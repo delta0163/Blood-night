@@ -1,86 +1,78 @@
 /* =========================================
    BLOOD GLOW NIGHT
-   NIGHT 1
+   NIGHT 1 — ЛИЧИ
 ========================================= */
 
 
-/* =========================================
-   ГЛАВНОЕ МЕНЮ
-========================================= */
+/* =========================
+   ЭЛЕМЕНТЫ
+========================= */
 
 const mainMenu =
-document.getElementById(
-    "mainMenu"
-);
-
+document.getElementById("mainMenu");
 
 const game =
-document.getElementById(
-    "game"
-);
-
+document.getElementById("game");
 
 const startGameButton =
-document.getElementById(
-    "startGameButton"
-);
-
+document.getElementById("startGameButton");
 
 const phoneScreen =
-document.getElementById(
-    "phoneScreen"
-);
-
-
-const answerPhone =
-document.getElementById(
-    "answerPhone"
-);
-
-
-/* =========================================
-   АУДИО
-========================================= */
+document.getElementById("phoneScreen");
 
 const phoneAudio =
-document.getElementById(
-    "phoneAudio"
-);
-
+document.getElementById("phoneAudio");
 
 const flashAudio =
-document.getElementById(
-    "flashAudio"
-);
-
+document.getElementById("flashAudio");
 
 const lichiAudio =
-document.getElementById(
-    "lichiAudio"
-);
-
+document.getElementById("lichiAudio");
 
 const humAudio =
-document.getElementById(
-    "humAudio"
-);
+document.getElementById("humAudio");
+
+const view =
+document.getElementById("view");
+
+const lichi =
+document.getElementById("lichi");
+
+const status =
+document.getElementById("status");
+
+const time =
+document.getElementById("time");
+
+const flash =
+document.getElementById("flash");
+
+const gameOverScreen =
+document.getElementById("gameOver");
+
+const winScreen =
+document.getElementById("winScreen");
+
+const fullscreenButton =
+document.getElementById("fullscreenButton");
 
 
-/*
-    Громкость постоянного гула.
-    Можно изменить:
+/* =========================
+   НАСТРОЙКИ ГРОМКОСТИ
+========================= */
 
-    0.10 = тихо
-    0.25 = средне
-    0.40 = громко
-*/
+phoneAudio.volume = 1.0;
+
+flashAudio.volume = 0.8;
+
+lichiAudio.volume = 1.0;
 
 humAudio.volume = 0.25;
 
 
-/* =========================================
-   СОСТОЯНИЕ ИГРЫ
-========================================= */
+/* =========================
+   СОСТОЯНИЕ
+========================= */
 
 let gameStarted = false;
 
@@ -97,9 +89,9 @@ let nightFinished = false;
 let gameMinutes = 0;
 
 
-/* =========================================
+/* =========================
    ПОЗИЦИИ ЛИЧИ
-========================================= */
+========================= */
 
 const LICHIPOSITIONS = {
 
@@ -116,61 +108,9 @@ const LICHIPOSITIONS = {
 };
 
 
-/* =========================================
-   ЭЛЕМЕНТЫ
-========================================= */
-
-const view =
-document.getElementById(
-    "view"
-);
-
-
-const lichi =
-document.getElementById(
-    "lichi"
-);
-
-
-const status =
-document.getElementById(
-    "status"
-);
-
-
-const time =
-document.getElementById(
-    "time"
-);
-
-
-const flash =
-document.getElementById(
-    "flash"
-);
-
-
-const gameOverScreen =
-document.getElementById(
-    "gameOver"
-);
-
-
-const winScreen =
-document.getElementById(
-    "winScreen"
-);
-
-
-const fullscreenButton =
-document.getElementById(
-    "fullscreenButton"
-);
-
-
-/* =========================================
-   ОФИС
-========================================= */
+/* =========================
+   КАМЕРЫ ОФИСА
+========================= */
 
 const officeViews = {
 
@@ -186,86 +126,165 @@ const officeViews = {
 };
 
 
-/* =========================================
+/* =========================
    НАЧАТЬ ИГРУ
-========================================= */
+========================= */
 
 startGameButton.addEventListener(
     "click",
-    function() {
+    async function () {
+
+        /*
+           Переход в fullscreen
+           происходит именно после
+           нажатия игрока.
+        */
+
+        try {
+
+            if (!document.fullscreenElement) {
+
+                await document.documentElement
+                    .requestFullscreen();
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "Fullscreen error:",
+                error
+            );
+
+        }
+
+
+        /*
+           Меню убираем.
+        */
 
         mainMenu.style.display =
             "none";
 
+
+        /*
+           Показываем телефон.
+        */
+
         phoneScreen.style.display =
             "flex";
 
-    }
-);
 
+        /*
+           Сбрасываем аудио.
+        */
 
-/* =========================================
-   ОТВЕТИТЬ НА ТЕЛЕФОН
-========================================= */
+        phoneAudio.currentTime = 0;
 
-answerPhone.addEventListener(
-    "click",
-    function() {
-
-        answerPhone.disabled =
-            true;
-
-
-        phoneAudio.currentTime =
-            0;
-
-
-        phoneAudio.play()
-        .then(
-            function() {
-
-                /*
-                   Телефонный разговор
-                   начался.
-                */
-
-            }
-        )
-        .catch(
-            function() {
-
-                /*
-                   Если браузер
-                   не смог воспроизвести
-                   аудио — всё равно
-                   начинаем ночь.
-                */
-
-                startNight();
-
-            }
-        );
+        phoneAudio.volume = 1;
 
 
         /*
-           После окончания
-           phone.mp3 начинается ночь.
+           Пытаемся сразу
+           запустить звонок.
         */
 
-        phoneAudio.onended =
-        function() {
+        try {
 
-            startNight();
+            await phoneAudio.play();
 
-        };
+        }
+
+        catch (error) {
+
+            console.log(
+                "Браузер заблокировал звук:",
+                error
+            );
+
+            showAudioButton();
+
+        }
 
     }
 );
 
 
-/* =========================================
+/* =========================
+   КНОПКА ДЛЯ ЗАПУСКА ЗВУКА
+========================= */
+
+function showAudioButton() {
+
+    if (
+        document.getElementById(
+            "audioStartButton"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const button =
+    document.createElement("button");
+
+
+    button.id =
+        "audioStartButton";
+
+
+    button.textContent =
+        "▶ ВКЛЮЧИТЬ ЗВОНОК";
+
+
+    phoneScreen.appendChild(
+        button
+    );
+
+
+    button.addEventListener(
+        "click",
+        async function () {
+
+            try {
+
+                await phoneAudio.play();
+
+                button.remove();
+
+            }
+
+            catch (error) {
+
+                console.log(error);
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ПОСЛЕ ТЕЛЕФОНА
+========================= */
+
+phoneAudio.addEventListener(
+    "ended",
+    function () {
+
+        startNight();
+
+    }
+);
+
+
+/* =========================
    НАЧАЛО НОЧИ
-========================================= */
+========================= */
 
 function startNight() {
 
@@ -274,29 +293,6 @@ function startNight() {
 
 
     gameStarted = true;
-
-
-    /*
-       ЗАПУСК ПОСТОЯННОГО ГУЛА
-    */
-
-    humAudio.currentTime =
-        0;
-
-
-    humAudio.play()
-    .catch(
-        function() {
-
-            /*
-               Некоторые браузеры
-               могут заблокировать звук.
-               После нажатия игрока
-               обычно разрешают его.
-            */
-
-        }
-    );
 
 
     phoneScreen.style.display =
@@ -318,6 +314,38 @@ function startNight() {
         "front";
 
 
+    gameOver =
+        false;
+
+
+    nightFinished =
+        false;
+
+
+    /*
+       ЗАПУСК ПОСТОЯННОГО ГУЛА
+    */
+
+    humAudio.currentTime = 0;
+
+
+    humAudio.play()
+    .catch(
+        function (error) {
+
+            console.log(
+                "Ошибка hum.mp3:",
+                error
+            );
+
+        }
+    );
+
+
+    /*
+       Начальный экран офиса.
+    */
+
     view.style.backgroundImage =
         `url("${officeViews.front}")`;
 
@@ -335,19 +363,17 @@ function startNight() {
 }
 
 
-/* =========================================
-   ПОВОРОТ
-========================================= */
+/* =========================
+   ПОВОРОТ КАМЕРЫ
+========================= */
 
 function changeView(direction) {
 
     if (!gameStarted)
         return;
 
-
     if (gameOver)
         return;
-
 
     if (nightFinished)
         return;
@@ -363,20 +389,18 @@ function changeView(direction) {
 
     updateStatus();
 
-
     updateLichiSprite();
 
 }
 
 
-/* =========================================
+/* =========================
    СТАТУС
-========================================= */
+========================= */
 
 function updateStatus() {
 
     if (currentView === "left") {
-
 
         if (
             lichiPosition >=
@@ -388,7 +412,6 @@ function updateStatus() {
 
         }
 
-
         else if (
             lichiPosition >=
             LICHIPOSITIONS.DOOR
@@ -398,7 +421,6 @@ function updateStatus() {
                 "Личи возле офиса!";
 
         }
-
 
         else if (
             lichiPosition >=
@@ -410,7 +432,6 @@ function updateStatus() {
 
         }
 
-
         else if (
             lichiPosition >=
             LICHIPOSITIONS.MIDDLE
@@ -421,14 +442,12 @@ function updateStatus() {
 
         }
 
-
         else {
 
             status.textContent =
-                "Личи стоит в конце коридора.";
+                "Личи далеко.";
 
         }
-
 
         return;
 
@@ -451,9 +470,9 @@ function updateStatus() {
 }
 
 
-/* =========================================
+/* =========================
    ЛИЧИ
-========================================= */
+========================= */
 
 function updateLichiSprite() {
 
@@ -486,7 +505,6 @@ function updateLichiSprite() {
 
     const positions = {
 
-
         1: {
 
             left: "80%",
@@ -496,7 +514,6 @@ function updateLichiSprite() {
             width: "90px"
 
         },
-
 
         2: {
 
@@ -508,7 +525,6 @@ function updateLichiSprite() {
 
         },
 
-
         3: {
 
             left: "54%",
@@ -518,7 +534,6 @@ function updateLichiSprite() {
             width: "180px"
 
         },
-
 
         4: {
 
@@ -544,10 +559,8 @@ function updateLichiSprite() {
     lichi.style.left =
         position.left;
 
-
     lichi.style.top =
         position.top;
-
 
     lichi.style.width =
         position.width;
@@ -555,23 +568,20 @@ function updateLichiSprite() {
 }
 
 
-/* =========================================
+/* =========================
    ВСПЫШКА
-========================================= */
+========================= */
 
 function useFlash() {
 
     if (!gameStarted)
         return;
 
-
     if (flashCooldown)
         return;
 
-
     if (gameOver)
         return;
-
 
     if (nightFinished)
         return;
@@ -579,13 +589,14 @@ function useFlash() {
 
     /*
        Вспышка работает
-       только в левом коридоре.
+       только при просмотре
+       левого коридора.
     */
 
     if (currentView !== "left") {
 
         status.textContent =
-            "Сначала посмотри в левый коридор.";
+            "Посмотри в левый коридор.";
 
         return;
 
@@ -593,8 +604,7 @@ function useFlash() {
 
 
     /*
-       Если Личи далеко,
-       вспышка её не отбрасывает.
+       Личи ещё далеко.
     */
 
     if (
@@ -613,16 +623,16 @@ function useFlash() {
     flashCooldown = true;
 
 
-    /* =================================
-       ВСПЫШКА ЭКРАНА
-    ================================= */
+    /*
+       Белая вспышка.
+    */
 
     flash.style.opacity =
         "1";
 
 
     setTimeout(
-        function() {
+        function () {
 
             flash.style.opacity =
                 "0";
@@ -632,9 +642,9 @@ function useFlash() {
     );
 
 
-    /* =================================
-       ЗВУК ВСПЫШКИ
-    ================================= */
+    /*
+       Звук вспышки.
+    */
 
     flashAudio.currentTime =
         0;
@@ -642,16 +652,16 @@ function useFlash() {
 
     flashAudio.play()
     .catch(
-        function() {}
+        function () {}
     );
 
 
-    /* =================================
-       КРИК ЛИЧИ
-    ================================= */
+    /*
+       Крик Личи.
+    */
 
     setTimeout(
-        function() {
+        function () {
 
             lichiAudio.currentTime =
                 0;
@@ -659,7 +669,7 @@ function useFlash() {
 
             lichiAudio.play()
             .catch(
-                function() {}
+                function () {}
             );
 
         },
@@ -667,9 +677,10 @@ function useFlash() {
     );
 
 
-    /* =================================
-       ОТБРАСЫВАЕМ ЛИЧИ
-    ================================= */
+    /*
+       Личи отбрасывается
+       обратно в начало.
+    */
 
     lichiPosition =
         LICHIPOSITIONS.FAR;
@@ -682,12 +693,12 @@ function useFlash() {
     updateLichiSprite();
 
 
-    /* =================================
-       ПЕРЕЗАРЯДКА
-    ================================= */
+    /*
+       Перезарядка вспышки.
+    */
 
     setTimeout(
-        function() {
+        function () {
 
             flashCooldown =
                 false;
@@ -699,27 +710,25 @@ function useFlash() {
 }
 
 
-/* =========================================
+/* =========================
    ДВИЖЕНИЕ ЛИЧИ
-========================================= */
+========================= */
 
 function updateLichi() {
 
     if (!gameStarted)
         return;
 
-
     if (gameOver)
         return;
-
 
     if (nightFinished)
         return;
 
 
     /*
-       Личи начинает движение
-       с 1:00 AM.
+       Личи начинает двигаться
+       после 1:00 AM.
     */
 
     if (gameMinutes < 60)
@@ -727,8 +736,8 @@ function updateLichi() {
 
 
     /*
-       Каждые 20 игровых минут
-       Личи делает шаг.
+       Каждые 20 секунд
+       она приближается.
     */
 
     if (
@@ -749,12 +758,12 @@ function updateLichi() {
 
     updateStatus();
 
-
     updateLichiSprite();
 
 
     /*
-       Личи достигла офиса.
+       Если Личи дошла
+       до офиса.
     */
 
     if (
@@ -762,6 +771,12 @@ function updateLichi() {
         LICHIPOSITIONS.ATTACK
     ) {
 
+        /*
+           Если игрок смотрит
+           в левый коридор,
+           ему даётся возможность
+           использовать вспышку.
+        */
 
         if (
             currentView !== "left"
@@ -772,7 +787,7 @@ function updateLichi() {
 
 
             setTimeout(
-                function() {
+                function () {
 
                     if (
                         lichiPosition >=
@@ -796,15 +811,18 @@ function updateLichi() {
 }
 
 
-/* =========================================
+/* =========================
    ЧАСЫ
-========================================= */
+========================= */
 
 function updateClock() {
 
     /*
-       360 минут =
-       6 часов.
+       1 настоящая секунда =
+       1 игровая минута.
+
+       12:00 -> 6:00
+       = 6 минут реального времени.
     */
 
     if (
@@ -859,9 +877,9 @@ function updateClock() {
 }
 
 
-/* =========================================
+/* =========================
    GAME OVER
-========================================= */
+========================= */
 
 function loseGame() {
 
@@ -886,9 +904,9 @@ function loseGame() {
 }
 
 
-/* =========================================
+/* =========================
    ПОБЕДА
-========================================= */
+========================= */
 
 function winGame() {
 
@@ -900,11 +918,6 @@ function winGame() {
         true;
 
 
-    /*
-       Останавливаем гул
-       после окончания ночи.
-    */
-
     humAudio.pause();
 
 
@@ -914,15 +927,15 @@ function winGame() {
 }
 
 
-/* =========================================
-   ПОВОРОТ ВЛЕВО
-========================================= */
+/* =========================
+   КНОПКИ ПОВОРОТА
+========================= */
 
 document
 .getElementById("leftButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("left");
 
@@ -930,15 +943,11 @@ document
 );
 
 
-/* =========================================
-   ПОВОРОТ ВПЕРЁД
-========================================= */
-
 document
 .getElementById("frontButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("front");
 
@@ -946,15 +955,11 @@ document
 );
 
 
-/* =========================================
-   ПОВОРОТ ВПРАВО
-========================================= */
-
 document
 .getElementById("rightButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("right");
 
@@ -962,15 +967,15 @@ document
 );
 
 
-/* =========================================
+/* =========================
    ВСПЫШКА
-========================================= */
+========================= */
 
 document
 .getElementById("flashButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         useFlash();
 
@@ -978,29 +983,39 @@ document
 );
 
 
-/* =========================================
+/* =========================
    FULLSCREEN
-========================================= */
+========================= */
 
 fullscreenButton.addEventListener(
     "click",
-    function() {
+    async function () {
 
-        if (
-            !document.fullscreenElement
-        ) {
+        try {
 
-            document.documentElement
-            .requestFullscreen()
-            .catch(
-                function() {}
-            );
+            if (
+                !document.fullscreenElement
+            ) {
+
+                await document.documentElement
+                    .requestFullscreen();
+
+            }
+
+            else {
+
+                await document
+                    .exitFullscreen();
+
+            }
 
         }
 
-        else {
+        catch (error) {
 
-            document.exitFullscreen();
+            console.log(
+                error
+            );
 
         }
 
@@ -1008,15 +1023,15 @@ fullscreenButton.addEventListener(
 );
 
 
-/* =========================================
+/* =========================
    ПЕРЕЗАПУСК
-========================================= */
+========================= */
 
 document
 .getElementById("restart")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         location.reload();
 
@@ -1024,15 +1039,15 @@ document
 );
 
 
-/* =========================================
+/* =========================
    В МЕНЮ
-========================================= */
+========================= */
 
 document
 .getElementById("menuAfterWin")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         location.reload();
 
@@ -1040,26 +1055,18 @@ document
 );
 
 
-/* =========================================
+/* =========================
    ИГРОВОЙ ЦИКЛ
-========================================= */
-
-/*
-   Сейчас 1 секунда = 1 игровая минута.
-   Поэтому демо-ночь длится 6 минут.
-*/
+========================= */
 
 setInterval(
-    function() {
-
+    function () {
 
         if (!gameStarted)
             return;
 
-
         if (gameOver)
             return;
-
 
         if (nightFinished)
             return;
