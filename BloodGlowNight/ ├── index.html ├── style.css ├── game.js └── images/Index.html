@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Blood Glow Night</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- ОСНОВНОЙ ВИД -->
+    <div id="view"></div>
+
+    <!-- Затемнение -->
+    <div id="darkness"></div>
+
+    <!-- ВРЕМЯ -->
+    <div id="time">12:00 AM</div>
+
+    <div id="night">
+        NIGHT 1
+    </div>
+
+    <!-- СООБЩЕНИЕ -->
+    <div id="status">
+        Личи ещё далеко.
+    </div>
+
+
+    <!-- КНОПКИ ПОВОРОТА -->
+
+    <div id="direction">
+
+        <button
+            class="directionButton"
+            id="leftButton"
+        >
+            ◀
+        </button>
+
+        <button
+            class="directionButton"
+            id="frontButton"
+        >
+            ▲
+        </button>
+
+        <button
+            class="directionButton"
+            id="rightButton"
+        >
+            ▶
+        </button>
+
+    </div>
+
+
+    <!-- НИЖНИЕ КНОПКИ -->
+
+    <div id="controls">
+
+        <button
+            class="controlButton"
+            id="cameraButton"
+        >
+            КАМЕРЫ
+        </button>
+
+        <button
+            class="controlButton"
+            id="flashButton"
+        >
+            ВСПЫШКА
+        </button>
+
+    </div>
+
+
+    <!-- КАМЕРЫ -->
+
+    <div id="cameraScreen">
+
+        <div id="cameraTitle">
+            CAM 1
+        </div>
+
+        <img
+            id="cameraImage"
+            src="images/camera_1.png"
+        >
+
+        <div id="cameraButtons">
+
+            <button
+                class="camButton"
+                data-camera="1"
+            >
+                CAM 1
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="2"
+            >
+                CAM 2
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="3"
+            >
+                CAM 3
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="4"
+            >
+                CAM 4
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="5"
+            >
+                CAM 5
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="6"
+            >
+                CAM 6
+            </button>
+
+            <button
+                class="camButton"
+                data-camera="7"
+            >
+                CAM 7
+            </button>
+
+            <button
+                class="camButton"
+                id="closeCamera"
+            >
+                ЗАКРЫТЬ
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ЭФФЕКТ ВСПЫШКИ -->
+
+    <div id="flash"></div>
+
+
+    <!-- GAME OVER -->
+
+    <div id="gameOver">
+
+        <h1>GAME OVER</h1>
+
+        <p>
+            Личи добралась до офиса.
+        </p>
+
+        <button id="restart">
+            НАЧАТЬ ЗАНОВО
+        </button>
+
+    </div>
+
+
+    <!-- ПОБЕДА -->
+
+    <div id="winScreen">
+
+        <h1>6:00 AM</h1>
+
+        <p>
+            NIGHT 1 COMPLETE
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+</html>
