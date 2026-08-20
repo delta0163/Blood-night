@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+
     margin: 0;
     padding: 0;
 
@@ -43,6 +44,11 @@ button {
     cursor: pointer;
 
     touch-action: manipulation;
+}
+
+button:hover {
+
+    background: #222;
 }
 
 button:active {
@@ -99,7 +105,7 @@ button.locked {
 
 
 /* =================================================
-   МЕНЮ НОЧЕЙ / НАСТРОЕК
+   МЕНЮ НОЧЕЙ И НАСТРОЕК
 ================================================= */
 
 #nightsMenu,
@@ -186,6 +192,11 @@ button.locked {
     margin-bottom: 25px;
 }
 
+.phoneWindow p {
+
+    margin-bottom: 25px;
+}
+
 
 /* =================================================
    ИГРА
@@ -234,7 +245,7 @@ button.locked {
 
     background:
         linear-gradient(
-            rgba(0,0,0,.8),
+            rgba(0,0,0,.85),
             transparent
         );
 
@@ -307,6 +318,9 @@ button.locked {
     pointer-events: none;
 
     z-index: 50;
+
+    transition:
+        opacity .05s;
 }
 
 
@@ -391,7 +405,7 @@ button.locked {
     align-items: center;
 
     background:
-        rgba(0,0,0,.9);
+        rgba(0,0,0,.92);
 
     z-index: 100;
 }
@@ -432,7 +446,7 @@ button.locked {
 
 
 /* =================================================
-   ШАПКА МОНИТОРА
+   ШАПКА
 ================================================= */
 
 #cameraHeader {
@@ -466,7 +480,7 @@ button.locked {
 
 
 /* =================================================
-   ЭКРАН КАМЕР
+   СОДЕРЖИМОЕ КАМЕР
 ================================================= */
 
 #cameraContent {
@@ -484,12 +498,9 @@ button.locked {
 }
 
 
-/*
-    ВАЖНО:
-    Это настоящий IMG,
-    поэтому cam01.png и остальные
-    должны отображаться напрямую.
-*/
+/* =================================================
+   ДИСПЛЕЙ КАМЕРЫ
+================================================= */
 
 #cameraScreen {
 
@@ -501,13 +512,43 @@ button.locked {
 
     height: 100%;
 
-    background: #000;
+    background: #050505;
 
     border: 2px solid #777;
 
     overflow: hidden;
 }
 
+
+/*
+   ФОН ДИСПЛЕЯ.
+
+   Он находится самым нижним слоем.
+*/
+
+#cameraBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 1;
+
+    display: block;
+}
+
+
+/*
+   ФОТО КАМЕРЫ.
+
+   Оно находится поверх background.
+*/
 
 #cameraImage {
 
@@ -521,9 +562,55 @@ button.locked {
 
     object-fit: cover;
 
+    z-index: 2;
+
     display: block;
 
-    z-index: 1;
+    image-rendering: auto;
+}
+
+
+/*
+   ЛЁГКИЙ ЭФФЕКТ ЭКРАНА
+*/
+
+#cameraNoise {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    opacity: .12;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.08) 4px
+        );
+
+    animation:
+        cameraNoiseMove .2s infinite;
+}
+
+@keyframes cameraNoiseMove {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 
@@ -548,7 +635,7 @@ button.locked {
     transform:
         translate(-50%, -50%);
 
-    z-index: 5;
+    z-index: 6;
 
     pointer-events: none;
 }
@@ -679,37 +766,32 @@ button.locked {
 
 
 #vent1 {
-
     left: 10%;
     top: 15%;
 }
 
 #vent2 {
-
     left: 40%;
     top: 15%;
 }
 
 #vent3 {
-
     left: 70%;
     top: 15%;
 }
 
 #vent4 {
-
     left: 40%;
     top: 50%;
 }
 
 #ventOffice {
-
     left: 40%;
     top: 80%;
 }
 
 
-/* ЛИНИИ КАРТЫ */
+/* ЛИНИИ */
 
 .ventLine {
 
@@ -882,4 +964,4 @@ button.locked {
         bottom: 125px;
     }
 
-}
+    }
