@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -50,7 +50,7 @@
 ========================= -->
 
 <div id="nightsMenu"
-     class="screen hidden">
+class="screen hidden">
 
     <div class="menuContent">
 
@@ -72,7 +72,7 @@
 ========================= -->
 
 <div id="settingsMenu"
-     class="screen hidden">
+class="screen hidden">
 
     <div class="menuContent">
 
@@ -96,16 +96,16 @@
 
 
 <!-- =========================
-     ТЕЛЕФОННЫЙ ЗВОНОК
+     ЗВОНОК
 ========================= -->
 
 <div id="phoneScreen"
-     class="screen hidden">
+class="screen hidden">
 
     <div class="phoneBox">
 
         <h2 id="phoneNight">
-            NIGHT 2
+            NIGHT 1
         </h2>
 
         <p>
@@ -125,20 +125,19 @@
      ИГРА
 ========================= -->
 
-<div id="game"
-     class="hidden">
+<div id="game" class="hidden">
 
     <div id="background"></div>
 
     <div id="view">
 
         <img id="lichi"
-             src="images/lichi.png"
-             alt="Личи">
+        src="images/lichi.png"
+        alt="Личи">
 
         <img id="pancake"
-             src="images/pancake.png"
-             alt="Панкейк">
+        src="images/pancake.png"
+        alt="Панкейк">
 
         <div id="flash"></div>
 
@@ -150,7 +149,7 @@
     <div id="hud">
 
         <div id="night">
-            NIGHT 2
+            NIGHT 1
         </div>
 
         <div id="time">
@@ -208,7 +207,7 @@
     ========================== -->
 
     <div id="cameraPanel"
-         class="panel hidden">
+    class="panel hidden">
 
         <div class="panelHeader">
 
@@ -232,15 +231,15 @@
             </div>
 
             <img id="cameraLichi"
-                 src="images/lichi.png">
+            src="images/lichi.png"
+            alt="Личи">
 
             <img id="cameraPancake"
-                 src="images/pancake.png">
+            src="images/pancake.png"
+            alt="Панкейк">
 
         </div>
 
-
-        <!-- ПРОКРУЧИВАЕМАЯ ПАНЕЛЬ -->
 
         <div id="cameraMap">
 
@@ -272,26 +271,22 @@
                 CAM 07
             </button>
 
-            <button data-camera="cam08">
-                CAM 08
-            </button>
-
         </div>
 
     </div>
 
 
     <!-- =========================
-         ВЕНТИЛЯЦИЯ
+         ПРОСТАЯ ВЕНТИЛЯЦИЯ
     ========================== -->
 
     <div id="ventPanel"
-         class="panel hidden">
+    class="panel hidden">
 
         <div class="panelHeader">
 
             <span>
-                СИСТЕМА ВЕНТИЛЯЦИИ
+                ВЕНТИЛЯЦИЯ
             </span>
 
             <button id="closeVentPanel">
@@ -301,69 +296,43 @@
         </div>
 
 
-        <div id="ventMap">
+        <div id="simpleVentMap">
 
-            <div class="ventRoom officeVent">
+            <div class="ventNode officeNode">
                 ОФИС
             </div>
 
-            <div class="ventRoom room1">
+            <div class="ventNode v1Node">
                 V1
             </div>
 
-            <div class="ventRoom room2">
+            <div class="ventNode v2Node">
                 V2
             </div>
 
-            <div class="ventRoom room3">
+            <div class="ventNode v3Node">
                 V3
             </div>
 
-            <div class="ventRoom room4">
-                V4
-            </div>
+            <div class="ventLine horizontalLine"></div>
 
-            <div class="ventRoom room5">
-                V5
-            </div>
-
-
-            <div class="ventLine line1"></div>
-            <div class="ventLine line2"></div>
-            <div class="ventLine line3"></div>
-            <div class="ventLine line4"></div>
-            <div class="ventLine line5"></div>
-
-
-            <button class="ventDoor door1"
-                    data-door="1">
-                ПЕРЕГОРОДКА 1
+            <button
+            class="ventDoor simpleDoor1"
+            data-door="1">
+                ПЕРЕГОРОДКА
             </button>
 
-            <button class="ventDoor door2"
-                    data-door="2">
-                ПЕРЕГОРОДКА 2
+            <button
+            class="ventDoor simpleDoor2"
+            data-door="2">
+                ПЕРЕГОРОДКА
             </button>
 
-            <button class="ventDoor door3"
-                    data-door="3">
-                ПЕРЕГОРОДКА 3
+            <button
+            class="ventDoor simpleDoor3"
+            data-door="3">
+                ПЕРЕГОРОДКА
             </button>
-
-            <button class="ventDoor door4"
-                    data-door="4">
-                ПЕРЕГОРОДКА 4
-            </button>
-
-            <button class="ventDoor door5"
-                    data-door="5">
-                ПЕРЕГОРОДКА 5
-            </button>
-
-
-            <div id="pancakeVent">
-                ПАНКЕЙК
-            </div>
 
         </div>
 
@@ -380,7 +349,7 @@
     ========================== -->
 
     <div id="gameOver"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -402,10 +371,10 @@
     ========================== -->
 
     <div id="winScreen"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1 id="winText">
-            NIGHT 2 COMPLETE
+            NIGHT 1 COMPLETE
         </h1>
 
         <button id="nextNight">
@@ -426,27 +395,27 @@
 ========================= -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
 
 <audio id="ventAudio"
-       src="sounds/vent.mp3"
-       loop></audio>
+src="sounds/vent.mp3"
+loop></audio>
 
 
 <script src="game.js"></script>
