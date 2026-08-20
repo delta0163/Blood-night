@@ -14,6 +14,7 @@ body {
     overflow: hidden;
 
     background: #000;
+
     color: white;
 
     font-family: Arial, sans-serif;
@@ -23,6 +24,7 @@ button {
     cursor: pointer;
 
     color: white;
+
     background: #111;
 
     border: 2px solid #777;
@@ -36,6 +38,11 @@ button:active {
     transform: scale(.96);
 }
 
+
+/* =========================
+   ГЛОБАЛЬНОЕ СКРЫТИЕ
+========================= */
+
 .hidden {
     display: none !important;
 }
@@ -47,6 +54,7 @@ button:active {
 
 .screen {
     position: fixed;
+
     inset: 0;
 
     width: 100%;
@@ -71,17 +79,21 @@ button:active {
 
 .menuBackground {
     position: absolute;
+
     inset: 0;
 
     background:
         linear-gradient(
             rgba(0,0,0,.65),
-            rgba(0,0,0,.85)
+            rgba(0,0,0,.8)
         ),
         url("images/menu_bg.png");
 
     background-size: cover;
+
     background-position: center;
+
+    filter: brightness(.6);
 
     z-index: -1;
 }
@@ -90,6 +102,7 @@ button:active {
     width: min(90%, 500px);
 
     display: flex;
+
     flex-direction: column;
 
     gap: 18px;
@@ -111,6 +124,8 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
+
+    margin-bottom: 20px;
 }
 
 .menuContent button {
@@ -145,19 +160,17 @@ button:active {
 
 
 /* =========================
-   ТЕЛЕФОН
+   ЗВОНОК
 ========================= */
 
 #phoneScreen {
-    background: rgba(0,0,0,.92);
+    background: #000;
 }
 
 .phoneBox {
     text-align: center;
 
     width: min(90%, 500px);
-
-    padding: 30px;
 }
 
 .phoneBox h2 {
@@ -177,6 +190,7 @@ button:active {
 
 #game {
     position: fixed;
+
     inset: 0;
 
     width: 100%;
@@ -185,12 +199,11 @@ button:active {
     overflow: hidden;
 
     background: #000;
-
-    z-index: 10;
 }
 
 #background {
     position: absolute;
+
     inset: 0;
 
     background:
@@ -204,10 +217,13 @@ button:active {
 
 #view {
     position: absolute;
+
     inset: 0;
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
     overflow: hidden;
@@ -231,13 +247,9 @@ button:active {
     transform: translate(-50%, -50%);
 }
 
-
-/* Панкейк при атаке всегда по центру */
-
-#pancake.attackPosition {
+#pancake.attack {
     left: 50% !important;
     top: 50% !important;
-
     width: min(55vw, 420px) !important;
 }
 
@@ -301,35 +313,7 @@ button:active {
     text-shadow:
         2px 2px 5px #000;
 
-    white-space: nowrap;
-}
-
-
-/* =========================
-   ЭНЕРГИЯ
-========================= */
-
-#powerStatus {
-    position: absolute;
-
-    top: 82px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 50;
-
-    padding: 5px 10px;
-
-    background: rgba(0,0,0,.65);
-
-    border: 1px solid #555;
-
-    font-size: 13px;
-
     text-align: center;
-
-    white-space: nowrap;
 }
 
 
@@ -340,7 +324,7 @@ button:active {
 #officeControls {
     position: absolute;
 
-    bottom: 120px;
+    bottom: 105px;
 
     left: 50%;
 
@@ -382,19 +366,13 @@ button:active {
 
     z-index: 60;
 
-    width: min(95%, 650px);
+    width: min(95%, 600px);
 }
 
 #bottomControls button {
     flex: 1;
 
     min-width: 0;
-
-    min-height: 55px;
-
-    padding: 8px;
-
-    font-size: 13px;
 }
 
 
@@ -405,7 +383,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 4%;
+    inset: 3%;
 
     z-index: 200;
 
@@ -446,27 +424,14 @@ button:active {
    КАМЕРЫ
 ========================= */
 
-#cameraContent {
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-
-    gap: 10px;
-
-    padding: 10px;
-}
-
-
-/* ФОТО КАМЕРЫ */
-
 #cameraImage {
     position: relative;
 
     flex: 1;
 
-    min-width: 0;
+    min-height: 0;
+
+    margin: 10px;
 
     overflow: hidden;
 
@@ -475,7 +440,9 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
+
     background-size: cover;
+
     background-repeat: no-repeat;
 }
 
@@ -530,13 +497,18 @@ button:active {
     z-index: 20;
 }
 
-
-/* ВЕРТИКАЛЬНЫЙ СПИСОК */
+#cameraPancake {
+    width: 220px;
+}
 
 #cameraMap {
-    width: 125px;
+    width: 150px;
 
-    flex-shrink: 0;
+    max-height: 190px;
+
+    margin: 10px auto 15px;
+
+    padding: 5px;
 
     display: flex;
 
@@ -544,50 +516,52 @@ button:active {
 
     gap: 8px;
 
-    padding: 5px;
-
     overflow-y: auto;
 
     overflow-x: hidden;
 
-    border: 2px solid #444;
+    flex-shrink: 0;
 
-    background: #080808;
+    border: 2px solid #555;
+
+    background: #090909;
+
+    scrollbar-width: auto;
 }
 
 #cameraMap button {
     width: 100%;
 
-    min-height: 55px;
+    min-height: 48px;
 
     flex-shrink: 0;
-
-    white-space: nowrap;
 }
 
-#cameraMap button.active {
-    background: #444;
-
-    border-color: white;
+#cameraMap::-webkit-scrollbar {
+    width: 10px;
 }
 
-#cameraPowerMessage {
-    padding: 10px;
+#cameraMap::-webkit-scrollbar-track {
+    background: #111;
+}
 
-    text-align: center;
+#cameraMap::-webkit-scrollbar-thumb {
+    background: #777;
 
-    border-top: 2px solid #555;
-
-    font-size: 14px;
+    border: 2px solid #111;
 }
 
 
 /* =========================
-   ПОД СТОЛОМ
+   ПАНЕЛЬ ЭНЕРГИИ
 ========================= */
 
-#underTablePanel {
-    background: #030303;
+#powerPanel {
+    background:
+        linear-gradient(
+            rgba(0,0,0,.85),
+            rgba(0,0,0,.95)
+        );
 }
 
 #underTable {
@@ -597,144 +571,117 @@ button:active {
 
     margin: 15px;
 
-    min-height: 300px;
-
-    overflow: hidden;
-
-    border: 2px solid #444;
+    border: 2px solid #555;
 
     background:
-        linear-gradient(
-            rgba(0,0,0,.35),
-            rgba(0,0,0,.7)
-        ),
-        url("images/under_table.png");
+        url("images/under_table.png")
+        center / cover no-repeat;
 
-    background-size: cover;
-    background-position: center;
+    min-height: 280px;
+
+    overflow: hidden;
 }
 
-
-/* Если фото под столом нет,
-   всё равно будет виден экран */
-
-#tableBottom {
+#tableShadow {
     position: absolute;
 
-    top: 8%;
+    inset: 0;
 
-    left: 10%;
-    right: 10%;
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 0%,
+            rgba(0,0,0,.25) 45%,
+            rgba(0,0,0,.8) 100%
+        );
 
-    height: 28%;
+    pointer-events: none;
+}
 
-    border: 3px solid #777;
+#leverArea {
+    position: absolute;
 
-    background: #171717;
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+#lever {
+    width: 80px;
+    height: 100px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    font-size: 20px;
-
-    opacity: .9;
-}
-
-
-/* РЫЧАГ */
-
-#lever {
-    position: absolute;
-
-    left: 50%;
-    top: 62%;
-
-    width: 100px;
-    height: 120px;
-
-    transform: translate(-50%, -50%);
-}
-
-#leverBase {
-    position: absolute;
-
-    bottom: 0;
-    left: 25%;
-
-    width: 50px;
-    height: 25px;
-
-    background: #333;
-
     border: 3px solid #aaa;
 
-    border-radius: 5px;
-}
-
-#leverHandle {
-    position: absolute;
-
-    bottom: 20px;
-    left: 46%;
-
-    width: 10px;
-    height: 85px;
-
-    background: #aaa;
-
-    border-radius: 5px;
+    background: #181818;
 
     transform:
-        rotate(-25deg);
+        rotate(-15deg);
 
-    transform-origin:
-        bottom center;
-}
-
-#leverText {
-    position: absolute;
-
-    left: 50%;
-    bottom: 8%;
-
-    transform:
-        translateX(-50%);
-
-    width: 90%;
+    font-size: 12px;
 
     text-align: center;
-
-    font-size: 15px;
-
-    text-shadow:
-        2px 2px 4px #000;
 }
 
-
-/* ВЫБОР НАПРАВЛЕНИЯ */
-
-#powerChoices {
-    display: flex;
-
-    gap: 10px;
-
-    padding: 10px;
+#switchLever {
+    white-space: nowrap;
 }
 
-#powerChoices button {
-    flex: 1;
-}
-
-#powerTransferStatus {
-    padding: 12px;
-
-    text-align: center;
+#powerDirection {
+    padding: 15px;
 
     border-top: 2px solid #555;
 
-    min-height: 45px;
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    text-align: center;
+}
+
+#currentPower {
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+#powerTimer {
+    font-size: 14px;
+
+    min-height: 20px;
+}
+
+.powerChoice {
+    width: 100%;
+}
+
+.powerChoice.active {
+    border-color: white;
+
+    background: #444;
+}
+
+.powerChoice:disabled {
+    opacity: .5;
+
+    cursor: not-allowed;
 }
 
 
@@ -769,25 +716,31 @@ button:active {
         clamp(30px, 7vw, 60px);
 }
 
+.overlay p {
+    max-width: 80%;
+
+    font-size: 18px;
+}
+
 
 /* =========================
-   МОБИЛЬНЫЙ ЭКРАН
+   ТЕЛЕФОН
 ========================= */
 
 @media (max-width: 600px) {
 
     #bottomControls {
-        width: 96%;
+        width: 95%;
     }
 
     #bottomControls button {
-        font-size: 10px;
+        padding: 10px 5px;
 
-        padding: 7px 3px;
+        font-size: 12px;
     }
 
     #officeControls {
-        bottom: 105px;
+        bottom: 100px;
     }
 
     .panel {
@@ -795,21 +748,9 @@ button:active {
     }
 
     #cameraMap {
-        width: 95px;
-    }
+        width: 130px;
 
-    #cameraMap button {
-        font-size: 11px;
-        min-height: 48px;
-    }
-
-    #cameraContent {
-        gap: 5px;
-        padding: 5px;
-    }
-
-    #powerStatus {
-        font-size: 11px;
+        max-height: 165px;
     }
 
 }
