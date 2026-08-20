@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 html,
@@ -15,18 +16,15 @@ body {
 
     background: #000;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
     color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =================================================
-   ВСЕ ЭКРАНЫ
-================================================= */
+/* =========================
+   ЭКРАНЫ
+========================= */
 
 .screen {
     position: fixed;
@@ -41,94 +39,122 @@ body {
     align-items: center;
     justify-content: center;
 
-    background:
+    background: #000;
+
+    z-index: 1000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   МЕНЮ
+========================= */
+
+.menuBackground {
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
         linear-gradient(
-            rgba(0,0,0,.72),
-            rgba(0,0,0,.85)
+            rgba(0,0,0,.55),
+            rgba(0,0,0,.8)
         ),
-        url("images/background.png");
+        url("images/menu-bg.png");
 
     background-size: cover;
+
     background-position: center;
 
-    z-index: 100;
+    z-index: 0;
 }
 
+.menuContent {
+    position: relative;
 
-/* =================================================
-   МЕНЮ
-================================================= */
+    z-index: 2;
 
-.menuBox {
-    width: min(90vw, 520px);
+    width: min(90%, 500px);
 
-    padding: 35px;
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
 
     text-align: center;
+}
 
-    background:
-        rgba(0,0,0,.82);
+.menuContent h1 {
+    font-size: clamp(
+        30px,
+        7vw,
+        70px
+    );
 
-    border:
-        2px solid
-        #555;
+    margin-bottom: 30px;
 
-    box-shadow:
-        0 0 30px
-        rgba(0,0,0,.9);
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 10px #000,
+        0 0 25px #000;
+}
+
+.menuContent h2 {
+    font-size: 35px;
+
+    margin-bottom: 20px;
 }
 
 
-.menuBox h1 {
-    margin-top: 0;
-
-    font-size:
-        clamp(28px, 6vw, 54px);
-
-    letter-spacing:
-        5px;
-}
-
-
-.menuBox h2 {
-    font-size: 30px;
-}
-
+/* =========================
+   КНОПКИ
+========================= */
 
 button {
-    border: 0;
+    border: 2px solid #777;
 
-    background: #111;
+    background:
+        linear-gradient(
+            #222,
+            #080808
+        );
 
     color: white;
 
-    padding:
-        14px 22px;
+    padding: 13px 22px;
 
-    margin: 6px;
+    min-width: 180px;
 
     font-size: 16px;
 
     cursor: pointer;
 
-    border:
-        1px solid #666;
+    transition: .15s;
 }
-
 
 button:hover {
-    background: #292929;
+    background: #444;
 }
-
 
 button:active {
     transform: scale(.96);
 }
 
+button:disabled {
+    opacity: .35;
+}
 
-/* =================================================
+
+/* =========================
    НОЧИ
-================================================= */
+========================= */
 
 #nightsList {
     display: grid;
@@ -136,47 +162,39 @@ button:active {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 8px;
+    gap: 10px;
+
+    width: 100%;
 
     margin-bottom: 20px;
 }
 
-
 .nightButton {
-    width: auto;
-
-    margin: 0;
+    min-width: 0;
 }
 
 
-.nightButton.locked {
-    opacity: .35;
-
-    cursor: not-allowed;
-}
-
-
-/* =================================================
-   ТЕЛЕФОН
-================================================= */
+/* =========================
+   ЗВОНОК
+========================= */
 
 .phoneBox {
-    width: min(90vw, 500px);
-
     text-align: center;
 
-    padding: 40px;
+    padding: 30px;
 
-    background: #050505;
+    border: 2px solid #555;
 
-    border:
-        2px solid #555;
+    background: #090909;
+
+    box-shadow:
+        0 0 40px #000;
 }
 
 
-/* =================================================
+/* =========================
    ИГРА
-================================================= */
+========================= */
 
 #game {
     position: fixed;
@@ -192,49 +210,341 @@ button:active {
 }
 
 
+/* =========================
+   ФОН
+========================= */
+
 #background {
     position: absolute;
 
     inset: 0;
 
-    background:
-        url("images/background.png")
-        center / cover
-        no-repeat;
+    background-image:
+        url("images/game-bg.png");
 
-    opacity: .25;
+    background-size: cover;
 
-    pointer-events: none;
+    background-position: center;
+
+    opacity: .35;
+
+    z-index: 0;
 }
 
+
+/* =========================
+   ОФИС
+========================= */
 
 #view {
     position: absolute;
 
-    left: 5%;
-    right: 5%;
-
-    top: 7%;
-    bottom: 17%;
-
-    background:
-        center / cover
-        no-repeat;
-
-    border:
-        2px solid #333;
-
-    overflow: hidden;
+    inset: 0;
 
     z-index: 2;
+
+    background-image:
+        url("images/office_front.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    overflow: hidden;
 }
 
 
-/* =================================================
+/* =========================
    ЛИЧИ
-================================================= */
+========================= */
 
 #lichi {
+    position: absolute;
+
+    display: none;
+
+    width: 150px;
+
+    max-width: 40vw;
+
+    z-index: 30;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+/* =========================
+   ПАНКЕЙК
+========================= */
+
+#pancake {
+    position: absolute;
+
+    display: none;
+
+    width: 170px;
+
+    max-width: 40vw;
+
+    z-index: 30;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+/* =========================
+   ВСПЫШКА
+========================= */
+
+#flash {
+    position: absolute;
+
+    inset: 0;
+
+    background: #fff;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 100;
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+#hud {
+    position: absolute;
+
+    top: 15px;
+
+    left: 20px;
+    right: 20px;
+
+    z-index: 200;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 20px;
+
+    text-shadow:
+        2px 2px 5px #000;
+}
+
+
+/* =========================
+   СТАТУС
+========================= */
+
+#status {
+    position: absolute;
+
+    top: 55px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 200;
+
+    padding: 7px 15px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    border: 1px solid #555;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   ПОВОРОТЫ
+========================= */
+
+#officeControls {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 95px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 300;
+
+    display: flex;
+
+    gap: 12px;
+}
+
+#officeControls button {
+    min-width: 65px;
+
+    width: 65px;
+
+    height: 55px;
+
+    padding: 0;
+}
+
+
+/* =========================
+   НИЖНИЕ КНОПКИ
+========================= */
+
+#bottomControls {
+    position: absolute;
+
+    bottom: 15px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 400;
+
+    display: flex;
+
+    gap: 10px;
+
+    width: 95%;
+
+    justify-content: center;
+}
+
+#bottomControls button {
+    min-width: 120px;
+}
+
+
+/* =========================
+   ПАНЕЛИ
+========================= */
+
+.panel {
+    position: absolute;
+
+    inset: 3%;
+
+    z-index: 500;
+
+    background:
+        rgba(5,5,5,.97);
+
+    border: 2px solid #777;
+
+    box-shadow:
+        0 0 40px #000;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.panelHeader {
+    height: 55px;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    background: #111;
+
+    border-bottom: 2px solid #555;
+}
+
+.panelHeader button {
+    min-width: 45px;
+
+    width: 45px;
+
+    height: 40px;
+
+    padding: 0;
+}
+
+
+/* =========================
+   КАМЕРЫ
+========================= */
+
+#cameraImage {
+    position: relative;
+
+    flex: 1;
+
+    margin: 12px;
+
+    overflow: hidden;
+
+    background: #111;
+
+    background-size: cover;
+
+    background-position: center;
+
+    border: 2px solid #555;
+}
+
+#cameraStatic {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .15;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.25) 4px
+        );
+
+    z-index: 10;
+}
+
+#cameraNumber {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    z-index: 20;
+
+    padding: 7px;
+
+    background:
+        rgba(0,0,0,.7);
+}
+
+#cameraLichi,
+#cameraPancake {
     position: absolute;
 
     display: none;
@@ -244,200 +554,268 @@ button:active {
     left: 50%;
     top: 50%;
 
+    z-index: 30;
+
     transform:
         translate(-50%, -50%);
-
-    z-index: 20;
-
-    pointer-events: none;
-
-    user-select: none;
 }
 
 
-#cameraLichi {
-    position: absolute;
+/* =========================
+   КНОПКИ КАМЕР
+========================= */
 
-    inset: 0;
+#cameraMap {
+    min-height: 105px;
 
-    pointer-events: none;
+    display: flex;
+
+    gap: 7px;
+
+    padding: 10px;
+
+    overflow-x: auto;
+
+    background: #080808;
+}
+
+#cameraMap button {
+    min-width: 85px;
+
+    height: 65px;
+
+    padding: 5px;
+
+    font-size: 13px;
 }
 
 
-/* =================================================
-   ВЕРХ
-================================================= */
+/* =========================
+   ВЕНТИЛЯЦИЯ
+========================= */
 
-#topBar {
+#ventMap {
+    position: relative;
+
+    flex: 1;
+
+    margin: 15px;
+
+    border: 2px solid #555;
+
+    background:
+        radial-gradient(
+            circle,
+            #222,
+            #050505
+        );
+
+    overflow: hidden;
+}
+
+.ventRoom {
     position: absolute;
 
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 7%;
+    width: 90px;
+    height: 60px;
 
     display: flex;
 
     align-items: center;
-
-    justify-content:
-        space-between;
-
-    padding:
-        0 25px;
-
-    background:
-        rgba(0,0,0,.75);
-
-    z-index: 30;
-
-    font-size:
-        clamp(15px, 2vw, 25px);
-}
-
-
-#status {
-    position: absolute;
-
-    left: 50%;
-
-    top: 8%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 30;
-
-    padding:
-        6px 15px;
-
-    background:
-        rgba(0,0,0,.65);
-
-    font-size: 14px;
-}
-
-
-/* =================================================
-   ПОВОРОТЫ
-================================================= */
-
-#viewControls {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 8%;
-
-    height: 9%;
-
-    display: flex;
-
-    align-items: center;
-
     justify-content: center;
 
-    z-index: 40;
+    border: 2px solid #777;
+
+    background: #111;
+
+    font-weight: bold;
+}
+
+.officeVent {
+    left: 42%;
+    top: 43%;
+}
+
+.room1 {
+    left: 10%;
+    top: 15%;
+}
+
+.room2 {
+    left: 45%;
+    top: 15%;
+}
+
+.room3 {
+    right: 10%;
+    top: 15%;
+}
+
+.room4 {
+    left: 15%;
+    bottom: 15%;
+}
+
+.room5 {
+    right: 15%;
+    bottom: 15%;
 }
 
 
-#viewControls button {
-    width: 65px;
+/* =========================
+   ЛИНИИ ВЕНТИЛЯЦИИ
+========================= */
+
+.ventLine {
+    position: absolute;
+
+    height: 8px;
+
+    background: #777;
+
+    border: 1px solid #aaa;
+}
+
+.line1 {
+    left: 18%;
+    top: 38%;
+
+    width: 65%;
+
+    transform: rotate(0deg);
+}
+
+.line2 {
+    left: 48%;
+    top: 25%;
+
+    width: 8px;
+    height: 35%;
+}
+
+.line3 {
+    left: 28%;
+    top: 52%;
+
+    width: 8px;
+    height: 30%;
+}
+
+.line4 {
+    right: 28%;
+    top: 52%;
+
+    width: 8px;
+    height: 30%;
+}
+
+.line5 {
+    left: 28%;
+    top: 72%;
+
+    width: 44%;
+}
+
+
+/* =========================
+   ПЕРЕГОРОДКИ
+========================= */
+
+.ventDoor {
+    position: absolute;
+
+    min-width: 110px;
+
+    padding: 7px;
+
+    font-size: 11px;
+
+    z-index: 10;
+}
+
+.door1 {
+    left: 35%;
+    top: 29%;
+}
+
+.door2 {
+    right: 28%;
+    top: 48%;
+}
+
+.door3 {
+    left: 22%;
+    top: 60%;
+}
+
+.door4 {
+    right: 22%;
+    top: 60%;
+}
+
+.door5 {
+    left: 43%;
+    bottom: 10%;
+}
+
+
+/* =========================
+   ПАНКЕЙК НА КАРТЕ
+========================= */
+
+#pancakeVent {
+    position: absolute;
+
+    display: none;
+
+    width: 100px;
     height: 55px;
 
-    margin:
-        0 8px;
-
-    font-size: 25px;
-}
-
-
-/* =================================================
-   НИЖНИЕ КНОПКИ
-================================================= */
-
-#bottomControls {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 0;
-
-    height: 8%;
-
-    display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    background:
-        rgba(0,0,0,.85);
+    border: 2px solid #aaa;
+
+    background: #500;
+
+    color: white;
+
+    font-size: 12px;
 
     z-index: 50;
 }
 
 
-#bottomControls button {
-    height: 80%;
+/* =========================
+   СТАТУС ВЕНТИЛЯЦИИ
+========================= */
 
-    font-size: 14px;
+#ventStatus {
+    min-height: 45px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    background: #111;
+
+    border-top: 1px solid #555;
 }
 
 
-/* =================================================
-   КАМЕРЫ
-================================================= */
+/* =========================
+   GAME OVER / ПОБЕДА
+========================= */
 
-#cameraPanel,
-#ventPanel {
+.overlay {
     position: absolute;
 
     inset: 0;
 
-    background:
-        rgba(0,0,0,.96);
-
-    z-index: 100;
-
-    display: none;
-}
-
-
-.panelHeader {
-    height: 10%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
-
-    padding:
-        0 20px;
+    z-index: 1000;
 
     background:
-        #101010;
-
-    border-bottom:
-        2px solid #555;
-
-    font-size: 22px;
-}
-
-
-#cameraContent,
-#ventContent {
-    position: absolute;
-
-    top: 10%;
-    left: 0;
-    right: 0;
-    bottom: 0;
+        rgba(0,0,0,.92);
 
     display: flex;
 
@@ -446,255 +824,69 @@ button:active {
     align-items: center;
 
     justify-content: center;
-}
 
-
-/* =================================================
-   ИЗОБРАЖЕНИЕ КАМЕРЫ
-================================================= */
-
-#cameraImage {
-    position: relative;
-
-    width: min(75vw, 900px);
-
-    height: min(55vh, 520px);
-
-    background:
-        center / cover
-        no-repeat;
-
-    border:
-        2px solid #555;
-
-    box-shadow:
-        0 0 25px
-        rgba(255,255,255,.1);
-}
-
-
-/* =================================================
-   КАРТА КАМЕР
-================================================= */
-
-#cameraMap {
-    width: min(90vw, 900px);
-
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    margin-top: 12px;
-}
-
-
-#cameraMap button {
-    min-width: 90px;
-}
-
-
-/* =================================================
-   ВЕНТИЛЯЦИЯ
-================================================= */
-
-#ventImage {
-    position: relative;
-
-    width: min(70vw, 800px);
-
-    height: min(45vh, 420px);
-
-    background:
-        center / cover
-        no-repeat;
-
-    border:
-        2px solid #555;
-}
-
-
-#ventMap {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 5px;
-
-    margin-top: 12px;
-
-    width: 90%;
-}
-
-
-.ventNode {
-    padding:
-        12px 18px;
-
-    background:
-        #151515;
-
-    border:
-        2px solid #777;
-}
-
-
-.ventLine {
-    font-size: 25px;
-}
-
-
-/* =================================================
-   ПЕРЕГОРОДКИ
-================================================= */
-
-#barriers {
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    margin-top: 10px;
-}
-
-
-.barrier {
-    min-width: 160px;
-}
-
-
-.barrier.closed {
-    background: #321010;
-
-    border-color: #aa4444;
-}
-
-
-.barrier span {
-    display: block;
-
-    margin-top: 5px;
-
-    font-size: 11px;
-
-    opacity: .7;
-}
-
-
-/* =================================================
-   ВСПЫШКА
-================================================= */
-
-#flash {
-    position: fixed;
-
-    inset: 0;
-
-    background: white;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    z-index: 500;
-
-    transition:
-        opacity .08s linear;
-}
-
-
-/* =================================================
-   GAME OVER / WIN
-================================================= */
-
-.overlay {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        rgba(0,0,0,.9);
-
-    z-index: 1000;
-}
-
-
-.gameOverBox {
-    width: min(90vw, 500px);
-
-    padding: 40px;
+    gap: 15px;
 
     text-align: center;
+}
 
-    background: #050505;
-
-    border:
-        2px solid #555;
+.overlay h1 {
+    font-size: clamp(
+        30px,
+        7vw,
+        70px
+    );
 }
 
 
-.gameOverBox h1 {
-    font-size: 40px;
-}
-
-
-/* =================================================
-   МОБИЛЬНЫЕ
-================================================= */
+/* =========================
+   МОБИЛЬНЫЙ ЭКРАН
+========================= */
 
 @media
 (max-width: 700px) {
 
-    #view {
-        left: 2%;
-        right: 2%;
-
-        top: 7%;
-        bottom: 18%;
+    #bottomControls {
+        gap: 5px;
     }
 
+    #bottomControls button {
+        min-width: 0;
 
-    #cameraImage {
-        width: 90vw;
-
-        height: 45vh;
-    }
-
-
-    #ventImage {
-        width: 90vw;
-
-        height: 38vh;
-    }
-
-
-    #cameraMap button {
-        min-width: 70px;
+        flex: 1;
 
         padding:
-            10px 12px;
+            11px 5px;
 
         font-size: 12px;
     }
 
-
-    #bottomControls button {
-        padding:
-            8px 10px;
-
+    #status {
         font-size: 11px;
     }
 
+    #nightsList {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .panel {
+        inset: 1%;
+    }
+
 }
+
+
+/* =========================
+   ПОЛНЫЙ ЭКРАН
+========================= */
+
+:fullscreen {
+    width: 100%;
+    height: 100%;
+}
+
+:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+    }
