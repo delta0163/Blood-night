@@ -94,7 +94,7 @@ user-scalable=no">
 
 
 <!-- =========================
-     ТЕЛЕФОН
+     ТЕЛЕФОННЫЙ ЗВОНОК
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
@@ -129,12 +129,12 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-             src="images/lichi.png"
-             alt="Личи">
+        src="images/lichi.png"
+        alt="Личи">
 
         <img id="pancake"
-             src="images/pancake.png"
-             alt="Панкейк">
+        src="images/pancake.png"
+        alt="Панкейк">
 
         <div id="flash"></div>
 
@@ -180,23 +180,16 @@ user-scalable=no">
     </div>
 
 
-    <!-- РЫЧАГ ПОД СТОЛОМ -->
-
-    <button id="leverButton"
-            class="leverButton">
-
-        <img src="images/lever.png"
-             alt="Рычаг">
-
-    </button>
-
-
     <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
         <button id="cameraButton">
             КАМЕРЫ
+        </button>
+
+        <button id="underTableButton">
+            ПОД СТОЛОМ
         </button>
 
         <button id="flashButton">
@@ -211,7 +204,7 @@ user-scalable=no">
     ========================== -->
 
     <div id="cameraPanel"
-         class="panel hidden">
+    class="panel hidden">
 
         <div class="panelHeader">
 
@@ -235,17 +228,17 @@ user-scalable=no">
             </div>
 
             <img id="cameraLichi"
-                 src="images/lichi.png"
-                 alt="Личи">
+            src="images/lichi.png"
+            alt="Личи">
 
             <img id="cameraPancake"
-                 src="images/pancake.png"
-                 alt="Панкейк">
+            src="images/pancake.png"
+            alt="Панкейк">
 
         </div>
 
 
-        <!-- ВЕРТИКАЛЬНЫЙ СПИСОК КАМЕР -->
+        <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
 
         <div id="cameraMap">
 
@@ -283,11 +276,53 @@ user-scalable=no">
 
 
     <!-- =========================
-         ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
+         ЭКРАН ПОД СТОЛОМ
     ========================== -->
 
-    <div id="powerPanel"
-         class="panel hidden">
+    <div id="underTablePanel"
+    class="panel hidden">
+
+        <div class="panelHeader">
+
+            <span>
+                ПОД СТОЛОМ
+            </span>
+
+            <button id="closeUnderTable">
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="underTableImage">
+
+            <img
+            src="images/under_table.png"
+            alt="Под столом">
+
+            <div id="leverHotspot">
+                <button id="leverButton">
+                    РЫЧАГ
+                </button>
+            </div>
+
+        </div>
+
+
+        <div id="electricStatus">
+            ЭЛЕКТРИЧЕСТВО: НОРМА
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ПЕРЕНАПРАВЛЕНИЕ
+    ========================== -->
+
+    <div id="electricPanel"
+    class="panel hidden">
 
         <div class="panelHeader">
 
@@ -295,66 +330,61 @@ user-scalable=no">
                 ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
             </span>
 
-            <button id="closePowerPanel">
+            <button id="closeElectric">
                 ✕
             </button>
 
         </div>
 
 
-        <div id="powerContent">
+        <div id="electricContent">
 
-            <div id="powerLeverVisual">
-
-                <img src="images/lever.png"
-                     alt="Рычаг">
-
+            <div id="electricWarning">
+                ВЫБЕРИ, КУДА ПЕРЕНАПРАВИТЬ
+                ЭЛЕКТРИЧЕСТВО
             </div>
 
 
-            <div id="powerStatus">
-                ЭЛЕКТРИЧЕСТВО: ОФИС
-            </div>
-
-
-            <p id="powerDescription">
-                Выберите, куда перенаправить электричество.
-            </p>
-
-
-            <div id="powerChoices">
+            <div id="electricChoices">
 
                 <button
-                    class="powerChoice"
-                    data-power="window">
+                class="electricChoice"
+                data-target="window">
 
-                    ⚡ ПЕРЕДНЕЕ ОКНО
+                    ПЕРЕДНЕЕ ОКНО
 
                 </button>
 
-                <button
-                    class="powerChoice"
-                    data-power="cameras">
 
-                    ⚡ КАМЕРЫ
+                <button
+                class="electricChoice"
+                data-target="left">
+
+                    ЛЕВЫЙ КОРИДОР
 
                 </button>
 
-                <button
-                    class="powerChoice"
-                    data-power="office">
 
-                    ⚡ ОФИС
+                <button
+                class="electricChoice"
+                data-target="right">
+
+                    ПРАВЫЙ КОРИДОР
 
                 </button>
 
             </div>
 
 
-            <div id="powerProgress">
+            <div id="redirectProgress">
 
-                <div id="powerProgressBar"></div>
+                <div id="redirectBar"></div>
 
+            </div>
+
+
+            <div id="redirectStatus">
+                СИСТЕМА ГОТОВА
             </div>
 
         </div>
@@ -367,14 +397,14 @@ user-scalable=no">
     ========================== -->
 
     <div id="gameOver"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
         </h1>
 
         <p id="loseReason">
-            ПАНКЕЙК ДОБРАЛСЯ ДО ОКНА.
+            Система отключена.
         </p>
 
         <button id="restart">
@@ -393,7 +423,7 @@ user-scalable=no">
     ========================== -->
 
     <div id="winScreen"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -417,26 +447,27 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
 
-<audio id="leverAudio"
-       src="sounds/vent.mp3"></audio>
+<audio id="ventAudio"
+src="sounds/vent.mp3"
+loop></audio>
 
 
 <script src="game.js"></script>
