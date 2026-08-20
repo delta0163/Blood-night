@@ -14,6 +14,7 @@ body {
     overflow: hidden;
 
     background: #000;
+
     color: white;
 
     font-family: Arial, sans-serif;
@@ -37,9 +38,13 @@ button:active {
     transform: scale(.96);
 }
 
+.hidden {
+    display: none !important;
+}
+
 
 /* =========================
-   ОБЩИЕ ЭКРАНЫ
+   ЭКРАНЫ
 ========================= */
 
 .screen {
@@ -56,10 +61,6 @@ button:active {
     align-items: center;
 
     z-index: 100;
-}
-
-.hidden {
-    display: none !important;
 }
 
 
@@ -79,7 +80,7 @@ button:active {
     background:
         linear-gradient(
             rgba(0,0,0,.65),
-            rgba(0,0,0,.8)
+            rgba(0,0,0,.85)
         ),
         url("images/menu_bg.png");
 
@@ -153,7 +154,7 @@ button:active {
 
 
 /* =========================
-   ЗВОНОК
+   ТЕЛЕФОН
 ========================= */
 
 #phoneScreen {
@@ -254,8 +255,7 @@ button:active {
 
     z-index: 100;
 
-    transition:
-        opacity .1s;
+    transition: opacity .1s;
 }
 
 
@@ -332,50 +332,6 @@ button:active {
 
 
 /* =========================
-   РЫЧАГ ПОД СТОЛОМ
-========================= */
-
-.leverButton {
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 155px;
-
-    transform:
-        translateX(-50%);
-
-    width: 75px;
-    height: 75px;
-
-    padding: 5px;
-
-    background: rgba(0,0,0,.55);
-
-    border: 2px solid #777;
-
-    z-index: 70;
-
-    border-radius: 8px;
-}
-
-.leverButton img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    display: block;
-}
-
-.leverButton:active {
-    transform:
-        translateX(-50%)
-        scale(.92);
-}
-
-
-/* =========================
    НИЖНИЕ КНОПКИ
 ========================= */
 
@@ -394,14 +350,10 @@ button:active {
     gap: 10px;
 
     z-index: 60;
-
-    width: min(95%, 500px);
 }
 
 #bottomControls button {
-    min-width: 0;
-
-    flex: 1;
+    min-width: 120px;
 }
 
 
@@ -412,7 +364,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 3%;
+    inset: 4%;
 
     z-index: 200;
 
@@ -527,11 +479,19 @@ button:active {
 }
 
 
-/* =========================
-   ВЕРТИКАЛЬНЫЕ КАМЕРЫ
-========================= */
+/*
+   ВЕРТИКАЛЬНЫЙ СПИСОК
+*/
 
 #cameraMap {
+    width: 100%;
+
+    max-height: 150px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
     display: flex;
 
     flex-direction: column;
@@ -540,15 +500,9 @@ button:active {
 
     padding: 10px;
 
-    height: 190px;
-
-    overflow-y: auto;
-
-    overflow-x: hidden;
-
     flex-shrink: 0;
 
-    border-top: 2px solid #555;
+    scrollbar-width: thin;
 }
 
 #cameraMap button {
@@ -557,14 +511,88 @@ button:active {
     min-height: 45px;
 
     flex-shrink: 0;
+
+    text-align: left;
+
+    padding-left: 20px;
 }
 
 
 /* =========================
-   ПЕРЕНАПРАВЛЕНИЕ
+   ПОД СТОЛОМ
 ========================= */
 
-#powerContent {
+#underTableImage {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    margin: 10px;
+
+    overflow: hidden;
+
+    background: #000;
+
+    border: 2px solid #555;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+#underTableImage > img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+#leverHotspot {
+    position: absolute;
+
+    left: 50%;
+    bottom: 15%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 20;
+}
+
+#leverButton {
+    min-width: 130px;
+
+    border-color: #aaa;
+
+    background:
+        rgba(0,0,0,.8);
+
+    box-shadow:
+        0 0 15px #000;
+}
+
+#electricStatus {
+    padding: 12px;
+
+    text-align: center;
+
+    border-top: 2px solid #555;
+}
+
+
+/* =========================
+   ЭЛЕКТРИЧЕСТВО
+========================= */
+
+#electricContent {
+    flex: 1;
+
     display: flex;
 
     flex-direction: column;
@@ -573,81 +601,52 @@ button:active {
 
     justify-content: center;
 
-    gap: 18px;
-
-    height: 100%;
+    gap: 25px;
 
     padding: 20px;
 
     text-align: center;
 }
 
-#powerLeverVisual {
-    width: 100px;
-    height: 100px;
+#electricWarning {
+    font-size: 20px;
 
-    padding: 10px;
-
-    border: 2px solid #555;
-
-    background: #111;
+    max-width: 600px;
 }
 
-#powerLeverVisual img {
-    width: 100%;
-    height: 100%;
+#electricChoices {
+    width: min(90%, 500px);
 
-    object-fit: contain;
-}
-
-#powerStatus {
-    font-size: 22px;
-
-    text-shadow:
-        0 0 10px #000;
-}
-
-#powerDescription {
-    max-width: 500px;
-
-    color: #aaa;
-}
-
-#powerChoices {
     display: flex;
 
     flex-direction: column;
 
-    width: min(90%, 400px);
-
-    gap: 10px;
+    gap: 12px;
 }
 
-.powerChoice {
+.electricChoice {
     width: 100%;
 
     min-height: 55px;
 }
 
-.powerChoice:disabled {
-    opacity: .45;
-
-    cursor: not-allowed;
+.electricChoice:disabled {
+    opacity: .5;
 }
 
-#powerProgress {
-    width: min(90%, 400px);
+#redirectProgress {
+    width: min(90%, 500px);
 
-    height: 15px;
+    height: 22px;
 
-    border: 2px solid #555;
+    border: 2px solid #777;
 
     background: #111;
 
     overflow: hidden;
 }
 
-#powerProgressBar {
+#redirectBar {
     width: 0%;
 
     height: 100%;
@@ -656,6 +655,40 @@ button:active {
 
     transition:
         width .05s linear;
+}
+
+#redirectStatus {
+    font-size: 18px;
+}
+
+
+/* =========================
+   ПАНКЕЙКОВАЯ АТАКА
+========================= */
+
+#pancakeWarning {
+    position: absolute;
+
+    top: 85px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 80;
+
+    padding: 10px 18px;
+
+    border: 2px solid #aaa;
+
+    background:
+        rgba(0,0,0,.85);
+
+    font-size: 17px;
+
+    text-align: center;
+
+    display: none;
 }
 
 
@@ -671,7 +704,7 @@ button:active {
     z-index: 500;
 
     background:
-        rgba(0,0,0,.92);
+        rgba(0,0,0,.9);
 
     display: flex;
 
@@ -699,18 +732,21 @@ button:active {
 
 
 /* =========================
-   МОБИЛЬНЫЙ ЭКРАН
+   ТЕЛЕФОН
 ========================= */
 
 @media (max-width: 600px) {
 
     #bottomControls {
-        width: 95%;
+        width: 96%;
     }
 
     #bottomControls button {
-        padding:
-            10px 5px;
+        min-width: 0;
+
+        flex: 1;
+
+        padding: 10px 5px;
 
         font-size: 12px;
     }
@@ -719,19 +755,12 @@ button:active {
         bottom: 100px;
     }
 
-    .leverButton {
-        bottom: 145px;
-
-        width: 65px;
-        height: 65px;
-    }
-
     .panel {
         inset: 2%;
     }
 
     #cameraMap {
-        height: 160px;
+        max-height: 135px;
     }
 
 }
