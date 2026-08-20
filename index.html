@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
+<meta charset="UTF-8">
 
-    <title>Blood Glow Night</title>
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
-    <link rel="stylesheet" href="style.css">
+<title>Blood Glow Night</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =================================================
-     ФОНОВЫЕ ЗВУКИ
-================================================= -->
-
-<audio id="phoneAudio"
-       src="sounds/phone.mp3"
-       preload="auto"></audio>
-
-<audio id="humAudio"
-       src="sounds/hum.mp3"
-       preload="auto"
-       loop></audio>
-
-<audio id="flashAudio"
-       src="sounds/flash.mp3"
-       preload="auto"></audio>
-
-<audio id="lichiAudio"
-       src="sounds/lichi_scream.mp3"
-       preload="auto"></audio>
-
-<audio id="ventAudio"
-       src="sounds/vent.mp3"
-       preload="auto"
-       loop></audio>
-
-
-<!-- =================================================
+<!-- =========================
      ГЛАВНОЕ МЕНЮ
-================================================= -->
+========================= -->
 
 <div id="mainMenu" class="screen">
 
-    <div class="menuBox">
+    <div class="menuBackground"></div>
+
+    <div class="menuContent">
 
         <h1>BLOOD GLOW NIGHT</h1>
 
         <button id="startGameButton">
-            НАЧАТЬ НОЧЬ
+            НОВАЯ НОЧЬ
         </button>
 
         <button id="nightsButton">
@@ -64,24 +40,19 @@
             НАСТРОЙКИ
         </button>
 
-        <button id="fullscreenButton">
-            ПОЛНЫЙ ЭКРАН
-        </button>
-
     </div>
 
 </div>
 
 
-<!-- =================================================
-     МЕНЮ НОЧЕЙ
-================================================= -->
+<!-- =========================
+     ВЫБОР НОЧИ
+========================= -->
 
 <div id="nightsMenu"
-     class="screen"
-     style="display:none;">
+     class="screen hidden">
 
-    <div class="menuBox">
+    <div class="menuContent">
 
         <h2>ВЫБОР НОЧИ</h2>
 
@@ -96,19 +67,18 @@
 </div>
 
 
-<!-- =================================================
+<!-- =========================
      НАСТРОЙКИ
-================================================= -->
+========================= -->
 
 <div id="settingsMenu"
-     class="screen"
-     style="display:none;">
+     class="screen hidden">
 
-    <div class="menuBox">
+    <div class="menuContent">
 
         <h2>НАСТРОЙКИ</h2>
 
-        <button id="fullscreenSetting">
+        <button id="fullscreenButton">
             ПОЛНЫЙ ЭКРАН
         </button>
 
@@ -125,20 +95,21 @@
 </div>
 
 
-<!-- =================================================
+<!-- =========================
      ТЕЛЕФОННЫЙ ЗВОНОК
-================================================= -->
+========================= -->
 
 <div id="phoneScreen"
-     class="screen"
-     style="display:none;">
+     class="screen hidden">
 
     <div class="phoneBox">
 
-        <h2>12:00 AM</h2>
+        <h2 id="phoneNight">
+            NIGHT 2
+        </h2>
 
         <p>
-            ВХОДЯЩИЙ ЗВОНОК...
+            Входящий звонок...
         </p>
 
         <button id="skipPhoneButton">
@@ -150,31 +121,36 @@
 </div>
 
 
-<!-- =================================================
+<!-- =========================
      ИГРА
-================================================= -->
+========================= -->
 
 <div id="game"
-     style="display:none;">
+     class="hidden">
 
     <div id="background"></div>
 
-    <!-- Основной экран -->
     <div id="view">
 
         <img id="lichi"
              src="images/lichi.png"
-             alt="Lichi">
+             alt="Личи">
+
+        <img id="pancake"
+             src="images/pancake.png"
+             alt="Панкейк">
+
+        <div id="flash"></div>
 
     </div>
 
 
-    <!-- Верхняя панель -->
+    <!-- HUD -->
 
-    <div id="topBar">
+    <div id="hud">
 
         <div id="night">
-            NIGHT 1
+            NIGHT 2
         </div>
 
         <div id="time">
@@ -184,16 +160,14 @@
     </div>
 
 
-    <!-- Статус -->
-
     <div id="status">
         ОФИС
     </div>
 
 
-    <!-- Управление обзором -->
+    <!-- ПОВОРОТЫ -->
 
-    <div id="viewControls">
+    <div id="officeControls">
 
         <button id="leftButton">
             ◀
@@ -210,7 +184,7 @@
     </div>
 
 
-    <!-- Нижняя панель -->
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -229,234 +203,250 @@
     </div>
 
 
-    <!-- =================================================
-         ПАНЕЛЬ КАМЕР
-    ================================================= -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================== -->
 
-    <div id="cameraPanel">
+    <div id="cameraPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>КАМЕРЫ</span>
+            <span>
+                СИСТЕМА КАМЕР
+            </span>
 
             <button id="closeCameraPanel">
-                X
+                ✕
             </button>
 
         </div>
 
 
-        <div id="cameraContent">
+        <div id="cameraImage">
 
-            <div id="cameraImage">
+            <div id="cameraStatic"></div>
 
-                <!-- картинка камеры -->
-                <div id="cameraLichi"></div>
-
+            <div id="cameraNumber">
+                CAM 01
             </div>
 
+            <img id="cameraLichi"
+                 src="images/lichi.png">
 
-            <div id="cameraMap">
+            <img id="cameraPancake"
+                 src="images/pancake.png">
 
-                <button data-camera="cam01">
-                    CAM 01
-                </button>
+        </div>
 
-                <button data-camera="cam02">
-                    CAM 02
-                </button>
 
-                <button data-camera="cam03">
-                    CAM 03
-                </button>
+        <!-- ПРОКРУЧИВАЕМАЯ ПАНЕЛЬ -->
 
-                <button data-camera="cam04">
-                    CAM 04
-                </button>
+        <div id="cameraMap">
 
-                <button data-camera="cam05">
-                    CAM 05
-                </button>
+            <button data-camera="cam01">
+                CAM 01
+            </button>
 
-                <button data-camera="cam06">
-                    CAM 06
-                </button>
+            <button data-camera="cam02">
+                CAM 02
+            </button>
 
-                <button data-camera="cam07">
-                    CAM 07
-                </button>
+            <button data-camera="cam03">
+                CAM 03
+            </button>
 
-            </div>
+            <button data-camera="cam04">
+                CAM 04
+            </button>
+
+            <button data-camera="cam05">
+                CAM 05
+            </button>
+
+            <button data-camera="cam06">
+                CAM 06
+            </button>
+
+            <button data-camera="cam07">
+                CAM 07
+            </button>
+
+            <button data-camera="cam08">
+                CAM 08
+            </button>
 
         </div>
 
     </div>
 
 
-    <!-- =================================================
-         ПАНЕЛЬ ВЕНТИЛЯЦИИ
-    ================================================= -->
+    <!-- =========================
+         ВЕНТИЛЯЦИЯ
+    ========================== -->
 
-    <div id="ventPanel">
+    <div id="ventPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>ВЕНТИЛЯЦИЯ</span>
+            <span>
+                СИСТЕМА ВЕНТИЛЯЦИИ
+            </span>
 
             <button id="closeVentPanel">
-                X
+                ✕
             </button>
 
         </div>
 
 
-        <div id="ventContent">
+        <div id="ventMap">
 
-            <div id="ventImage">
+            <div class="ventRoom officeVent">
+                ОФИС
+            </div>
 
-                <div id="ventLichi"></div>
+            <div class="ventRoom room1">
+                V1
+            </div>
 
+            <div class="ventRoom room2">
+                V2
+            </div>
+
+            <div class="ventRoom room3">
+                V3
+            </div>
+
+            <div class="ventRoom room4">
+                V4
+            </div>
+
+            <div class="ventRoom room5">
+                V5
             </div>
 
 
-            <!-- Карта вентиляции -->
+            <div class="ventLine line1"></div>
+            <div class="ventLine line2"></div>
+            <div class="ventLine line3"></div>
+            <div class="ventLine line4"></div>
+            <div class="ventLine line5"></div>
 
-            <div id="ventMap">
 
-                <div class="ventNode">
-                    V1
-                </div>
+            <button class="ventDoor door1"
+                    data-door="1">
+                ПЕРЕГОРОДКА 1
+            </button>
 
-                <div class="ventLine">
-                    ↓
-                </div>
+            <button class="ventDoor door2"
+                    data-door="2">
+                ПЕРЕГОРОДКА 2
+            </button>
 
-                <div class="ventNode">
-                    V2
-                </div>
+            <button class="ventDoor door3"
+                    data-door="3">
+                ПЕРЕГОРОДКА 3
+            </button>
 
-                <div class="ventLine">
-                    ↓
-                </div>
+            <button class="ventDoor door4"
+                    data-door="4">
+                ПЕРЕГОРОДКА 4
+            </button>
 
-                <div class="ventNode">
-                    V3
-                </div>
+            <button class="ventDoor door5"
+                    data-door="5">
+                ПЕРЕГОРОДКА 5
+            </button>
 
-                <div class="ventLine">
-                    ↓
-                </div>
 
-                <div class="ventNode">
-                    OFFICE
-                </div>
-
+            <div id="pancakeVent">
+                ПАНКЕЙК
             </div>
 
-
-            <!-- Перегородки -->
-
-            <div id="barriers">
-
-                <button
-                    class="barrier"
-                    data-barrier="1">
-
-                    ПЕРЕГОРОДКА 1
-                    <span>ОТКРЫТА</span>
-
-                </button>
+        </div>
 
 
-                <button
-                    class="barrier"
-                    data-barrier="2">
-
-                    ПЕРЕГОРОДКА 2
-                    <span>ОТКРЫТА</span>
-
-                </button>
-
-
-                <button
-                    class="barrier"
-                    data-barrier="3">
-
-                    ПЕРЕГОРОДКА 3
-                    <span>ОТКРЫТА</span>
-
-                </button>
-
-            </div>
-
+        <div id="ventStatus">
+            ВЕНТИЛЯЦИЯ НОРМАЛЬНА
         </div>
 
     </div>
 
 
-    <!-- =================================================
-         ВСПЫШКА
-    ================================================= -->
-
-    <div id="flash"></div>
-
-
-    <!-- =================================================
+    <!-- =========================
          GAME OVER
-    ================================================= -->
+    ========================== -->
 
     <div id="gameOver"
-         class="overlay"
-         style="display:none;">
+         class="overlay hidden">
 
-        <div class="gameOverBox">
+        <h1>
+            ТЫ ПРОИГРАЛ
+        </h1>
 
-            <h1>GAME OVER</h1>
+        <button id="restart">
+            ПОВТОРИТЬ
+        </button>
 
-            <p>
-                ЛИЧИ ДОБРАЛАСЬ ДО ТЕБЯ
-            </p>
-
-            <button id="restart">
-                ЗАНОВО
-            </button>
-
-            <button id="menuAfterLose">
-                МЕНЮ
-            </button>
-
-        </div>
+        <button id="menuAfterLose">
+            МЕНЮ
+        </button>
 
     </div>
 
 
-    <!-- =================================================
+    <!-- =========================
          ПОБЕДА
-    ================================================= -->
+    ========================== -->
 
     <div id="winScreen"
-         class="overlay"
-         style="display:none;">
+         class="overlay hidden">
 
-        <div class="gameOverBox">
+        <h1 id="winText">
+            NIGHT 2 COMPLETE
+        </h1>
 
-            <h1 id="winText">
-                NIGHT COMPLETE
-            </h1>
+        <button id="nextNight">
+            СЛЕДУЮЩАЯ НОЧЬ
+        </button>
 
-            <button id="nextNight">
-                СЛЕДУЮЩАЯ НОЧЬ
-            </button>
-
-            <button id="menuAfterWin">
-                МЕНЮ
-            </button>
-
-        </div>
+        <button id="menuAfterWin">
+            МЕНЮ
+        </button>
 
     </div>
 
 </div>
+
+
+<!-- =========================
+     ЗВУКИ
+========================= -->
+
+<audio id="phoneAudio"
+       src="sounds/phone.mp3"></audio>
+
+<audio id="humAudio"
+       src="sounds/hum.mp3"
+       loop></audio>
+
+<audio id="flashAudio"
+       src="sounds/flash.mp3"></audio>
+
+<audio id="lichiAudio"
+       src="sounds/lichi.mp3"></audio>
+
+<audio id="pancakeAudio"
+       src="sounds/pancake.mp3"></audio>
+
+<audio id="screamAudio"
+       src="sounds/scream.mp3"></audio>
+
+<audio id="ventAudio"
+       src="sounds/vent.mp3"
+       loop></audio>
 
 
 <script src="game.js"></script>
