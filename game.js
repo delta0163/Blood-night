@@ -8,47 +8,98 @@
    ЭЛЕМЕНТЫ
 ================================================= */
 
-const mainMenu = document.getElementById("mainMenu");
-const nightsMenu = document.getElementById("nightsMenu");
-const settingsMenu = document.getElementById("settingsMenu");
-const nightsList = document.getElementById("nightsList");
+const mainMenu =
+    document.getElementById("mainMenu");
 
-const game = document.getElementById("game");
-const phoneScreen = document.getElementById("phoneScreen");
+const nightsMenu =
+    document.getElementById("nightsMenu");
 
-const phoneAudio = document.getElementById("phoneAudio");
-const humAudio = document.getElementById("humAudio");
-const flashAudio = document.getElementById("flashAudio");
-const lichiAudio = document.getElementById("lichiAudio");
-const pancakeAudio = document.getElementById("pancakeAudio");
-const screamAudio = document.getElementById("screamAudio");
-const ventAudio = document.getElementById("ventAudio");
+const settingsMenu =
+    document.getElementById("settingsMenu");
 
-const view = document.getElementById("view");
+const nightsList =
+    document.getElementById("nightsList");
 
-const lichi = document.getElementById("lichi");
-const pancake = document.getElementById("pancake");
+const game =
+    document.getElementById("game");
 
-const flash = document.getElementById("flash");
+const phoneScreen =
+    document.getElementById("phoneScreen");
 
-const status = document.getElementById("status");
-const time = document.getElementById("time");
-const nightDisplay = document.getElementById("night");
+const phoneAudio =
+    document.getElementById("phoneAudio");
 
-const cameraPanel = document.getElementById("cameraPanel");
-const cameraImage = document.getElementById("cameraImage");
-const cameraNumber = document.getElementById("cameraNumber");
+const flashAudio =
+    document.getElementById("flashAudio");
 
-const cameraLichi = document.getElementById("cameraLichi");
-const cameraPancake = document.getElementById("cameraPancake");
+const lichiAudio =
+    document.getElementById("lichiAudio");
 
-const ventPanel = document.getElementById("ventPanel");
-const ventStatus = document.getElementById("ventStatus");
-const pancakeVent = document.getElementById("pancakeVent");
+const humAudio =
+    document.getElementById("humAudio");
 
-const gameOverScreen = document.getElementById("gameOver");
-const winScreen = document.getElementById("winScreen");
-const winText = document.getElementById("winText");
+const pancakeAudio =
+    document.getElementById("pancakeAudio");
+
+const screamAudio =
+    document.getElementById("screamAudio");
+
+const ventAudio =
+    document.getElementById("ventAudio");
+
+const view =
+    document.getElementById("view");
+
+const lichi =
+    document.getElementById("lichi");
+
+const pancake =
+    document.getElementById("pancake");
+
+const flash =
+    document.getElementById("flash");
+
+const status =
+    document.getElementById("status");
+
+const time =
+    document.getElementById("time");
+
+const nightDisplay =
+    document.getElementById("night");
+
+const cameraPanel =
+    document.getElementById("cameraPanel");
+
+const cameraImage =
+    document.getElementById("cameraImage");
+
+const cameraNumber =
+    document.getElementById("cameraNumber");
+
+const cameraLichi =
+    document.getElementById("cameraLichi");
+
+const cameraPancake =
+    document.getElementById("cameraPancake");
+
+const ventPanel =
+    document.getElementById("ventPanel");
+
+const ventStatus =
+    document.getElementById("ventStatus");
+
+const pancakeVent =
+    document.getElementById("pancakeVent");
+
+const gameOverScreen =
+    document.getElementById("gameOver");
+
+const winScreen =
+    document.getElementById("winScreen");
+
+const winText =
+    document.getElementById("winText");
 
 const nextNightButton =
     document.getElementById("nextNight");
@@ -88,18 +139,10 @@ let gameTimer = null;
 
 /* =================================================
    ДЛИТЕЛЬНОСТЬ НОЧИ
-=================================================
 
    NIGHT 1 = 5 минут
    NIGHT 2 = 6 минут
    NIGHT 3 = 7 минут
-   NIGHT 4 = 8 минут
-
-   и так далее.
-
-   Внутри игры всегда 360 игровых минут:
-   12 AM → 6 AM.
-
 ================================================= */
 
 function getNightDuration() {
@@ -110,7 +153,7 @@ function getNightDuration() {
 
 
 /* =================================================
-   СКОЛЬКО ДЛИТСЯ ОДНА ИГРОВАЯ МИНУТА
+   ВРЕМЯ ОДНОЙ ИГРОВОЙ МИНУТЫ
 ================================================= */
 
 function getGameMinuteTime() {
@@ -118,11 +161,11 @@ function getGameMinuteTime() {
     const realMinutes =
         getNightDuration();
 
-    const totalRealSeconds =
+    const totalSeconds =
         realMinutes * 60;
 
     return (
-        totalRealSeconds * 1000 / 360
+        totalSeconds * 1000 / 360
     );
 
 }
@@ -130,31 +173,33 @@ function getGameMinuteTime() {
 
 /* =================================================
    ПОЗИЦИЯ ЛИЧИ
-=================================================
-
-   0 = далеко
-   1 = приближается
-   2 = левый коридор
-   3 = дверь
-   4 = атака
-
 ================================================= */
 
 let lichiPosition = 0;
 
 
+/*
+   0 = далеко
+   1 = коридор
+   2 = рядом
+   3 = дверь
+   4 = атака
+*/
+
+
 /* =================================================
    ПОЗИЦИЯ ПАНКЕЙКА
-=================================================
-
-   0 = нет
-   1 = вентиляция
-   2 = близко
-   3 = офис
-
 ================================================= */
 
 let pancakePosition = 0;
+
+
+/*
+   0 = отсутствует
+   1 = вентиляция
+   2 = близко
+   3 = офис
+*/
 
 
 /* =================================================
@@ -186,7 +231,7 @@ const cameraImages = {
 
 
 /* =================================================
-   ПОЗИЦИИ ЛИЧИ НА КАМЕРАХ
+   ЛИЧИ НА КАМЕРАХ
 ================================================= */
 
 const lichiCameraPositions = {
@@ -199,7 +244,7 @@ const lichiCameraPositions = {
 
 
 /* =================================================
-   ПОЗИЦИИ ПАНКЕЙКА
+   ПАНКЕЙК НА КАМЕРАХ
    ТОЛЬКО NIGHT 2+
 ================================================= */
 
@@ -213,7 +258,7 @@ const pancakeCameraPositions = {
 
 
 /* =================================================
-   ОФИС
+   ФОТО ОФИСА
 ================================================= */
 
 const officeViews = {
@@ -231,77 +276,61 @@ const officeViews = {
 
 
 /* =================================================
-   ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-================================================= */
-
-function hideAllScreens() {
-
-    mainMenu.classList.add("hidden");
-    nightsMenu.classList.add("hidden");
-    settingsMenu.classList.add("hidden");
-    phoneScreen.classList.add("hidden");
-
-}
-
-
-function stopAllSounds() {
-
-    [
-        phoneAudio,
-        humAudio,
-        ventAudio
-    ].forEach(function(audio) {
-
-        audio.pause();
-
-    });
-
-}
-
-
-/* =================================================
    МЕНЮ
 ================================================= */
 
 document
 .getElementById("startGameButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    selectedNight = 1;
+        selectedNight = 1;
 
-    enterFullscreen();
+        enterFullscreen();
 
-    startSelectedNight();
+        startSelectedNight();
 
-});
+    }
+);
 
 
 document
 .getElementById("nightsButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    renderNights();
+        renderNights();
 
-    mainMenu.classList.add("hidden");
+        mainMenu.style.display =
+            "none";
 
-    nightsMenu.classList.remove("hidden");
+        nightsMenu.style.display =
+            "flex";
 
-});
+    }
+);
 
 
 document
 .getElementById("closeNights")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    nightsMenu.classList.add("hidden");
+        nightsMenu.style.display =
+            "none";
 
-    mainMenu.classList.remove("hidden");
+        mainMenu.style.display =
+            "flex";
 
-});
+    }
+);
 
 
 /* =================================================
-   СПИСОК НОЧЕЙ
+   ВЫБОР НОЧИ
 ================================================= */
 
 function renderNights() {
@@ -315,7 +344,9 @@ function renderNights() {
     ) {
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
 
         button.className =
             "nightButton";
@@ -326,12 +357,15 @@ function renderNights() {
 
         if (!unlocked) {
 
-            button.classList.add("locked");
+            button.classList.add(
+                "locked"
+            );
 
             button.textContent =
                 "🔒 NIGHT " + i;
 
-            button.disabled = true;
+            button.disabled =
+                true;
 
         } else {
 
@@ -340,7 +374,7 @@ function renderNights() {
 
             button.addEventListener(
                 "click",
-                function() {
+                function () {
 
                     selectedNight = i;
 
@@ -353,7 +387,9 @@ function renderNights() {
 
         }
 
-        nightsList.appendChild(button);
+        nightsList.appendChild(
+            button
+        );
 
     }
 
@@ -366,24 +402,34 @@ function renderNights() {
 
 document
 .getElementById("settingsButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    mainMenu.classList.add("hidden");
+        mainMenu.style.display =
+            "none";
 
-    settingsMenu.classList.remove("hidden");
+        settingsMenu.style.display =
+            "flex";
 
-});
+    }
+);
 
 
 document
 .getElementById("closeSettings")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    settingsMenu.classList.add("hidden");
+        settingsMenu.style.display =
+            "none";
 
-    mainMenu.classList.remove("hidden");
+        mainMenu.style.display =
+            "flex";
 
-});
+    }
+);
 
 
 /* =================================================
@@ -394,7 +440,10 @@ async function enterFullscreen() {
 
     try {
 
-        if (!document.fullscreenElement) {
+        if (
+            !document.fullscreenElement &&
+            document.documentElement.requestFullscreen
+        ) {
 
             await document
                 .documentElement
@@ -405,7 +454,7 @@ async function enterFullscreen() {
     } catch (error) {
 
         console.log(
-            "Fullscreen недоступен:",
+            "Fullscreen:",
             error
         );
 
@@ -428,29 +477,32 @@ document
 
 document
 .getElementById("resetProgress")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    if (
-        !confirm(
-            "Сбросить весь прогресс?"
-        )
-    ) {
-        return;
+        if (
+            !confirm(
+                "Сбросить весь прогресс?"
+            )
+        ) {
+            return;
+        }
+
+        completedNight = 0;
+
+        localStorage.removeItem(
+            "bloodGlowNightCompleted"
+        );
+
+        renderNights();
+
+        alert(
+            "Прогресс сброшен."
+        );
+
     }
-
-    completedNight = 0;
-
-    localStorage.removeItem(
-        "bloodGlowNightCompleted"
-    );
-
-    renderNights();
-
-    alert(
-        "Прогресс сброшен."
-    );
-
-});
+);
 
 
 /* =================================================
@@ -461,31 +513,26 @@ function startSelectedNight() {
 
     stopGameTimer();
 
-    stopAllSounds();
-
-    hideAllScreens();
-
-    game.classList.add("hidden");
-
-    gameOverScreen.classList.add("hidden");
-    winScreen.classList.add("hidden");
-
-    cameraPanel.classList.add("hidden");
-    ventPanel.classList.add("hidden");
-
     gameStarted = false;
     gameOver = false;
     nightFinished = false;
 
     gameMinutes = 0;
 
-    currentView = "front";
-    currentCamera = "cam01";
+    currentView =
+        "front";
 
-    lichiPosition = 0;
-    pancakePosition = 0;
+    currentCamera =
+        "cam01";
 
-    flashCooldown = false;
+    lichiPosition =
+        0;
+
+    pancakePosition =
+        0;
+
+    flashCooldown =
+        false;
 
     ventDoors = {
         1: false,
@@ -494,14 +541,40 @@ function startSelectedNight() {
     };
 
 
+    /* Закрываем все панели */
+
+    cameraPanel.style.display =
+        "none";
+
+    ventPanel.style.display =
+        "none";
+
+    gameOverScreen.style.display =
+        "none";
+
+    winScreen.style.display =
+        "none";
+
+
+    /* Останавливаем звуки */
+
+    phoneAudio.pause();
+    humAudio.pause();
+    ventAudio.pause();
+
+    phoneAudio.currentTime = 0;
+    humAudio.currentTime = 0;
+    ventAudio.currentTime = 0;
+
+
     /* HUD */
 
     nightDisplay.textContent =
         "NIGHT " + selectedNight;
 
     document
-        .getElementById("phoneNight")
-        .textContent =
+    .getElementById("phoneNight")
+    .textContent =
         "NIGHT " + selectedNight;
 
     time.textContent =
@@ -517,49 +590,51 @@ function startSelectedNight() {
         `url("${officeViews.front}")`;
 
 
-    /* ПЕРСОНАЖИ */
+    /* Персонажи */
 
-    lichi.style.display = "none";
-    pancake.style.display = "none";
+    lichi.style.display =
+        "none";
 
-    cameraLichi.style.display = "none";
-    cameraPancake.style.display = "none";
+    pancake.style.display =
+        "none";
 
-    pancakeVent.style.display = "none";
+    cameraLichi.style.display =
+        "none";
 
+    cameraPancake.style.display =
+        "none";
 
-    /* ВЕНТИЛЯЦИЯ */
-
-    ventStatus.textContent =
-        "ВЕНТИЛЯЦИЯ НОРМАЛЬНА";
-
-    updateVentilation();
-
-
-    /* КАМЕРА */
-
-    showCamera("cam01");
+    pancakeVent.style.display =
+        "none";
 
 
-    /* ПОКАЗЫВАЕМ ЗВОНОК */
+    /* Сначала показываем звонок */
 
-    phoneScreen.classList.remove("hidden");
+    mainMenu.style.display =
+        "none";
+
+    nightsMenu.style.display =
+        "none";
+
+    settingsMenu.style.display =
+        "none";
+
+    game.style.display =
+        "none";
+
+    phoneScreen.style.display =
+        "flex";
 
 
-    /* ЗАПУСКАЕМ ЗВОНОК */
+    /* Запускаем звук звонка */
 
-    try {
+    phoneAudio.currentTime =
+        0;
 
-        phoneAudio.currentTime = 0;
-
-        phoneAudio.play()
-            .catch(function() {});
-
-    } catch (error) {
-
-        console.log(error);
-
-    }
+    phoneAudio.play()
+    .catch(
+        function () {}
+    );
 
 }
 
@@ -570,28 +645,28 @@ function startSelectedNight() {
 
 document
 .getElementById("skipPhoneButton")
-.addEventListener("click", function() {
-
-    try {
+.addEventListener(
+    "click",
+    function () {
 
         phoneAudio.pause();
 
-        phoneAudio.currentTime = 0;
+        phoneAudio.currentTime =
+            0;
 
-    } catch (error) {}
+        startNightAfterPhone();
 
-    startNightAfterPhone();
-
-});
+    }
+);
 
 
 /* =================================================
-   ЕСЛИ ЗВОНОК ЗАКОНЧИЛСЯ
+   ЗВОНОК ЗАКОНЧИЛСЯ
 ================================================= */
 
 phoneAudio.addEventListener(
     "ended",
-    function() {
+    function () {
 
         startNightAfterPhone();
 
@@ -605,33 +680,37 @@ phoneAudio.addEventListener(
 
 function startNightAfterPhone() {
 
-    if (gameStarted) {
+    if (gameStarted)
         return;
-    }
 
-    gameStarted = true;
+    gameStarted =
+        true;
 
-    phoneScreen.classList.add("hidden");
+    phoneScreen.style.display =
+        "none";
 
-    game.classList.remove("hidden");
-
-    cameraPanel.classList.add("hidden");
-    ventPanel.classList.add("hidden");
-
-    gameOverScreen.classList.add("hidden");
-    winScreen.classList.add("hidden");
+    game.style.display =
+        "block";
 
 
-    /* ФОНОВЫЙ ЗВУК */
+    /* Устанавливаем изображение сразу */
 
-    try {
+    currentView =
+        "front";
 
-        humAudio.currentTime = 0;
+    view.style.backgroundImage =
+        `url("${officeViews.front}")`;
 
-        humAudio.play()
-            .catch(function() {});
 
-    } catch (error) {}
+    /* Фоновый звук */
+
+    humAudio.currentTime =
+        0;
+
+    humAudio.play()
+    .catch(
+        function () {}
+    );
 
 
     updateEverything();
@@ -651,7 +730,7 @@ function startGameTimer() {
 
     gameTimer =
         setInterval(
-            function() {
+            function () {
 
                 if (!gameStarted)
                     return;
@@ -664,7 +743,6 @@ function startGameTimer() {
 
 
                 gameMinutes++;
-
 
                 updateClock();
 
@@ -692,9 +770,12 @@ function stopGameTimer() {
 
     if (gameTimer !== null) {
 
-        clearInterval(gameTimer);
+        clearInterval(
+            gameTimer
+        );
 
-        gameTimer = null;
+        gameTimer =
+            null;
 
     }
 
@@ -738,14 +819,14 @@ function updateClock() {
         displayHour +
         ":" +
         String(minute)
-            .padStart(2, "0") +
+        .padStart(2, "0") +
         " AM";
 
 }
 
 
 /* =================================================
-   ДВИЖЕНИЕ ПЕРСОНАЖЕЙ
+   ДВИЖЕНИЕ
 ================================================= */
 
 function moveCharacters() {
@@ -754,17 +835,6 @@ function moveCharacters() {
        ЛИЧИ
     ========================= */
 
-    /*
-       Ночная 1:
-       шаг примерно каждые 45 секунд.
-
-       Ночная 2:
-       шаг каждые 30 секунд.
-
-       Поэтому во вторую ночь
-       Личи заметно быстрее.
-    */
-
     const lichiSpeed =
         selectedNight === 1
             ? 45
@@ -772,7 +842,7 @@ function moveCharacters() {
 
 
     if (
-        gameMinutes >= 45 &&
+        gameMinutes >= 60 &&
         gameMinutes % lichiSpeed === 0
     ) {
 
@@ -782,14 +852,13 @@ function moveCharacters() {
 
             lichiPosition++;
 
-            try {
+            lichiAudio.currentTime =
+                0;
 
-                lichiAudio.currentTime = 0;
-
-                lichiAudio.play()
-                    .catch(function(){});
-
-            } catch (error) {}
+            lichiAudio.play()
+            .catch(
+                function () {}
+            );
 
         }
 
@@ -823,14 +892,13 @@ function moveCharacters() {
 
                 pancakePosition++;
 
-                try {
+                pancakeAudio.currentTime =
+                    0;
 
-                    pancakeAudio.currentTime = 0;
-
-                    pancakeAudio.play()
-                        .catch(function(){});
-
-                } catch (error) {}
+                pancakeAudio.play()
+                .catch(
+                    function () {}
+                );
 
             }
 
@@ -847,18 +915,21 @@ function moveCharacters() {
         lichiPosition >= 4
     ) {
 
-        if (
-            currentView === "left"
-        ) {
+        setTimeout(
+            function () {
 
-            status.textContent =
-                "ЛИЧИ СОВСЕМ БЛИЗКО!";
+                if (
+                    lichiPosition >= 4 &&
+                    !gameOver
+                ) {
 
-        } else {
+                    loseGame();
 
-            loseGame();
+                }
 
-        }
+            },
+            1500
+        );
 
     }
 
@@ -869,11 +940,31 @@ function moveCharacters() {
 
     if (
         selectedNight >= 2 &&
-        pancakePosition >= 3 &&
-        !ventDoors[3]
+        pancakePosition >= 3
     ) {
 
-        loseGame();
+        if (
+            !ventDoors[3]
+        ) {
+
+            setTimeout(
+                function () {
+
+                    if (
+                        pancakePosition >= 3 &&
+                        !ventDoors[3] &&
+                        !gameOver
+                    ) {
+
+                        loseGame();
+
+                    }
+
+                },
+                1200
+            );
+
+        }
 
     }
 
@@ -904,6 +995,9 @@ function changeView(direction) {
         `url("${officeViews[direction]}")`;
 
 
+    updateOfficeCharacters();
+
+
     if (
         direction === "left"
     ) {
@@ -929,9 +1023,6 @@ function changeView(direction) {
 
     }
 
-
-    updateOfficeCharacters();
-
 }
 
 
@@ -939,7 +1030,7 @@ document
 .getElementById("leftButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("left");
 
@@ -951,7 +1042,7 @@ document
 .getElementById("frontButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("front");
 
@@ -963,7 +1054,7 @@ document
 .getElementById("rightButton")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         changeView("right");
 
@@ -977,29 +1068,36 @@ document
 
 function updateOfficeCharacters() {
 
-    lichi.style.display = "none";
-    pancake.style.display = "none";
+    lichi.style.display =
+        "none";
+
+    pancake.style.display =
+        "none";
 
 
-    /* =========================
-       ЛИЧИ
-    ========================= */
+    /* ЛИЧИ */
 
     if (
         lichiPosition >= 2 &&
         currentView === "left"
     ) {
 
-        lichi.style.display = "block";
+        lichi.style.display =
+            "block";
 
 
         if (
             lichiPosition === 2
         ) {
 
-            lichi.style.left = "75%";
-            lichi.style.top = "50%";
-            lichi.style.width = "130px";
+            lichi.style.left =
+                "75%";
+
+            lichi.style.top =
+                "50%";
+
+            lichi.style.width =
+                "130px";
 
         }
 
@@ -1007,26 +1105,34 @@ function updateOfficeCharacters() {
             lichiPosition === 3
         ) {
 
-            lichi.style.left = "58%";
-            lichi.style.top = "50%";
-            lichi.style.width = "190px";
+            lichi.style.left =
+                "58%";
+
+            lichi.style.top =
+                "50%";
+
+            lichi.style.width =
+                "190px";
 
         }
 
         else {
 
-            lichi.style.left = "50%";
-            lichi.style.top = "50%";
-            lichi.style.width = "270px";
+            lichi.style.left =
+                "50%";
+
+            lichi.style.top =
+                "50%";
+
+            lichi.style.width =
+                "270px";
 
         }
 
     }
 
 
-    /* =========================
-       ПАНКЕЙК
-    ========================= */
+    /* ПАНКЕЙК */
 
     if (
         selectedNight >= 2 &&
@@ -1034,10 +1140,14 @@ function updateOfficeCharacters() {
         currentView === "front"
     ) {
 
-        pancake.style.display = "block";
+        pancake.style.display =
+            "block";
 
-        pancake.style.left = "78%";
-        pancake.style.top = "55%";
+        pancake.style.left =
+            "78%";
+
+        pancake.style.top =
+            "55%";
 
         pancake.style.width =
             pancakePosition >= 3
@@ -1055,54 +1165,98 @@ function updateOfficeCharacters() {
 
 document
 .getElementById("cameraButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    if (!gameStarted)
-        return;
+        if (!gameStarted)
+            return;
 
-    cameraPanel.classList.remove("hidden");
+        cameraPanel.style.display =
+            "flex";
 
-    ventPanel.classList.add("hidden");
+        showCamera(
+            currentCamera
+        );
 
-    showCamera(currentCamera);
-
-});
-
-
-document
-.getElementById("closeCameraPanel")
-.addEventListener("click", function() {
-
-    cameraPanel.classList.add("hidden");
-
-    view.style.backgroundImage =
-        `url("${officeViews[currentView]}")`;
-
-    updateOfficeCharacters();
-
-});
+    }
+);
 
 
 /* =================================================
-   ПОКАЗ КАМЕРЫ
+   ЗАКРЫТЬ КАМЕРЫ
+================================================= */
+
+document
+.getElementById("closeCameraPanel")
+.addEventListener(
+    "click",
+    function () {
+
+        cameraPanel.style.display =
+            "none";
+
+        view.style.backgroundImage =
+            `url("${officeViews[currentView]}")`;
+
+        updateOfficeCharacters();
+
+    }
+);
+
+
+/* =================================================
+   ПОКАЗАТЬ КАМЕРУ
 ================================================= */
 
 function showCamera(camera) {
-
-    if (!cameraImages[camera])
-        return;
-
 
     currentCamera =
         camera;
 
 
+    const image =
+        cameraImages[camera];
+
+
+    if (!image)
+        return;
+
+
     cameraImage.style.backgroundImage =
-        `url("${cameraImages[camera]}")`;
+        `url("${image}")`;
 
 
     cameraNumber.textContent =
         camera.toUpperCase();
+
+
+    /* Подсветка выбранной камеры */
+
+    document
+    .querySelectorAll(
+        "#cameraMap button"
+    )
+    .forEach(
+        function (button) {
+
+            button.classList.remove(
+                "active"
+            );
+
+            if (
+                button.dataset.camera ===
+                camera
+            ) {
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
 
 
     updateCameraCharacters();
@@ -1111,27 +1265,29 @@ function showCamera(camera) {
 
 
 /* =================================================
-   КНОПКИ КАМЕР
+   КНОПКИ CAM 01–07
 ================================================= */
 
 document
 .querySelectorAll(
     "#cameraMap [data-camera]"
 )
-.forEach(function(button) {
+.forEach(
+    function (button) {
 
-    button.addEventListener(
-        "click",
-        function() {
+        button.addEventListener(
+            "click",
+            function () {
 
-            showCamera(
-                button.dataset.camera
-            );
+                showCamera(
+                    button.dataset.camera
+                );
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 /* =================================================
@@ -1140,13 +1296,14 @@ document
 
 function updateCameraCharacters() {
 
-    cameraLichi.style.display = "none";
-    cameraPancake.style.display = "none";
+    cameraLichi.style.display =
+        "none";
+
+    cameraPancake.style.display =
+        "none";
 
 
-    /* =========================
-       ЛИЧИ
-    ========================= */
+    /* ЛИЧИ */
 
     const lichiCam =
         lichiCameraPositions[
@@ -1155,8 +1312,7 @@ function updateCameraCharacters() {
 
 
     if (
-        lichiCam === currentCamera &&
-        lichiPosition > 0
+        lichiCam === currentCamera
     ) {
 
         cameraLichi.style.display =
@@ -1168,9 +1324,7 @@ function updateCameraCharacters() {
     }
 
 
-    /* =========================
-       ПАНКЕЙК
-    ========================= */
+    /* ПАНКЕЙК */
 
     if (
         selectedNight >= 2
@@ -1183,8 +1337,7 @@ function updateCameraCharacters() {
 
 
         if (
-            pancakeCam === currentCamera &&
-            pancakePosition > 0
+            pancakeCam === currentCamera
         ) {
 
             cameraPancake.style.display =
@@ -1229,7 +1382,7 @@ function useFlash() {
     ) {
 
         status.textContent =
-            "ПОСМОТРИ В ЛЕВЫЙ КОРИДОР";
+            "Посмотри в левый коридор.";
 
         return;
 
@@ -1241,61 +1394,66 @@ function useFlash() {
     ) {
 
         status.textContent =
-            "ЛИЧИ ЕЩЁ ДАЛЕКО";
+            "Личи ещё далеко.";
 
         return;
 
     }
 
 
-    flashCooldown = true;
+    flashCooldown =
+        true;
 
 
-    flash.style.opacity = "1";
+    flash.style.opacity =
+        "1";
 
 
     setTimeout(
-        function() {
+        function () {
 
-            flash.style.opacity = "0";
+            flash.style.opacity =
+                "0";
 
         },
         120
     );
 
 
-    try {
+    flashAudio.currentTime =
+        0;
 
-        flashAudio.currentTime = 0;
-
-        flashAudio.play()
-            .catch(function(){});
-
-    } catch (error) {}
+    flashAudio.play()
+    .catch(
+        function () {}
+    );
 
 
     setTimeout(
-        function() {
+        function () {
 
-            try {
+            lichiAudio.currentTime =
+                0;
 
-                lichiAudio.currentTime = 0;
-
-                lichiAudio.play()
-                    .catch(function(){});
-
-            } catch (error) {}
+            lichiAudio.play()
+            .catch(
+                function () {}
+            );
 
         },
         100
     );
 
 
-    lichiPosition = 0;
+    lichiPosition =
+        0;
 
-    lichi.style.display = "none";
 
-    cameraLichi.style.display = "none";
+    lichi.style.display =
+        "none";
+
+    cameraLichi.style.display =
+        "none";
 
 
     status.textContent =
@@ -1303,9 +1461,10 @@ function useFlash() {
 
 
     setTimeout(
-        function() {
+        function () {
 
-            flashCooldown = false;
+            flashCooldown =
+                false;
 
         },
         1500
@@ -1320,45 +1479,47 @@ function useFlash() {
 
 document
 .getElementById("ventButton")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    if (!gameStarted)
-        return;
-
-
-    ventPanel.classList.remove("hidden");
-
-    cameraPanel.classList.add("hidden");
+        if (!gameStarted)
+            return;
 
 
-    updateVentilation();
+        ventPanel.style.display =
+            "flex";
 
 
-    try {
+        updateVentilation();
 
-        ventAudio.currentTime = 0;
 
         ventAudio.play()
-            .catch(function(){});
+        .catch(
+            function () {}
+        );
 
-    } catch (error) {}
+    }
+);
 
-});
 
+/* =================================================
+   ЗАКРЫТЬ ВЕНТИЛЯЦИЮ
+================================================= */
 
 document
 .getElementById("closeVentPanel")
-.addEventListener("click", function() {
+.addEventListener(
+    "click",
+    function () {
 
-    ventPanel.classList.add("hidden");
-
-    try {
+        ventPanel.style.display =
+            "none";
 
         ventAudio.pause();
 
-    } catch (error) {}
-
-});
+    }
+);
 
 
 /* =================================================
@@ -1366,27 +1527,31 @@ document
 ================================================= */
 
 document
-.querySelectorAll(".ventDoor")
-.forEach(function(button) {
+.querySelectorAll(
+    ".ventDoor"
+)
+.forEach(
+    function (button) {
 
-    button.addEventListener(
-        "click",
-        function() {
+        button.addEventListener(
+            "click",
+            function () {
 
-            const door =
-                Number(button.dataset.door);
-
-
-            ventDoors[door] =
-                !ventDoors[door];
+                const door =
+                    button.dataset.door;
 
 
-            updateVentilation();
+                ventDoors[door] =
+                    !ventDoors[door];
 
-        }
-    );
 
-});
+                updateVentilation();
+
+            }
+        );
+
+    }
+);
 
 
 /* =================================================
@@ -1396,35 +1561,45 @@ document
 function updateVentilation() {
 
     document
-    .querySelectorAll(".ventDoor")
-    .forEach(function(button) {
+    .querySelectorAll(
+        ".ventDoor"
+    )
+    .forEach(
+        function (button) {
 
-        const door =
-            Number(button.dataset.door);
+            const door =
+                button.dataset.door;
 
 
-        if (
-            ventDoors[door]
-        ) {
+            if (
+                ventDoors[door]
+            ) {
 
-            button.classList.add("closed");
+                button.classList.add(
+                    "closed"
+                );
 
-            button.textContent =
-                "ЗАКРЫТО";
+                button.textContent =
+                    "ЗАКРЫТО";
 
-        } else {
+            }
 
-            button.classList.remove("closed");
+            else {
 
-            button.textContent =
-                "ПЕРЕГОРОДКА";
+                button.classList.remove(
+                    "closed"
+                );
+
+                button.textContent =
+                    "ПЕРЕГОРОДКА";
+
+            }
 
         }
+    );
 
-    });
 
-
-    /* ПАНКЕЙК */
+    /* Панкейк только Night 2+ */
 
     if (
         selectedNight >= 2 &&
@@ -1437,15 +1612,15 @@ function updateVentilation() {
         pancakeVent.textContent =
             "ПАНКЕЙК В ВЕНТИЛЯЦИИ";
 
-    } else {
+    }
+
+    else {
 
         pancakeVent.style.display =
             "none";
 
     }
 
-
-    /* СТАТУС */
 
     if (
         ventDoors[1] ||
@@ -1456,7 +1631,9 @@ function updateVentilation() {
         ventStatus.textContent =
             "ПЕРЕГОРОДКИ АКТИВНЫ";
 
-    } else {
+    }
+
+    else {
 
         ventStatus.textContent =
             "ВЕНТИЛЯЦИЯ НОРМАЛЬНА";
@@ -1493,35 +1670,28 @@ function loseGame() {
         return;
 
 
-    gameOver = true;
-
-    gameStarted = false;
+    gameOver =
+        true;
 
 
     stopGameTimer();
 
 
-    try {
-
-        humAudio.pause();
-        ventAudio.pause();
-
-    } catch (error) {}
+    humAudio.pause();
+    ventAudio.pause();
 
 
-    try {
+    screamAudio.currentTime =
+        0;
 
-        screamAudio.currentTime = 0;
-
-        screamAudio.play()
-            .catch(function(){});
-
-    } catch (error) {}
-
-
-    gameOverScreen.classList.remove(
-        "hidden"
+    screamAudio.play()
+    .catch(
+        function () {}
     );
+
+
+    gameOverScreen.style.display =
+        "flex";
 
 }
 
@@ -1536,24 +1706,20 @@ function winGame() {
         return;
 
 
-    nightFinished = true;
-
-    gameStarted = false;
+    nightFinished =
+        true;
 
 
     stopGameTimer();
 
 
-    try {
-
-        humAudio.pause();
-        ventAudio.pause();
-
-    } catch (error) {}
+    humAudio.pause();
+    ventAudio.pause();
 
 
     if (
-        selectedNight > completedNight
+        selectedNight >
+        completedNight
     ) {
 
         completedNight =
@@ -1581,7 +1747,9 @@ function winGame() {
         nextNightButton.style.display =
             "none";
 
-    } else {
+    }
+
+    else {
 
         nextNightButton.style.display =
             "block";
@@ -1589,9 +1757,8 @@ function winGame() {
     }
 
 
-    winScreen.classList.remove(
-        "hidden"
-    );
+    winScreen.style.display =
+        "flex";
 
 }
 
@@ -1602,7 +1769,7 @@ function winGame() {
 
 nextNightButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         if (
             selectedNight < 13
@@ -1619,14 +1786,14 @@ nextNightButton.addEventListener(
 
 
 /* =================================================
-   ПОВТОР
+   ПОВТОРИТЬ
 ================================================= */
 
 document
 .getElementById("restart")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         startSelectedNight();
 
@@ -1642,21 +1809,21 @@ document
 .getElementById("menuAfterLose")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         stopGameTimer();
 
-        stopAllSounds();
+        gameStarted =
+            false;
 
-        game.classList.add("hidden");
+        game.style.display =
+            "none";
 
-        gameOverScreen.classList.add(
-            "hidden"
-        );
+        gameOverScreen.style.display =
+            "none";
 
-        mainMenu.classList.remove(
-            "hidden"
-        );
+        mainMenu.style.display =
+            "flex";
 
         renderNights();
 
@@ -1672,21 +1839,21 @@ document
 .getElementById("menuAfterWin")
 .addEventListener(
     "click",
-    function() {
+    function () {
 
         stopGameTimer();
 
-        stopAllSounds();
+        gameStarted =
+            false;
 
-        game.classList.add("hidden");
+        game.style.display =
+            "none";
 
-        winScreen.classList.add(
-            "hidden"
-        );
+        winScreen.style.display =
+            "none";
 
-        mainMenu.classList.remove(
-            "hidden"
-        );
+        mainMenu.style.display =
+            "flex";
 
         renderNights();
 
@@ -1700,16 +1867,17 @@ document
 
 renderNights();
 
-mainMenu.classList.remove("hidden");
+mainMenu.style.display =
+    "flex";
 
-nightsMenu.classList.add("hidden");
+nightsMenu.style.display =
+    "none";
 
-settingsMenu.classList.add("hidden");
+settingsMenu.style.display =
+    "none";
 
-phoneScreen.classList.add("hidden");
+phoneScreen.style.display =
+    "none";
 
-game.classList.add("hidden");
-
-gameOverScreen.classList.add("hidden");
-
-winScreen.classList.add("hidden");
+game.style.display =
+    "none";
