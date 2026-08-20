@@ -1,22 +1,17 @@
 * {
-
     box-sizing: border-box;
 
     -webkit-tap-highlight-color:
         transparent;
-
 }
-
 
 html,
 body {
 
     margin: 0;
-
     padding: 0;
 
     width: 100%;
-
     height: 100%;
 
     overflow: hidden;
@@ -28,13 +23,12 @@ body {
     font-family: Arial, sans-serif;
 
     touch-action: manipulation;
-
 }
 
 
-/* =================================
+/* =========================
    ПОВОРОТ ТЕЛЕФОНА
-================================= */
+========================= */
 
 #rotateMessage {
 
@@ -55,23 +49,17 @@ body {
     align-items: center;
 
     text-align: center;
-
 }
-
 
 #rotateMessage h1 {
 
     font-size: 30px;
-
 }
-
 
 #rotateMessage p {
 
     font-size: 18px;
-
 }
-
 
 .rotateIcon {
 
@@ -81,39 +69,27 @@ body {
 
     animation:
         rotatePhone 1.5s infinite;
-
 }
-
 
 @keyframes rotatePhone {
 
     0% {
-
-        transform:
-            rotate(0deg);
-
+        transform: rotate(0deg);
     }
 
     50% {
-
-        transform:
-            rotate(90deg);
-
+        transform: rotate(90deg);
     }
 
     100% {
-
-        transform:
-            rotate(0deg);
-
+        transform: rotate(0deg);
     }
-
 }
 
 
-/* =================================
-   ГЛАВНОЕ МЕНЮ
-================================= */
+/* =========================
+   МЕНЮ
+========================= */
 
 #mainMenu {
 
@@ -126,9 +102,7 @@ body {
     overflow: hidden;
 
     background: #000;
-
 }
-
 
 .menuBackground {
 
@@ -143,11 +117,8 @@ body {
 
     background-position: center;
 
-    transform:
-        scale(1.03);
-
+    transform: scale(1.03);
 }
-
 
 .menuDarkness {
 
@@ -157,9 +128,7 @@ body {
 
     background:
         rgba(0,0,0,0.7);
-
 }
-
 
 .menuContent {
 
@@ -182,13 +151,12 @@ body {
     flex-direction: column;
 
     align-items: center;
-
 }
 
 
-/* =================================
+/* =========================
    НАЗВАНИЕ
-================================= */
+========================= */
 
 .gameTitle {
 
@@ -206,16 +174,12 @@ body {
     text-shadow:
         4px 4px 0 #000,
         0 0 20px #000;
-
 }
-
 
 .gameTitle span {
 
     letter-spacing: 12px;
-
 }
-
 
 .subtitle {
 
@@ -229,13 +193,12 @@ body {
     letter-spacing: 8px;
 
     opacity: 0.75;
-
 }
 
 
-/* =================================
-   КНОПКИ МЕНЮ
-================================= */
+/* =========================
+   КНОПКИ
+========================= */
 
 .menuButton {
 
@@ -262,27 +225,20 @@ body {
     font-weight: bold;
 
     letter-spacing: 2px;
-
 }
-
 
 .menuButton:active {
 
-    transform:
-        scale(0.95);
+    transform: scale(0.95);
 
     background:
         rgba(255,255,255,0.15);
-
 }
-
 
 .disabledButton {
 
     opacity: 0.35;
-
 }
-
 
 .version {
 
@@ -293,13 +249,12 @@ body {
     opacity: 0.45;
 
     letter-spacing: 2px;
-
 }
 
 
-/* =================================
+/* =========================
    ТЕЛЕФОН
-================================= */
+========================= */
 
 #phoneScreen {
 
@@ -318,9 +273,7 @@ body {
     align-items: center;
 
     text-align: center;
-
 }
-
 
 .phoneBox {
 
@@ -336,18 +289,14 @@ body {
         rgba(20,20,20,0.9);
 
     border-radius: 10px;
-
 }
-
 
 .phoneIcon {
 
     font-size: 60px;
 
     margin-bottom: 15px;
-
 }
-
 
 .phoneTitle {
 
@@ -356,51 +305,30 @@ body {
     font-weight: bold;
 
     letter-spacing: 3px;
-
 }
-
 
 .phoneText {
 
     margin-top: 15px;
 
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 
     opacity: 0.7;
+}
 
+.phonePlaying {
+
+    font-size: 14px;
+
+    opacity: 0.6;
+
+    letter-spacing: 2px;
 }
 
 
-#answerPhone {
-
-    padding:
-        14px 30px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 7px;
-
-    background: #111;
-
-    color: white;
-
-    font-size: 18px;
-
-}
-
-
-#answerPhone:active {
-
-    transform:
-        scale(0.95);
-
-}
-
-
-/* =================================
+/* =========================
    ИГРА
-================================= */
+========================= */
 
 #game {
 
@@ -411,9 +339,7 @@ body {
     overflow: hidden;
 
     background: #000;
-
 }
-
 
 #view {
 
@@ -431,13 +357,12 @@ body {
     background-position: center;
 
     background-repeat: no-repeat;
-
 }
 
 
-/* =================================
+/* =========================
    ЛИЧИ
-================================= */
+========================= */
 
 #lichi {
 
@@ -472,13 +397,12 @@ body {
             0 0 10px
             rgba(0,0,0,0.9)
         );
-
 }
 
 
-/* =================================
+/* =========================
    ЗАТЕМНЕНИЕ
-================================= */
+========================= */
 
 #darkness {
 
@@ -492,13 +416,12 @@ body {
         rgba(0,0,0,0.25);
 
     pointer-events: none;
-
 }
 
 
-/* =================================
+/* =========================
    ВРЕМЯ
-================================= */
+========================= */
 
 #time {
 
@@ -514,9 +437,7 @@ body {
         clamp(20px,5vw,32px);
 
     font-weight: bold;
-
 }
-
 
 #night {
 
@@ -530,13 +451,12 @@ body {
 
     font-size:
         clamp(13px,3vw,19px);
-
 }
 
 
-/* =================================
+/* =========================
    СТАТУС
-================================= */
+========================= */
 
 #status {
 
@@ -565,13 +485,12 @@ body {
         clamp(12px,3vw,18px);
 
     white-space: nowrap;
-
 }
 
 
-/* =================================
+/* =========================
    FULLSCREEN
-================================= */
+========================= */
 
 .topButton {
 
@@ -598,13 +517,12 @@ body {
     color: white;
 
     font-size: 28px;
-
 }
 
 
-/* =================================
+/* =========================
    ПОВОРОТЫ
-================================= */
+========================= */
 
 #direction {
 
@@ -622,9 +540,7 @@ body {
     display: flex;
 
     gap: 10px;
-
 }
-
 
 .directionButton {
 
@@ -643,21 +559,17 @@ body {
     color: white;
 
     font-size: 25px;
-
 }
-
 
 .directionButton:active {
 
-    transform:
-        scale(0.9);
-
+    transform: scale(0.9);
 }
 
 
-/* =================================
+/* =========================
    ВСПЫШКА
-================================= */
+========================= */
 
 #flashButton {
 
@@ -687,21 +599,17 @@ body {
         clamp(13px,3vw,18px);
 
     font-weight: bold;
-
 }
-
 
 #flashButton:active {
 
-    transform:
-        scale(0.92);
-
+    transform: scale(0.92);
 }
 
 
-/* =================================
+/* =========================
    ВСПЫШКА ЭКРАНА
-================================= */
+========================= */
 
 #flash {
 
@@ -719,13 +627,12 @@ body {
 
     transition:
         opacity 0.05s;
-
 }
 
 
-/* =================================
+/* =========================
    GAME OVER
-================================= */
+========================= */
 
 #gameOver {
 
@@ -746,24 +653,18 @@ body {
     flex-direction: column;
 
     text-align: center;
-
 }
-
 
 #gameOver h1 {
 
     font-size:
         clamp(35px,9vw,65px);
-
 }
-
 
 #gameOver p {
 
     font-size: 18px;
-
 }
-
 
 #restart,
 #menuAfterWin {
@@ -782,13 +683,12 @@ body {
     color: white;
 
     font-size: 18px;
-
 }
 
 
-/* =================================
+/* =========================
    ПОБЕДА
-================================= */
+========================= */
 
 #winScreen {
 
@@ -809,21 +709,51 @@ body {
     flex-direction: column;
 
     text-align: center;
-
 }
-
 
 #winScreen h1 {
 
     font-size:
         clamp(35px,9vw,65px);
-
 }
 
 
-/* =================================
-   ГОРИЗОНТАЛЬНЫЙ РЕЖИМ
-================================= */
+/* =========================
+   АУДИО КНОПКА
+========================= */
+
+#audioStartButton {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 30px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 1000;
+
+    padding:
+        15px 25px;
+
+    font-size: 18px;
+
+    background: #111;
+
+    color: white;
+
+    border:
+        2px solid #777;
+
+    border-radius: 8px;
+}
+
+
+/* =========================
+   ПОРТРЕТ
+========================= */
 
 @media (orientation: portrait) {
 
@@ -832,13 +762,10 @@ body {
     #phoneScreen {
 
         display: none !important;
-
     }
 
     #rotateMessage {
 
         display: flex;
-
     }
-
 }
