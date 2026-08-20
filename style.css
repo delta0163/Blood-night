@@ -14,6 +14,7 @@ body {
     overflow: hidden;
 
     background: #000;
+
     color: white;
 
     font-family: Arial, sans-serif;
@@ -23,6 +24,7 @@ button {
     cursor: pointer;
 
     color: white;
+
     background: #111;
 
     border: 2px solid #777;
@@ -36,13 +38,9 @@ button:active {
     transform: scale(.96);
 }
 
-.hidden {
-    display: none !important;
-}
-
 
 /* =========================
-   ЭКРАНЫ
+   ОБЩИЕ ЭКРАНЫ
 ========================= */
 
 .screen {
@@ -59,6 +57,10 @@ button:active {
     align-items: center;
 
     z-index: 100;
+}
+
+.hidden {
+    display: none !important;
 }
 
 
@@ -92,7 +94,6 @@ button:active {
 
 .menuContent {
     position: relative;
-
     z-index: 2;
 
     width: min(90%, 500px);
@@ -156,7 +157,7 @@ button:active {
 
 
 /* =========================
-   ТЕЛЕФОН
+   ЗВОНОК
 ========================= */
 
 #phoneScreen {
@@ -407,22 +408,20 @@ button:active {
    КАМЕРЫ
 ========================= */
 
-.cameraSystem {
+.cameraContent {
     flex: 1;
 
     min-height: 0;
 
     display: flex;
 
-    flex-direction: row;
-
-    gap: 12px;
+    gap: 10px;
 
     padding: 10px;
 }
 
 
-/* КАРТИНКА СЛЕВА */
+/* ИЗОБРАЖЕНИЕ СЛЕВА */
 
 #cameraImage {
     position: relative;
@@ -430,7 +429,6 @@ button:active {
     flex: 1;
 
     min-width: 0;
-    min-height: 0;
 
     overflow: hidden;
 
@@ -439,12 +437,11 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
+
     background-size: cover;
+
     background-repeat: no-repeat;
 }
-
-
-/* СТАТИКА */
 
 #cameraStatic {
     position: absolute;
@@ -466,9 +463,6 @@ button:active {
     z-index: 10;
 }
 
-
-/* НОМЕР */
-
 #cameraNumber {
     position: absolute;
 
@@ -482,9 +476,6 @@ button:active {
     text-shadow:
         2px 2px 5px #000;
 }
-
-
-/* ПЕРСОНАЖИ НА КАМЕРЕ */
 
 #cameraLichi,
 #cameraPancake {
@@ -505,11 +496,11 @@ button:active {
 
 
 /* =========================
-   ВЕРТИКАЛЬНЫЙ СПИСОК КАМЕР
+   ВЕРТИКАЛЬНЫЕ КАМЕРЫ
 ========================= */
 
 #cameraMap {
-    width: 125px;
+    width: 120px;
 
     flex-shrink: 0;
 
@@ -525,11 +516,7 @@ button:active {
 
     overflow-x: hidden;
 
-    border: 2px solid #444;
-
-    background: #080808;
-
-    scrollbar-width: thin;
+    border-left: 2px solid #555;
 }
 
 #cameraMap button {
@@ -539,9 +526,9 @@ button:active {
 
     flex-shrink: 0;
 
-    white-space: nowrap;
+    padding: 8px 5px;
 
-    font-size: 14px;
+    white-space: nowrap;
 }
 
 #cameraMap button.active {
@@ -648,6 +635,24 @@ button:active {
     background: #444;
 }
 
+#pancakeVent {
+    position: absolute;
+
+    display: none;
+
+    right: 5%;
+
+    top: 45%;
+
+    padding: 10px;
+
+    border: 2px solid #aaa;
+
+    background: #111;
+
+    z-index: 10;
+}
+
 #ventStatus {
     padding: 12px;
 
@@ -689,7 +694,7 @@ button:active {
 
 
 /* =========================
-   МОБИЛЬНЫЙ ЭКРАН
+   ТЕЛЕФОН
 ========================= */
 
 @media (max-width: 600px) {
@@ -716,44 +721,17 @@ button:active {
         inset: 2%;
     }
 
-    .cameraSystem {
-        gap: 7px;
-        padding: 6px;
-    }
-
     #cameraMap {
-        width: 95px;
+        width: 90px;
     }
 
     #cameraMap button {
-        min-height: 50px;
-        font-size: 11px;
-        padding: 7px 3px;
+        font-size: 12px;
+        min-height: 48px;
     }
 
-    #cameraNumber {
-        font-size: 16px;
+    .cameraContent {
+        gap: 5px;
     }
 
-    #cameraLichi,
-    #cameraPancake {
-        max-width: 55%;
-        height: auto;
-    }
 }
-
-
-/* =========================
-   ОЧЕНЬ УЗКИЙ ЭКРАН
-========================= */
-
-@media (max-width: 380px) {
-
-    #cameraMap {
-        width: 82px;
-    }
-
-    #cameraMap button {
-        font-size: 10px;
-    }
-                          }
