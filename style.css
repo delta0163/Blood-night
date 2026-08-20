@@ -23,6 +23,7 @@ button {
     cursor: pointer;
 
     color: white;
+
     background: #111;
 
     border: 2px solid #777;
@@ -34,6 +35,10 @@ button {
 
 button:active {
     transform: scale(.96);
+}
+
+.hidden {
+    display: none !important;
 }
 
 
@@ -55,10 +60,6 @@ button:active {
     align-items: center;
 
     z-index: 100;
-}
-
-.hidden {
-    display: none !important;
 }
 
 
@@ -87,13 +88,10 @@ button:active {
 
     filter: brightness(.6);
 
-    z-index: 0;
+    z-index: -1;
 }
 
 .menuContent {
-    position: relative;
-    z-index: 2;
-
     width: min(90%, 500px);
 
     display: flex;
@@ -208,8 +206,6 @@ button:active {
     opacity: .35;
 
     pointer-events: none;
-
-    z-index: 1;
 }
 
 #view {
@@ -224,8 +220,6 @@ button:active {
     background-repeat: no-repeat;
 
     overflow: hidden;
-
-    z-index: 2;
 }
 
 
@@ -260,50 +254,6 @@ button:active {
     z-index: 100;
 
     transition: opacity .1s;
-}
-
-
-/* =========================
-   МЕСТО ПОД СТОЛОМ
-========================= */
-
-#underTable {
-    position: absolute;
-
-    left: 50%;
-    bottom: 8%;
-
-    transform: translateX(-50%);
-
-    width: 180px;
-    height: 90px;
-
-    background: rgba(0,0,0,.55);
-
-    border: 2px solid rgba(255,255,255,.15);
-
-    z-index: 25;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    opacity: .75;
-
-    pointer-events: none;
-}
-
-#energyLeverVisual {
-    font-size: 12px;
-
-    color: #aaa;
-
-    border: 1px solid #555;
-
-    padding: 7px;
-
-    background: #080808;
 }
 
 
@@ -344,6 +294,10 @@ button:active {
 
     text-shadow:
         2px 2px 5px #000;
+
+    text-align: center;
+
+    white-space: nowrap;
 }
 
 
@@ -354,7 +308,7 @@ button:active {
 #officeControls {
     position: absolute;
 
-    bottom: 105px;
+    bottom: 110px;
 
     left: 50%;
 
@@ -396,13 +350,15 @@ button:active {
 
     z-index: 60;
 
-    width: min(96%, 600px);
+    width: min(95%, 600px);
 }
 
 #bottomControls button {
+    min-width: 0;
+
     flex: 1;
 
-    min-width: 0;
+    min-height: 55px;
 }
 
 
@@ -413,7 +369,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 4%;
+    inset: 3%;
 
     z-index: 200;
 
@@ -443,6 +399,8 @@ button:active {
     border-bottom: 2px solid #555;
 
     font-size: 20px;
+
+    flex-shrink: 0;
 }
 
 .panelHeader button {
@@ -454,27 +412,14 @@ button:active {
    КАМЕРЫ
 ========================= */
 
-#cameraContent {
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-
-    flex-direction: row;
-
-    gap: 10px;
-
-    padding: 10px;
-}
-
 #cameraImage {
     position: relative;
 
     flex: 1;
 
-    min-width: 0;
     min-height: 0;
+
+    margin: 10px;
 
     overflow: hidden;
 
@@ -483,7 +428,9 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
+
     background-size: cover;
+
     background-repeat: no-repeat;
 }
 
@@ -539,36 +486,46 @@ button:active {
 }
 
 
-/* ВЕРТИКАЛЬНЫЙ СПИСОК */
+/* =========================
+   ВЕРТИКАЛЬНЫЙ СПИСОК
+========================= */
 
 #cameraMap {
-    width: 115px;
-
-    flex-shrink: 0;
-
     display: flex;
 
     flex-direction: column;
 
     gap: 8px;
 
+    padding: 10px;
+
+    flex-shrink: 0;
+
+    height: 170px;
+
     overflow-y: auto;
 
     overflow-x: hidden;
 
-    padding: 4px;
-
-    border-left: 2px solid #444;
+    border-top: 2px solid #555;
 }
 
 #cameraMap button {
     width: 100%;
 
-    min-height: 55px;
+    min-height: 48px;
 
     flex-shrink: 0;
 
-    white-space: nowrap;
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+#cameraMap button.active {
+    background: #333;
+
+    border-color: white;
 }
 
 
@@ -576,7 +533,7 @@ button:active {
    ЭНЕРГИЯ
 ========================= */
 
-#energyContent {
+#powerArea {
     flex: 1;
 
     display: flex;
@@ -587,85 +544,104 @@ button:active {
 
     justify-content: center;
 
-    gap: 20px;
+    gap: 30px;
 
     padding: 20px;
 }
 
-#energyWarning {
-    font-size: 22px;
-
-    text-align: center;
-}
-
-#energyLever {
-    position: relative;
-
-    width: 80px;
-    height: 180px;
-
-    background: #151515;
+#powerLever {
+    width: 150px;
+    height: 150px;
 
     border: 3px solid #777;
 
-    border-radius: 10px;
+    background: #111;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
 }
 
 #leverHandle {
-    position: absolute;
+    width: 65px;
+    height: 65px;
 
-    width: 25px;
-    height: 100px;
+    border: 3px solid #aaa;
 
-    left: 50%;
-    top: 50%;
+    border-radius: 50%;
 
-    transform:
-        translate(-50%, -50%)
-        rotate(-35deg);
+    display: flex;
 
-    transform-origin: bottom center;
+    align-items: center;
 
-    background: #888;
+    justify-content: center;
 
-    border: 2px solid #ccc;
+    font-size: 30px;
 
-    cursor: pointer;
-
-    transition: transform .2s;
+    background: #222;
 }
 
-#energyLever.active #leverHandle {
-    transform:
-        translate(-50%, -50%)
-        rotate(35deg);
+#leverText {
+    font-size: 18px;
 }
 
-#energyTargets {
-    display: grid;
+#powerDirection {
+    width: min(90%, 500px);
 
-    grid-template-columns:
-        repeat(3, 1fr);
+    display: flex;
 
-    gap: 10px;
+    flex-direction: column;
 
-    width: min(100%, 600px);
-}
-
-#energyTargets button {
-    min-height: 60px;
-}
-
-#energyMessage {
-    min-height: 25px;
+    gap: 12px;
 
     text-align: center;
 }
 
-#energyTimer {
-    font-size: 22px;
+.powerLine {
+    padding: 18px;
 
+    border: 2px solid #666;
+
+    background: #111;
+
+    font-size: 18px;
+}
+
+#powerArrow {
+    margin: 0 10px;
+
+    font-size: 25px;
+}
+
+#powerTarget {
     font-weight: bold;
+}
+
+#powerStatus {
+    padding: 12px;
+
+    border: 2px solid #555;
+
+    background: #151515;
+
+    font-size: 16px;
+}
+
+#powerStatus.window {
+    border-color: #aaa;
+
+    background: #333;
+}
+
+#switchToCameras,
+#switchToWindow {
+    width: 100%;
 }
 
 
@@ -680,7 +656,7 @@ button:active {
 
     z-index: 500;
 
-    background: rgba(0,0,0,.9);
+    background: rgba(0,0,0,.92);
 
     display: flex;
 
@@ -693,11 +669,16 @@ button:active {
     gap: 20px;
 
     text-align: center;
+
+    padding: 20px;
 }
 
 .overlay h1 {
-    font-size:
-        clamp(30px, 7vw, 60px);
+    font-size: clamp(30px, 7vw, 60px);
+}
+
+.overlay p {
+    font-size: 18px;
 }
 
 
@@ -707,35 +688,27 @@ button:active {
 
 @media (max-width: 600px) {
 
-    #officeControls {
-        bottom: 105px;
-    }
-
-    #cameraContent {
-        gap: 5px;
-    }
-
-    #cameraMap {
-        width: 90px;
-    }
-
-    #cameraMap button {
-        font-size: 12px;
-
-        padding: 8px 3px;
-    }
-
-    #energyTargets {
-        grid-template-columns: 1fr;
-    }
-
     .panel {
         inset: 2%;
     }
 
-    #underTable {
-        width: 140px;
-        height: 70px;
+    #cameraMap {
+        height: 150px;
+    }
+
+    #officeControls {
+        bottom: 100px;
+    }
+
+    #bottomControls button {
+        font-size: 12px;
+
+        padding:
+            8px 4px;
+    }
+
+    #powerArea {
+        gap: 20px;
     }
 
 }
