@@ -1,80 +1,32 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-
     width: 100%;
     height: 100%;
 
     overflow: hidden;
 
     background: #000;
+
     color: white;
 
-    font-family: Arial, sans-serif;
-
-    touch-action: manipulation;
+    font-family:
+        Arial,
+        sans-serif;
 }
 
 
 /* =========================
-   ПОВОРОТ
+   ОБЩИЕ ЭКРАНЫ
 ========================= */
 
-#rotateMessage {
-
-    display: none;
-
-    position: fixed;
-    inset: 0;
-
-    z-index: 99999;
-
-    background: #000;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
-
-.rotateIcon {
-
-    font-size: 70px;
-
-    margin-top: 20px;
-
-    animation:
-        rotatePhone 1.5s infinite;
-}
-
-@keyframes rotatePhone {
-
-    0% {
-        transform: rotate(0deg);
-    }
-
-    50% {
-        transform: rotate(90deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-
-/* =========================
-   ГЛАВНОЕ МЕНЮ
-========================= */
-
-#mainMenu {
-
+.screen {
     position: fixed;
 
     inset: 0;
@@ -82,137 +34,76 @@ body {
     width: 100vw;
     height: 100vh;
 
-    z-index: 500;
-
-    overflow: hidden;
-
     background: #000;
-}
-
-.menuBackground {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        url("images/menu_background.png")
-        center center /
-        cover
-        no-repeat;
-}
-
-.menuDarkness {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        rgba(0,0,0,0.72);
-}
-
-.menuContent {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width:
-        min(90vw, 430px);
-
-    text-align: center;
 
     display: flex;
 
-    flex-direction: column;
-
+    justify-content: center;
     align-items: center;
+
+    z-index: 1000;
 }
 
-.gameTitle {
+.hidden {
+    display: none !important;
+}
 
-    margin: 0;
 
-    font-size:
-        clamp(45px, 11vw, 90px);
+/* =========================
+   МЕНЮ
+========================= */
 
-    line-height: 0.82;
+.menuBox {
+    width: min(90vw, 600px);
+
+    padding: 30px;
+
+    text-align: center;
+}
+
+.menuBox h1 {
+    font-size: clamp(30px, 7vw, 70px);
+
+    margin-bottom: 50px;
 
     letter-spacing: 5px;
-
-    font-weight: 900;
-
-    text-shadow:
-        4px 4px 0 #000,
-        0 0 20px #000;
 }
 
-.gameTitle span {
-    letter-spacing: 12px;
-}
-
-.subtitle {
-
-    margin-top: 20px;
+.menuBox h2 {
     margin-bottom: 30px;
-
-    font-size:
-        clamp(13px, 3vw, 20px);
-
-    letter-spacing: 8px;
-
-    opacity: 0.75;
 }
 
-.menuButton {
 
-    width:
-        min(85vw, 320px);
+/* =========================
+   КНОПКИ
+========================= */
 
-    min-height: 58px;
+button {
+    border: 2px solid #888;
 
-    margin: 6px 0;
-
-    border:
-        2px solid #777;
-
-    border-radius: 7px;
-
-    background:
-        rgba(0,0,0,0.85);
+    background: #111;
 
     color: white;
 
-    font-size:
-        clamp(15px, 3.5vw, 20px);
+    padding: 14px 22px;
 
-    font-weight: bold;
+    margin: 7px;
 
-    letter-spacing: 2px;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
 }
 
-.menuButton:active {
+button:active {
+    background: #444;
 
-    transform: scale(0.95);
-
-    background:
-        rgba(255,255,255,0.15);
+    transform: scale(.96);
 }
 
-.version {
-
-    margin-top: 25px;
-
-    font-size: 12px;
-
-    opacity: 0.45;
-
-    letter-spacing: 2px;
+button:disabled {
+    opacity: .35;
 }
 
 
@@ -220,89 +111,19 @@ body {
    НОЧИ
 ========================= */
 
-#nightsMenu,
-#settingsMenu {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 700;
-
-    background:
-        #050505;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-
-    text-align: center;
-}
-
-.nightsTitle {
-
-    font-size:
-        clamp(30px, 8vw, 55px);
-
-    font-weight: bold;
-
-    margin-bottom: 25px;
-}
-
 #nightsList {
-
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(3, 1fr);
 
-    gap: 10px;
+    gap: 5px;
 
-    width:
-        min(90vw, 600px);
+    margin-bottom: 20px;
 }
 
 .nightButton {
-
-    height: 65px;
-
-    border:
-        2px solid #555;
-
-    border-radius: 7px;
-
-    background: #111;
-
-    color: white;
-
-    font-size: 17px;
-
-    font-weight: bold;
-}
-
-.nightButton.locked {
-
-    opacity: 0.25;
-}
-
-.nightButton:not(.locked):active {
-
-    transform: scale(0.94);
-
-    background: #333;
-}
-
-#settingsMenu p {
-
-    width:
-        min(85vw, 500px);
-
-    opacity: 0.65;
-
-    line-height: 1.5;
+    margin: 2px;
 }
 
 
@@ -310,101 +131,16 @@ body {
    ТЕЛЕФОН
 ========================= */
 
-#phoneScreen {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 450;
-
-    background: #050505;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
-
 .phoneBox {
+    text-align: center;
 
-    width:
-        min(90%, 500px);
-
-    padding: 35px;
-
-    border:
-        1px solid #444;
-
-    background:
-        rgba(20,20,20,0.9);
-
-    border-radius: 10px;
+    padding: 30px;
 }
 
-.phoneIcon {
+.phoneBox h2 {
+    font-size: 40px;
 
-    font-size: 60px;
-
-    margin-bottom: 15px;
-}
-
-.phoneTitle {
-
-    font-size: 25px;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-}
-
-.phoneText {
-
-    margin-top: 15px;
-    margin-bottom: 20px;
-
-    opacity: 0.7;
-}
-
-.phonePlaying {
-
-    font-size: 14px;
-
-    opacity: 0.6;
-
-    letter-spacing: 2px;
-}
-
-#skipPhoneButton {
-
-    margin-top: 25px;
-
-    width:
-        min(80vw, 300px);
-
-    height: 55px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 8px;
-
-    background: #111;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-}
-
-#skipPhoneButton:active {
-
-    transform: scale(0.95);
-
-    background: #333;
+    margin-bottom: 30px;
 }
 
 
@@ -413,7 +149,6 @@ body {
 ========================= */
 
 #game {
-
     position: fixed;
 
     inset: 0;
@@ -421,40 +156,64 @@ body {
     width: 100vw;
     height: 100vh;
 
-    overflow: hidden;
-
     background: #000;
 
-    display: none;
+    overflow: hidden;
 }
+
+
+/* =========================
+   HUD
+========================= */
+
+#hud {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 55px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 20px;
+
+    z-index: 20;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.8),
+            transparent
+        );
+
+    font-size: 20px;
+}
+
+
+/* =========================
+   ОФИС
+========================= */
 
 #view {
-
     position: absolute;
 
     inset: 0;
 
-    background:
-        url("images/office_front.png")
-        center center /
-        cover
-        no-repeat;
+    background-image:
+        url("images/office_front.png");
 
-    z-index: 1;
-}
+    background-size: cover;
 
-#darkness {
+    background-position: center;
 
-    position: absolute;
+    background-repeat: no-repeat;
 
-    inset: 0;
-
-    z-index: 5;
-
-    background:
-        rgba(0,0,0,0.2);
-
-    pointer-events: none;
+    overflow: hidden;
 }
 
 
@@ -463,193 +222,20 @@ body {
 ========================= */
 
 #lichi {
-
     position: absolute;
 
     display: none;
 
+    width: 150px;
+
+    height: auto;
+
     z-index: 10;
-
-    width: 90px;
-
-    left: 80%;
-    top: 44%;
-
-    transform:
-        translate(-50%, -50%);
 
     pointer-events: none;
 
-    user-select: none;
-
-    transition:
-        left 1s ease,
-        top 1s ease,
-        width 1s ease;
-}
-
-
-/* =========================
-   HUD
-========================= */
-
-#time {
-
-    position: absolute;
-
-    top: 15px;
-    left: 18px;
-
-    z-index: 40;
-
-    font-size:
-        clamp(20px,5vw,32px);
-
-    font-weight: bold;
-}
-
-#night {
-
-    position: absolute;
-
-    top: 55px;
-    left: 18px;
-
-    z-index: 40;
-
-    font-size:
-        clamp(13px,3vw,19px);
-}
-
-#status {
-
-    position: absolute;
-
-    top: 18px;
-    left: 50%;
-
     transform:
-        translateX(-50%);
-
-    z-index: 40;
-
-    padding: 8px 14px;
-
-    background:
-        rgba(0,0,0,0.75);
-
-    border-radius: 8px;
-
-    text-align: center;
-
-    font-size:
-        clamp(12px,3vw,18px);
-
-    white-space: nowrap;
-}
-
-
-/* =========================
-   КНОПКИ
-========================= */
-
-.topButton {
-
-    position: absolute;
-
-    top: 15px;
-    right: 15px;
-
-    z-index: 60;
-
-    width: 52px;
-    height: 52px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size: 28px;
-}
-
-.systemButton {
-
-    position: absolute;
-
-    z-index: 60;
-
-    left: 20px;
-
-    width: 125px;
-
-    height: 48px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 8px;
-
-    background:
-        rgba(0,0,0,0.85);
-
-    color: white;
-
-    font-weight: bold;
-}
-
-#cameraButton {
-    bottom: 100px;
-}
-
-#ventButton {
-    bottom: 45px;
-}
-
-
-/* =========================
-   ПОВОРОТЫ
-========================= */
-
-#direction {
-
-    position: absolute;
-
-    bottom: 25px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 60;
-
-    display: flex;
-
-    gap: 10px;
-}
-
-.directionButton {
-
-    width: 65px;
-    height: 55px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size: 25px;
+        translate(-50%, -50%);
 }
 
 
@@ -657,436 +243,404 @@ body {
    ВСПЫШКА
 ========================= */
 
-#flashButton {
-
-    position: absolute;
-
-    right: 20px;
-    bottom: 25px;
-
-    z-index: 60;
-
-    min-width: 125px;
-    min-height: 55px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size:
-        clamp(13px,3vw,18px);
-
-    font-weight: bold;
-}
-
 #flash {
-
     position: absolute;
 
     inset: 0;
-
-    z-index: 100;
 
     background: white;
 
     opacity: 0;
 
     pointer-events: none;
+
+    z-index: 50;
+
+    transition:
+        opacity .08s linear;
 }
 
 
 /* =========================
-   КАМЕРЫ
+   СТАТУС
+========================= */
+
+#status {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 145px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 30;
+
+    padding: 8px 15px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   ПОВОРОТЫ
+========================= */
+
+#officeControls {
+    position: absolute;
+
+    bottom: 65px;
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    z-index: 30;
+}
+
+#officeControls button {
+    min-width: 80px;
+
+    background:
+        rgba(0,0,0,.75);
+}
+
+#officeControls span {
+    display: block;
+
+    font-size: 10px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================
+   НИЖНИЕ КНОПКИ
+========================= */
+
+#bottomControls {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 60px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(0,0,0,.85);
+
+    z-index: 100;
+}
+
+#bottomControls button {
+    min-width: 130px;
+
+    margin: 5px;
+}
+
+
+/* =========================
+   МОНИТОР
 ========================= */
 
 #cameraPanel {
-
-    display: none;
-
     position: absolute;
 
     inset: 0;
 
-    z-index: 300;
+    background: #111;
 
-    background:
-        rgba(0,0,0,0.96);
+    z-index: 500;
 
-    padding:
-        8vh 5vw;
-
-    overflow-y: auto;
-}
-
-.panelTitle {
-
-    text-align: center;
-
-    font-size:
-        clamp(25px,6vw,45px);
-
-    font-weight: bold;
-
-    margin-bottom: 25px;
-}
-
-#cameraPanel button {
-
-    display: block;
-
-    width:
-        min(90vw,600px);
-
-    margin:
-        10px auto;
-
-    min-height: 55px;
-
-    border:
-        2px solid #555;
-
-    border-radius: 8px;
-
-    background:
-        #111;
-
-    color: white;
-
-    font-weight: bold;
-
-    font-size:
-        clamp(13px,3vw,18px);
-}
-
-#cameraPanel button:active {
-
-    background: #333;
+    padding: 10px;
 }
 
 
-/* =========================
-   ВЕНТИЛЯЦИЯ
-========================= */
+/* Верх монитора */
 
-#ventMap {
-
-    display: none;
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 350;
-
-    background:
-        #090909;
-
-    overflow: hidden;
-}
-
-.ventHeader {
-
-    position: absolute;
-
-    top: 15px;
-    left: 20px;
-    right: 20px;
+#cameraHeader {
+    height: 55px;
 
     display: flex;
 
     justify-content: space-between;
-
-    font-weight: bold;
-
-    font-size:
-        clamp(14px,3vw,20px);
-
-    z-index: 10;
-}
-
-.ventNode {
-
-    position: absolute;
-
-    width: 105px;
-    height: 55px;
-
-    transform:
-        translate(-50%, -50%);
-
-    display: flex;
-
     align-items: center;
-    justify-content: center;
 
-    text-align: center;
+    padding: 5px 10px;
 
-    border:
-        2px solid #777;
-
-    border-radius: 7px;
-
-    background:
-        #151515;
-
-    font-size: 13px;
+    border-bottom: 2px solid #777;
 
     font-weight: bold;
-
-    z-index: 5;
-}
-
-#nodeAttic {
-    left: 50%;
-    top: 15%;
-}
-
-#node01 {
-    left: 25%;
-    top: 35%;
-}
-
-#node02 {
-    left: 75%;
-    top: 35%;
-}
-
-#node03 {
-    left: 50%;
-    top: 55%;
-}
-
-#nodeBottom {
-    left: 50%;
-    top: 73%;
-}
-
-.officeNode {
-    left: 50%;
-    top: 91%;
-}
-
-.ventConnection {
-
-    position: absolute;
-
-    z-index: 4;
-
-    border: none;
-
-    background: transparent;
-
-    color: #777;
-
-    font-size: 45px;
-
-    line-height: 1;
-
-    padding: 0;
-}
-
-#connectionAttic {
-    left: 50%;
-    top: 24%;
-}
-
-#connectionCenter {
-    left: 50%;
-    top: 63%;
-}
-
-#connectionBottom {
-    left: 50%;
-    top: 82%;
-}
-
-.horizontal {
-    font-size: 55px;
-}
-
-#connectionLeft {
-    left: 37%;
-    top: 43%;
-}
-
-#connectionRight {
-    left: 63%;
-    top: 43%;
-}
-
-.ventConnection.barrier {
-
-    color: white;
-
-    background:
-        rgba(120,120,120,0.7);
-
-    border:
-        2px solid white;
-
-    border-radius: 4px;
-
-    width: 45px;
-    height: 45px;
-
-    font-size: 0;
-}
-
-.ventConnection.barrier::after {
-
-    content: "▣";
-
-    font-size: 27px;
-}
-
-.animMarker {
-
-    position: absolute;
-
-    width: 35px;
-    height: 35px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-weight: bold;
-
-    z-index: 20;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,0.4);
-}
-
-.pancake {
-    background: #555;
-}
-
-.delta {
-    background: #333;
-}
-
-.ventHint {
-
-    position: absolute;
-
-    left: 50%;
-    bottom: 70px;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        min(90vw,600px);
-
-    text-align: center;
-
-    font-size: 13px;
-
-    opacity: 0.6;
 }
 
 
 /* =========================
-   ЗАКРЫТЬ
+   ЭКРАН КАМЕРЫ
 ========================= */
 
-.closePanel {
+#cameraScreen {
+    position: absolute;
 
-    position: absolute !important;
+    top: 65px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
 
-    left: 50% !important;
+    display: flex;
 
-    bottom: 15px !important;
-
-    transform:
-        translateX(-50%);
-
-    width: 180px !important;
-
-    min-height: 50px !important;
-
-    z-index: 50;
+    gap: 10px;
 }
 
 
-/* =========================
-   GAME OVER / WIN
-========================= */
+/* Изображение */
 
-#gameOver,
-#winScreen {
+#cameraImage {
+    position: relative;
 
-    display: none;
+    flex: 1;
 
+    min-width: 0;
+
+    background:
+        url("images/cam01.png")
+        center / cover
+        no-repeat;
+
+    border: 2px solid #777;
+
+    overflow: hidden;
+}
+
+
+/* Шум */
+
+#cameraNoise {
     position: absolute;
 
     inset: 0;
 
-    z-index: 500;
+    pointer-events: none;
 
-    background: #000;
+    opacity: .15;
 
-    justify-content: center;
-    align-items: center;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 2px,
+            white 3px,
+            transparent 4px
+        );
 
-    flex-direction: column;
-
-    text-align: center;
+    animation:
+        cameraNoise .15s infinite;
 }
 
-#gameOver h1,
-#winScreen h1 {
+@keyframes cameraNoise {
 
-    font-size:
-        clamp(35px,9vw,65px);
+    0% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(2px);
+    }
+
+    100% {
+        transform:
+            translateY(0);
+    }
 }
 
-#gameOver button,
-#winScreen button {
 
-    margin-top: 20px;
+/* Название камеры */
 
-    padding: 14px 25px;
+#cameraName {
+    position: absolute;
 
-    border: 0;
+    top: 10px;
+    left: 10px;
 
-    border-radius: 8px;
+    padding: 8px 12px;
 
-    background: #333;
+    background:
+        rgba(0,0,0,.7);
 
-    color: white;
+    font-weight: bold;
+}
 
-    font-size: 18px;
+
+/* Индикатор Личи */
+
+#cameraLichiIndicator {
+    position: absolute;
+
+    left: 10px;
+    bottom: 10px;
+
+    padding: 8px;
+
+    background:
+        rgba(0,0,0,.75);
+
+    font-size: 12px;
+}
+
+#cameraLichiIndicator span {
+    margin-left: 5px;
 }
 
 
 /* =========================
-   ПОРТРЕТ
+   КАРТА
 ========================= */
 
-@media (orientation: portrait) {
+#cameraMap {
+    width: 230px;
 
-    #game,
-    #mainMenu,
-    #phoneScreen,
-    #nightsMenu,
-    #settingsMenu {
+    max-width: 32%;
 
-        display: none !important;
+    border: 2px solid #777;
+
+    background:
+        #171717;
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: stretch;
+}
+
+.mapTitle {
+    text-align: center;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+}
+
+.cameraButton {
+    width: 100%;
+
+    margin: 4px 0;
+
+    padding: 12px 5px;
+
+    background:
+        #222;
+}
+
+.cameraButton.active {
+    background:
+        #555;
+
+    border-color:
+        white;
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+.gameOverBox {
+    text-align: center;
+}
+
+.gameOverBox h1 {
+    font-size:
+        clamp(40px, 10vw, 100px);
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   ТЕЛЕФОН
+========================= */
+
+@media
+(max-width: 700px) {
+
+    #cameraScreen {
+        flex-direction: column;
     }
 
-    #rotateMessage {
-
-        display: flex;
+    #cameraImage {
+        flex: 1;
     }
-        }
+
+    #cameraMap {
+        width: 100%;
+
+        max-width: none;
+
+        height: 125px;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 2px;
+
+        padding: 4px;
+    }
+
+    .mapTitle {
+        display: none;
+    }
+
+    .cameraButton {
+        margin: 2px;
+
+        padding: 5px;
+
+        font-size: 11px;
+    }
+
+    #status {
+        bottom: 125px;
+    }
+
+    #officeControls {
+        bottom: 60px;
+    }
+
+    #officeControls button {
+        min-width: 65px;
+
+        padding: 8px;
+    }
+
+    #bottomControls button {
+        min-width: 110px;
+
+        padding: 10px;
+    }
+
+}
