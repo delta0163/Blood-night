@@ -1,45 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
+<meta name="viewport"
 content="width=device-width,
 initial-scale=1.0,
 maximum-scale=1.0,
-user-scalable=no"
->
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<!-- =========================
-     ПОВОРОТ ТЕЛЕФОНА
-========================= -->
+<!-- ПОВОРОТ ТЕЛЕФОНА -->
 
 <div id="rotateMessage">
-
     <div>
-
-        <h1>Blood Glow Night</h1>
-
-        <p>
-            Поверните телефон горизонтально
-        </p>
-
-        <div class="rotateIcon">
-            ⟳
-        </div>
-
+        <h1>BLOOD GLOW NIGHT</h1>
+        <p>Поверните телефон горизонтально</p>
+        <div class="rotateIcon">⟳</div>
     </div>
-
 </div>
 
 
@@ -50,7 +34,6 @@ user-scalable=no"
 <div id="mainMenu">
 
     <div class="menuBackground"></div>
-
     <div class="menuDarkness"></div>
 
     <div class="menuContent">
@@ -65,39 +48,83 @@ user-scalable=no"
             NIGHTMARE
         </div>
 
-        <button
-        id="startGameButton"
-        class="menuButton">
-
+        <button id="startGameButton"
+                class="menuButton">
             НАЧАТЬ ИГРУ
-
         </button>
 
-        <button
-        class="menuButton disabledButton">
-
+        <button id="nightsButton"
+                class="menuButton">
             НОЧИ
-
         </button>
 
-        <button
-        class="menuButton disabledButton">
-
+        <button id="settingsButton"
+                class="menuButton">
             НАСТРОЙКИ
-
         </button>
 
         <div class="version">
-            DEMO v0.1
+            DEMO v0.3
         </div>
 
     </div>
+</div>
+
+
+<!-- =========================
+     МЕНЮ НОЧЕЙ
+========================= -->
+
+<div id="nightsMenu">
+
+    <div class="nightsTitle">
+        ВЫБОР НОЧИ
+    </div>
+
+    <div id="nightsList"></div>
+
+    <button id="closeNights"
+            class="menuButton">
+        НАЗАД
+    </button>
 
 </div>
 
 
 <!-- =========================
-     ТЕЛЕФОН
+     НАСТРОЙКИ
+========================= -->
+
+<div id="settingsMenu">
+
+    <div class="nightsTitle">
+        НАСТРОЙКИ
+    </div>
+
+    <p>
+        Прогресс сохраняется автоматически.
+    </p>
+
+    <p>
+        После прохождения ночи следующая
+        ночь открывается автоматически.
+    </p>
+
+    <button id="resetProgress"
+            class="menuButton">
+        СБРОСИТЬ ПРОГРЕСС
+    </button>
+
+    <button id="closeSettings"
+            class="menuButton">
+        НАЗАД
+    </button>
+
+</div>
+
+
+<!-- =========================
+     ТЕЛЕФОННЫЙ ЗВОНОК
 ========================= -->
 
 <div id="phoneScreen">
@@ -120,6 +147,10 @@ user-scalable=no"
             ● ВОСПРОИЗВЕДЕНИЕ
         </div>
 
+        <button id="skipPhoneButton">
+            ПРОПУСТИТЬ ЗВОНОК
+        </button>
+
     </div>
 
 </div>
@@ -133,36 +164,19 @@ user-scalable=no"
 
     <div id="view"></div>
 
-
-    <!-- ЛИЧИ -->
-
-    <img
-    id="lichi"
-    src="images/lichi.png"
-    alt="Личи"
-    >
-
-
-    <!-- ЗАТЕМНЕНИЕ -->
+    <img id="lichi"
+         src="images/lichi.png"
+         alt="Личи">
 
     <div id="darkness"></div>
-
-
-    <!-- ВРЕМЯ -->
 
     <div id="time">
         12:00 AM
     </div>
 
-
-    <!-- НОМЕР НОЧИ -->
-
     <div id="night">
         NIGHT 1
     </div>
-
-
-    <!-- СТАТУС -->
 
     <div id="status">
         Офис. Ночь начинается.
@@ -171,12 +185,25 @@ user-scalable=no"
 
     <!-- FULLSCREEN -->
 
-    <button
-    id="fullscreenButton"
-    class="topButton">
-
+    <button id="fullscreenButton"
+            class="topButton">
         ⛶
+    </button>
 
+
+    <!-- КАМЕРЫ -->
+
+    <button id="cameraButton"
+            class="systemButton">
+        📷 КАМЕРЫ
+    </button>
+
+
+    <!-- ВЕНТИЛЯЦИЯ -->
+
+    <button id="ventButton"
+            class="systemButton">
+        ⬡ ВЕНТ
     </button>
 
 
@@ -184,28 +211,19 @@ user-scalable=no"
 
     <div id="direction">
 
-        <button
-        class="directionButton"
-        id="leftButton">
-
+        <button id="leftButton"
+                class="directionButton">
             ◀
-
         </button>
 
-        <button
-        class="directionButton"
-        id="frontButton">
-
+        <button id="frontButton"
+                class="directionButton">
             ▲
-
         </button>
 
-        <button
-        class="directionButton"
-        id="rightButton">
-
+        <button id="rightButton"
+                class="directionButton">
             ▶
-
         </button>
 
     </div>
@@ -213,18 +231,160 @@ user-scalable=no"
 
     <!-- ВСПЫШКА -->
 
-    <button
-    id="flashButton"
-    class="controlButton">
-
+    <button id="flashButton"
+            class="controlButton">
         📷 ВСПЫШКА
-
     </button>
 
-
-    <!-- ЭКРАН ВСПЫШКИ -->
-
     <div id="flash"></div>
+
+
+    <!-- =========================
+         КАМЕРЫ
+    ========================= -->
+
+    <div id="cameraPanel">
+
+        <div class="panelTitle">
+            КАМЕРЫ
+        </div>
+
+        <button data-camera="cam01">
+            CAM 01 — ЛЕВЫЙ КОРИДОР
+        </button>
+
+        <button data-camera="cam02">
+            CAM 02 — ПРАВЫЙ КОРИДОР
+        </button>
+
+        <button data-camera="cam03">
+            CAM 03 — ЗАДНИЙ ДВОР
+        </button>
+
+        <button data-camera="cam04">
+            CAM 04 — ЧЕРДАК
+        </button>
+
+        <button data-camera="cam05">
+            CAM 05 — РЕЗЕРВНОЕ ПИТАНИЕ
+        </button>
+
+        <button data-camera="cam06">
+            CAM 06 — ЗАДНЕЕ ОКНО
+        </button>
+
+        <button data-camera="cam07">
+            CAM 07 — ЩИТОВАЯ
+        </button>
+
+        <button id="closeCameraPanel"
+                class="closePanel">
+            ЗАКРЫТЬ
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         КАРТА ВЕНТИЛЯЦИИ
+    ========================= -->
+
+    <div id="ventMap">
+
+        <div class="ventHeader">
+
+            <span>
+                ВЕНТИЛЯЦИЯ
+            </span>
+
+            <span id="barrierCounter">
+                ПЕРЕГОРОДКИ: 2/2
+            </span>
+
+        </div>
+
+
+        <div class="ventNode"
+             id="nodeAttic">
+            ЧЕРДАК
+        </div>
+
+        <div class="ventNode"
+             id="node01">
+            ВЕНТ 01
+        </div>
+
+        <div class="ventNode"
+             id="node02">
+            ВЕНТ 02
+        </div>
+
+        <div class="ventNode"
+             id="node03">
+            ВЕНТ 03
+        </div>
+
+        <div class="ventNode"
+             id="nodeBottom">
+            НИЖНЯЯ
+            ВЕНТИЛЯЦИЯ
+        </div>
+
+        <div class="ventNode officeNode">
+            ОФИС
+        </div>
+
+
+        <button class="ventConnection"
+                id="connectionAttic">
+            │
+        </button>
+
+        <button class="ventConnection horizontal"
+                id="connectionLeft">
+            ─
+        </button>
+
+        <button class="ventConnection horizontal"
+                id="connectionRight">
+            ─
+        </button>
+
+        <button class="ventConnection"
+                id="connectionCenter">
+            │
+        </button>
+
+        <button class="ventConnection"
+                id="connectionBottom">
+            │
+        </button>
+
+
+        <div id="pancakeMarker"
+             class="animMarker pancake">
+            P
+        </div>
+
+        <div id="deltaMarker"
+             class="animMarker delta">
+            D
+        </div>
+
+
+        <div class="ventHint">
+            Нажмите на соединение,
+            чтобы поставить или убрать
+            перегородку.
+        </div>
+
+
+        <button id="closeVentMap"
+                class="closePanel">
+            ЗАКРЫТЬ
+        </button>
+
+    </div>
 
 
     <!-- GAME OVER -->
@@ -254,9 +414,13 @@ user-scalable=no"
             6:00 AM
         </h1>
 
-        <p>
+        <p id="winText">
             NIGHT 1 COMPLETE
         </p>
+
+        <button id="nextNight">
+            СЛЕДУЮЩАЯ НОЧЬ
+        </button>
 
         <button id="menuAfterWin">
             В МЕНЮ
@@ -268,37 +432,32 @@ user-scalable=no"
 
 
 <!-- =========================
-     АУДИО
+     AUDIO
 ========================= -->
 
-<audio
-id="phoneAudio"
-src="audio/phone.mp3"
-preload="auto">
+<audio id="phoneAudio"
+       src="audio/phone.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="flashAudio"
-src="audio/flash.mp3"
-preload="auto">
+<audio id="flashAudio"
+       src="audio/flash.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="lichiAudio"
-src="audio/lichi_scream.mp3"
-preload="auto">
+<audio id="lichiAudio"
+       src="audio/lichi_scream.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="humAudio"
-src="audio/hum.mp3"
-preload="auto"
-loop>
+<audio id="humAudio"
+       src="audio/hum.mp3"
+       preload="auto"
+       loop>
 </audio>
 
 
 <script src="game.js"></script>
 
 </body>
-
 </html>
