@@ -46,7 +46,7 @@ user-scalable=no">
 
 
 <!-- =========================
-     НОЧИ
+     ВЫБОР НОЧИ
 ========================= -->
 
 <div id="nightsMenu" class="screen hidden">
@@ -94,7 +94,7 @@ user-scalable=no">
 
 
 <!-- =========================
-     ТЕЛЕФОН
+     ТЕЛЕФОННЫЙ ЗВОНОК
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
@@ -129,12 +129,12 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-             src="images/lichi.png"
-             alt="Личи">
+        src="images/lichi.png"
+        alt="Личи">
 
         <img id="pancake"
-             src="images/pancake.png"
-             alt="Панкейк">
+        src="images/pancake.png"
+        alt="Панкейк">
 
         <div id="flash"></div>
 
@@ -161,9 +161,14 @@ user-scalable=no">
     </div>
 
 
-    <!-- =========================
-         ПОВОРОТЫ
-    ========================== -->
+    <!-- СОСТОЯНИЕ ЭНЕРГИИ -->
+
+    <div id="powerStatus">
+        ЭНЕРГИЯ: КАМЕРЫ
+    </div>
+
+
+    <!-- ПОВОРОТЫ -->
 
     <div id="officeControls">
 
@@ -182,9 +187,7 @@ user-scalable=no">
     </div>
 
 
-    <!-- =========================
-         НИЖНИЕ КНОПКИ
-    ========================== -->
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -196,20 +199,75 @@ user-scalable=no">
             ВСПЫШКА
         </button>
 
-        <button id="leverButton">
-            РЫЧАГ<br>
-            ЭНЕРГИИ
+        <button id="powerButton">
+            ПЕРЕКЛЮЧЕНИЕ<br>ЭНЕРГИИ
         </button>
 
     </div>
 
 
     <!-- =========================
-         ПАНЕЛЬ КАМЕР
+         ПРОСТРАНСТВО ПОД СТОЛОМ
     ========================== -->
 
-    <div id="cameraPanel"
-         class="panel hidden">
+    <div id="underTablePanel" class="panel hidden">
+
+        <div class="panelHeader">
+
+            <span>
+                ПОД СТОЛОМ
+            </span>
+
+            <button id="closePowerPanel">
+                ✕
+            </button>
+
+        </div>
+
+        <div id="underTable">
+
+            <div id="tableBottom">
+                СТОЛ
+            </div>
+
+            <div id="lever">
+
+                <div id="leverHandle"></div>
+
+                <div id="leverBase"></div>
+
+            </div>
+
+            <div id="leverText">
+                РЫЧАГ ПЕРЕКЛЮЧЕНИЯ ЭНЕРГИИ
+            </div>
+
+        </div>
+
+        <div id="powerChoices">
+
+            <button id="powerCameraButton">
+                НАПРАВИТЬ НА КАМЕРЫ
+            </button>
+
+            <button id="powerWindowButton">
+                НАПРАВИТЬ НА ОКНО
+            </button>
+
+        </div>
+
+        <div id="powerTransferStatus">
+            ЭНЕРГИЯ: КАМЕРЫ
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         КАМЕРЫ
+    ========================== -->
+
+    <div id="cameraPanel" class="panel hidden">
 
         <div class="panelHeader">
 
@@ -224,132 +282,67 @@ user-scalable=no">
         </div>
 
 
-        <div id="cameraImage">
+        <div id="cameraContent">
 
-            <div id="cameraStatic"></div>
+            <!-- ФОТО КАМЕРЫ СЛЕВА -->
 
-            <div id="cameraNumber">
-                CAM 01
-            </div>
+            <div id="cameraImage">
 
-            <img id="cameraLichi"
-                 src="images/lichi.png"
-                 alt="Личи">
+                <div id="cameraStatic"></div>
 
-            <img id="cameraPancake"
-                 src="images/pancake.png"
-                 alt="Панкейк">
-
-        </div>
-
-
-        <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
-
-        <div id="cameraMap">
-
-            <button data-camera="cam01">
-                CAM 01
-            </button>
-
-            <button data-camera="cam02">
-                CAM 02
-            </button>
-
-            <button data-camera="cam03">
-                CAM 03
-            </button>
-
-            <button data-camera="cam04">
-                CAM 04
-            </button>
-
-            <button data-camera="cam05">
-                CAM 05
-            </button>
-
-            <button data-camera="cam06">
-                CAM 06
-            </button>
-
-            <button data-camera="cam07">
-                CAM 07
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         ПАНЕЛЬ ЭНЕРГИИ
-    ========================== -->
-
-    <div id="powerPanel"
-         class="panel hidden">
-
-        <div class="panelHeader">
-
-            <span>
-                ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ
-            </span>
-
-            <button id="closePowerPanel">
-                ✕
-            </button>
-
-        </div>
-
-
-        <div id="powerArea">
-
-            <div id="powerLever">
-
-                <div id="leverHandle">
-                    ⚡
+                <div id="cameraNumber">
+                    CAM 01
                 </div>
 
-                <div id="leverText">
-                    РЫЧАГ
-                </div>
+                <img id="cameraLichi"
+                src="images/lichi.png"
+                alt="Личи">
+
+                <img id="cameraPancake"
+                src="images/pancake.png"
+                alt="Панкейк">
 
             </div>
 
 
-            <div id="powerDirection">
+            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК СПРАВА -->
 
-                <div class="powerLine">
+            <div id="cameraMap">
 
-                    <span>
-                        ЭНЕРГИЯ
-                    </span>
-
-                    <span id="powerArrow">
-                        →
-                    </span>
-
-                    <span id="powerTarget">
-                        КАМЕРЫ
-                    </span>
-
-                </div>
-
-
-                <button id="switchToCameras">
-                    ЭНЕРГИЯ → КАМЕРЫ
+                <button data-camera="cam01">
+                    CAM 01
                 </button>
 
-
-                <button id="switchToWindow">
-                    ЭНЕРГИЯ → ОКНО
+                <button data-camera="cam02">
+                    CAM 02
                 </button>
 
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
 
-                <div id="powerStatus">
-                    ЭНЕРГИЯ НА КАМЕРАХ
-                </div>
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
+
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
+
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
+
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
 
             </div>
 
+        </div>
+
+        <div id="cameraPowerMessage">
+            КАМЕРЫ РАБОТАЮТ
         </div>
 
     </div>
@@ -359,16 +352,11 @@ user-scalable=no">
          GAME OVER
     ========================== -->
 
-    <div id="gameOver"
-         class="overlay hidden">
+    <div id="gameOver" class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
         </h1>
-
-        <p id="loseReason">
-            Система отключена.
-        </p>
 
         <button id="restart">
             ПОВТОРИТЬ
@@ -385,8 +373,7 @@ user-scalable=no">
          ПОБЕДА
     ========================== -->
 
-    <div id="winScreen"
-         class="overlay hidden">
+    <div id="winScreen" class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -410,23 +397,27 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
+
+<audio id="ventAudio"
+src="sounds/vent.mp3"
+loop></audio>
 
 
 <script src="game.js"></script>
