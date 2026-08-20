@@ -184,7 +184,7 @@
 
 
     <!-- =================================================
-         МОНИТОР КАМЕР
+         МОНИТОР
     ================================================= -->
 
     <div id="cameraPanel">
@@ -206,32 +206,39 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              КАМЕРЫ
-        ========================== -->
+        ================================================= -->
 
         <div id="cameraContent">
 
             <div id="cameraScreen">
 
-                <!--
-                    КАРТИНКА КАМЕРЫ
-                    появляется здесь
-                -->
+                <!-- ФОН ДИСПЛЕЯ -->
+
+                <img
+                    id="cameraBackground"
+                    src="images/camera_background.png"
+                    alt=""
+                >
+
+                <!-- ФОТО КАМЕРЫ -->
 
                 <img
                     id="cameraImage"
                     src="images/cam01.png"
-                    alt="Camera"
+                    alt="CAM 01"
                 >
 
-                <!-- Личи поверх картинки -->
+                <!-- ЛИЧИ -->
 
                 <img
                     id="cameraLichi"
                     src="images/lichi.png"
                     alt="Lichi"
                 >
+
+                <div id="cameraNoise"></div>
 
                 <div id="cameraName">
                     CAM 01
@@ -277,41 +284,39 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              ВЕНТИЛЯЦИЯ
-        ========================== -->
+        ================================================= -->
 
         <div id="ventContent">
 
             <div id="ventMap">
 
                 <div class="ventLine line1"></div>
+
                 <div class="ventLine line2"></div>
+
                 <div class="ventLine line3"></div>
+
                 <div class="ventLine line4"></div>
 
-                <div class="ventPoint"
-                     id="vent1">
+                <div class="ventPoint" id="vent1">
                     V-01
                 </div>
 
-                <div class="ventPoint"
-                     id="vent2">
+                <div class="ventPoint" id="vent2">
                     V-02
                 </div>
 
-                <div class="ventPoint"
-                     id="vent3">
+                <div class="ventPoint" id="vent3">
                     V-03
                 </div>
 
-                <div class="ventPoint"
-                     id="vent4">
+                <div class="ventPoint" id="vent4">
                     V-04
                 </div>
 
-                <div class="ventPoint"
-                     id="ventOffice">
+                <div class="ventPoint" id="ventOffice">
                     OFFICE
                 </div>
 
@@ -384,29 +389,39 @@
      ЗВУКИ
 ================================================= -->
 
-<audio id="phoneAudio"
-       src="sounds/phone.mp3"
-       preload="auto">
+<audio
+    id="phoneAudio"
+    src="sounds/phone.mp3"
+    preload="auto">
 </audio>
 
-<audio id="flashAudio"
-       src="sounds/flash.mp3"
-       preload="auto">
+<audio
+    id="humAudio"
+    src="sounds/hum.mp3"
+    preload="auto"
+    loop>
 </audio>
 
-<audio id="lichiAudio"
-       src="sounds/lichi.mp3"
-       preload="auto">
+<audio
+    id="flashAudio"
+    src="sounds/flash.mp3"
+    preload="auto">
 </audio>
 
-<audio id="humAudio"
-       src="sounds/hum.mp3"
-       preload="auto"
-       loop>
+<audio
+    id="lichiAudio"
+    src="sounds/lichi.mp3"
+    preload="auto">
+</audio>
+
+<audio
+    id="screamAudio"
+    src="sounds/scream.mp3"
+    preload="auto">
 </audio>
 
 
 <script src="game.js"></script>
 
 </body>
-                     </html>
+</html>
