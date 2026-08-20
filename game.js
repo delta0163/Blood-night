@@ -1,216 +1,124 @@
 /* =================================================
    BLOOD GLOW NIGHT
+   LICHИ + КАМЕРЫ + ПРАВЫЙ КОРИДОР
 ================================================= */
 
+const mainMenu = document.getElementById("mainMenu");
+const nightsMenu = document.getElementById("nightsMenu");
+const settingsMenu = document.getElementById("settingsMenu");
+const nightsList = document.getElementById("nightsList");
 
-/* =========================
-   ЭЛЕМЕНТЫ
-========================= */
+const game = document.getElementById("game");
+const phoneScreen = document.getElementById("phoneScreen");
 
-const mainMenu =
-document.getElementById("mainMenu");
+const phoneAudio = document.getElementById("phoneAudio");
+const flashAudio = document.getElementById("flashAudio");
+const lichiAudio = document.getElementById("lichiAudio");
+const humAudio = document.getElementById("humAudio");
 
-const nightsMenu =
-document.getElementById("nightsMenu");
+const view = document.getElementById("view");
+const lichi = document.getElementById("lichi");
 
-const settingsMenu =
-document.getElementById("settingsMenu");
+const status = document.getElementById("status");
+const time = document.getElementById("time");
+const nightDisplay = document.getElementById("night");
 
-const nightsList =
-document.getElementById("nightsList");
-
-const phoneScreen =
-document.getElementById("phoneScreen");
-
-const game =
-document.getElementById("game");
-
-const view =
-document.getElementById("view");
-
-const lichi =
-document.getElementById("lichi");
-
-const flash =
-document.getElementById("flash");
-
-const status =
-document.getElementById("status");
-
-const time =
-document.getElementById("time");
-
-const nightDisplay =
-document.getElementById("night");
+const flash = document.getElementById("flash");
 
 const cameraPanel =
-document.getElementById("cameraPanel");
+    document.getElementById("cameraPanel");
 
-const cameraTab =
-document.getElementById("cameraTab");
-
-const ventTab =
-document.getElementById("ventTab");
-
-const ventButton =
-document.getElementById("ventButton");
-
-const cameraImage =
-document.getElementById("cameraImage");
-
-const cameraName =
-document.getElementById("cameraName");
-
-const cameraLichiIndicator =
-document.getElementById(
-    "cameraLichiIndicator"
-);
+const ventMap =
+    document.getElementById("ventMap");
 
 const gameOverScreen =
-document.getElementById("gameOver");
+    document.getElementById("gameOver");
 
 const winScreen =
-document.getElementById("winScreen");
+    document.getElementById("winScreen");
 
 const winText =
-document.getElementById("winText");
+    document.getElementById("winText");
 
 const nextNightButton =
-document.getElementById("nextNight");
+    document.getElementById("nextNight");
 
 
-/* =========================
-   ЗВУКИ
-========================= */
-
-const phoneAudio =
-document.getElementById(
-    "phoneAudio"
-);
-
-const humAudio =
-document.getElementById(
-    "humAudio"
-);
-
-const flashAudio =
-document.getElementById(
-    "flashAudio"
-);
-
-const lichiAudio =
-document.getElementById(
-    "lichiAudio"
-);
-
-const lichiScreamer =
-document.getElementById(
-    "lichiScreamer"
-);
-
-
-/* =========================
-   ПРОГРЕСС
-========================= */
+/* =================================================
+   СОХРАНЕНИЕ
+================================================= */
 
 let completedNight =
-Number(
-    localStorage.getItem(
-        "bloodGlowNightCompleted"
-    )
-) || 0;
-
-
-/* =========================
-   СОСТОЯНИЕ
-========================= */
+    Number(
+        localStorage.getItem(
+            "bloodGlowNightCompleted"
+        )
+    ) || 0;
 
 let selectedNight = 1;
 
+
+/* =================================================
+   СОСТОЯНИЕ
+================================================= */
+
 let gameStarted = false;
-
 let gameOver = false;
-
 let nightFinished = false;
 
 let gameMinutes = 0;
 
 let currentView = "front";
 
-let currentCamera = "cam01";
-
-let cameraOpen = false;
-
 let flashCooldown = false;
 
 
-/* =========================
+/* =================================================
    ЛИЧИ
-========================= */
+================================================= */
+
+/*
+    0 = далеко
+    1 = коридор
+    2 = рядом с офисом
+    3 = дверь
+    4 = атака
+*/
 
 let lichiPosition = 0;
 
 
-/*
-0 — далеко
-1 — коридор
-2 — возле офиса
-3 — у офиса
-4 — атака
-*/
-
-
-/* =========================
-   ОФИС
-========================= */
-
-const officeViews = {
-
-    front:
-    "images/office_front.png",
-
-    left:
-    "images/office_left.png",
-
-    right:
-    "images/office_right.png"
-
-};
-
-
-/* =========================
+/* =================================================
    КАМЕРЫ
-========================= */
+================================================= */
+
+let currentCamera = "cam01";
+
 
 const cameraImages = {
 
-    cam01:
-    "images/cam01.png",
-
-    cam02:
-    "images/cam02.png",
-
-    cam03:
-    "images/cam03.png",
-
-    cam04:
-    "images/cam04.png",
-
-    cam05:
-    "images/cam05.png",
-
-    cam06:
-    "images/cam06.png",
-
-    cam07:
-    "images/cam07.png"
+    cam01: "images/cam01.png",
+    cam02: "images/cam02.png",
+    cam03: "images/cam03.png",
+    cam04: "images/cam04.png",
+    cam05: "images/cam05.png",
+    cam06: "images/cam06.png",
+    cam07: "images/cam07.png"
 
 };
 
 
 /*
-Личи находится
-на этих камерах.
+   Здесь задаём,
+   на какой камере появляется Личи.
+
+   CAM 01 — левый коридор
+   CAM 02 — правый коридор
+   CAM 03 — двор
+   CAM 04 — чердак
+   CAM 05 — резерв
+   CAM 06 — окно
+   CAM 07 — щитовая
 */
 
 const lichiCameraPositions = {
@@ -219,169 +127,88 @@ const lichiCameraPositions = {
 
     2: "cam01",
 
-    3: "cam06"
+    3: "cam06",
+
+    4: "cam06"
 
 };
 
 
-/* =========================
-   FULLSCREEN
-========================= */
+/* =================================================
+   ОФИС
+================================================= */
 
-async function enterFullscreen() {
+const officeViews = {
 
-    try {
+    front:
+        "images/office_front.png",
 
-        if (
-            !document.fullscreenElement
-        ) {
+    left:
+        "images/office_left.png",
 
-            await document
-            .documentElement
-            .requestFullscreen();
+    right:
+        "images/office_right.png"
 
-        }
-
-    }
-
-    catch(error) {
-
-        console.log(error);
-
-    }
-
-}
+};
 
 
-/* =========================
+/* =================================================
    МЕНЮ
-========================= */
+================================================= */
 
 document
-.getElementById(
-    "startGameButton"
-)
-.onclick = function() {
+.getElementById("startGameButton")
+.addEventListener(
+    "click",
+    function () {
 
-    selectedNight = 1;
+        selectedNight = 1;
 
-    enterFullscreen();
+        enterFullscreen();
 
-    startSelectedNight();
+        startSelectedNight();
 
-};
-
-
-document
-.getElementById(
-    "nightsButton"
-)
-.onclick = function() {
-
-    renderNights();
-
-    mainMenu.classList.add(
-        "hidden"
-    );
-
-    nightsMenu.classList.remove(
-        "hidden"
-    );
-
-};
+    }
+);
 
 
 document
-.getElementById(
-    "closeNights"
-)
-.onclick = function() {
+.getElementById("nightsButton")
+.addEventListener(
+    "click",
+    function () {
 
-    nightsMenu.classList.add(
-        "hidden"
-    );
+        renderNights();
 
-    mainMenu.classList.remove(
-        "hidden"
-    );
+        mainMenu.style.display =
+            "none";
 
-};
+        nightsMenu.style.display =
+            "flex";
 
-
-/* =========================
-   НАСТРОЙКИ
-========================= */
-
-document
-.getElementById(
-    "settingsButton"
-)
-.onclick = function() {
-
-    mainMenu.classList.add(
-        "hidden"
-    );
-
-    settingsMenu.classList.remove(
-        "hidden"
-    );
-
-};
+    }
+);
 
 
 document
-.getElementById(
-    "closeSettings"
-)
-.onclick = function() {
+.getElementById("closeNights")
+.addEventListener(
+    "click",
+    function () {
 
-    settingsMenu.classList.add(
-        "hidden"
-    );
+        nightsMenu.style.display =
+            "none";
 
-    mainMenu.classList.remove(
-        "hidden"
-    );
+        mainMenu.style.display =
+            "block";
 
-};
-
-
-document
-.getElementById(
-    "fullscreenButton"
-)
-.onclick =
-enterFullscreen;
+    }
+);
 
 
-/* =========================
-   СБРОС
-========================= */
-
-document
-.getElementById(
-    "resetProgress"
-)
-.onclick = function() {
-
-    localStorage.removeItem(
-        "bloodGlowNightCompleted"
-    );
-
-    completedNight = 0;
-
-    renderNights();
-
-    alert(
-        "Прогресс сброшен."
-    );
-
-};
-
-
-/* =========================
+/* =================================================
    НОЧИ
-========================= */
+================================================= */
 
 function renderNights() {
 
@@ -395,43 +222,46 @@ function renderNights() {
     ) {
 
         const button =
-        document.createElement(
-            "button"
-        );
-
-
-        const unlocked =
-        i === 1 ||
-        i <= completedNight + 1;
+            document.createElement(
+                "button"
+            );
 
 
         button.className =
-        "nightButton";
+            "nightButton";
+
+
+        const unlocked =
+            i === 1 ||
+            i <= completedNight + 1;
 
 
         if (!unlocked) {
 
-            button.textContent =
-            "🔒 NIGHT " + i;
+            button.classList
+                .add("locked");
 
-            button.disabled = true;
+            button.textContent =
+                "🔒 " + i;
+
+            button.disabled =
+                true;
 
         }
 
         else {
 
             button.textContent =
-            "NIGHT " + i;
-
+                "NIGHT " + i;
 
             button.onclick =
-            function() {
+                function () {
 
-                selectedNight = i;
+                    selectedNight = i;
 
-                startSelectedNight();
+                    startSelectedNight();
 
-            };
+                };
 
         }
 
@@ -445,31 +275,136 @@ function renderNights() {
 }
 
 
-/* =========================
+/* =================================================
+   НАСТРОЙКИ
+================================================= */
+
+document
+.getElementById("settingsButton")
+.addEventListener(
+    "click",
+    function () {
+
+        mainMenu.style.display =
+            "none";
+
+        settingsMenu.style.display =
+            "flex";
+
+    }
+);
+
+
+document
+.getElementById("closeSettings")
+.addEventListener(
+    "click",
+    function () {
+
+        settingsMenu.style.display =
+            "none";
+
+        mainMenu.style.display =
+            "block";
+
+    }
+);
+
+
+/* =================================================
+   СБРОС
+================================================= */
+
+document
+.getElementById("resetProgress")
+.addEventListener(
+    "click",
+    function () {
+
+        if (
+            !confirm(
+                "Сбросить весь прогресс?"
+            )
+        ) return;
+
+
+        completedNight = 0;
+
+
+        localStorage.removeItem(
+            "bloodGlowNightCompleted"
+        );
+
+
+        renderNights();
+
+        alert(
+            "Прогресс сброшен."
+        );
+
+    }
+);
+
+
+/* =================================================
+   FULLSCREEN
+================================================= */
+
+async function enterFullscreen() {
+
+    try {
+
+        if (
+            !document.fullscreenElement
+        ) {
+
+            await document
+                .documentElement
+                .requestFullscreen();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+
+document
+.getElementById("fullscreenButton")
+.addEventListener(
+    "click",
+    enterFullscreen
+);
+
+
+/* =================================================
    НАЧАЛО НОЧИ
-========================= */
+================================================= */
 
 function startSelectedNight() {
 
-    mainMenu.classList.add(
-        "hidden"
-    );
+    mainMenu.style.display =
+        "none";
 
-    nightsMenu.classList.add(
-        "hidden"
-    );
+    nightsMenu.style.display =
+        "none";
 
-    settingsMenu.classList.add(
-        "hidden"
-    );
+    settingsMenu.style.display =
+        "none";
 
-    game.classList.add(
-        "hidden"
-    );
 
-    phoneScreen.classList.remove(
-        "hidden"
-    );
+    phoneScreen.style.display =
+        "flex";
+
+
+    game.style.display =
+        "none";
 
 
     gameStarted = false;
@@ -478,114 +413,122 @@ function startSelectedNight() {
 
     nightFinished = false;
 
-    cameraOpen = false;
 
     gameMinutes = 0;
 
-    currentView = "front";
 
-    currentCamera = "cam01";
+    currentView =
+        "front";
 
-    lichiPosition = 0;
+
+    currentCamera =
+        "cam01";
+
+
+    lichiPosition =
+        0;
 
 
     nightDisplay.textContent =
-    "NIGHT " +
-    selectedNight;
+        "NIGHT " +
+        selectedNight;
 
 
     time.textContent =
-    "12:00 AM";
+        "12:00 AM";
+
+
+    status.textContent =
+        "Офис. Ночь начинается.";
+
+
+    gameOverScreen.style.display =
+        "none";
+
+
+    winScreen.style.display =
+        "none";
 
 
     view.style.backgroundImage =
-    `url("${officeViews.front}")`;
+        `url("${officeViews.front}")`;
 
 
     lichi.style.display =
-    "none";
+        "none";
 
 
-    cameraPanel.classList.add(
-        "hidden"
-    );
+    phoneAudio.currentTime =
+        0;
 
-    cameraTab.classList.remove(
-        "hidden"
-    );
-
-    ventTab.classList.add(
-        "hidden"
-    );
-
-
-    gameOverScreen.classList.add(
-        "hidden"
-    );
-
-    winScreen.classList.add(
-        "hidden"
-    );
-
-
-    phoneAudio.currentTime = 0;
 
     phoneAudio.play()
     .catch(
-        () => {}
+        function () {}
     );
 
 }
 
 
-/* =========================
-   ПРОПУСК ЗВОНКА
-========================= */
+/* =================================================
+   ПРОПУСТИТЬ ЗВОНОК
+================================================= */
 
 document
-.getElementById(
-    "skipPhoneButton"
-)
-.onclick = function() {
+.getElementById("skipPhoneButton")
+.addEventListener(
+    "click",
+    function () {
 
-    phoneAudio.pause();
+        phoneAudio.pause();
 
-    startGameAfterPhone();
+        phoneAudio.currentTime =
+            0;
 
-};
+        startNightAfterPhone();
+
+    }
+);
 
 
-phoneAudio.onended =
-startGameAfterPhone;
+phoneAudio.addEventListener(
+    "ended",
+    function () {
+
+        startNightAfterPhone();
+
+    }
+);
 
 
-/* =========================
-   ИГРА ПОСЛЕ ЗВОНКА
-========================= */
+/* =================================================
+   ПОСЛЕ ЗВОНКА
+================================================= */
 
-function startGameAfterPhone() {
+function startNightAfterPhone() {
 
-    if(gameStarted)
-    return;
+    if (gameStarted)
+        return;
 
 
     gameStarted = true;
 
 
-    phoneScreen.classList.add(
-        "hidden"
-    );
-
-    game.classList.remove(
-        "hidden"
-    );
+    phoneScreen.style.display =
+        "none";
 
 
-    humAudio.currentTime = 0;
+    game.style.display =
+        "block";
+
+
+    humAudio.currentTime =
+        0;
+
 
     humAudio.play()
     .catch(
-        () => {}
+        function () {}
     );
 
 
@@ -594,59 +537,83 @@ function startGameAfterPhone() {
 }
 
 
-/* =========================
-   ПОВОРОТЫ
-========================= */
+/* =================================================
+   ПРАВИЛЬНЫЙ ПОВОРОТ
+================================================= */
 
 function changeView(direction) {
 
-    if(!gameStarted)
-    return;
+    if (!gameStarted)
+        return;
 
-    if(gameOver)
-    return;
-
-    if(cameraOpen)
-    return;
+    if (gameOver)
+        return;
 
 
-    if(!officeViews[direction])
-    return;
+    if (
+        !officeViews[direction]
+    ) {
+
+        console.log(
+            "Изображение не найдено:",
+            direction
+        );
+
+        return;
+
+    }
 
 
     currentView =
-    direction;
+        direction;
 
 
     view.style.backgroundImage =
-    `url("${officeViews[direction]}")`;
+        `url("${officeViews[direction]}")`;
 
 
-    lichi.style.display =
-    "none";
+    view.style.backgroundSize =
+        "cover";
 
+
+    view.style.backgroundPosition =
+        "center";
+
+
+    view.style.backgroundRepeat =
+        "no-repeat";
+
+
+    /*
+       Личи в офисе показывается
+       только со 2 положения.
+    */
 
     updateOfficeLichi();
 
 
-    if(direction === "left") {
+    if (
+        direction === "left"
+    ) {
 
         status.textContent =
-        "ЛЕВЫЙ КОРИДОР";
+            "ЛЕВЫЙ КОРИДОР";
 
     }
 
-    else if(direction === "right") {
+    else if (
+        direction === "right"
+    ) {
 
         status.textContent =
-        "ПРАВЫЙ КОРИДОР";
+            "ПРАВЫЙ КОРИДОР";
 
     }
 
     else {
 
         status.textContent =
-        "ОФИС";
+            "ОФИС";
 
     }
 
@@ -654,59 +621,76 @@ function changeView(direction) {
 
 
 document
-.getElementById(
-    "leftButton"
-)
-.onclick = () =>
-changeView("left");
+.getElementById("leftButton")
+.addEventListener(
+    "click",
+    function () {
+
+        changeView("left");
+
+    }
+);
 
 
 document
-.getElementById(
-    "frontButton"
-)
-.onclick = () =>
-changeView("front");
+.getElementById("frontButton")
+.addEventListener(
+    "click",
+    function () {
+
+        changeView("front");
+
+    }
+);
 
 
 document
-.getElementById(
-    "rightButton"
-)
-.onclick = () =>
-changeView("right");
+.getElementById("rightButton")
+.addEventListener(
+    "click",
+    function () {
+
+        changeView("right");
+
+    }
+);
 
 
-/* =========================
+/* =================================================
    ЛИЧИ В ОФИСЕ
-========================= */
+================================================= */
 
 function updateOfficeLichi() {
 
-    if(cameraOpen) {
+    /*
+       Личи появляется только
+       начиная со второго положения.
+    */
+
+    if (
+        lichiPosition < 2
+    ) {
 
         lichi.style.display =
-        "none";
+            "none";
 
         return;
 
     }
 
 
-    if(lichiPosition < 2) {
+    /*
+       Личи показывается
+       рядом с офисом
+       только на левом коридоре.
+    */
+
+    if (
+        currentView !== "left"
+    ) {
 
         lichi.style.display =
-        "none";
-
-        return;
-
-    }
-
-
-    if(currentView !== "left") {
-
-        lichi.style.display =
-        "none";
+            "none";
 
         return;
 
@@ -714,427 +698,438 @@ function updateOfficeLichi() {
 
 
     lichi.style.display =
-    "block";
+        "block";
 
 
-    lichi.style.position =
-    "absolute";
-
-
-    if(lichiPosition === 2) {
+    if (
+        lichiPosition === 2
+    ) {
 
         lichi.style.left =
-        "73%";
+            "72%";
 
         lichi.style.top =
-        "52%";
+            "48%";
 
         lichi.style.width =
-        "130px";
+            "130px";
+
+    }
+
+    else if (
+        lichiPosition === 3
+    ) {
+
+        lichi.style.left =
+            "57%";
+
+        lichi.style.top =
+            "50%";
+
+        lichi.style.width =
+            "190px";
 
     }
 
     else {
 
         lichi.style.left =
-        "55%";
+            "50%";
 
         lichi.style.top =
-        "50%";
+            "52%";
 
         lichi.style.width =
-        "220px";
+            "280px";
 
     }
-
-
-    lichi.style.transform =
-    "translate(-50%, -50%)";
-
-    lichi.style.zIndex = 10;
 
 }
 
 
-/* =========================
-   ОТКРЫТЬ МОНИТОР
-========================= */
-
-document
-.getElementById(
-    "cameraButton"
-)
-.onclick = function() {
-
-    if(!gameStarted)
-    return;
-
-    if(gameOver)
-    return;
-
-
-    cameraOpen = true;
-
-
-    cameraPanel.classList.remove(
-        "hidden"
-    );
-
-
-    cameraTab.classList.remove(
-        "hidden"
-    );
-
-    ventTab.classList.add(
-        "hidden"
-    );
-
-
-    showCamera(
-        currentCamera
-    );
-
-};
-
-
-/* =========================
-   ЗАКРЫТЬ МОНИТОР
-========================= */
-
-document
-.getElementById(
-    "closeCameraPanel"
-)
-.onclick = function() {
-
-    cameraOpen = false;
-
-
-    cameraPanel.classList.add(
-        "hidden"
-    );
-
-
-    cameraTab.classList.remove(
-        "hidden"
-    );
-
-    ventTab.classList.add(
-        "hidden"
-    );
-
-
-    view.style.backgroundImage =
-    `url("${officeViews[currentView]}")`;
-
-
-    updateOfficeLichi();
-
-
-    if(currentView === "left") {
-
-        status.textContent =
-        "ЛЕВЫЙ КОРИДОР";
-
-    }
-
-    else if(currentView === "right") {
-
-        status.textContent =
-        "ПРАВЫЙ КОРИДОР";
-
-    }
-
-    else {
-
-        status.textContent =
-        "ОФИС";
-
-    }
-
-};
-
-
-/* =========================
-   ВЕНТИЛЯЦИЯ
-========================= */
-
-ventButton.onclick =
-function() {
-
-    cameraTab.classList.add(
-        "hidden"
-    );
-
-    ventTab.classList.remove(
-        "hidden"
-    );
-
-};
-
-
-/* =========================
+/* =================================================
    КАМЕРЫ
-========================= */
+================================================= */
 
 document
-.querySelectorAll(
-    ".cameraButton"
-)
-.forEach(
-function(button) {
+.getElementById("cameraButton")
+.addEventListener(
+    "click",
+    function () {
 
-    button.onclick =
-    function() {
+        cameraPanel.style.display =
+            "block";
 
         showCamera(
-            button.dataset.camera
+            currentCamera
         );
 
-    };
+    }
+);
 
-});
+
+document
+.getElementById("closeCameraPanel")
+.addEventListener(
+    "click",
+    function () {
+
+        cameraPanel.style.display =
+            "none";
+
+        /*
+           После закрытия камеры
+           возвращаем офис.
+        */
+
+        view.style.backgroundImage =
+            `url("${officeViews[currentView]}")`;
+
+        updateOfficeLichi();
+
+    }
+);
 
 
-/* =========================
+/* =================================================
    ПОКАЗ КАМЕРЫ
-========================= */
+================================================= */
 
 function showCamera(camera) {
 
-    if(!cameraImages[camera])
-    return;
-
-
     currentCamera =
-    camera;
+        camera;
 
 
-    cameraImage.style.backgroundImage =
-    `url("${cameraImages[camera]}")`;
+    const image =
+        cameraImages[camera];
 
 
-    cameraImage.style.backgroundSize =
-    "cover";
+    if (!image) {
 
-
-    cameraImage.style.backgroundPosition =
-    "center";
-
-
-    cameraName.textContent =
-    camera.toUpperCase();
-
-
-    document
-    .querySelectorAll(
-        ".cameraButton"
-    )
-    .forEach(
-    function(button) {
-
-        button.classList.remove(
-            "active"
+        console.log(
+            "Камера не найдена:",
+            camera
         );
 
+        return;
 
-        if(
-            button.dataset.camera ===
-            camera
-        ) {
+    }
 
-            button.classList.add(
-                "active"
-            );
 
-        }
+    /*
+       Основной экран
+       камеры.
+    */
 
-    });
+    view.style.backgroundImage =
+        `url("${image}")`;
 
+
+    view.style.backgroundSize =
+        "cover";
+
+
+    view.style.backgroundPosition =
+        "center";
+
+
+    view.style.backgroundRepeat =
+        "no-repeat";
+
+
+    /*
+       Проверяем,
+       есть ли Личи на этой камере.
+    */
 
     updateCameraLichi();
 
+
+    status.textContent =
+        camera.toUpperCase();
+
 }
 
 
-/* =========================
-   ЛИЧИ НА КАМЕРЕ
-========================= */
+/* =================================================
+   КНОПКИ КАМЕР
+================================================= */
+
+document
+.querySelectorAll(
+    "#cameraPanel [data-camera]"
+)
+.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                showCamera(
+                    button.dataset.camera
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =================================================
+   ЛИЧИ НА КАМЕРАХ
+================================================= */
 
 function updateCameraLichi() {
 
+    /*
+       Сначала убираем
+       офисный спрайт.
+    */
+
     lichi.style.display =
-    "none";
+        "none";
 
 
-    const lichiCamera =
-    lichiCameraPositions[
-        lichiPosition
-    ];
+    /*
+       Если Личи ещё далеко,
+       на камерах её нет.
+    */
+
+    if (
+        lichiPosition === 0
+    ) {
+
+        return;
+
+    }
 
 
-    if(
-        lichiCamera ===
+    const cameraForLichi =
+        lichiCameraPositions[
+            lichiPosition
+        ];
+
+
+    /*
+       Личи находится
+       не на этой камере.
+    */
+
+    if (
+        cameraForLichi !==
         currentCamera
     ) {
 
-        /*
-        Используем спрайт Личи
-        поверх камеры.
-        */
+        return;
 
-        lichi.style.display =
+    }
+
+
+    /*
+       Показываем спрайт.
+    */
+
+    lichi.style.display =
         "block";
 
-        lichi.style.position =
-        "fixed";
 
-        lichi.style.left =
-        "50%";
-
-        lichi.style.top =
-        "50%";
-
-        lichi.style.width =
+    lichi.style.width =
         "150px";
 
-        lichi.style.transform =
+
+    lichi.style.left =
+        "50%";
+
+
+    lichi.style.top =
+        "50%";
+
+
+    lichi.style.transform =
         "translate(-50%, -50%)";
 
-        lichi.style.zIndex =
-        "600";
 
-
-        cameraLichiIndicator.innerHTML =
-        "ЛИЧИ: <span>ОБНАРУЖЕНА</span>";
-
-
-        status.textContent =
+    status.textContent =
         "⚠ ЛИЧИ ОБНАРУЖЕНА";
 
-    }
 
-    else {
+    /*
+       Небольшое движение
+       спрайта.
+    */
 
-        cameraLichiIndicator.innerHTML =
-        "ЛИЧИ: <span>НЕ ОБНАРУЖЕНА</span>";
+    lichi.animate(
+        [
+            {
+                transform:
+                    "translate(-50%, -50%) scale(1)"
+            },
 
-    }
+            {
+                transform:
+                    "translate(-50%, -50%) scale(1.06)"
+            },
+
+            {
+                transform:
+                    "translate(-50%, -50%) scale(1)"
+            }
+        ],
+        {
+            duration: 700,
+            iterations: 1
+        }
+    );
 
 }
 
 
-/* =========================
+/* =================================================
    ВСПЫШКА
-========================= */
+================================================= */
 
 document
-.getElementById(
-    "flashButton"
-)
-.onclick =
-useFlash;
+.getElementById("flashButton")
+.addEventListener(
+    "click",
+    useFlash
+);
 
 
 function useFlash() {
 
-    if(!gameStarted)
-    return;
+    if (!gameStarted)
+        return;
 
-    if(gameOver)
-    return;
+    if (gameOver)
+        return;
 
-    if(cameraOpen)
-    return;
-
-    if(flashCooldown)
-    return;
+    if (flashCooldown)
+        return;
 
 
-    if(currentView !== "left") {
+    /*
+       Вспышка используется
+       только в левом коридоре.
+    */
+
+    if (
+        currentView !== "left"
+    ) {
 
         status.textContent =
-        "ВСПЫШКА РАБОТАЕТ В ЛЕВОМ КОРИДОРЕ";
+            "Посмотри в левый коридор.";
 
         return;
 
     }
 
 
-    if(lichiPosition < 2) {
+    /*
+       До второго положения
+       вспышка ничего
+       не делает.
+    */
+
+    if (
+        lichiPosition < 2
+    ) {
 
         status.textContent =
-        "ЛИЧИ ЕЩЁ ДАЛЕКО";
+            "Личи ещё далеко.";
 
         return;
 
     }
 
 
-    flashCooldown = true;
+    flashCooldown =
+        true;
 
 
-    flash.style.opacity = "1";
+    flash.style.opacity =
+        "1";
 
 
     setTimeout(
-    function() {
+        function () {
 
-        flash.style.opacity =
-        "0";
+            flash.style.opacity =
+                "0";
 
-    },
-    120
+        },
+        120
     );
 
 
-    flashAudio.currentTime = 0;
+    flashAudio.currentTime =
+        0;
+
 
     flashAudio.play()
     .catch(
-        () => {}
+        function () {}
     );
-
-
-    lichiPosition = 0;
-
-
-    lichi.style.display =
-    "none";
-
-
-    lichiAudio.currentTime = 0;
-
-    lichiAudio.play()
-    .catch(
-        () => {}
-    );
-
-
-    status.textContent =
-    "ВСПЫШКА! ЛИЧИ ОТСТУПИЛА";
 
 
     setTimeout(
-    function() {
+        function () {
 
-        flashCooldown =
-        false;
+            lichiAudio.currentTime =
+                0;
 
-    },
-    1200
+            lichiAudio.play()
+            .catch(
+                function () {}
+            );
+
+        },
+        80
+    );
+
+
+    /*
+       Личи отбрасывается
+       обратно в начало.
+    */
+
+    lichiPosition =
+        0;
+
+
+    lichi.style.display =
+        "none";
+
+
+    status.textContent =
+        "ВСПЫШКА! Личи отступила.";
+
+
+    setTimeout(
+        function () {
+
+            flashCooldown =
+                false;
+
+        },
+        1500
     );
 
 }
 
 
-/* =========================
+/* =================================================
    ЧАСЫ
-========================= */
+================================================= */
 
 function updateClock() {
 
-    if(gameMinutes >= 360) {
+    if (
+        gameMinutes >= 360
+    ) {
 
         winGame();
 
@@ -1144,65 +1139,69 @@ function updateClock() {
 
 
     const hour =
-    Math.floor(
-        gameMinutes / 60
-    );
+        Math.floor(
+            gameMinutes / 60
+        );
 
 
     const minute =
-    gameMinutes % 60;
+        gameMinutes % 60;
 
 
     const displayHour =
-    hour === 0
-        ? 12
-        : hour;
+        hour === 0
+            ? 12
+            : hour;
 
 
     time.textContent =
-    displayHour +
-    ":" +
-    String(minute)
-    .padStart(2,"0") +
-    " AM";
+        displayHour +
+        ":" +
+        String(minute)
+            .padStart(2, "0") +
+        " AM";
 
 }
 
 
-/* =========================
-   ЛИЧИ ДВИЖЕТСЯ
-========================= */
+/* =================================================
+   ДВИЖЕНИЕ ЛИЧИ
+================================================= */
 
 function moveLichi() {
 
-    if(!gameStarted)
-    return;
+    if (!gameStarted)
+        return;
 
-    if(gameOver)
-    return;
-
-    if(nightFinished)
-    return;
+    if (gameOver)
+        return;
 
 
     /*
-    Личи начинает движение
-    после 1:00.
+       Личи начинает двигаться
+       с 1:00.
     */
 
-    if(gameMinutes < 60)
-    return;
+    if (
+        gameMinutes < 60
+    ) {
+
+        return;
+
+    }
 
 
     /*
-    Каждые 20 секунд.
+       Каждые 20 секунд
+       она переходит
+       в следующее положение.
     */
 
-    if(
+    if (
         gameMinutes % 20 === 0
     ) {
 
-        if(
+        if (
             lichiPosition < 4
         ) {
 
@@ -1216,24 +1215,28 @@ function moveLichi() {
     updateEverything();
 
 
-    if(
+    /*
+       Если дошла до атаки,
+       игрок проигрывает.
+    */
+
+    if (
         lichiPosition >= 4
     ) {
 
         setTimeout(
-        function() {
+            function () {
 
-            if(
-                lichiPosition >= 4 &&
-                !gameOver
-            ) {
+                if (
+                    lichiPosition >= 4
+                ) {
 
-                loseGame();
+                    loseGame();
 
-            }
+                }
 
-        },
-        1500
+            },
+            2500
         );
 
     }
@@ -1241,171 +1244,72 @@ function moveLichi() {
 }
 
 
-/* =========================
-   ОБНОВЛЕНИЕ
-========================= */
+/* =================================================
+   ОБНОВИТЬ ВСЁ
+================================================= */
 
 function updateEverything() {
 
     updateClock();
 
+    updateOfficeLichi();
 
-    if(cameraOpen) {
-
-        /*
-        На камере показываем
-        Личи только если она
-        находится здесь.
-        */
-
-        updateCameraLichi();
-
-    }
-
-    else {
-
-        updateOfficeLichi();
-
-    }
+    updateCameraLichi();
 
 }
 
 
-/* =========================
+/* =================================================
    GAME OVER
-========================= */
+================================================= */
 
 function loseGame() {
 
-    if(gameOver)
-    return;
+    if (gameOver)
+        return;
 
 
-    gameOver = true;
+    gameOver =
+        true;
 
 
     humAudio.pause();
 
 
-    /*
-    Скример.
-    */
-
-    lichiScreamer.currentTime =
-    0;
-
-    lichiScreamer.play()
-    .catch(
-        () => {}
-    );
-
-
-    /*
-    Личи на весь экран.
-    */
-
-    lichi.style.display =
-    "block";
-
-    lichi.style.position =
-    "fixed";
-
-    lichi.style.left =
-    "50%";
-
-    lichi.style.top =
-    "50%";
-
-    lichi.style.width =
-    "100vw";
-
-    lichi.style.maxWidth =
-    "100vw";
-
-    lichi.style.transform =
-    "translate(-50%, -50%)";
-
-    lichi.style.zIndex =
-    "9999";
-
-
-    setTimeout(
-    function() {
-
-        gameOverScreen.classList.remove(
-            "hidden"
-        );
-
-    },
-    1800
-    );
+    gameOverScreen.style.display =
+        "flex";
 
 }
 
 
-/* =========================
-   RESTART
-========================= */
-
-document
-.getElementById(
-    "restart"
-)
-.onclick = function() {
-
-    startSelectedNight();
-
-};
-
-
-/* =========================
-   МЕНЮ ПОСЛЕ ПОРАЖЕНИЯ
-========================= */
-
-document
-.getElementById(
-    "menuAfterLose"
-)
-.onclick = function() {
-
-    gameOverScreen.classList.add(
-        "hidden"
-    );
-
-    game.classList.add(
-        "hidden"
-    );
-
-    mainMenu.classList.remove(
-        "hidden"
-    );
-
-};
-
-
-/* =========================
+/* =================================================
    ПОБЕДА
-========================= */
+================================================= */
 
 function winGame() {
 
-    if(nightFinished)
-    return;
+    if (nightFinished)
+        return;
 
 
-    nightFinished = true;
+    nightFinished =
+        true;
 
 
     humAudio.pause();
 
 
-    if(
+    /*
+       Сохраняем пройденную ночь.
+    */
+
+    if (
         selectedNight >
         completedNight
     ) {
 
         completedNight =
-        selectedNight;
+            selectedNight;
 
 
         localStorage.setItem(
@@ -1417,111 +1321,126 @@ function winGame() {
 
 
     winText.textContent =
-    "NIGHT " +
-    selectedNight +
-    " COMPLETE";
+        "NIGHT " +
+        selectedNight +
+        " COMPLETE";
 
 
-    if(
+    if (
         selectedNight >= 13
     ) {
 
         nextNightButton.style.display =
-        "none";
+            "none";
 
     }
 
     else {
 
         nextNightButton.style.display =
-        "block";
+            "block";
 
     }
 
 
-    winScreen.classList.remove(
-        "hidden"
-    );
+    winScreen.style.display =
+        "flex";
 
 }
 
 
-/* =========================
+/* =================================================
    СЛЕДУЮЩАЯ НОЧЬ
-========================= */
+================================================= */
 
-nextNightButton.onclick =
-function() {
+nextNightButton.addEventListener(
+    "click",
+    function () {
 
-    if(
-        selectedNight < 13
-    ) {
+        if (
+            selectedNight < 13
+        ) {
 
-        selectedNight++;
+            selectedNight++;
+
+            startSelectedNight();
+
+        }
+
+    }
+);
+
+
+/* =================================================
+   ПЕРЕЗАПУСК
+================================================= */
+
+document
+.getElementById("restart")
+.addEventListener(
+    "click",
+    function () {
 
         startSelectedNight();
 
     }
-
-};
-
-
-/* =========================
-   МЕНЮ ПОСЛЕ ПОБЕДЫ
-========================= */
-
-document
-.getElementById(
-    "menuAfterWin"
-)
-.onclick = function() {
-
-    winScreen.classList.add(
-        "hidden"
-    );
-
-    game.classList.add(
-        "hidden"
-    );
-
-    mainMenu.classList.remove(
-        "hidden"
-    );
-
-    renderNights();
-
-};
-
-
-/* =========================
-   ИГРОВОЙ ЦИКЛ
-========================= */
-
-setInterval(
-function() {
-
-    if(!gameStarted)
-    return;
-
-    if(gameOver)
-    return;
-
-    if(nightFinished)
-    return;
-
-
-    gameMinutes++;
-
-
-    moveLichi();
-
-},
-1000
 );
 
 
-/* =========================
-   ЗАПУСК
-========================= */
+/* =================================================
+   В МЕНЮ
+================================================= */
+
+document
+.getElementById("menuAfterWin")
+.addEventListener(
+    "click",
+    function () {
+
+        game.style.display =
+            "none";
+
+        winScreen.style.display =
+            "none";
+
+        mainMenu.style.display =
+            "block";
+
+        renderNights();
+
+    }
+);
+
+
+/* =================================================
+   ИГРОВОЙ ЦИКЛ
+================================================= */
+
+setInterval(
+    function () {
+
+        if (!gameStarted)
+            return;
+
+        if (gameOver)
+            return;
+
+        if (nightFinished)
+            return;
+
+
+        gameMinutes++;
+
+
+        moveLichi();
+
+    },
+    1000
+);
+
+
+/* =================================================
+   СТАРТ
+================================================= */
 
 renderNights();
