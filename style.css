@@ -4,6 +4,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+
 html,
 body {
 
@@ -43,7 +44,7 @@ body {
 
 
 /* =================================
-   ВИД ОФИСА
+   ОСНОВНОЙ ВИД
 ================================= */
 
 #view {
@@ -60,6 +61,48 @@ body {
     background-position: center;
 
     background-repeat: no-repeat;
+
+    z-index: 1;
+}
+
+
+/* =================================
+   ЛИЧИ
+================================= */
+
+#lichi {
+
+    position: absolute;
+
+    display: none;
+
+    z-index: 10;
+
+    width: 100px;
+
+    height: auto;
+
+    left: 78%;
+
+    top: 45%;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    user-select: none;
+
+    transition:
+        left 1s ease,
+        top 1s ease,
+        width 1s ease;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(0,0,0,0.8)
+        );
 }
 
 
@@ -76,6 +119,8 @@ body {
     background:
         rgba(0, 0, 0, 0.25);
 
+    z-index: 20;
+
     pointer-events: none;
 }
 
@@ -89,6 +134,7 @@ body {
     position: absolute;
 
     top: 15px;
+
     left: 18px;
 
     font-size:
@@ -96,21 +142,26 @@ body {
 
     font-weight: bold;
 
-    z-index: 10;
+    z-index: 40;
 }
 
+
+/* =================================
+   НОЧЬ
+================================= */
 
 #night {
 
     position: absolute;
 
     top: 55px;
+
     left: 18px;
 
     font-size:
         clamp(13px, 3vw, 19px);
 
-    z-index: 10;
+    z-index: 40;
 }
 
 
@@ -123,6 +174,7 @@ body {
     position: absolute;
 
     top: 18px;
+
     left: 50%;
 
     transform:
@@ -141,9 +193,50 @@ body {
     font-size:
         clamp(12px, 3vw, 18px);
 
-    z-index: 20;
+    z-index: 40;
 
     white-space: nowrap;
+}
+
+
+/* =================================
+   FULLSCREEN
+================================= */
+
+.topButton {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    width: 52px;
+
+    height: 52px;
+
+    border:
+        2px solid #777;
+
+    border-radius: 9px;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    color: white;
+
+    font-size: 28px;
+
+    z-index: 50;
+}
+
+
+.topButton:active {
+
+    transform:
+        scale(0.9);
+
+    background: #444;
 }
 
 
@@ -166,13 +259,14 @@ body {
 
     gap: 10px;
 
-    z-index: 30;
+    z-index: 50;
 }
 
 
 .directionButton {
 
     width: 65px;
+
     height: 55px;
 
     border:
@@ -207,9 +301,11 @@ body {
     position: absolute;
 
     right: 20px;
+
     bottom: 25px;
 
-    min-width: 110px;
+    min-width: 125px;
+
     min-height: 55px;
 
     border:
@@ -227,7 +323,7 @@ body {
 
     font-weight: bold;
 
-    z-index: 30;
+    z-index: 50;
 }
 
 
@@ -275,8 +371,7 @@ body {
 
     inset: 0;
 
-    background:
-        #000;
+    background: #000;
 
     z-index: 200;
 
@@ -302,6 +397,8 @@ body {
 #gameOver p {
 
     font-size: 18px;
+
+    margin: 10px;
 }
 
 
@@ -321,6 +418,13 @@ body {
     color: white;
 
     font-size: 18px;
+}
+
+
+#restart:active {
+
+    transform:
+        scale(0.94);
 }
 
 
@@ -354,4 +458,93 @@ body {
 
     font-size:
         clamp(35px, 9vw, 65px);
+
+    margin: 10px;
+}
+
+
+/* =================================
+   ПОВОРОТ ТЕЛЕФОНА
+================================= */
+
+#rotateMessage {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: #000;
+
+    color: white;
+
+    z-index: 9999;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+#rotateMessage h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+
+#rotateMessage p {
+
+    font-size: 18px;
+}
+
+
+.rotateIcon {
+
+    margin-top: 20px;
+
+    font-size: 60px;
+
+    animation:
+        rotatePhone 1.5s infinite;
+}
+
+
+@keyframes rotatePhone {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+/* =================================
+   ВЕРТИКАЛЬНЫЙ ЭКРАН
+================================= */
+
+@media (orientation: portrait) {
+
+    #game {
+
+        display: none;
+
+    }
+
+    #rotateMessage {
+
+        display: flex;
+
+    }
 }
