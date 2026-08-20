@@ -48,7 +48,8 @@ user-scalable=no">
      ВЫБОР НОЧИ
 ========================= -->
 
-<div id="nightsMenu" class="screen hidden">
+<div id="nightsMenu" class="screen"
+style="display:none;">
 
     <div class="menuBox">
 
@@ -69,7 +70,8 @@ user-scalable=no">
      НАСТРОЙКИ
 ========================= -->
 
-<div id="settingsMenu" class="screen hidden">
+<div id="settingsMenu" class="screen"
+style="display:none;">
 
     <div class="menuBox">
 
@@ -96,13 +98,17 @@ user-scalable=no">
      ЗВОНОК
 ========================= -->
 
-<div id="phoneScreen" class="screen hidden">
+<div id="phoneScreen"
+class="screen"
+style="display:none;">
 
     <div class="phoneBox">
 
         <h2>12:00 AM</h2>
 
-        <p>Входящий звонок...</p>
+        <p>
+            Входящий звонок...
+        </p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
@@ -117,7 +123,8 @@ user-scalable=no">
      ИГРА
 ========================= -->
 
-<div id="game" class="hidden">
+<div id="game"
+style="display:none;">
 
     <div id="hud">
 
@@ -136,9 +143,11 @@ user-scalable=no">
 
     <div id="view">
 
-        <img id="lichi"
-        src="images/lichi.png"
-        alt="Lichi">
+        <img
+            id="lichi"
+            src="images/lichi.png"
+            alt="Lichi"
+        >
 
         <div id="flash"></div>
 
@@ -191,25 +200,21 @@ user-scalable=no">
          МОНИТОР
     ========================== -->
 
-    <div id="cameraPanel" class="hidden">
+    <div id="cameraPanel">
 
-        <div id="cameraHeader">
+        <div id="cameraTop">
 
-            <span>
-                SECURITY MONITOR
-            </span>
+            <button id="cameraTabButton">
+                КАМЕРЫ
+            </button>
 
-            <div>
+            <button id="ventTabButton">
+                ВЕНТИЛЯЦИЯ
+            </button>
 
-                <button id="ventButton">
-                    ВЕНТИЛЯЦИЯ
-                </button>
-
-                <button id="closeCameraPanel">
-                    ▼ ОПУСТИТЬ
-                </button>
-
-            </div>
+            <button id="closeCameraPanel">
+                ▼ ОПУСТИТЬ
+            </button>
 
         </div>
 
@@ -218,64 +223,52 @@ user-scalable=no">
              КАМЕРЫ
         ====================== -->
 
-        <div id="cameraTab">
+        <div id="cameraContent">
 
-            <div id="cameraImage">
+            <div id="cameraScreen">
 
-                <div id="cameraNoise"></div>
+                <div id="cameraScreenImage"></div>
 
-                <div id="cameraName">
+                <div id="cameraScreenName">
                     CAM 01
                 </div>
 
-                <div id="cameraLichiIndicator">
-                    ЛИЧИ:
-                    <span>
-                        НЕ ОБНАРУЖЕНА
-                    </span>
-                </div>
+                <img
+                    id="cameraLichi"
+                    src="images/lichi.png"
+                    alt="Lichi"
+                >
 
             </div>
 
 
-            <div id="cameraMap">
+            <div id="cameraList">
 
-                <div class="mapTitle">
-                    CAMERAS
-                </div>
-
-                <button class="cameraButton"
-                data-camera="cam01">
+                <button data-camera="cam01">
                     CAM 01
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam02">
+                <button data-camera="cam02">
                     CAM 02
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam03">
+                <button data-camera="cam03">
                     CAM 03
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam04">
+                <button data-camera="cam04">
                     CAM 04
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam05">
+                <button data-camera="cam05">
                     CAM 05
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam06">
+                <button data-camera="cam06">
                     CAM 06
                 </button>
 
-                <button class="cameraButton"
-                data-camera="cam07">
+                <button data-camera="cam07">
                     CAM 07
                 </button>
 
@@ -288,50 +281,39 @@ user-scalable=no">
              ВЕНТИЛЯЦИЯ
         ====================== -->
 
-        <div id="ventTab" class="hidden">
+        <div id="ventContent">
 
-            <div id="ventScreen">
+            <div id="ventMap">
 
-                <div class="ventTitle">
-                    VENTILATION SYSTEM
+                <div class="ventPoint"
+                     id="vent1">
+                    V-01
                 </div>
 
-                <div class="ventMap">
-
-                    <div class="ventPoint vent01">
-                        V-01
-                    </div>
-
-                    <div class="ventPoint vent02">
-                        V-02
-                    </div>
-
-                    <div class="ventPoint vent03">
-                        V-03
-                    </div>
-
-                    <div class="ventPoint vent04">
-                        V-04
-                    </div>
-
-                    <div class="ventPoint vent05">
-                        OFFICE
-                    </div>
-
-                    <div class="ventLine line1"></div>
-
-                    <div class="ventLine line2"></div>
-
-                    <div class="ventLine line3"></div>
-
-                    <div class="ventLine line4"></div>
-
+                <div class="ventPoint"
+                     id="vent2">
+                    V-02
                 </div>
 
-                <div id="ventStatus">
-                    ВЕНТИЛЯЦИЯ РАБОТАЕТ
+                <div class="ventPoint"
+                     id="vent3">
+                    V-03
                 </div>
 
+                <div class="ventPoint"
+                     id="vent4">
+                    V-04
+                </div>
+
+                <div class="ventPoint"
+                     id="ventOffice">
+                    OFFICE
+                </div>
+
+            </div>
+
+            <div id="ventStatus">
+                ВЕНТИЛЯЦИЯ РАБОТАЕТ
             </div>
 
         </div>
@@ -345,7 +327,9 @@ user-scalable=no">
      GAME OVER
 ========================= -->
 
-<div id="gameOver" class="screen hidden">
+<div id="gameOver"
+class="screen"
+style="display:none;">
 
     <div class="gameOverBox">
 
@@ -372,7 +356,9 @@ user-scalable=no">
      ПОБЕДА
 ========================= -->
 
-<div id="winScreen" class="screen hidden">
+<div id="winScreen"
+class="screen"
+style="display:none;">
 
     <div class="gameOverBox">
 
@@ -397,26 +383,30 @@ user-scalable=no">
      ЗВУКИ
 ========================= -->
 
-<audio id="phoneAudio"
+<audio
+id="phoneAudio"
 src="sounds/phone.mp3"
-preload="auto"></audio>
+preload="auto">
+</audio>
 
-<audio id="humAudio"
+<audio
+id="flashAudio"
+src="sounds/flash.mp3"
+preload="auto">
+</audio>
+
+<audio
+id="lichiAudio"
+src="sounds/lichi.mp3"
+preload="auto">
+</audio>
+
+<audio
+id="humAudio"
 src="sounds/hum.mp3"
 preload="auto"
-loop></audio>
-
-<audio id="flashAudio"
-src="sounds/flash.mp3"
-preload="auto"></audio>
-
-<audio id="lichiAudio"
-src="sounds/lichi.mp3"
-preload="auto"></audio>
-
-<audio id="lichiScreamer"
-src="sounds/lichi_screamer.mp3"
-preload="auto"></audio>
+loop>
+</audio>
 
 
 <script src="game.js"></script>
