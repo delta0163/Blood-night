@@ -94,7 +94,7 @@ user-scalable=no">
 
 
 <!-- =========================
-     ТЕЛЕФОННЫЙ ЗВОНОК
+     ТЕЛЕФОН
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
@@ -129,12 +129,12 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-        src="images/lichi.png"
-        alt="Личи">
+             src="images/lichi.png"
+             alt="Личи">
 
         <img id="pancake"
-        src="images/pancake.png"
-        alt="Панкейк">
+             src="images/pancake.png"
+             alt="Панкейк">
 
         <div id="flash"></div>
 
@@ -180,16 +180,23 @@ user-scalable=no">
     </div>
 
 
+    <!-- РЫЧАГ ПОД СТОЛОМ -->
+
+    <button id="leverButton"
+            class="leverButton">
+
+        <img src="images/lever.png"
+             alt="Рычаг">
+
+    </button>
+
+
     <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
         <button id="cameraButton">
             КАМЕРЫ
-        </button>
-
-        <button id="ventButton">
-            ВЕНТИЛЯЦИЯ
         </button>
 
         <button id="flashButton">
@@ -203,7 +210,8 @@ user-scalable=no">
          КАМЕРЫ
     ========================== -->
 
-    <div id="cameraPanel" class="panel hidden">
+    <div id="cameraPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
@@ -218,62 +226,56 @@ user-scalable=no">
         </div>
 
 
-        <div class="cameraContent">
+        <div id="cameraImage">
 
-            <!-- ИЗОБРАЖЕНИЕ СЛЕВА -->
+            <div id="cameraStatic"></div>
 
-            <div id="cameraImage">
-
-                <div id="cameraStatic"></div>
-
-                <div id="cameraNumber">
-                    CAM 01
-                </div>
-
-                <img id="cameraLichi"
-                src="images/lichi.png"
-                alt="Личи">
-
-                <img id="cameraPancake"
-                src="images/pancake.png"
-                alt="Панкейк">
-
+            <div id="cameraNumber">
+                CAM 01
             </div>
 
+            <img id="cameraLichi"
+                 src="images/lichi.png"
+                 alt="Личи">
 
-            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК СПРАВА -->
+            <img id="cameraPancake"
+                 src="images/pancake.png"
+                 alt="Панкейк">
 
-            <div id="cameraMap">
+        </div>
 
-                <button data-camera="cam01">
-                    CAM 01
-                </button>
 
-                <button data-camera="cam02">
-                    CAM 02
-                </button>
+        <!-- ВЕРТИКАЛЬНЫЙ СПИСОК КАМЕР -->
 
-                <button data-camera="cam03">
-                    CAM 03
-                </button>
+        <div id="cameraMap">
 
-                <button data-camera="cam04">
-                    CAM 04
-                </button>
+            <button data-camera="cam01">
+                CAM 01
+            </button>
 
-                <button data-camera="cam05">
-                    CAM 05
-                </button>
+            <button data-camera="cam02">
+                CAM 02
+            </button>
 
-                <button data-camera="cam06">
-                    CAM 06
-                </button>
+            <button data-camera="cam03">
+                CAM 03
+            </button>
 
-                <button data-camera="cam07">
-                    CAM 07
-                </button>
+            <button data-camera="cam04">
+                CAM 04
+            </button>
 
-            </div>
+            <button data-camera="cam05">
+                CAM 05
+            </button>
+
+            <button data-camera="cam06">
+                CAM 06
+            </button>
+
+            <button data-camera="cam07">
+                CAM 07
+            </button>
 
         </div>
 
@@ -281,70 +283,80 @@ user-scalable=no">
 
 
     <!-- =========================
-         ПРОСТАЯ ВЕНТИЛЯЦИЯ
+         ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
     ========================== -->
 
-    <div id="ventPanel" class="panel hidden">
+    <div id="powerPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
             <span>
-                ВЕНТИЛЯЦИЯ
+                ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
             </span>
 
-            <button id="closeVentPanel">
+            <button id="closePowerPanel">
                 ✕
             </button>
 
         </div>
 
 
-        <div id="simpleVentMap">
+        <div id="powerContent">
 
-            <div class="ventNode officeNode">
-                ОФИС
+            <div id="powerLeverVisual">
+
+                <img src="images/lever.png"
+                     alt="Рычаг">
+
             </div>
 
-            <div class="ventNode v1Node">
-                V1
+
+            <div id="powerStatus">
+                ЭЛЕКТРИЧЕСТВО: ОФИС
             </div>
 
-            <div class="ventNode v2Node">
-                V2
+
+            <p id="powerDescription">
+                Выберите, куда перенаправить электричество.
+            </p>
+
+
+            <div id="powerChoices">
+
+                <button
+                    class="powerChoice"
+                    data-power="window">
+
+                    ⚡ ПЕРЕДНЕЕ ОКНО
+
+                </button>
+
+                <button
+                    class="powerChoice"
+                    data-power="cameras">
+
+                    ⚡ КАМЕРЫ
+
+                </button>
+
+                <button
+                    class="powerChoice"
+                    data-power="office">
+
+                    ⚡ ОФИС
+
+                </button>
+
             </div>
 
-            <div class="ventNode v3Node">
-                V3
+
+            <div id="powerProgress">
+
+                <div id="powerProgressBar"></div>
+
             </div>
 
-            <div class="ventLine horizontalLine"></div>
-
-
-            <button class="ventDoor simpleDoor1"
-            data-door="1">
-                ПЕРЕГОРОДКА
-            </button>
-
-            <button class="ventDoor simpleDoor2"
-            data-door="2">
-                ПЕРЕГОРОДКА
-            </button>
-
-            <button class="ventDoor simpleDoor3"
-            data-door="3">
-                ПЕРЕГОРОДКА
-            </button>
-
-
-            <div id="pancakeVent">
-                ПАНКЕЙК
-            </div>
-
-        </div>
-
-
-        <div id="ventStatus">
-            ВЕНТИЛЯЦИЯ НОРМАЛЬНА
         </div>
 
     </div>
@@ -354,11 +366,16 @@ user-scalable=no">
          GAME OVER
     ========================== -->
 
-    <div id="gameOver" class="overlay hidden">
+    <div id="gameOver"
+         class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
         </h1>
+
+        <p id="loseReason">
+            ПАНКЕЙК ДОБРАЛСЯ ДО ОКНА.
+        </p>
 
         <button id="restart">
             ПОВТОРИТЬ
@@ -375,7 +392,8 @@ user-scalable=no">
          ПОБЕДА
     ========================== -->
 
-    <div id="winScreen" class="overlay hidden">
+    <div id="winScreen"
+         class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -399,27 +417,26 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
+       src="sounds/scream.mp3"></audio>
 
-<audio id="ventAudio"
-src="sounds/vent.mp3"
-loop></audio>
+<audio id="leverAudio"
+       src="sounds/vent.mp3"></audio>
 
 
 <script src="game.js"></script>
