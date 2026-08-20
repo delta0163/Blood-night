@@ -23,7 +23,6 @@ button {
     cursor: pointer;
 
     color: white;
-
     background: #111;
 
     border: 2px solid #777;
@@ -48,7 +47,6 @@ button:active {
 
 .screen {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -73,7 +71,6 @@ button:active {
 
 .menuBackground {
     position: absolute;
-
     inset: 0;
 
     background:
@@ -86,8 +83,6 @@ button:active {
     background-size: cover;
     background-position: center;
 
-    filter: brightness(.6);
-
     z-index: -1;
 }
 
@@ -95,7 +90,6 @@ button:active {
     width: min(90%, 500px);
 
     display: flex;
-
     flex-direction: column;
 
     gap: 18px;
@@ -117,8 +111,6 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
-
-    margin-bottom: 20px;
 }
 
 .menuContent button {
@@ -157,13 +149,15 @@ button:active {
 ========================= */
 
 #phoneScreen {
-    background: #000;
+    background: rgba(0,0,0,.92);
 }
 
 .phoneBox {
     text-align: center;
 
     width: min(90%, 500px);
+
+    padding: 30px;
 }
 
 .phoneBox h2 {
@@ -183,7 +177,6 @@ button:active {
 
 #game {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -192,11 +185,12 @@ button:active {
     overflow: hidden;
 
     background: #000;
+
+    z-index: 10;
 }
 
 #background {
     position: absolute;
-
     inset: 0;
 
     background:
@@ -210,13 +204,10 @@ button:active {
 
 #view {
     position: absolute;
-
     inset: 0;
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     overflow: hidden;
@@ -239,6 +230,21 @@ button:active {
 
     transform: translate(-50%, -50%);
 }
+
+
+/* Панкейк при атаке всегда по центру */
+
+#pancake.attackPosition {
+    left: 50% !important;
+    top: 50% !important;
+
+    width: min(55vw, 420px) !important;
+}
+
+
+/* =========================
+   ВСПЫШКА
+========================= */
 
 #flash {
     position: absolute;
@@ -295,6 +301,32 @@ button:active {
     text-shadow:
         2px 2px 5px #000;
 
+    white-space: nowrap;
+}
+
+
+/* =========================
+   ЭНЕРГИЯ
+========================= */
+
+#powerStatus {
+    position: absolute;
+
+    top: 82px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 50;
+
+    padding: 5px 10px;
+
+    background: rgba(0,0,0,.65);
+
+    border: 1px solid #555;
+
+    font-size: 13px;
+
     text-align: center;
 
     white-space: nowrap;
@@ -308,7 +340,7 @@ button:active {
 #officeControls {
     position: absolute;
 
-    bottom: 110px;
+    bottom: 120px;
 
     left: 50%;
 
@@ -350,15 +382,19 @@ button:active {
 
     z-index: 60;
 
-    width: min(95%, 600px);
+    width: min(95%, 650px);
 }
 
 #bottomControls button {
-    min-width: 0;
-
     flex: 1;
 
+    min-width: 0;
+
     min-height: 55px;
+
+    padding: 8px;
+
+    font-size: 13px;
 }
 
 
@@ -369,7 +405,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 3%;
+    inset: 4%;
 
     z-index: 200;
 
@@ -399,8 +435,6 @@ button:active {
     border-bottom: 2px solid #555;
 
     font-size: 20px;
-
-    flex-shrink: 0;
 }
 
 .panelHeader button {
@@ -412,14 +446,27 @@ button:active {
    КАМЕРЫ
 ========================= */
 
+#cameraContent {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 10px;
+}
+
+
+/* ФОТО КАМЕРЫ */
+
 #cameraImage {
     position: relative;
 
     flex: 1;
 
-    min-height: 0;
-
-    margin: 10px;
+    min-width: 0;
 
     overflow: hidden;
 
@@ -428,9 +475,7 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
-
     background-size: cover;
-
     background-repeat: no-repeat;
 }
 
@@ -486,162 +531,210 @@ button:active {
 }
 
 
-/* =========================
-   ВЕРТИКАЛЬНЫЙ СПИСОК
-========================= */
+/* ВЕРТИКАЛЬНЫЙ СПИСОК */
 
 #cameraMap {
+    width: 125px;
+
+    flex-shrink: 0;
+
     display: flex;
 
     flex-direction: column;
 
     gap: 8px;
 
-    padding: 10px;
-
-    flex-shrink: 0;
-
-    height: 170px;
+    padding: 5px;
 
     overflow-y: auto;
 
     overflow-x: hidden;
 
-    border-top: 2px solid #555;
+    border: 2px solid #444;
+
+    background: #080808;
 }
 
 #cameraMap button {
     width: 100%;
 
-    min-height: 48px;
+    min-height: 55px;
 
     flex-shrink: 0;
 
-    text-align: left;
-
-    padding-left: 20px;
+    white-space: nowrap;
 }
 
 #cameraMap button.active {
-    background: #333;
+    background: #444;
 
     border-color: white;
 }
 
+#cameraPowerMessage {
+    padding: 10px;
 
-/* =========================
-   ЭНЕРГИЯ
-========================= */
+    text-align: center;
 
-#powerArea {
-    flex: 1;
+    border-top: 2px solid #555;
 
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 30px;
-
-    padding: 20px;
+    font-size: 14px;
 }
 
-#powerLever {
-    width: 150px;
-    height: 150px;
+
+/* =========================
+   ПОД СТОЛОМ
+========================= */
+
+#underTablePanel {
+    background: #030303;
+}
+
+#underTable {
+    position: relative;
+
+    flex: 1;
+
+    margin: 15px;
+
+    min-height: 300px;
+
+    overflow: hidden;
+
+    border: 2px solid #444;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.35),
+            rgba(0,0,0,.7)
+        ),
+        url("images/under_table.png");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* Если фото под столом нет,
+   всё равно будет виден экран */
+
+#tableBottom {
+    position: absolute;
+
+    top: 8%;
+
+    left: 10%;
+    right: 10%;
+
+    height: 28%;
 
     border: 3px solid #777;
 
-    background: #111;
+    background: #171717;
 
     display: flex;
 
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
-    gap: 10px;
+    font-size: 20px;
+
+    opacity: .9;
 }
 
-#leverHandle {
-    width: 65px;
-    height: 65px;
+
+/* РЫЧАГ */
+
+#lever {
+    position: absolute;
+
+    left: 50%;
+    top: 62%;
+
+    width: 100px;
+    height: 120px;
+
+    transform: translate(-50%, -50%);
+}
+
+#leverBase {
+    position: absolute;
+
+    bottom: 0;
+    left: 25%;
+
+    width: 50px;
+    height: 25px;
+
+    background: #333;
 
     border: 3px solid #aaa;
 
-    border-radius: 50%;
+    border-radius: 5px;
+}
 
-    display: flex;
+#leverHandle {
+    position: absolute;
 
-    align-items: center;
+    bottom: 20px;
+    left: 46%;
 
-    justify-content: center;
+    width: 10px;
+    height: 85px;
 
-    font-size: 30px;
+    background: #aaa;
 
-    background: #222;
+    border-radius: 5px;
+
+    transform:
+        rotate(-25deg);
+
+    transform-origin:
+        bottom center;
 }
 
 #leverText {
-    font-size: 18px;
-}
+    position: absolute;
 
-#powerDirection {
-    width: min(90%, 500px);
+    left: 50%;
+    bottom: 8%;
 
-    display: flex;
+    transform:
+        translateX(-50%);
 
-    flex-direction: column;
-
-    gap: 12px;
+    width: 90%;
 
     text-align: center;
+
+    font-size: 15px;
+
+    text-shadow:
+        2px 2px 4px #000;
 }
 
-.powerLine {
-    padding: 18px;
 
-    border: 2px solid #666;
+/* ВЫБОР НАПРАВЛЕНИЯ */
 
-    background: #111;
+#powerChoices {
+    display: flex;
 
-    font-size: 18px;
+    gap: 10px;
+
+    padding: 10px;
 }
 
-#powerArrow {
-    margin: 0 10px;
-
-    font-size: 25px;
+#powerChoices button {
+    flex: 1;
 }
 
-#powerTarget {
-    font-weight: bold;
-}
-
-#powerStatus {
+#powerTransferStatus {
     padding: 12px;
 
-    border: 2px solid #555;
+    text-align: center;
 
-    background: #151515;
+    border-top: 2px solid #555;
 
-    font-size: 16px;
-}
-
-#powerStatus.window {
-    border-color: #aaa;
-
-    background: #333;
-}
-
-#switchToCameras,
-#switchToWindow {
-    width: 100%;
+    min-height: 45px;
 }
 
 
@@ -669,16 +762,11 @@ button:active {
     gap: 20px;
 
     text-align: center;
-
-    padding: 20px;
 }
 
 .overlay h1 {
-    font-size: clamp(30px, 7vw, 60px);
-}
-
-.overlay p {
-    font-size: 18px;
+    font-size:
+        clamp(30px, 7vw, 60px);
 }
 
 
@@ -688,27 +776,40 @@ button:active {
 
 @media (max-width: 600px) {
 
+    #bottomControls {
+        width: 96%;
+    }
+
+    #bottomControls button {
+        font-size: 10px;
+
+        padding: 7px 3px;
+    }
+
+    #officeControls {
+        bottom: 105px;
+    }
+
     .panel {
         inset: 2%;
     }
 
     #cameraMap {
-        height: 150px;
+        width: 95px;
     }
 
-    #officeControls {
-        bottom: 100px;
+    #cameraMap button {
+        font-size: 11px;
+        min-height: 48px;
     }
 
-    #bottomControls button {
-        font-size: 12px;
-
-        padding:
-            8px 4px;
+    #cameraContent {
+        gap: 5px;
+        padding: 5px;
     }
 
-    #powerArea {
-        gap: 20px;
+    #powerStatus {
+        font-size: 11px;
     }
 
 }
