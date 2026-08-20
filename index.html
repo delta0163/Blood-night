@@ -2,41 +2,167 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+<meta charset="UTF-8">
 
-    <title>Blood Glow Night</title>
+<meta
+name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no"
+>
 
-    <link rel="stylesheet" href="style.css">
+<title>Blood Glow Night</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+
+<!-- =================================
+     ПОВОРОТ ТЕЛЕФОНА
+================================= -->
+
 <div id="rotateMessage">
+
     <div>
+
         <h1>Blood Glow Night</h1>
-        <p>Поверните телефон горизонтально</p>
-        <div class="rotateIcon">⟳</div>
+
+        <p>
+            Поверните телефон горизонтально
+        </p>
+
+        <div class="rotateIcon">
+            ⟳
+        </div>
+
     </div>
+
 </div>
 
 
-<div id="game">
+<!-- =================================
+     ГЛАВНОЕ МЕНЮ
+================================= -->
 
-    <!-- ОСНОВНОЙ ЭКРАН -->
+<div id="mainMenu">
+
+    <div class="menuBackground"></div>
+
+    <div class="menuDarkness"></div>
+
+
+    <div class="menuContent">
+
+        <h1 class="gameTitle">
+
+            BLOOD<br>
+
+            <span>GLOW</span><br>
+
+            NIGHT
+
+        </h1>
+
+
+        <div class="subtitle">
+            NIGHTMARE
+        </div>
+
+
+        <button
+        id="startGameButton"
+        class="menuButton">
+
+            НАЧАТЬ ИГРУ
+
+        </button>
+
+
+        <button
+        class="menuButton disabledButton">
+
+            НОЧИ
+
+        </button>
+
+
+        <button
+        class="menuButton disabledButton">
+
+            НАСТРОЙКИ
+
+        </button>
+
+
+        <div class="version">
+
+            DEMO v0.1
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     ТЕЛЕФОН
+================================= -->
+
+<div id="phoneScreen">
+
+    <div class="phoneBox">
+
+        <div class="phoneIcon">
+            ☎
+        </div>
+
+
+        <div class="phoneTitle">
+
+            ВХОДЯЩИЙ ЗВОНОК
+
+        </div>
+
+
+        <div class="phoneText">
+
+            Нажмите, чтобы начать разговор
+
+        </div>
+
+
+        <button id="answerPhone">
+
+            ОТВЕТИТЬ
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     ИГРА
+================================= -->
+
+<div id="game">
 
     <div id="view"></div>
 
-    <!-- СПРАЙТ ЛИЧИ -->
+
+    <!-- ЛИЧИ -->
 
     <img
-        id="lichi"
-        src="images/lichi.png"
-        alt="Личи"
+    id="lichi"
+    src="images/lichi.png"
+    alt="Личи"
     >
 
 
@@ -45,28 +171,41 @@
     <div id="darkness"></div>
 
 
-    <!-- ВЕРХНИЙ ИНТЕРФЕЙС -->
+    <!-- ВРЕМЯ -->
 
     <div id="time">
+
         12:00 AM
+
     </div>
+
+
+    <!-- НОЧЬ -->
 
     <div id="night">
-        NIGHT 1 — DEMO
+
+        NIGHT 1
+
     </div>
+
+
+    <!-- СТАТУС -->
 
     <div id="status">
-        Личи находится далеко.
+
+        Ночь ещё не началась.
+
     </div>
 
 
-    <!-- ПОЛНЫЙ ЭКРАН -->
+    <!-- FULLSCREEN -->
 
     <button
-        id="fullscreenButton"
-        class="topButton"
-    >
+    id="fullscreenButton"
+    class="topButton">
+
         ⛶
+
     </button>
 
 
@@ -74,26 +213,33 @@
 
     <div id="direction">
 
+
         <button
-            class="directionButton"
-            id="leftButton"
-        >
+        class="directionButton"
+        id="leftButton">
+
             ◀
+
         </button>
 
+
         <button
-            class="directionButton"
-            id="frontButton"
-        >
+        class="directionButton"
+        id="frontButton">
+
             ▲
+
         </button>
 
+
         <button
-            class="directionButton"
-            id="rightButton"
-        >
+        class="directionButton"
+        id="rightButton">
+
             ▶
+
         </button>
+
 
     </div>
 
@@ -101,10 +247,11 @@
     <!-- ВСПЫШКА -->
 
     <button
-        id="flashButton"
-        class="controlButton"
-    >
+    id="flashButton"
+    class="controlButton">
+
         📷 ВСПЫШКА
+
     </button>
 
 
@@ -117,15 +264,27 @@
 
     <div id="gameOver">
 
-        <h1>GAME OVER</h1>
+
+        <h1>
+
+            GAME OVER
+
+        </h1>
+
 
         <p>
+
             Личи добралась до офиса.
+
         </p>
 
+
         <button id="restart">
+
             НАЧАТЬ ЗАНОВО
+
         </button>
+
 
     </div>
 
@@ -134,18 +293,71 @@
 
     <div id="winScreen">
 
-        <h1>6:00 AM</h1>
+
+        <h1>
+
+            6:00 AM
+
+        </h1>
+
 
         <p>
+
             NIGHT 1 COMPLETE
+
         </p>
+
+
+        <button id="menuAfterWin">
+
+            В МЕНЮ
+
+        </button>
+
 
     </div>
 
 </div>
 
 
+<!-- =================================
+     АУДИО
+================================= -->
+
+
+<audio
+id="phoneAudio"
+src="audio/phone.mp3"
+preload="auto">
+</audio>
+
+
+<audio
+id="flashAudio"
+src="audio/flash.mp3"
+preload="auto">
+</audio>
+
+
+<audio
+id="lichiAudio"
+src="audio/lichi_scream.mp3"
+preload="auto">
+</audio>
+
+
+<!-- ПОСТОЯННЫЙ ГУЛ -->
+
+<audio
+id="humAudio"
+src="audio/hum.mp3"
+preload="auto"
+loop>
+</audio>
+
+
 <script src="game.js"></script>
 
 </body>
+
 </html>
