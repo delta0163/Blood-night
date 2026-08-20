@@ -1,19 +1,15 @@
 /* =========================================
    BLOOD GLOW NIGHT
-   NIGHT 1
+   NIGHT 1 DEMO
    ЛИЧИ
 ========================================= */
 
 
 /* =========================================
-   СОСТОЯНИЕ ИГРЫ
+   СОСТОЯНИЕ
 ========================================= */
 
 let currentView = "front";
-
-let cameraOpen = false;
-
-let currentCamera = 1;
 
 let lichiPosition = 0;
 
@@ -27,12 +23,29 @@ let gameMinutes = 0;
 
 
 /*
-    Для тестирования:
+   Позиции Личи:
 
-    1 секунда = 1 игровая минута.
-
-    Позже изменим скорость.
+   0 — конец коридора
+   1 — середина коридора
+   2 — возле входа
+   3 — частично вошла в офис
+   4 — почти в офисе
 */
+
+
+const LICHIPOSITIONS = {
+
+    FAR: 0,
+
+    MIDDLE: 1,
+
+    DOOR: 2,
+
+    ENTERING: 3,
+
+    ATTACK: 4
+
+};
 
 
 /* =========================================
@@ -48,15 +61,6 @@ const status =
 const time =
     document.getElementById("time");
 
-const cameraScreen =
-    document.getElementById("cameraScreen");
-
-const cameraImage =
-    document.getElementById("cameraImage");
-
-const cameraTitle =
-    document.getElementById("cameraTitle");
-
 const flash =
     document.getElementById("flash");
 
@@ -68,7 +72,7 @@ const winScreen =
 
 
 /* =========================================
-   КАРТИНКИ ОФИСА
+   КАРТИНКИ
 ========================================= */
 
 const officeViews = {
@@ -86,43 +90,10 @@ const officeViews = {
 
 
 /* =========================================
-   КАРТИНКИ КАМЕР
-========================================= */
-
-const cameraImages = {
-
-    1:
-        "images/camera_1.png",
-
-    2:
-        "images/camera_2.png",
-
-    3:
-        "images/camera_3.png",
-
-    4:
-        "images/camera_4.png",
-
-    5:
-        "images/camera_5.png",
-
-    6:
-        "images/camera_6.png",
-
-    7:
-        "images/camera_7.png"
-
-};
-
-
-/* =========================================
    ПОВОРОТ
 ========================================= */
 
 function changeView(direction) {
-
-    if (cameraOpen)
-        return;
 
     if (gameOver)
         return;
@@ -138,7 +109,7 @@ function changeView(direction) {
         `url("${officeViews[direction]}")`;
 
 
-    updateViewStatus();
+    updateStatus();
 }
 
 
@@ -146,20 +117,56 @@ function changeView(direction) {
    СТАТУС
 ========================================= */
 
-function updateViewStatus() {
+function updateStatus() {
 
     if (currentView === "left") {
 
-        if (lichiPosition >= 2) {
+        if (
+            lichiPosition >=
+            LICHIPOSITIONS.ATTACK
+        ) {
 
             status.textContent =
-                "Личи находится в левом коридоре.";
+                "ЛИЧИ УЖЕ В ОФИСЕ! ВСПЫШКА!";
 
-        } else {
-
-            status.textContent =
-                "Левый коридор пуст.";
         }
+
+        else if (
+            lichiPosition >=
+            LICHIPOSITIONS.ENTERING
+        ) {
+
+            status.textContent =
+                "Личи входит в офис.";
+
+        }
+
+        else if (
+            lichiPosition >=
+            LICHIPOSITIONS.DOOR
+        ) {
+
+            status.textContent =
+                "Личи возле двери.";
+
+        }
+
+        else if (
+            lichiPosition >=
+            LICHIPOSITIONS.MIDDLE
+        ) {
+
+            status.textContent =
+                "Личи приближается.";
+
+        }
+
+        else {
+
+            status.textContent =
+                "Личи в конце коридора.";
+        }
+
 
         return;
     }
@@ -180,61 +187,6 @@ function updateViewStatus() {
 
 
 /* =========================================
-   КАМЕРЫ
-========================================= */
-
-function openCameras() {
-
-    if (gameOver)
-        return;
-
-    if (nightFinished)
-        return;
-
-
-    cameraOpen = true;
-
-    cameraScreen.style.display =
-        "block";
-
-
-    updateCamera();
-}
-
-
-function closeCameras() {
-
-    cameraOpen = false;
-
-    cameraScreen.style.display =
-        "none";
-}
-
-
-function updateCamera() {
-
-    cameraImage.src =
-        cameraImages[currentCamera];
-
-
-    if (
-        currentCamera === 2 &&
-        lichiPosition >= 1
-    ) {
-
-        cameraTitle.textContent =
-            "CAM 2 — ЛИЧИ";
-
-    } else {
-
-        cameraTitle.textContent =
-            "CAM " +
-            currentCamera;
-    }
-}
-
-
-/* =========================================
    ВСПЫШКА
 ========================================= */
 
@@ -243,26 +195,40 @@ function useFlash() {
     if (flashCooldown)
         return;
 
-    if (cameraOpen)
+    if (gameOver)
         return;
 
-    if (gameOver)
+    if (nightFinished)
         return;
 
 
     /*
-       В этой версии вспышка
-       работает только при
-       взгляде влево.
+       Вспышка работает,
+       только если игрок смотрит
+       в левый коридор.
+    */
+
+    if (currentView !== "left") {
+
+        status.textContent =
+            "Здесь вспышка не нужна.";
+
+        return;
+    }
+
+
+    /*
+       Личи должна быть
+       достаточно близко.
     */
 
     if (
-        currentView !== "left" ||
-        lichiPosition < 2
+        lichiPosition <
+        LICHIPOSITIONS.DOOR
     ) {
 
         status.textContent =
-            "Вспышка ничего не обнаружила.";
+            "Личи ещё слишком далеко.";
 
         return;
     }
@@ -271,41 +237,48 @@ function useFlash() {
     flashCooldown = true;
 
 
-    /* Эффект */
+    /* Белая вспышка */
 
     flash.style.opacity = "1";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        flash.style.opacity = "0";
+            flash.style.opacity = "0";
 
-    }, 100);
+        },
+        120
+    );
 
 
     /*
-       Отбрасываем Личи.
+       ОТБРАСЫВАЕМ ЛИЧИ НАЗАД
     */
 
-    lichiPosition = 0;
+    lichiPosition =
+        LICHIPOSITIONS.FAR;
 
 
     status.textContent =
-        "Личи отпугнута вспышкой.";
+        "ВСПЫШКА! Личи отступила.";
 
 
-    updateViewStatus();
+    updateStatus();
 
 
     /*
-       Перезарядка вспышки.
+       Перезарядка
     */
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        flashCooldown = false;
+            flashCooldown = false;
 
-    }, 1500);
+        },
+        1500
+    );
 }
 
 
@@ -323,8 +296,8 @@ function updateLichi() {
 
 
     /*
-       Личи активируется
-       после 1:00.
+       Личи начинает двигаться
+       примерно с 1:00.
     */
 
     if (gameMinutes < 60)
@@ -332,76 +305,84 @@ function updateLichi() {
 
 
     /*
-       Каждые 30 секунд
-       она двигается дальше.
+       Каждые 20 игровых секунд
+       Личи продвигается.
     */
 
-    if (gameMinutes % 30 === 0) {
+    if (
+        gameMinutes % 20 === 0
+    ) {
 
-        if (lichiPosition < 4) {
+        if (
+            lichiPosition <
+            LICHIPOSITIONS.ATTACK
+        ) {
 
             lichiPosition++;
+
         }
     }
 
 
-    updateLichiStatus();
+    updateStatus();
 
 
     /*
-       Дошла до офиса.
+       Личи полностью вошла
+       в офис.
     */
 
-    if (lichiPosition >= 4) {
+    if (
+        lichiPosition >=
+        LICHIPOSITIONS.ATTACK
+    ) {
 
-        loseGame();
+        /*
+           Если игрок смотрит
+           влево — даём небольшой
+           шанс успеть использовать
+           вспышку.
+
+           Сама атака происходит
+           через несколько секунд.
+        */
+
+        if (currentView !== "left") {
+
+            status.textContent =
+                "Личи вошла в офис!";
+
+
+            setTimeout(
+                function() {
+
+                    if (
+                        lichiPosition >=
+                        LICHIPOSITIONS.ATTACK
+                    ) {
+
+                        loseGame();
+
+                    }
+
+                },
+                2500
+            );
+
+        }
     }
 }
 
 
 /* =========================================
-   СТАТУС ЛИЧИ
-========================================= */
-
-function updateLichiStatus() {
-
-    if (lichiPosition === 0) {
-
-        status.textContent =
-            "Личи ещё далеко.";
-
-    }
-
-
-    else if (lichiPosition === 1) {
-
-        status.textContent =
-            "Личи начала движение.";
-
-    }
-
-
-    else if (lichiPosition === 2) {
-
-        status.textContent =
-            "Личи в левом коридоре.";
-
-    }
-
-
-    else if (lichiPosition === 3) {
-
-        status.textContent =
-            "Личи возле офиса.";
-    }
-}
-
-
-/* =========================================
-   ИГРОВЫЕ ЧАСЫ
+   ЧАСЫ
 ========================================= */
 
 function updateClock() {
+
+    /*
+       360 минут = 6:00 AM
+    */
 
     if (gameMinutes >= 360) {
 
@@ -412,7 +393,9 @@ function updateClock() {
 
 
     const hour =
-        Math.floor(gameMinutes / 60);
+        Math.floor(
+            gameMinutes / 60
+        );
 
 
     const minute =
@@ -426,22 +409,28 @@ function updateClock() {
 
         displayHour = 12;
 
-    } else {
+    }
+
+    else {
 
         displayHour = hour;
+
     }
 
 
     time.textContent =
         displayHour +
         ":" +
-        String(minute).padStart(2, "0") +
+        String(minute).padStart(
+            2,
+            "0"
+        ) +
         " AM";
 }
 
 
 /* =========================================
-   GAME OVER
+   ПОРАЖЕНИЕ
 ========================================= */
 
 function loseGame() {
@@ -477,7 +466,7 @@ function winGame() {
 
 
 /* =========================================
-   КНОПКИ ПОВОРОТА
+   КНОПКА ВЛЕВО
 ========================================= */
 
 document
@@ -492,6 +481,10 @@ document
     );
 
 
+/* =========================================
+   КНОПКА ВПЕРЁД
+========================================= */
+
 document
     .getElementById("frontButton")
     .addEventListener(
@@ -504,6 +497,10 @@ document
     );
 
 
+/* =========================================
+   КНОПКА ВПРАВО
+========================================= */
+
 document
     .getElementById("rightButton")
     .addEventListener(
@@ -511,34 +508,6 @@ document
         function() {
 
             changeView("right");
-
-        }
-    );
-
-
-/* =========================================
-   КАМЕРЫ
-========================================= */
-
-document
-    .getElementById("cameraButton")
-    .addEventListener(
-        "click",
-        function() {
-
-            openCameras();
-
-        }
-    );
-
-
-document
-    .getElementById("closeCamera")
-    .addEventListener(
-        "click",
-        function() {
-
-            closeCameras();
 
         }
     );
@@ -558,38 +527,6 @@ document
 
         }
     );
-
-
-/* =========================================
-   КАМЕРЫ — КНОПКИ
-========================================= */
-
-document
-    .querySelectorAll(".camButton")
-    .forEach(function(button) {
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                const camera =
-                    button.dataset.camera;
-
-
-                if (!camera)
-                    return;
-
-
-                currentCamera =
-                    Number(camera);
-
-
-                updateCamera();
-
-            }
-        );
-
-    });
 
 
 /* =========================================
@@ -640,4 +577,4 @@ setInterval(
 
 updateClock();
 
-updateLichiStatus();
+updateStatus();
