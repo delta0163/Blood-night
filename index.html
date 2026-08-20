@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -17,48 +16,43 @@ user-scalable=no">
 
 <body>
 
-<!-- =========================
+<!-- =================================================
      ГЛАВНОЕ МЕНЮ
-========================= -->
+================================================= -->
 
-<div id="mainMenu" class="screen">
+<div id="mainMenu">
 
-    <div class="menuBox">
+    <h1>BLOOD GLOW NIGHT</h1>
 
-        <h1>BLOOD GLOW NIGHT</h1>
+    <button id="startGameButton">
+        НАЧАТЬ НОЧЬ
+    </button>
 
-        <button id="startGameButton">
-            NEW GAME
-        </button>
+    <button id="nightsButton">
+        НОЧИ
+    </button>
 
-        <button id="nightsButton">
-            NIGHTS
-        </button>
-
-        <button id="settingsButton">
-            SETTINGS
-        </button>
-
-    </div>
+    <button id="settingsButton">
+        НАСТРОЙКИ
+    </button>
 
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      ВЫБОР НОЧИ
-========================= -->
+================================================= -->
 
-<div id="nightsMenu" class="screen"
-style="display:none;">
+<div id="nightsMenu">
 
-    <div class="menuBox">
+    <div class="menuWindow">
 
-        <h2>SELECT NIGHT</h2>
+        <h2>ВЫБОР НОЧИ</h2>
 
         <div id="nightsList"></div>
 
         <button id="closeNights">
-            BACK
+            НАЗАД
         </button>
 
     </div>
@@ -66,27 +60,26 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      НАСТРОЙКИ
-========================= -->
+================================================= -->
 
-<div id="settingsMenu" class="screen"
-style="display:none;">
+<div id="settingsMenu">
 
-    <div class="menuBox">
+    <div class="menuWindow">
 
-        <h2>SETTINGS</h2>
+        <h2>НАСТРОЙКИ</h2>
 
         <button id="fullscreenButton">
-            FULLSCREEN
+            ПОЛНЫЙ ЭКРАН
         </button>
 
         <button id="resetProgress">
-            RESET PROGRESS
+            СБРОСИТЬ ПРОГРЕСС
         </button>
 
         <button id="closeSettings">
-            BACK
+            НАЗАД
         </button>
 
     </div>
@@ -94,21 +87,17 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
-     ЗВОНОК
-========================= -->
+<!-- =================================================
+     ТЕЛЕФОННЫЙ ЗВОНОК
+================================================= -->
 
-<div id="phoneScreen"
-class="screen"
-style="display:none;">
+<div id="phoneScreen">
 
-    <div class="phoneBox">
+    <div class="phoneWindow">
 
         <h2>12:00 AM</h2>
 
-        <p>
-            Входящий звонок...
-        </p>
+        <p>ВХОДЯЩИЙ ЗВОНОК...</p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
@@ -119,12 +108,11 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      ИГРА
-========================= -->
+================================================= -->
 
-<div id="game"
-style="display:none;">
+<div id="game">
 
     <div id="hud">
 
@@ -154,6 +142,8 @@ style="display:none;">
     </div>
 
 
+    <!-- СТАТУС -->
+
     <div id="status">
         ОФИС
     </div>
@@ -165,17 +155,14 @@ style="display:none;">
 
         <button id="leftButton">
             ◀
-            <span>ЛЕВО</span>
         </button>
 
         <button id="frontButton">
-            ▲
-            <span>ЦЕНТР</span>
+            ●
         </button>
 
         <button id="rightButton">
             ▶
-            <span>ПРАВО</span>
         </button>
 
     </div>
@@ -186,7 +173,7 @@ style="display:none;">
     <div id="bottomControls">
 
         <button id="cameraButton">
-            МОНИТОР
+            КАМЕРЫ
         </button>
 
         <button id="flashButton">
@@ -196,13 +183,13 @@ style="display:none;">
     </div>
 
 
-    <!-- =========================
-         МОНИТОР
-    ========================== -->
+    <!-- =================================================
+         МОНИТОР КАМЕР
+    ================================================= -->
 
     <div id="cameraPanel">
 
-        <div id="cameraTop">
+        <div id="cameraHeader">
 
             <button id="cameraTabButton">
                 КАМЕРЫ
@@ -213,25 +200,32 @@ style="display:none;">
             </button>
 
             <button id="closeCameraPanel">
-                ▼ ОПУСТИТЬ
+                ОПУСТИТЬ
             </button>
 
         </div>
 
 
-        <!-- =====================
+        <!-- =========================
              КАМЕРЫ
-        ====================== -->
+        ========================== -->
 
         <div id="cameraContent">
 
             <div id="cameraScreen">
 
-                <div id="cameraScreenImage"></div>
+                <!--
+                    КАРТИНКА КАМЕРЫ
+                    появляется здесь
+                -->
 
-                <div id="cameraScreenName">
-                    CAM 01
-                </div>
+                <img
+                    id="cameraImage"
+                    src="images/cam01.png"
+                    alt="Camera"
+                >
+
+                <!-- Личи поверх картинки -->
 
                 <img
                     id="cameraLichi"
@@ -239,8 +233,14 @@ style="display:none;">
                     alt="Lichi"
                 >
 
+                <div id="cameraName">
+                    CAM 01
+                </div>
+
             </div>
 
+
+            <!-- СПИСОК КАМЕР -->
 
             <div id="cameraList">
 
@@ -277,13 +277,18 @@ style="display:none;">
         </div>
 
 
-        <!-- =====================
+        <!-- =========================
              ВЕНТИЛЯЦИЯ
-        ====================== -->
+        ========================== -->
 
         <div id="ventContent">
 
             <div id="ventMap">
+
+                <div class="ventLine line1"></div>
+                <div class="ventLine line2"></div>
+                <div class="ventLine line3"></div>
+                <div class="ventLine line4"></div>
 
                 <div class="ventPoint"
                      id="vent1">
@@ -313,7 +318,7 @@ style="display:none;">
             </div>
 
             <div id="ventStatus">
-                ВЕНТИЛЯЦИЯ РАБОТАЕТ
+                ВЕНТИЛЯЦИЯ
             </div>
 
         </div>
@@ -323,28 +328,26 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      GAME OVER
-========================= -->
+================================================= -->
 
-<div id="gameOver"
-class="screen"
-style="display:none;">
+<div id="gameOver">
 
-    <div class="gameOverBox">
+    <div class="resultWindow">
 
         <h1>GAME OVER</h1>
 
         <p>
-            Личи добралась до офиса.
+            ЛИЧИ ДОБРАЛАСЬ ДО ОФИСА
         </p>
 
         <button id="restart">
-            RESTART
+            ПОВТОРИТЬ
         </button>
 
         <button id="menuAfterLose">
-            MENU
+            МЕНЮ
         </button>
 
     </div>
@@ -352,26 +355,24 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      ПОБЕДА
-========================= -->
+================================================= -->
 
-<div id="winScreen"
-class="screen"
-style="display:none;">
+<div id="winScreen">
 
-    <div class="gameOverBox">
+    <div class="resultWindow">
 
         <h1 id="winText">
             NIGHT COMPLETE
         </h1>
 
         <button id="nextNight">
-            NEXT NIGHT
+            СЛЕДУЮЩАЯ НОЧЬ
         </button>
 
         <button id="menuAfterWin">
-            MENU
+            МЕНЮ
         </button>
 
     </div>
@@ -379,37 +380,33 @@ style="display:none;">
 </div>
 
 
-<!-- =========================
+<!-- =================================================
      ЗВУКИ
-========================= -->
+================================================= -->
 
-<audio
-id="phoneAudio"
-src="sounds/phone.mp3"
-preload="auto">
+<audio id="phoneAudio"
+       src="sounds/phone.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="flashAudio"
-src="sounds/flash.mp3"
-preload="auto">
+<audio id="flashAudio"
+       src="sounds/flash.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="lichiAudio"
-src="sounds/lichi.mp3"
-preload="auto">
+<audio id="lichiAudio"
+       src="sounds/lichi.mp3"
+       preload="auto">
 </audio>
 
-<audio
-id="humAudio"
-src="sounds/hum.mp3"
-preload="auto"
-loop>
+<audio id="humAudio"
+       src="sounds/hum.mp3"
+       preload="auto"
+       loop>
 </audio>
 
 
 <script src="game.js"></script>
 
 </body>
-</html>
+                     </html>
