@@ -2,7 +2,6 @@
 <html lang="ru">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -21,10 +20,9 @@ user-scalable=no"
 
 <body>
 
-
-<!-- =================================
+<!-- =========================
      ПОВОРОТ ТЕЛЕФОНА
-================================= -->
+========================= -->
 
 <div id="rotateMessage">
 
@@ -45,9 +43,9 @@ user-scalable=no"
 </div>
 
 
-<!-- =================================
+<!-- =========================
      ГЛАВНОЕ МЕНЮ
-================================= -->
+========================= -->
 
 <div id="mainMenu">
 
@@ -55,24 +53,17 @@ user-scalable=no"
 
     <div class="menuDarkness"></div>
 
-
     <div class="menuContent">
 
         <h1 class="gameTitle">
-
             BLOOD<br>
-
             <span>GLOW</span><br>
-
             NIGHT
-
         </h1>
-
 
         <div class="subtitle">
             NIGHTMARE
         </div>
-
 
         <button
         id="startGameButton"
@@ -82,14 +73,12 @@ user-scalable=no"
 
         </button>
 
-
         <button
         class="menuButton disabledButton">
 
             НОЧИ
 
         </button>
-
 
         <button
         class="menuButton disabledButton">
@@ -98,11 +87,8 @@ user-scalable=no"
 
         </button>
 
-
         <div class="version">
-
             DEMO v0.1
-
         </div>
 
     </div>
@@ -110,9 +96,9 @@ user-scalable=no"
 </div>
 
 
-<!-- =================================
+<!-- =========================
      ТЕЛЕФОН
-================================= -->
+========================= -->
 
 <div id="phoneScreen">
 
@@ -122,35 +108,26 @@ user-scalable=no"
             ☎
         </div>
 
-
         <div class="phoneTitle">
-
-            ВХОДЯЩИЙ ЗВОНОК
-
+            ТЕЛЕФОН
         </div>
-
 
         <div class="phoneText">
-
-            Нажмите, чтобы начать разговор
-
+            Входящий звонок...
         </div>
 
-
-        <button id="answerPhone">
-
-            ОТВЕТИТЬ
-
-        </button>
+        <div class="phonePlaying">
+            ● ВОСПРОИЗВЕДЕНИЕ
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- =================================
+<!-- =========================
      ИГРА
-================================= -->
+========================= -->
 
 <div id="game">
 
@@ -174,27 +151,21 @@ user-scalable=no"
     <!-- ВРЕМЯ -->
 
     <div id="time">
-
         12:00 AM
-
     </div>
 
 
-    <!-- НОЧЬ -->
+    <!-- НОМЕР НОЧИ -->
 
     <div id="night">
-
         NIGHT 1
-
     </div>
 
 
     <!-- СТАТУС -->
 
     <div id="status">
-
-        Ночь ещё не началась.
-
+        Офис. Ночь начинается.
     </div>
 
 
@@ -213,7 +184,6 @@ user-scalable=no"
 
     <div id="direction">
 
-
         <button
         class="directionButton"
         id="leftButton">
@@ -221,7 +191,6 @@ user-scalable=no"
             ◀
 
         </button>
-
 
         <button
         class="directionButton"
@@ -231,7 +200,6 @@ user-scalable=no"
 
         </button>
 
-
         <button
         class="directionButton"
         id="rightButton">
@@ -239,7 +207,6 @@ user-scalable=no"
             ▶
 
         </button>
-
 
     </div>
 
@@ -255,7 +222,7 @@ user-scalable=no"
     </button>
 
 
-    <!-- ВСПЫШКА ЭКРАНА -->
+    <!-- ЭКРАН ВСПЫШКИ -->
 
     <div id="flash"></div>
 
@@ -264,27 +231,17 @@ user-scalable=no"
 
     <div id="gameOver">
 
-
         <h1>
-
             GAME OVER
-
         </h1>
 
-
         <p>
-
             Личи добралась до офиса.
-
         </p>
 
-
         <button id="restart">
-
             НАЧАТЬ ЗАНОВО
-
         </button>
-
 
     </div>
 
@@ -293,37 +250,26 @@ user-scalable=no"
 
     <div id="winScreen">
 
-
         <h1>
-
             6:00 AM
-
         </h1>
 
-
         <p>
-
             NIGHT 1 COMPLETE
-
         </p>
 
-
         <button id="menuAfterWin">
-
             В МЕНЮ
-
         </button>
-
 
     </div>
 
 </div>
 
 
-<!-- =================================
+<!-- =========================
      АУДИО
-================================= -->
-
+========================= -->
 
 <audio
 id="phoneAudio"
@@ -331,22 +277,17 @@ src="audio/phone.mp3"
 preload="auto">
 </audio>
 
-
 <audio
 id="flashAudio"
 src="audio/flash.mp3"
 preload="auto">
 </audio>
 
-
 <audio
 id="lichiAudio"
 src="audio/lichi_scream.mp3"
 preload="auto">
 </audio>
-
-
-<!-- ПОСТОЯННЫЙ ГУЛ -->
 
 <audio
 id="humAudio"
