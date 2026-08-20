@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
-    user-select: none;
-    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -18,12 +17,31 @@ body {
 
     color: white;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
+}
+
+
+button {
+    cursor: pointer;
+
+    color: white;
+
+    background: #111;
+
+    border: 2px solid #777;
+
+    padding: 12px 20px;
+
+    font-size: 16px;
+}
+
+button:active {
+    transform: scale(.96);
 }
 
 
 /* =========================
-   ЭКРАНЫ
+   ОБЩИЕ ЭКРАНЫ
 ========================= */
 
 .screen {
@@ -31,17 +49,15 @@ body {
 
     inset: 0;
 
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     display: flex;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    background: #000;
-
-    z-index: 1000;
+    z-index: 100;
 }
 
 .hidden {
@@ -53,53 +69,48 @@ body {
    МЕНЮ
 ========================= */
 
+#mainMenu {
+    background: #050505;
+}
+
 .menuBackground {
     position: absolute;
 
     inset: 0;
 
-    background-image:
+    background:
         linear-gradient(
-            rgba(0,0,0,.55),
+            rgba(0,0,0,.65),
             rgba(0,0,0,.8)
         ),
-        url("images/menu-bg.png");
+        url("images/menu_bg.png");
 
     background-size: cover;
-
     background-position: center;
 
-    z-index: 0;
+    filter: brightness(.6);
+
+    z-index: -1;
 }
 
 .menuContent {
-    position: relative;
-
-    z-index: 2;
-
     width: min(90%, 500px);
 
     display: flex;
 
     flex-direction: column;
 
-    align-items: center;
-
-    gap: 15px;
+    gap: 18px;
 
     text-align: center;
 }
 
 .menuContent h1 {
-    font-size: clamp(
-        30px,
-        7vw,
-        70px
-    );
+    font-size: clamp(30px, 7vw, 60px);
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 
     text-shadow:
         0 0 10px #000,
@@ -107,48 +118,13 @@ body {
 }
 
 .menuContent h2 {
-    font-size: 35px;
+    font-size: 30px;
 
     margin-bottom: 20px;
 }
 
-
-/* =========================
-   КНОПКИ
-========================= */
-
-button {
-    border: 2px solid #777;
-
-    background:
-        linear-gradient(
-            #222,
-            #080808
-        );
-
-    color: white;
-
-    padding: 13px 22px;
-
-    min-width: 180px;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition: .15s;
-}
-
-button:hover {
-    background: #444;
-}
-
-button:active {
-    transform: scale(.96);
-}
-
-button:disabled {
-    opacity: .35;
+.menuContent button {
+    width: 100%;
 }
 
 
@@ -160,17 +136,21 @@ button:disabled {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(2, 1fr);
 
     gap: 10px;
 
-    width: 100%;
+    max-height: 60vh;
 
-    margin-bottom: 20px;
+    overflow-y: auto;
 }
 
 .nightButton {
-    min-width: 0;
+    min-height: 50px;
+}
+
+.nightButton.locked {
+    opacity: .4;
 }
 
 
@@ -178,17 +158,24 @@ button:disabled {
    ЗВОНОК
 ========================= */
 
+#phoneScreen {
+    background: #000;
+}
+
 .phoneBox {
     text-align: center;
 
-    padding: 30px;
+    width: min(90%, 500px);
+}
 
-    border: 2px solid #555;
+.phoneBox h2 {
+    font-size: 35px;
+}
 
-    background: #090909;
+.phoneBox p {
+    font-size: 20px;
 
-    box-shadow:
-        0 0 40px #000;
+    margin: 30px;
 }
 
 
@@ -201,50 +188,32 @@ button:disabled {
 
     inset: 0;
 
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
     background: #000;
 }
 
-
-/* =========================
-   ФОН
-========================= */
-
 #background {
     position: absolute;
 
     inset: 0;
 
-    background-image:
-        url("images/game-bg.png");
-
-    background-size: cover;
-
-    background-position: center;
+    background:
+        url("images/game_bg.png")
+        center / cover no-repeat;
 
     opacity: .35;
 
-    z-index: 0;
+    pointer-events: none;
 }
-
-
-/* =========================
-   ОФИС
-========================= */
 
 #view {
     position: absolute;
 
     inset: 0;
-
-    z-index: 2;
-
-    background-image:
-        url("images/office_front.png");
 
     background-size: cover;
 
@@ -257,61 +226,36 @@ button:disabled {
 
 
 /* =========================
-   ЛИЧИ
+   ПЕРСОНАЖИ
 ========================= */
 
-#lichi {
-    position: absolute;
-
-    display: none;
-
-    width: 150px;
-
-    max-width: 40vw;
-
-    z-index: 30;
-
-    transform:
-        translate(-50%, -50%);
-}
-
-
-/* =========================
-   ПАНКЕЙК
-========================= */
-
+#lichi,
 #pancake {
     position: absolute;
 
+    z-index: 20;
+
     display: none;
 
-    width: 170px;
+    pointer-events: none;
 
-    max-width: 40vw;
-
-    z-index: 30;
-
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-
-
-/* =========================
-   ВСПЫШКА
-========================= */
 
 #flash {
     position: absolute;
 
     inset: 0;
 
-    background: #fff;
+    background: white;
 
     opacity: 0;
 
     pointer-events: none;
 
     z-index: 100;
+
+    transition: opacity .1s;
 }
 
 
@@ -323,15 +267,14 @@ button:disabled {
     position: absolute;
 
     top: 15px;
-
-    left: 20px;
-    right: 20px;
-
-    z-index: 200;
+    left: 15px;
+    right: 15px;
 
     display: flex;
 
     justify-content: space-between;
+
+    z-index: 50;
 
     font-size: 20px;
 
@@ -339,31 +282,20 @@ button:disabled {
         2px 2px 5px #000;
 }
 
-
-/* =========================
-   СТАТУС
-========================= */
-
 #status {
     position: absolute;
 
     top: 55px;
-
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    z-index: 200;
+    z-index: 50;
 
-    padding: 7px 15px;
+    font-size: 16px;
 
-    background:
-        rgba(0,0,0,.65);
-
-    border: 1px solid #555;
-
-    font-size: 14px;
+    text-shadow:
+        2px 2px 5px #000;
 }
 
 
@@ -374,28 +306,26 @@ button:disabled {
 #officeControls {
     position: absolute;
 
+    bottom: 105px;
+
     left: 50%;
 
-    bottom: 95px;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 300;
+    transform: translateX(-50%);
 
     display: flex;
 
-    gap: 12px;
+    gap: 15px;
+
+    z-index: 60;
 }
 
 #officeControls button {
-    min-width: 65px;
-
-    width: 65px;
-
+    width: 60px;
     height: 55px;
 
-    padding: 0;
+    border-radius: 8px;
+
+    font-size: 24px;
 }
 
 
@@ -410,22 +340,17 @@ button:disabled {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
-
-    z-index: 400;
+    transform: translateX(-50%);
 
     display: flex;
 
     gap: 10px;
 
-    width: 95%;
-
-    justify-content: center;
+    z-index: 60;
 }
 
 #bottomControls button {
-    min-width: 120px;
+    min-width: 110px;
 }
 
 
@@ -436,31 +361,23 @@ button:disabled {
 .panel {
     position: absolute;
 
-    inset: 3%;
+    inset: 4%;
 
-    z-index: 500;
+    z-index: 200;
 
-    background:
-        rgba(5,5,5,.97);
+    background: #050505;
 
-    border: 2px solid #777;
+    border: 2px solid #888;
 
     box-shadow:
-        0 0 40px #000;
+        0 0 30px #000;
 
     display: flex;
 
     flex-direction: column;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .panelHeader {
-    height: 55px;
-
     min-height: 55px;
 
     display: flex;
@@ -469,21 +386,15 @@ button:disabled {
 
     justify-content: space-between;
 
-    padding: 0 15px;
-
-    background: #111;
+    padding: 8px 15px;
 
     border-bottom: 2px solid #555;
+
+    font-size: 20px;
 }
 
 .panelHeader button {
-    min-width: 45px;
-
-    width: 45px;
-
-    height: 40px;
-
-    padding: 0;
+    padding: 5px 12px;
 }
 
 
@@ -496,17 +407,19 @@ button:disabled {
 
     flex: 1;
 
-    margin: 12px;
+    min-height: 0;
+
+    margin: 10px;
 
     overflow: hidden;
 
     background: #111;
 
-    background-size: cover;
+    border: 2px solid #555;
 
     background-position: center;
-
-    border: 2px solid #555;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #cameraStatic {
@@ -516,14 +429,14 @@ button:disabled {
 
     pointer-events: none;
 
-    opacity: .15;
+    opacity: .12;
 
     background:
         repeating-linear-gradient(
             0deg,
             transparent 0px,
             transparent 3px,
-            rgba(255,255,255,.25) 4px
+            rgba(255,255,255,.15) 4px
         );
 
     z-index: 10;
@@ -535,12 +448,12 @@ button:disabled {
     top: 10px;
     left: 10px;
 
-    z-index: 20;
+    z-index: 30;
 
-    padding: 7px;
+    font-size: 20px;
 
-    background:
-        rgba(0,0,0,.7);
+    text-shadow:
+        2px 2px 5px #000;
 }
 
 #cameraLichi,
@@ -549,44 +462,33 @@ button:disabled {
 
     display: none;
 
-    width: 150px;
+    width: 180px;
 
     left: 50%;
     top: 50%;
 
-    z-index: 30;
-
     transform:
         translate(-50%, -50%);
+
+    z-index: 20;
 }
 
-
-/* =========================
-   КНОПКИ КАМЕР
-========================= */
-
 #cameraMap {
-    min-height: 105px;
-
     display: flex;
 
-    gap: 7px;
+    gap: 8px;
 
     padding: 10px;
 
     overflow-x: auto;
 
-    background: #080808;
+    flex-shrink: 0;
 }
 
 #cameraMap button {
-    min-width: 85px;
+    min-width: 100px;
 
-    height: 65px;
-
-    padding: 5px;
-
-    font-size: 13px;
+    white-space: nowrap;
 }
 
 
@@ -594,217 +496,110 @@ button:disabled {
    ВЕНТИЛЯЦИЯ
 ========================= */
 
-#ventMap {
+#simpleVentMap {
     position: relative;
 
     flex: 1;
 
     margin: 15px;
 
+    min-height: 300px;
+
     border: 2px solid #555;
 
-    background:
-        radial-gradient(
-            circle,
-            #222,
-            #050505
-        );
-
-    overflow: hidden;
+    background: #080808;
 }
 
-.ventRoom {
+.ventNode {
     position: absolute;
 
-    width: 90px;
-    height: 60px;
+    width: 75px;
+    height: 75px;
+
+    border: 2px solid #aaa;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border: 2px solid #777;
-
-    background: #111;
-
-    font-weight: bold;
+    background: #151515;
 }
 
-.officeVent {
-    left: 42%;
-    top: 43%;
-}
-
-.room1 {
+.officeNode {
     left: 10%;
-    top: 15%;
+    top: 42%;
 }
 
-.room2 {
-    left: 45%;
-    top: 15%;
+.v1Node {
+    left: 35%;
+    top: 42%;
 }
 
-.room3 {
-    right: 10%;
-    top: 15%;
+.v2Node {
+    left: 60%;
+    top: 20%;
 }
 
-.room4 {
-    left: 15%;
-    bottom: 15%;
+.v3Node {
+    left: 60%;
+    top: 65%;
 }
-
-.room5 {
-    right: 15%;
-    bottom: 15%;
-}
-
-
-/* =========================
-   ЛИНИИ ВЕНТИЛЯЦИИ
-========================= */
 
 .ventLine {
     position: absolute;
 
-    height: 8px;
+    height: 4px;
 
     background: #777;
-
-    border: 1px solid #aaa;
 }
 
-.line1 {
-    left: 18%;
-    top: 38%;
-
-    width: 65%;
-
-    transform: rotate(0deg);
+.horizontalLine {
+    left: 20%;
+    right: 20%;
+    top: 49%;
 }
-
-.line2 {
-    left: 48%;
-    top: 25%;
-
-    width: 8px;
-    height: 35%;
-}
-
-.line3 {
-    left: 28%;
-    top: 52%;
-
-    width: 8px;
-    height: 30%;
-}
-
-.line4 {
-    right: 28%;
-    top: 52%;
-
-    width: 8px;
-    height: 30%;
-}
-
-.line5 {
-    left: 28%;
-    top: 72%;
-
-    width: 44%;
-}
-
-
-/* =========================
-   ПЕРЕГОРОДКИ
-========================= */
 
 .ventDoor {
     position: absolute;
 
-    min-width: 110px;
-
-    padding: 7px;
-
     font-size: 11px;
 
-    z-index: 10;
+    padding: 8px;
 }
 
-.door1 {
-    left: 35%;
-    top: 29%;
+.simpleDoor1 {
+    left: 26%;
+    top: 32%;
 }
 
-.door2 {
-    right: 28%;
-    top: 48%;
+.simpleDoor2 {
+    left: 52%;
+    top: 10%;
 }
 
-.door3 {
-    left: 22%;
-    top: 60%;
+.simpleDoor3 {
+    left: 52%;
+    top: 70%;
 }
 
-.door4 {
-    right: 22%;
-    top: 60%;
+.ventDoor.closed {
+    border-color: white;
+
+    background: #444;
 }
-
-.door5 {
-    left: 43%;
-    bottom: 10%;
-}
-
-
-/* =========================
-   ПАНКЕЙК НА КАРТЕ
-========================= */
-
-#pancakeVent {
-    position: absolute;
-
-    display: none;
-
-    width: 100px;
-    height: 55px;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 2px solid #aaa;
-
-    background: #500;
-
-    color: white;
-
-    font-size: 12px;
-
-    z-index: 50;
-}
-
-
-/* =========================
-   СТАТУС ВЕНТИЛЯЦИИ
-========================= */
 
 #ventStatus {
-    min-height: 45px;
-
     padding: 12px;
 
     text-align: center;
 
-    background: #111;
-
-    border-top: 1px solid #555;
+    border-top: 2px solid #555;
 }
 
 
 /* =========================
-   GAME OVER / ПОБЕДА
+   GAME OVER / WIN
 ========================= */
 
 .overlay {
@@ -812,10 +607,9 @@ button:disabled {
 
     inset: 0;
 
-    z-index: 1000;
+    z-index: 500;
 
-    background:
-        rgba(0,0,0,.92);
+    background: rgba(0,0,0,.9);
 
     display: flex;
 
@@ -825,29 +619,24 @@ button:disabled {
 
     justify-content: center;
 
-    gap: 15px;
+    gap: 20px;
 
     text-align: center;
 }
 
 .overlay h1 {
-    font-size: clamp(
-        30px,
-        7vw,
-        70px
-    );
+    font-size: clamp(30px, 7vw, 60px);
 }
 
 
 /* =========================
-   МОБИЛЬНЫЙ ЭКРАН
+   ТЕЛЕФОН
 ========================= */
 
-@media
-(max-width: 700px) {
+@media (max-width: 600px) {
 
     #bottomControls {
-        gap: 5px;
+        width: 95%;
     }
 
     #bottomControls button {
@@ -855,38 +644,17 @@ button:disabled {
 
         flex: 1;
 
-        padding:
-            11px 5px;
+        padding: 10px 5px;
 
         font-size: 12px;
     }
 
-    #status {
-        font-size: 11px;
-    }
-
-    #nightsList {
-        grid-template-columns:
-            repeat(2, 1fr);
+    #officeControls {
+        bottom: 100px;
     }
 
     .panel {
-        inset: 1%;
+        inset: 2%;
     }
 
-}
-
-
-/* =========================
-   ПОЛНЫЙ ЭКРАН
-========================= */
-
-:fullscreen {
-    width: 100%;
-    height: 100%;
-}
-
-:-webkit-full-screen {
-    width: 100%;
-    height: 100%;
     }
