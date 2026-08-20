@@ -14,13 +14,15 @@ body {
     overflow: hidden;
 
     background: #000;
-    color: #fff;
+    color: white;
 
     font-family: Arial, sans-serif;
 }
 
 button {
-    color: #fff;
+    cursor: pointer;
+
+    color: white;
     background: #111;
 
     border: 2px solid #777;
@@ -28,16 +30,10 @@ button {
     padding: 12px 20px;
 
     font-size: 16px;
-
-    cursor: pointer;
 }
 
 button:active {
     transform: scale(.96);
-}
-
-.hidden {
-    display: none !important;
 }
 
 
@@ -59,6 +55,10 @@ button:active {
     align-items: center;
 
     z-index: 100;
+}
+
+.hidden {
+    display: none !important;
 }
 
 
@@ -85,12 +85,13 @@ button:active {
     background-size: cover;
     background-position: center;
 
+    filter: brightness(.6);
+
     z-index: 0;
 }
 
 .menuContent {
     position: relative;
-
     z-index: 2;
 
     width: min(90%, 500px);
@@ -118,6 +119,8 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
+
+    margin-bottom: 20px;
 }
 
 .menuContent button {
@@ -160,9 +163,9 @@ button:active {
 }
 
 .phoneBox {
-    width: min(90%, 500px);
-
     text-align: center;
+
+    width: min(90%, 500px);
 }
 
 .phoneBox h2 {
@@ -205,6 +208,8 @@ button:active {
     opacity: .35;
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 #view {
@@ -213,10 +218,14 @@ button:active {
     inset: 0;
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
     overflow: hidden;
+
+    z-index: 2;
 }
 
 
@@ -228,67 +237,21 @@ button:active {
 #pancake {
     position: absolute;
 
-    display: none;
-
     z-index: 20;
+
+    display: none;
 
     pointer-events: none;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-
-
-/* =========================
-   РЫЧАГ ПОД СТОЛОМ
-========================= */
-
-#electricLever {
-    position: absolute;
-
-    display: none;
-
-    left: 50%;
-    bottom: 15%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 80;
-
-    width: 70px;
-    height: 55px;
-
-    padding: 0;
-
-    font-size: 30px;
-
-    border: 2px solid #aaa;
-
-    background: rgba(0,0,0,.8);
-}
-
-#electricLever.visible {
-    display: block;
-}
-
-#electricLever.active {
-    border-color: #fff;
-    box-shadow:
-        0 0 15px #fff;
-}
-
-
-/* =========================
-   ВСПЫШКА
-========================= */
 
 #flash {
     position: absolute;
 
     inset: 0;
 
-    background: #fff;
+    background: white;
 
     opacity: 0;
 
@@ -297,6 +260,50 @@ button:active {
     z-index: 100;
 
     transition: opacity .1s;
+}
+
+
+/* =========================
+   МЕСТО ПОД СТОЛОМ
+========================= */
+
+#underTable {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    transform: translateX(-50%);
+
+    width: 180px;
+    height: 90px;
+
+    background: rgba(0,0,0,.55);
+
+    border: 2px solid rgba(255,255,255,.15);
+
+    z-index: 25;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    opacity: .75;
+
+    pointer-events: none;
+}
+
+#energyLeverVisual {
+    font-size: 12px;
+
+    color: #aaa;
+
+    border: 1px solid #555;
+
+    padding: 7px;
+
+    background: #080808;
 }
 
 
@@ -329,12 +336,11 @@ button:active {
     top: 55px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     z-index: 50;
 
-    text-align: center;
+    font-size: 16px;
 
     text-shadow:
         2px 2px 5px #000;
@@ -349,10 +355,10 @@ button:active {
     position: absolute;
 
     bottom: 105px;
+
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
@@ -365,9 +371,9 @@ button:active {
     width: 60px;
     height: 55px;
 
-    font-size: 24px;
-
     border-radius: 8px;
+
+    font-size: 24px;
 }
 
 
@@ -382,18 +388,21 @@ button:active {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
     gap: 10px;
 
     z-index: 60;
+
+    width: min(96%, 600px);
 }
 
 #bottomControls button {
-    min-width: 130px;
+    flex: 1;
+
+    min-width: 0;
 }
 
 
@@ -404,7 +413,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 3%;
+    inset: 4%;
 
     z-index: 200;
 
@@ -445,24 +454,37 @@ button:active {
    КАМЕРЫ
 ========================= */
 
+#cameraContent {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: row;
+
+    gap: 10px;
+
+    padding: 10px;
+}
+
 #cameraImage {
     position: relative;
 
     flex: 1;
 
+    min-width: 0;
     min-height: 0;
-
-    margin: 10px;
 
     overflow: hidden;
 
-    background-color: #111;
+    background: #111;
+
+    border: 2px solid #555;
 
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
-    border: 2px solid #555;
 }
 
 #cameraStatic {
@@ -477,7 +499,7 @@ button:active {
     background:
         repeating-linear-gradient(
             0deg,
-            transparent 0,
+            transparent 0px,
             transparent 3px,
             rgba(255,255,255,.15) 4px
         );
@@ -517,19 +539,12 @@ button:active {
 }
 
 
-/*
-   ВАЖНО:
-   список камер вертикальный
-   и прокручивается сверху вниз.
-*/
+/* ВЕРТИКАЛЬНЫЙ СПИСОК */
 
 #cameraMap {
-    width: 100%;
+    width: 115px;
 
-    max-height: 180px;
-
-    overflow-y: auto;
-    overflow-x: hidden;
+    flex-shrink: 0;
 
     display: flex;
 
@@ -537,64 +552,120 @@ button:active {
 
     gap: 8px;
 
-    padding: 10px;
+    overflow-y: auto;
 
-    border-top: 2px solid #555;
+    overflow-x: hidden;
+
+    padding: 4px;
+
+    border-left: 2px solid #444;
 }
 
 #cameraMap button {
     width: 100%;
 
-    min-height: 48px;
+    min-height: 55px;
 
     flex-shrink: 0;
+
+    white-space: nowrap;
 }
 
 
 /* =========================
-   ЭЛЕКТРИЧЕСТВО
+   ЭНЕРГИЯ
 ========================= */
 
-.electricInfo {
-    padding: 20px;
+#energyContent {
+    flex: 1;
 
-    text-align: center;
-}
-
-#electricWarning {
-    font-size: 20px;
-
-    margin-bottom: 15px;
-}
-
-#electricTimer {
-    font-size: 30px;
-
-    font-weight: bold;
-}
-
-#electricChoices {
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
 
     padding: 20px;
 }
 
-#electricChoices button {
-    min-height: 55px;
-}
-
-#electricStatus {
-    margin-top: auto;
-
-    padding: 15px;
+#energyWarning {
+    font-size: 22px;
 
     text-align: center;
+}
 
-    border-top: 2px solid #555;
+#energyLever {
+    position: relative;
+
+    width: 80px;
+    height: 180px;
+
+    background: #151515;
+
+    border: 3px solid #777;
+
+    border-radius: 10px;
+}
+
+#leverHandle {
+    position: absolute;
+
+    width: 25px;
+    height: 100px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-35deg);
+
+    transform-origin: bottom center;
+
+    background: #888;
+
+    border: 2px solid #ccc;
+
+    cursor: pointer;
+
+    transition: transform .2s;
+}
+
+#energyLever.active #leverHandle {
+    transform:
+        translate(-50%, -50%)
+        rotate(35deg);
+}
+
+#energyTargets {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    width: min(100%, 600px);
+}
+
+#energyTargets button {
+    min-height: 60px;
+}
+
+#energyMessage {
+    min-height: 25px;
+
+    text-align: center;
+}
+
+#energyTimer {
+    font-size: 22px;
+
+    font-weight: bold;
 }
 
 
@@ -609,14 +680,14 @@ button:active {
 
     z-index: 500;
 
-    background:
-        rgba(0,0,0,.92);
+    background: rgba(0,0,0,.9);
 
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 20px;
@@ -629,41 +700,42 @@ button:active {
         clamp(30px, 7vw, 60px);
 }
 
-.overlay p {
-    font-size: 18px;
-}
-
 
 /* =========================
-   МОБИЛЬНЫЕ
+   МОБИЛЬНЫЙ ЭКРАН
 ========================= */
 
 @media (max-width: 600px) {
 
-    #bottomControls {
-        width: 95%;
-    }
-
-    #bottomControls button {
-        min-width: 0;
-
-        flex: 1;
-
-        padding: 10px 5px;
-
-        font-size: 12px;
-    }
-
     #officeControls {
-        bottom: 100px;
+        bottom: 105px;
+    }
+
+    #cameraContent {
+        gap: 5px;
+    }
+
+    #cameraMap {
+        width: 90px;
+    }
+
+    #cameraMap button {
+        font-size: 12px;
+
+        padding: 8px 3px;
+    }
+
+    #energyTargets {
+        grid-template-columns: 1fr;
     }
 
     .panel {
         inset: 2%;
     }
 
-    #cameraMap {
-        max-height: 160px;
+    #underTable {
+        width: 140px;
+        height: 70px;
     }
 
-    }
+}
