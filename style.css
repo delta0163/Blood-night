@@ -1,7 +1,10 @@
 * {
+
     box-sizing: border-box;
 
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color:
+        transparent;
+
 }
 
 
@@ -9,9 +12,11 @@ html,
 body {
 
     margin: 0;
+
     padding: 0;
 
     width: 100%;
+
     height: 100%;
 
     overflow: hidden;
@@ -23,443 +28,7 @@ body {
     font-family: Arial, sans-serif;
 
     touch-action: manipulation;
-}
 
-
-/* =================================
-   ИГРА
-================================= */
-
-#game {
-
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    background: #000;
-}
-
-
-/* =================================
-   ОСНОВНОЙ ВИД
-================================= */
-
-#view {
-
-    position: absolute;
-
-    inset: 0;
-
-    background-image:
-        url("images/office_front.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    z-index: 1;
-}
-
-
-/* =================================
-   ЛИЧИ
-================================= */
-
-#lichi {
-
-    position: absolute;
-
-    display: none;
-
-    z-index: 10;
-
-    width: 100px;
-
-    height: auto;
-
-    left: 78%;
-
-    top: 45%;
-
-    transform:
-        translate(-50%, -50%);
-
-    pointer-events: none;
-
-    user-select: none;
-
-    transition:
-        left 1s ease,
-        top 1s ease,
-        width 1s ease;
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            rgba(0,0,0,0.8)
-        );
-}
-
-
-/* =================================
-   ЗАТЕМНЕНИЕ
-================================= */
-
-#darkness {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        rgba(0, 0, 0, 0.25);
-
-    z-index: 20;
-
-    pointer-events: none;
-}
-
-
-/* =================================
-   ВРЕМЯ
-================================= */
-
-#time {
-
-    position: absolute;
-
-    top: 15px;
-
-    left: 18px;
-
-    font-size:
-        clamp(20px, 5vw, 32px);
-
-    font-weight: bold;
-
-    z-index: 40;
-}
-
-
-/* =================================
-   НОЧЬ
-================================= */
-
-#night {
-
-    position: absolute;
-
-    top: 55px;
-
-    left: 18px;
-
-    font-size:
-        clamp(13px, 3vw, 19px);
-
-    z-index: 40;
-}
-
-
-/* =================================
-   СТАТУС
-================================= */
-
-#status {
-
-    position: absolute;
-
-    top: 18px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    padding:
-        8px 14px;
-
-    background:
-        rgba(0,0,0,0.75);
-
-    border-radius: 8px;
-
-    text-align: center;
-
-    font-size:
-        clamp(12px, 3vw, 18px);
-
-    z-index: 40;
-
-    white-space: nowrap;
-}
-
-
-/* =================================
-   FULLSCREEN
-================================= */
-
-.topButton {
-
-    position: absolute;
-
-    top: 15px;
-
-    right: 15px;
-
-    width: 52px;
-
-    height: 52px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size: 28px;
-
-    z-index: 50;
-}
-
-
-.topButton:active {
-
-    transform:
-        scale(0.9);
-
-    background: #444;
-}
-
-
-/* =================================
-   КНОПКИ ПОВОРОТА
-================================= */
-
-#direction {
-
-    position: absolute;
-
-    bottom: 25px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    display: flex;
-
-    gap: 10px;
-
-    z-index: 50;
-}
-
-
-.directionButton {
-
-    width: 65px;
-
-    height: 55px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size: 25px;
-}
-
-
-.directionButton:active {
-
-    transform:
-        scale(0.9);
-
-    background: #444;
-}
-
-
-/* =================================
-   ВСПЫШКА
-================================= */
-
-#flashButton {
-
-    position: absolute;
-
-    right: 20px;
-
-    bottom: 25px;
-
-    min-width: 125px;
-
-    min-height: 55px;
-
-    border:
-        2px solid #777;
-
-    border-radius: 9px;
-
-    background:
-        rgba(0,0,0,0.8);
-
-    color: white;
-
-    font-size:
-        clamp(13px, 3vw, 18px);
-
-    font-weight: bold;
-
-    z-index: 50;
-}
-
-
-#flashButton:active {
-
-    transform:
-        scale(0.92);
-
-    background: #444;
-}
-
-
-/* =================================
-   ЭФФЕКТ ВСПЫШКИ
-================================= */
-
-#flash {
-
-    position: absolute;
-
-    inset: 0;
-
-    background: white;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    z-index: 100;
-
-    transition:
-        opacity 0.05s;
-}
-
-
-/* =================================
-   GAME OVER
-================================= */
-
-#gameOver {
-
-    display: none;
-
-    position: absolute;
-
-    inset: 0;
-
-    background: #000;
-
-    z-index: 200;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-direction: column;
-
-    text-align: center;
-}
-
-
-#gameOver h1 {
-
-    font-size:
-        clamp(35px, 9vw, 65px);
-
-    margin: 10px;
-}
-
-
-#gameOver p {
-
-    font-size: 18px;
-
-    margin: 10px;
-}
-
-
-#restart {
-
-    margin-top: 20px;
-
-    padding:
-        14px 25px;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background: #333;
-
-    color: white;
-
-    font-size: 18px;
-}
-
-
-#restart:active {
-
-    transform:
-        scale(0.94);
-}
-
-
-/* =================================
-   ПОБЕДА
-================================= */
-
-#winScreen {
-
-    display: none;
-
-    position: absolute;
-
-    inset: 0;
-
-    background: #000;
-
-    z-index: 190;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-direction: column;
-
-    text-align: center;
-}
-
-
-#winScreen h1 {
-
-    font-size:
-        clamp(35px, 9vw, 65px);
-
-    margin: 10px;
 }
 
 
@@ -486,59 +55,783 @@ body {
     align-items: center;
 
     text-align: center;
+
 }
 
 
 #rotateMessage h1 {
 
-    font-size: 28px;
+    font-size: 30px;
 
-    margin-bottom: 10px;
 }
 
 
 #rotateMessage p {
 
     font-size: 18px;
+
 }
 
 
 .rotateIcon {
 
-    margin-top: 20px;
+    font-size: 65px;
 
-    font-size: 60px;
+    margin-top: 20px;
 
     animation:
         rotatePhone 1.5s infinite;
+
 }
 
 
 @keyframes rotatePhone {
 
     0% {
-        transform: rotate(0deg);
+
+        transform:
+            rotate(0deg);
+
     }
 
     50% {
-        transform: rotate(90deg);
+
+        transform:
+            rotate(90deg);
+
     }
 
     100% {
-        transform: rotate(0deg);
+
+        transform:
+            rotate(0deg);
+
     }
+
 }
 
 
 /* =================================
-   ВЕРТИКАЛЬНЫЙ ЭКРАН
+   ГЛАВНОЕ МЕНЮ
+================================= */
+
+#mainMenu {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    overflow: hidden;
+
+    background: #000;
+
+}
+
+
+.menuBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        url("images/menu_background.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    transform:
+        scale(1.03);
+
+}
+
+
+.menuDarkness {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.7);
+
+}
+
+
+.menuContent {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width:
+        min(90%, 420px);
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+/* =================================
+   НАЗВАНИЕ
+================================= */
+
+.gameTitle {
+
+    margin: 0;
+
+    font-size:
+        clamp(45px, 11vw, 90px);
+
+    line-height: 0.82;
+
+    letter-spacing: 5px;
+
+    font-weight: 900;
+
+    text-shadow:
+        4px 4px 0 #000,
+        0 0 20px #000;
+
+}
+
+
+.gameTitle span {
+
+    letter-spacing: 12px;
+
+}
+
+
+.subtitle {
+
+    margin-top: 20px;
+
+    margin-bottom: 30px;
+
+    font-size:
+        clamp(13px, 3vw, 20px);
+
+    letter-spacing: 8px;
+
+    opacity: 0.75;
+
+}
+
+
+/* =================================
+   КНОПКИ МЕНЮ
+================================= */
+
+.menuButton {
+
+    width:
+        min(85vw, 320px);
+
+    height: 58px;
+
+    margin: 6px 0;
+
+    border:
+        2px solid #777;
+
+    border-radius: 7px;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    color: white;
+
+    font-size:
+        clamp(15px, 3.5vw, 20px);
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+.menuButton:active {
+
+    transform:
+        scale(0.95);
+
+    background:
+        rgba(255,255,255,0.15);
+
+}
+
+
+.disabledButton {
+
+    opacity: 0.35;
+
+}
+
+
+.version {
+
+    margin-top: 25px;
+
+    font-size: 12px;
+
+    opacity: 0.45;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =================================
+   ТЕЛЕФОН
+================================= */
+
+#phoneScreen {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 450;
+
+    background: #050505;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+.phoneBox {
+
+    width:
+        min(90%, 500px);
+
+    padding: 35px;
+
+    border:
+        1px solid #444;
+
+    background:
+        rgba(20,20,20,0.9);
+
+    border-radius: 10px;
+
+}
+
+
+.phoneIcon {
+
+    font-size: 60px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.phoneTitle {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+}
+
+
+.phoneText {
+
+    margin-top: 15px;
+
+    margin-bottom: 25px;
+
+    opacity: 0.7;
+
+}
+
+
+#answerPhone {
+
+    padding:
+        14px 30px;
+
+    border:
+        2px solid #777;
+
+    border-radius: 7px;
+
+    background: #111;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+
+#answerPhone:active {
+
+    transform:
+        scale(0.95);
+
+}
+
+
+/* =================================
+   ИГРА
+================================= */
+
+#game {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    background: #000;
+
+}
+
+
+#view {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background-image:
+        url("images/office_front.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* =================================
+   ЛИЧИ
+================================= */
+
+#lichi {
+
+    position: absolute;
+
+    display: none;
+
+    z-index: 10;
+
+    width: 90px;
+
+    height: auto;
+
+    left: 80%;
+
+    top: 44%;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    user-select: none;
+
+    transition:
+        left 1s ease,
+        top 1s ease,
+        width 1s ease;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(0,0,0,0.9)
+        );
+
+}
+
+
+/* =================================
+   ЗАТЕМНЕНИЕ
+================================= */
+
+#darkness {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    background:
+        rgba(0,0,0,0.25);
+
+    pointer-events: none;
+
+}
+
+
+/* =================================
+   ВРЕМЯ
+================================= */
+
+#time {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 18px;
+
+    z-index: 40;
+
+    font-size:
+        clamp(20px,5vw,32px);
+
+    font-weight: bold;
+
+}
+
+
+#night {
+
+    position: absolute;
+
+    top: 55px;
+
+    left: 18px;
+
+    z-index: 40;
+
+    font-size:
+        clamp(13px,3vw,19px);
+
+}
+
+
+/* =================================
+   СТАТУС
+================================= */
+
+#status {
+
+    position: absolute;
+
+    top: 18px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 40;
+
+    padding:
+        8px 14px;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size:
+        clamp(12px,3vw,18px);
+
+    white-space: nowrap;
+
+}
+
+
+/* =================================
+   FULLSCREEN
+================================= */
+
+.topButton {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    z-index: 50;
+
+    width: 52px;
+
+    height: 52px;
+
+    border:
+        2px solid #777;
+
+    border-radius: 9px;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    color: white;
+
+    font-size: 28px;
+
+}
+
+
+/* =================================
+   ПОВОРОТЫ
+================================= */
+
+#direction {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 50;
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.directionButton {
+
+    width: 65px;
+
+    height: 55px;
+
+    border:
+        2px solid #777;
+
+    border-radius: 9px;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    color: white;
+
+    font-size: 25px;
+
+}
+
+
+.directionButton:active {
+
+    transform:
+        scale(0.9);
+
+}
+
+
+/* =================================
+   ВСПЫШКА
+================================= */
+
+#flashButton {
+
+    position: absolute;
+
+    right: 20px;
+
+    bottom: 25px;
+
+    z-index: 50;
+
+    min-width: 125px;
+
+    min-height: 55px;
+
+    border:
+        2px solid #777;
+
+    border-radius: 9px;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    color: white;
+
+    font-size:
+        clamp(13px,3vw,18px);
+
+    font-weight: bold;
+
+}
+
+
+#flashButton:active {
+
+    transform:
+        scale(0.92);
+
+}
+
+
+/* =================================
+   ВСПЫШКА ЭКРАНА
+================================= */
+
+#flash {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.05s;
+
+}
+
+
+/* =================================
+   GAME OVER
+================================= */
+
+#gameOver {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 200;
+
+    background: #000;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+#gameOver h1 {
+
+    font-size:
+        clamp(35px,9vw,65px);
+
+}
+
+
+#gameOver p {
+
+    font-size: 18px;
+
+}
+
+
+#restart,
+#menuAfterWin {
+
+    margin-top: 20px;
+
+    padding:
+        14px 25px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #333;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+
+/* =================================
+   ПОБЕДА
+================================= */
+
+#winScreen {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 190;
+
+    background: #000;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+#winScreen h1 {
+
+    font-size:
+        clamp(35px,9vw,65px);
+
+}
+
+
+/* =================================
+   ГОРИЗОНТАЛЬНЫЙ РЕЖИМ
 ================================= */
 
 @media (orientation: portrait) {
 
-    #game {
+    #game,
+    #mainMenu,
+    #phoneScreen {
 
-        display: none;
+        display: none !important;
 
     }
 
@@ -547,4 +840,5 @@ body {
         display: flex;
 
     }
-        }
+
+}
