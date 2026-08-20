@@ -94,7 +94,7 @@ user-scalable=no">
 
 
 <!-- =========================
-     ЗВОНОК
+     ТЕЛЕФОННЫЙ ЗВОНОК
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
@@ -203,8 +203,7 @@ user-scalable=no">
          КАМЕРЫ
     ========================== -->
 
-    <div id="cameraPanel"
-         class="panel hidden">
+    <div id="cameraPanel" class="panel hidden">
 
         <div class="panelHeader">
 
@@ -219,9 +218,9 @@ user-scalable=no">
         </div>
 
 
-        <div class="cameraSystem">
+        <div class="cameraContent">
 
-            <!-- ИЗОБРАЖЕНИЕ КАМЕРЫ -->
+            <!-- ИЗОБРАЖЕНИЕ СЛЕВА -->
 
             <div id="cameraImage">
 
@@ -232,17 +231,17 @@ user-scalable=no">
                 </div>
 
                 <img id="cameraLichi"
-                     src="images/lichi.png"
-                     alt="Личи">
+                src="images/lichi.png"
+                alt="Личи">
 
                 <img id="cameraPancake"
-                     src="images/pancake.png"
-                     alt="Панкейк">
+                src="images/pancake.png"
+                alt="Панкейк">
 
             </div>
 
 
-            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
+            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК СПРАВА -->
 
             <div id="cameraMap">
 
@@ -285,8 +284,7 @@ user-scalable=no">
          ПРОСТАЯ ВЕНТИЛЯЦИЯ
     ========================== -->
 
-    <div id="ventPanel"
-         class="panel hidden">
+    <div id="ventPanel" class="panel hidden">
 
         <div class="panelHeader">
 
@@ -321,23 +319,26 @@ user-scalable=no">
 
             <div class="ventLine horizontalLine"></div>
 
-            <button
-            class="ventDoor simpleDoor1"
+
+            <button class="ventDoor simpleDoor1"
             data-door="1">
                 ПЕРЕГОРОДКА
             </button>
 
-            <button
-            class="ventDoor simpleDoor2"
+            <button class="ventDoor simpleDoor2"
             data-door="2">
                 ПЕРЕГОРОДКА
             </button>
 
-            <button
-            class="ventDoor simpleDoor3"
+            <button class="ventDoor simpleDoor3"
             data-door="3">
                 ПЕРЕГОРОДКА
             </button>
+
+
+            <div id="pancakeVent">
+                ПАНКЕЙК
+            </div>
 
         </div>
 
@@ -353,8 +354,7 @@ user-scalable=no">
          GAME OVER
     ========================== -->
 
-    <div id="gameOver"
-         class="overlay hidden">
+    <div id="gameOver" class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -375,8 +375,7 @@ user-scalable=no">
          ПОБЕДА
     ========================== -->
 
-    <div id="winScreen"
-         class="overlay hidden">
+    <div id="winScreen" class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -400,27 +399,27 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
 
 <audio id="ventAudio"
-       src="sounds/vent.mp3"
-       loop></audio>
+src="sounds/vent.mp3"
+loop></audio>
 
 
 <script src="game.js"></script>
