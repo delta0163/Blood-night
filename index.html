@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width,
-        initial-scale=1.0,
-        maximum-scale=1.0,
-        user-scalable=no"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     >
 
     <title>Blood Glow Night</title>
@@ -18,19 +16,58 @@
 
 <body>
 
+<div id="rotateMessage">
+    <div>
+        <h1>Blood Glow Night</h1>
+        <p>Поверните телефон горизонтально</p>
+        <div class="rotateIcon">⟳</div>
+    </div>
+</div>
+
+
 <div id="game">
+
+    <!-- ОСНОВНОЙ ЭКРАН -->
 
     <div id="view"></div>
 
+    <!-- СПРАЙТ ЛИЧИ -->
+
+    <img
+        id="lichi"
+        src="images/lichi.png"
+        alt="Личи"
+    >
+
+
+    <!-- ЗАТЕМНЕНИЕ -->
+
     <div id="darkness"></div>
 
-    <div id="time">12:00 AM</div>
 
-    <div id="night">NIGHT 1 — DEMO</div>
+    <!-- ВЕРХНИЙ ИНТЕРФЕЙС -->
+
+    <div id="time">
+        12:00 AM
+    </div>
+
+    <div id="night">
+        NIGHT 1 — DEMO
+    </div>
 
     <div id="status">
         Личи находится далеко.
     </div>
+
+
+    <!-- ПОЛНЫЙ ЭКРАН -->
+
+    <button
+        id="fullscreenButton"
+        class="topButton"
+    >
+        ⛶
+    </button>
 
 
     <!-- ПОВОРОТЫ -->
@@ -39,19 +76,22 @@
 
         <button
             class="directionButton"
-            id="leftButton">
+            id="leftButton"
+        >
             ◀
         </button>
 
         <button
             class="directionButton"
-            id="frontButton">
+            id="frontButton"
+        >
             ▲
         </button>
 
         <button
             class="directionButton"
-            id="rightButton">
+            id="rightButton"
+        >
             ▶
         </button>
 
@@ -62,7 +102,8 @@
 
     <button
         id="flashButton"
-        class="controlButton">
+        class="controlButton"
+    >
         📷 ВСПЫШКА
     </button>
 
@@ -102,6 +143,7 @@
     </div>
 
 </div>
+
 
 <script src="game.js"></script>
 
