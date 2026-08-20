@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -41,7 +41,6 @@ user-scalable=no">
         </button>
 
     </div>
-
 </div>
 
 
@@ -62,7 +61,6 @@ user-scalable=no">
         </button>
 
     </div>
-
 </div>
 
 
@@ -89,12 +87,11 @@ user-scalable=no">
         </button>
 
     </div>
-
 </div>
 
 
 <!-- =========================
-     ТЕЛЕФОННЫЙ ЗВОНОК
+     ТЕЛЕФОН
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
@@ -114,7 +111,6 @@ user-scalable=no">
         </button>
 
     </div>
-
 </div>
 
 
@@ -129,19 +125,27 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-        src="images/lichi.png"
-        alt="Личи">
+             src="images/lichi.png"
+             alt="Личи">
 
         <img id="pancake"
-        src="images/pancake.png"
-        alt="Панкейк">
+             src="images/pancake.png"
+             alt="Панкейк">
+
+        <!-- Рычаг под столом -->
+        <button id="electricLever"
+                aria-label="Рычаг перенаправления электричества">
+            ⚡
+        </button>
 
         <div id="flash"></div>
 
     </div>
 
 
-    <!-- HUD -->
+    <!-- =========================
+         HUD
+    ========================== -->
 
     <div id="hud">
 
@@ -161,35 +165,29 @@ user-scalable=no">
     </div>
 
 
-    <!-- ПОВОРОТЫ -->
+    <!-- =========================
+         ПОВОРОТЫ
+    ========================== -->
 
     <div id="officeControls">
 
-        <button id="leftButton">
-            ◀
-        </button>
+        <button id="leftButton">◀</button>
 
-        <button id="frontButton">
-            ●
-        </button>
+        <button id="frontButton">●</button>
 
-        <button id="rightButton">
-            ▶
-        </button>
+        <button id="rightButton">▶</button>
 
     </div>
 
 
-    <!-- НИЖНИЕ КНОПКИ -->
+    <!-- =========================
+         НИЖНИЕ КНОПКИ
+    ========================== -->
 
     <div id="bottomControls">
 
         <button id="cameraButton">
             КАМЕРЫ
-        </button>
-
-        <button id="underTableButton">
-            ПОД СТОЛОМ
         </button>
 
         <button id="flashButton">
@@ -203,8 +201,7 @@ user-scalable=no">
          КАМЕРЫ
     ========================== -->
 
-    <div id="cameraPanel"
-    class="panel hidden">
+    <div id="cameraPanel" class="panel hidden">
 
         <div class="panelHeader">
 
@@ -228,12 +225,12 @@ user-scalable=no">
             </div>
 
             <img id="cameraLichi"
-            src="images/lichi.png"
-            alt="Личи">
+                 src="images/lichi.png"
+                 alt="Личи">
 
             <img id="cameraPancake"
-            src="images/pancake.png"
-            alt="Панкейк">
+                 src="images/pancake.png"
+                 alt="Панкейк">
 
         </div>
 
@@ -276,53 +273,10 @@ user-scalable=no">
 
 
     <!-- =========================
-         ЭКРАН ПОД СТОЛОМ
-    ========================== -->
-
-    <div id="underTablePanel"
-    class="panel hidden">
-
-        <div class="panelHeader">
-
-            <span>
-                ПОД СТОЛОМ
-            </span>
-
-            <button id="closeUnderTable">
-                ✕
-            </button>
-
-        </div>
-
-
-        <div id="underTableImage">
-
-            <img
-            src="images/under_table.png"
-            alt="Под столом">
-
-            <div id="leverHotspot">
-                <button id="leverButton">
-                    РЫЧАГ
-                </button>
-            </div>
-
-        </div>
-
-
-        <div id="electricStatus">
-            ЭЛЕКТРИЧЕСТВО: НОРМА
-        </div>
-
-    </div>
-
-
-    <!-- =========================
          ПЕРЕНАПРАВЛЕНИЕ
     ========================== -->
 
-    <div id="electricPanel"
-    class="panel hidden">
+    <div id="electricPanel" class="panel hidden">
 
         <div class="panelHeader">
 
@@ -330,63 +284,49 @@ user-scalable=no">
                 ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
             </span>
 
-            <button id="closeElectric">
+            <button id="closeElectricPanel">
                 ✕
             </button>
 
         </div>
 
 
-        <div id="electricContent">
+        <div class="electricInfo">
 
             <div id="electricWarning">
-                ВЫБЕРИ, КУДА ПЕРЕНАПРАВИТЬ
-                ЭЛЕКТРИЧЕСТВО
+                ВЫБЕРИ КУДА НАПРАВИТЬ ЭНЕРГИЮ
             </div>
 
-
-            <div id="electricChoices">
-
-                <button
-                class="electricChoice"
-                data-target="window">
-
-                    ПЕРЕДНЕЕ ОКНО
-
-                </button>
-
-
-                <button
-                class="electricChoice"
-                data-target="left">
-
-                    ЛЕВЫЙ КОРИДОР
-
-                </button>
-
-
-                <button
-                class="electricChoice"
-                data-target="right">
-
-                    ПРАВЫЙ КОРИДОР
-
-                </button>
-
+            <div id="electricTimer">
+                ГОТОВО
             </div>
 
-
-            <div id="redirectProgress">
-
-                <div id="redirectBar"></div>
-
-            </div>
+        </div>
 
 
-            <div id="redirectStatus">
-                СИСТЕМА ГОТОВА
-            </div>
+        <div id="electricChoices">
 
+            <button data-power="window">
+                ПЕРЕДНЕЕ ОКНО
+            </button>
+
+            <button data-power="left">
+                ЛЕВЫЙ КОРИДОР
+            </button>
+
+            <button data-power="right">
+                ПРАВЫЙ КОРИДОР
+            </button>
+
+            <button data-power="office">
+                ОФИС
+            </button>
+
+        </div>
+
+
+        <div id="electricStatus">
+            ЭНЕРГИЯ: ОФИС
         </div>
 
     </div>
@@ -396,15 +336,12 @@ user-scalable=no">
          GAME OVER
     ========================== -->
 
-    <div id="gameOver"
-    class="overlay hidden">
+    <div id="gameOver" class="overlay hidden">
 
-        <h1>
-            ТЫ ПРОИГРАЛ
-        </h1>
+        <h1>ТЫ ПРОИГРАЛ</h1>
 
         <p id="loseReason">
-            Система отключена.
+            ПАНКЕЙК ДОБРАЛСЯ ДО ОКНА
         </p>
 
         <button id="restart">
@@ -422,8 +359,7 @@ user-scalable=no">
          ПОБЕДА
     ========================== -->
 
-    <div id="winScreen"
-    class="overlay hidden">
+    <div id="winScreen" class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -447,27 +383,29 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"
+       preload="auto"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       preload="auto"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"
+       preload="auto"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"
+       preload="auto"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
+       src="sounds/pancake.mp3"
+       preload="auto"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
-
-<audio id="ventAudio"
-src="sounds/vent.mp3"
-loop></audio>
+       src="sounds/scream.mp3"
+       preload="auto"></audio>
 
 
 <script src="game.js"></script>
