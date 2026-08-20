@@ -8,66 +8,75 @@
 ========================= */
 
 const mainMenu =
-    document.getElementById("mainMenu");
+document.getElementById("mainMenu");
 
 const nightsMenu =
-    document.getElementById("nightsMenu");
+document.getElementById("nightsMenu");
 
 const settingsMenu =
-    document.getElementById("settingsMenu");
+document.getElementById("settingsMenu");
 
 const nightsList =
-    document.getElementById("nightsList");
+document.getElementById("nightsList");
 
 const phoneScreen =
-    document.getElementById("phoneScreen");
+document.getElementById("phoneScreen");
 
 const game =
-    document.getElementById("game");
+document.getElementById("game");
 
 const view =
-    document.getElementById("view");
+document.getElementById("view");
 
 const lichi =
-    document.getElementById("lichi");
+document.getElementById("lichi");
 
 const flash =
-    document.getElementById("flash");
+document.getElementById("flash");
 
 const status =
-    document.getElementById("status");
+document.getElementById("status");
 
 const time =
-    document.getElementById("time");
+document.getElementById("time");
 
 const nightDisplay =
-    document.getElementById("night");
+document.getElementById("night");
 
 const cameraPanel =
-    document.getElementById("cameraPanel");
+document.getElementById("cameraPanel");
+
+const cameraTab =
+document.getElementById("cameraTab");
+
+const ventTab =
+document.getElementById("ventTab");
+
+const ventButton =
+document.getElementById("ventButton");
 
 const cameraImage =
-    document.getElementById("cameraImage");
+document.getElementById("cameraImage");
 
 const cameraName =
-    document.getElementById("cameraName");
+document.getElementById("cameraName");
 
 const cameraLichiIndicator =
-    document.getElementById(
-        "cameraLichiIndicator"
-    );
+document.getElementById(
+    "cameraLichiIndicator"
+);
 
 const gameOverScreen =
-    document.getElementById("gameOver");
+document.getElementById("gameOver");
 
 const winScreen =
-    document.getElementById("winScreen");
+document.getElementById("winScreen");
 
 const winText =
-    document.getElementById("winText");
+document.getElementById("winText");
 
 const nextNightButton =
-    document.getElementById("nextNight");
+document.getElementById("nextNight");
 
 
 /* =========================
@@ -75,41 +84,41 @@ const nextNightButton =
 ========================= */
 
 const phoneAudio =
-    document.getElementById(
-        "phoneAudio"
-    );
+document.getElementById(
+    "phoneAudio"
+);
 
 const humAudio =
-    document.getElementById(
-        "humAudio"
-    );
+document.getElementById(
+    "humAudio"
+);
 
 const flashAudio =
-    document.getElementById(
-        "flashAudio"
-    );
+document.getElementById(
+    "flashAudio"
+);
 
 const lichiAudio =
-    document.getElementById(
-        "lichiAudio"
-    );
+document.getElementById(
+    "lichiAudio"
+);
 
 const lichiScreamer =
-    document.getElementById(
-        "lichiScreamer"
-    );
+document.getElementById(
+    "lichiScreamer"
+);
 
 
 /* =========================
-   СОХРАНЕНИЕ
+   ПРОГРЕСС
 ========================= */
 
 let completedNight =
-    Number(
-        localStorage.getItem(
-            "bloodGlowNightCompleted"
-        )
-    ) || 0;
+Number(
+    localStorage.getItem(
+        "bloodGlowNightCompleted"
+    )
+) || 0;
 
 
 /* =========================
@@ -139,31 +148,32 @@ let flashCooldown = false;
    ЛИЧИ
 ========================= */
 
-/*
-   0 — далеко
-   1 — коридор
-   2 — возле офиса
-   3 — прямо у офиса
-   4 — атака
-*/
-
 let lichiPosition = 0;
 
 
+/*
+0 — далеко
+1 — коридор
+2 — возле офиса
+3 — у офиса
+4 — атака
+*/
+
+
 /* =========================
-   ИЗОБРАЖЕНИЯ ОФИСА
+   ОФИС
 ========================= */
 
 const officeViews = {
 
     front:
-        "images/office_front.png",
+    "images/office_front.png",
 
     left:
-        "images/office_left.png",
+    "images/office_left.png",
 
     right:
-        "images/office_right.png"
+    "images/office_right.png"
 
 };
 
@@ -175,31 +185,32 @@ const officeViews = {
 const cameraImages = {
 
     cam01:
-        "images/cam01.png",
+    "images/cam01.png",
 
     cam02:
-        "images/cam02.png",
+    "images/cam02.png",
 
     cam03:
-        "images/cam03.png",
+    "images/cam03.png",
 
     cam04:
-        "images/cam04.png",
+    "images/cam04.png",
 
     cam05:
-        "images/cam05.png",
+    "images/cam05.png",
 
     cam06:
-        "images/cam06.png",
+    "images/cam06.png",
 
     cam07:
-        "images/cam07.png"
+    "images/cam07.png"
 
 };
 
 
 /*
-   Где находится Личи.
+Личи находится
+на этих камерах.
 */
 
 const lichiCameraPositions = {
@@ -226,14 +237,14 @@ async function enterFullscreen() {
         ) {
 
             await document
-                .documentElement
-                .requestFullscreen();
+            .documentElement
+            .requestFullscreen();
 
         }
 
     }
 
-    catch (error) {
+    catch(error) {
 
         console.log(error);
 
@@ -247,54 +258,54 @@ async function enterFullscreen() {
 ========================= */
 
 document
-    .getElementById(
-        "startGameButton"
-    )
-    .onclick = function () {
+.getElementById(
+    "startGameButton"
+)
+.onclick = function() {
 
-        selectedNight = 1;
+    selectedNight = 1;
 
-        enterFullscreen();
+    enterFullscreen();
 
-        startSelectedNight();
+    startSelectedNight();
 
-    };
-
-
-document
-    .getElementById(
-        "nightsButton"
-    )
-    .onclick = function () {
-
-        renderNights();
-
-        mainMenu.classList.add(
-            "hidden"
-        );
-
-        nightsMenu.classList.remove(
-            "hidden"
-        );
-
-    };
+};
 
 
 document
-    .getElementById(
-        "closeNights"
-    )
-    .onclick = function () {
+.getElementById(
+    "nightsButton"
+)
+.onclick = function() {
 
-        nightsMenu.classList.add(
-            "hidden"
-        );
+    renderNights();
 
-        mainMenu.classList.remove(
-            "hidden"
-        );
+    mainMenu.classList.add(
+        "hidden"
+    );
 
-    };
+    nightsMenu.classList.remove(
+        "hidden"
+    );
+
+};
+
+
+document
+.getElementById(
+    "closeNights"
+)
+.onclick = function() {
+
+    nightsMenu.classList.add(
+        "hidden"
+    );
+
+    mainMenu.classList.remove(
+        "hidden"
+    );
+
+};
 
 
 /* =========================
@@ -302,45 +313,45 @@ document
 ========================= */
 
 document
-    .getElementById(
-        "settingsButton"
-    )
-    .onclick = function () {
+.getElementById(
+    "settingsButton"
+)
+.onclick = function() {
 
-        mainMenu.classList.add(
-            "hidden"
-        );
+    mainMenu.classList.add(
+        "hidden"
+    );
 
-        settingsMenu.classList.remove(
-            "hidden"
-        );
+    settingsMenu.classList.remove(
+        "hidden"
+    );
 
-    };
-
-
-document
-    .getElementById(
-        "closeSettings"
-    )
-    .onclick = function () {
-
-        settingsMenu.classList.add(
-            "hidden"
-        );
-
-        mainMenu.classList.remove(
-            "hidden"
-        );
-
-    };
+};
 
 
 document
-    .getElementById(
-        "fullscreenButton"
-    )
-    .onclick =
-    enterFullscreen;
+.getElementById(
+    "closeSettings"
+)
+.onclick = function() {
+
+    settingsMenu.classList.add(
+        "hidden"
+    );
+
+    mainMenu.classList.remove(
+        "hidden"
+    );
+
+};
+
+
+document
+.getElementById(
+    "fullscreenButton"
+)
+.onclick =
+enterFullscreen;
 
 
 /* =========================
@@ -348,28 +359,28 @@ document
 ========================= */
 
 document
-    .getElementById(
-        "resetProgress"
-    )
-    .onclick = function () {
+.getElementById(
+    "resetProgress"
+)
+.onclick = function() {
 
-        localStorage.removeItem(
-            "bloodGlowNightCompleted"
-        );
+    localStorage.removeItem(
+        "bloodGlowNightCompleted"
+    );
 
-        completedNight = 0;
+    completedNight = 0;
 
-        renderNights();
+    renderNights();
 
-        alert(
-            "Прогресс сброшен."
-        );
+    alert(
+        "Прогресс сброшен."
+    );
 
-    };
+};
 
 
 /* =========================
-   СПИСОК НОЧЕЙ
+   НОЧИ
 ========================= */
 
 function renderNights() {
@@ -384,45 +395,43 @@ function renderNights() {
     ) {
 
         const button =
-            document.createElement(
-                "button"
-            );
-
-
-        button.className =
-            "nightButton";
+        document.createElement(
+            "button"
+        );
 
 
         const unlocked =
-            i === 1 ||
-            i <= completedNight + 1;
+        i === 1 ||
+        i <= completedNight + 1;
+
+
+        button.className =
+        "nightButton";
 
 
         if (!unlocked) {
 
             button.textContent =
-                "🔒 NIGHT " + i;
+            "🔒 NIGHT " + i;
 
-            button.disabled =
-                true;
+            button.disabled = true;
 
         }
 
         else {
 
             button.textContent =
-                "NIGHT " + i;
+            "NIGHT " + i;
 
 
             button.onclick =
-                function () {
+            function() {
 
-                    selectedNight =
-                        i;
+                selectedNight = i;
 
-                    startSelectedNight();
+                startSelectedNight();
 
-                };
+            };
 
         }
 
@@ -481,23 +490,31 @@ function startSelectedNight() {
 
 
     nightDisplay.textContent =
-        "NIGHT " +
-        selectedNight;
+    "NIGHT " +
+    selectedNight;
 
 
     time.textContent =
-        "12:00 AM";
+    "12:00 AM";
 
 
     view.style.backgroundImage =
-        `url("${officeViews.front}")`;
+    `url("${officeViews.front}")`;
 
 
     lichi.style.display =
-        "none";
+    "none";
 
 
     cameraPanel.classList.add(
+        "hidden"
+    );
+
+    cameraTab.classList.remove(
+        "hidden"
+    );
+
+    ventTab.classList.add(
         "hidden"
     );
 
@@ -514,9 +531,9 @@ function startSelectedNight() {
     phoneAudio.currentTime = 0;
 
     phoneAudio.play()
-        .catch(
-            () => {}
-        );
+    .catch(
+        () => {}
+    );
 
 }
 
@@ -526,30 +543,30 @@ function startSelectedNight() {
 ========================= */
 
 document
-    .getElementById(
-        "skipPhoneButton"
-    )
-    .onclick = function () {
+.getElementById(
+    "skipPhoneButton"
+)
+.onclick = function() {
 
-        phoneAudio.pause();
+    phoneAudio.pause();
 
-        startGameAfterPhone();
+    startGameAfterPhone();
 
-    };
+};
 
 
 phoneAudio.onended =
-    startGameAfterPhone;
+startGameAfterPhone;
 
 
 /* =========================
-   ПОСЛЕ ЗВОНКА
+   ИГРА ПОСЛЕ ЗВОНКА
 ========================= */
 
 function startGameAfterPhone() {
 
-    if (gameStarted)
-        return;
+    if(gameStarted)
+    return;
 
 
     gameStarted = true;
@@ -567,9 +584,9 @@ function startGameAfterPhone() {
     humAudio.currentTime = 0;
 
     humAudio.play()
-        .catch(
-            () => {}
-        );
+    .catch(
+        () => {}
+    );
 
 
     updateEverything();
@@ -581,61 +598,55 @@ function startGameAfterPhone() {
    ПОВОРОТЫ
 ========================= */
 
-function changeView(
-    direction
-) {
+function changeView(direction) {
 
-    if (!gameStarted)
-        return;
+    if(!gameStarted)
+    return;
 
-    if (gameOver)
-        return;
+    if(gameOver)
+    return;
 
-    if (cameraOpen)
-        return;
+    if(cameraOpen)
+    return;
 
 
-    if (!officeViews[direction])
-        return;
+    if(!officeViews[direction])
+    return;
 
 
     currentView =
-        direction;
+    direction;
 
 
     view.style.backgroundImage =
-        `url("${officeViews[direction]}")`;
+    `url("${officeViews[direction]}")`;
 
 
     lichi.style.display =
-        "none";
+    "none";
 
 
     updateOfficeLichi();
 
 
-    if (
-        direction === "left"
-    ) {
+    if(direction === "left") {
 
         status.textContent =
-            "ЛЕВЫЙ КОРИДОР";
+        "ЛЕВЫЙ КОРИДОР";
 
     }
 
-    else if (
-        direction === "right"
-    ) {
+    else if(direction === "right") {
 
         status.textContent =
-            "ПРАВЫЙ КОРИДОР";
+        "ПРАВЫЙ КОРИДОР";
 
     }
 
     else {
 
         status.textContent =
-            "ОФИС";
+        "ОФИС";
 
     }
 
@@ -643,27 +654,27 @@ function changeView(
 
 
 document
-    .getElementById(
-        "leftButton"
-    )
-    .onclick = () =>
-        changeView("left");
+.getElementById(
+    "leftButton"
+)
+.onclick = () =>
+changeView("left");
 
 
 document
-    .getElementById(
-        "frontButton"
-    )
-    .onclick = () =>
-        changeView("front");
+.getElementById(
+    "frontButton"
+)
+.onclick = () =>
+changeView("front");
 
 
 document
-    .getElementById(
-        "rightButton"
-    )
-    .onclick = () =>
-        changeView("right");
+.getElementById(
+    "rightButton"
+)
+.onclick = () =>
+changeView("right");
 
 
 /* =========================
@@ -672,46 +683,30 @@ document
 
 function updateOfficeLichi() {
 
-    if (
-        cameraOpen
-    ) {
+    if(cameraOpen) {
 
         lichi.style.display =
-            "none";
+        "none";
 
         return;
 
     }
 
 
-    /*
-       В офисе Личи появляется
-       только со 2 позиции.
-    */
-
-    if (
-        lichiPosition < 2
-    ) {
+    if(lichiPosition < 2) {
 
         lichi.style.display =
-            "none";
+        "none";
 
         return;
 
     }
 
 
-    /*
-       Она находится возле
-       левого коридора.
-    */
-
-    if (
-        currentView !== "left"
-    ) {
+    if(currentView !== "left") {
 
         lichi.style.display =
-            "none";
+        "none";
 
         return;
 
@@ -719,45 +714,42 @@ function updateOfficeLichi() {
 
 
     lichi.style.display =
-        "block";
+    "block";
 
 
     lichi.style.position =
-        "absolute";
+    "absolute";
 
 
-    if (
-        lichiPosition === 2
-    ) {
+    if(lichiPosition === 2) {
 
         lichi.style.left =
-            "73%";
+        "73%";
 
         lichi.style.top =
-            "52%";
+        "52%";
 
         lichi.style.width =
-            "130px";
+        "130px";
 
     }
 
     else {
 
         lichi.style.left =
-            "55%";
+        "55%";
 
         lichi.style.top =
-            "50%";
+        "50%";
 
         lichi.style.width =
-            "220px";
+        "220px";
 
     }
 
 
     lichi.style.transform =
-        "translate(-50%, -50%)";
-
+    "translate(-50%, -50%)";
 
     lichi.style.zIndex = 10;
 
@@ -765,164 +757,199 @@ function updateOfficeLichi() {
 
 
 /* =========================
-   ОТКРЫТЬ КАМЕРЫ
+   ОТКРЫТЬ МОНИТОР
 ========================= */
 
 document
-    .getElementById(
-        "cameraButton"
-    )
-    .onclick = function () {
+.getElementById(
+    "cameraButton"
+)
+.onclick = function() {
 
-        if (!gameStarted)
-            return;
+    if(!gameStarted)
+    return;
 
-        if (gameOver)
-            return;
-
-
-        /*
-           Открываем монитор.
-        */
-
-        cameraOpen = true;
+    if(gameOver)
+    return;
 
 
-        cameraPanel.classList.remove(
-            "hidden"
-        );
+    cameraOpen = true;
 
 
-        showCamera(
-            currentCamera
-        );
+    cameraPanel.classList.remove(
+        "hidden"
+    );
 
-    };
+
+    cameraTab.classList.remove(
+        "hidden"
+    );
+
+    ventTab.classList.add(
+        "hidden"
+    );
+
+
+    showCamera(
+        currentCamera
+    );
+
+};
 
 
 /* =========================
-   ЗАКРЫТЬ КАМЕРЫ
+   ЗАКРЫТЬ МОНИТОР
 ========================= */
 
 document
-    .getElementById(
-        "closeCameraPanel"
-    )
-    .onclick = function () {
+.getElementById(
+    "closeCameraPanel"
+)
+.onclick = function() {
 
-        cameraOpen = false;
-
-
-        cameraPanel.classList.add(
-            "hidden"
-        );
+    cameraOpen = false;
 
 
-        view.style.backgroundImage =
-            `url("${officeViews[currentView]}")`;
+    cameraPanel.classList.add(
+        "hidden"
+    );
 
 
-        updateOfficeLichi();
+    cameraTab.classList.remove(
+        "hidden"
+    );
 
+    ventTab.classList.add(
+        "hidden"
+    );
+
+
+    view.style.backgroundImage =
+    `url("${officeViews[currentView]}")`;
+
+
+    updateOfficeLichi();
+
+
+    if(currentView === "left") {
 
         status.textContent =
-            currentView === "left"
-                ? "ЛЕВЫЙ КОРИДОР"
-                : currentView === "right"
-                    ? "ПРАВЫЙ КОРИДОР"
-                    : "ОФИС";
+        "ЛЕВЫЙ КОРИДОР";
 
-    };
+    }
+
+    else if(currentView === "right") {
+
+        status.textContent =
+        "ПРАВЫЙ КОРИДОР";
+
+    }
+
+    else {
+
+        status.textContent =
+        "ОФИС";
+
+    }
+
+};
 
 
 /* =========================
-   ВЫБОР КАМЕРЫ
+   ВЕНТИЛЯЦИЯ
+========================= */
+
+ventButton.onclick =
+function() {
+
+    cameraTab.classList.add(
+        "hidden"
+    );
+
+    ventTab.classList.remove(
+        "hidden"
+    );
+
+};
+
+
+/* =========================
+   КАМЕРЫ
 ========================= */
 
 document
-    .querySelectorAll(
-        ".cameraButton"
-    )
-    .forEach(
-        function (button) {
+.querySelectorAll(
+    ".cameraButton"
+)
+.forEach(
+function(button) {
 
-            button.onclick =
-                function () {
+    button.onclick =
+    function() {
 
-                    showCamera(
-                        button.dataset.camera
-                    );
+        showCamera(
+            button.dataset.camera
+        );
 
-                };
+    };
 
-        }
-    );
+});
 
 
 /* =========================
    ПОКАЗ КАМЕРЫ
 ========================= */
 
-function showCamera(
-    camera
-) {
+function showCamera(camera) {
 
-    if (
-        !cameraImages[camera]
-    )
-        return;
+    if(!cameraImages[camera])
+    return;
 
 
     currentCamera =
-        camera;
+    camera;
 
 
     cameraImage.style.backgroundImage =
-        `url("${cameraImages[camera]}")`;
+    `url("${cameraImages[camera]}")`;
 
 
     cameraImage.style.backgroundSize =
-        "cover";
+    "cover";
 
 
     cameraImage.style.backgroundPosition =
-        "center";
+    "center";
 
 
     cameraName.textContent =
-        camera
-            .toUpperCase();
+    camera.toUpperCase();
 
-
-    /*
-       Подсветка выбранной камеры.
-    */
 
     document
-        .querySelectorAll(
-            ".cameraButton"
-        )
-        .forEach(
-            function (button) {
+    .querySelectorAll(
+        ".cameraButton"
+    )
+    .forEach(
+    function(button) {
 
-                button.classList.remove(
-                    "active"
-                );
-
-
-                if (
-                    button.dataset.camera ===
-                    camera
-                ) {
-
-                    button.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
+        button.classList.remove(
+            "active"
         );
+
+
+        if(
+            button.dataset.camera ===
+            camera
+        ) {
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+    });
 
 
     updateCameraLichi();
@@ -936,79 +963,61 @@ function showCamera(
 
 function updateCameraLichi() {
 
-    /*
-       На мониторе отдельный
-       спрайт накладывается
-       через сам элемент lichi.
-    */
-
     lichi.style.display =
-        "none";
+    "none";
 
 
     const lichiCamera =
-        lichiCameraPositions[
-            lichiPosition
-        ];
+    lichiCameraPositions[
+        lichiPosition
+    ];
 
 
-    if (
+    if(
         lichiCamera ===
         currentCamera
     ) {
 
         /*
-           Создаём отдельный
-           визуальный слой.
+        Используем спрайт Личи
+        поверх камеры.
         */
 
         lichi.style.display =
-            "block";
-
+        "block";
 
         lichi.style.position =
-            "fixed";
-
+        "fixed";
 
         lichi.style.left =
-            "50%";
-
+        "50%";
 
         lichi.style.top =
-            "50%";
-
+        "50%";
 
         lichi.style.width =
-            "150px";
-
+        "150px";
 
         lichi.style.transform =
-            "translate(-50%, -50%)";
-
+        "translate(-50%, -50%)";
 
         lichi.style.zIndex =
-            "600";
+        "600";
 
 
         cameraLichiIndicator.innerHTML =
-            "ЛИЧИ: <span>ОБНАРУЖЕНА</span>";
-
-
-        cameraLichiIndicator
-            .querySelector("span")
-            .style.fontWeight =
-            "bold";
+        "ЛИЧИ: <span>ОБНАРУЖЕНА</span>";
 
 
         status.textContent =
-            "⚠ ЛИЧИ ОБНАРУЖЕНА";
+        "⚠ ЛИЧИ ОБНАРУЖЕНА";
 
     }
 
     else {
 
         cameraLichiIndicator.innerHTML =
-            "ЛИЧИ: <span>НЕ ОБНАРУЖЕНА</span>";
+        "ЛИЧИ: <span>НЕ ОБНАРУЖЕНА</span>";
 
     }
 
@@ -1020,45 +1029,42 @@ function updateCameraLichi() {
 ========================= */
 
 document
-    .getElementById(
-        "flashButton"
-    )
-    .onclick = useFlash;
+.getElementById(
+    "flashButton"
+)
+.onclick =
+useFlash;
 
 
 function useFlash() {
 
-    if (!gameStarted)
-        return;
+    if(!gameStarted)
+    return;
 
-    if (gameOver)
-        return;
+    if(gameOver)
+    return;
 
-    if (cameraOpen)
-        return;
+    if(cameraOpen)
+    return;
 
-    if (flashCooldown)
-        return;
+    if(flashCooldown)
+    return;
 
 
-    if (
-        currentView !== "left"
-    ) {
+    if(currentView !== "left") {
 
         status.textContent =
-            "ВСПЫШКА РАБОТАЕТ В ЛЕВОМ КОРИДОРЕ";
+        "ВСПЫШКА РАБОТАЕТ В ЛЕВОМ КОРИДОРЕ";
 
         return;
 
     }
 
 
-    if (
-        lichiPosition < 2
-    ) {
+    if(lichiPosition < 2) {
 
         status.textContent =
-            "ЛИЧИ ЕЩЁ ДАЛЕКО";
+        "ЛИЧИ ЕЩЁ ДАЛЕКО";
 
         return;
 
@@ -1072,70 +1078,63 @@ function useFlash() {
 
 
     setTimeout(
-        function () {
+    function() {
 
-            flash.style.opacity =
-                "0";
+        flash.style.opacity =
+        "0";
 
-        },
-        120
+    },
+    120
     );
 
 
     flashAudio.currentTime = 0;
 
     flashAudio.play()
-        .catch(
-            () => {}
-        );
+    .catch(
+        () => {}
+    );
 
-
-    /*
-       Личи отбрасывает
-       обратно.
-    */
 
     lichiPosition = 0;
 
 
     lichi.style.display =
-        "none";
+    "none";
 
 
     lichiAudio.currentTime = 0;
 
     lichiAudio.play()
-        .catch(
-            () => {}
-        );
+    .catch(
+        () => {}
+    );
 
 
     status.textContent =
-        "ВСПЫШКА! ЛИЧИ ОТСТУПИЛА";
+    "ВСПЫШКА! ЛИЧИ ОТСТУПИЛА";
 
 
     setTimeout(
-        function () {
+    function() {
 
-            flashCooldown =
-                false;
+        flashCooldown =
+        false;
 
-        },
-        1200
+    },
+    1200
     );
 
 }
 
 
 /* =========================
-   ВРЕМЯ
+   ЧАСЫ
 ========================= */
 
 function updateClock() {
 
-    if (
-        gameMinutes >= 360
-    ) {
+    if(gameMinutes >= 360) {
 
         winGame();
 
@@ -1145,68 +1144,65 @@ function updateClock() {
 
 
     const hour =
-        Math.floor(
-            gameMinutes / 60
-        );
+    Math.floor(
+        gameMinutes / 60
+    );
 
 
     const minute =
-        gameMinutes % 60;
+    gameMinutes % 60;
 
 
     const displayHour =
-        hour === 0
-            ? 12
-            : hour;
+    hour === 0
+        ? 12
+        : hour;
 
 
     time.textContent =
-        displayHour +
-        ":" +
-        String(minute)
-            .padStart(2, "0") +
-        " AM";
+    displayHour +
+    ":" +
+    String(minute)
+    .padStart(2,"0") +
+    " AM";
 
 }
 
 
 /* =========================
-   ДВИЖЕНИЕ ЛИЧИ
+   ЛИЧИ ДВИЖЕТСЯ
 ========================= */
 
 function moveLichi() {
 
-    if (!gameStarted)
-        return;
+    if(!gameStarted)
+    return;
 
-    if (gameOver)
-        return;
+    if(gameOver)
+    return;
 
-    if (nightFinished)
-        return;
-
-
-    /*
-       Личи начинает движение
-       с 1:00.
-    */
-
-    if (
-        gameMinutes < 60
-    )
-        return;
+    if(nightFinished)
+    return;
 
 
     /*
-       Каждые 20 игровых секунд
-       переходим дальше.
+    Личи начинает движение
+    после 1:00.
     */
 
-    if (
+    if(gameMinutes < 60)
+    return;
+
+
+    /*
+    Каждые 20 секунд.
+    */
+
+    if(
         gameMinutes % 20 === 0
     ) {
 
-        if (
+        if(
             lichiPosition < 4
         ) {
 
@@ -1220,29 +1216,24 @@ function moveLichi() {
     updateEverything();
 
 
-    /*
-       Если дошла до 4 позиции —
-       скример.
-    */
-
-    if (
+    if(
         lichiPosition >= 4
     ) {
 
         setTimeout(
-            function () {
+        function() {
 
-                if (
-                    lichiPosition >= 4 &&
-                    !gameOver
-                ) {
+            if(
+                lichiPosition >= 4 &&
+                !gameOver
+            ) {
 
-                    loseGame();
+                loseGame();
 
-                }
+            }
 
-            },
-            1500
+        },
+        1500
         );
 
     }
@@ -1258,7 +1249,14 @@ function updateEverything() {
 
     updateClock();
 
-    if (cameraOpen) {
+
+    if(cameraOpen) {
+
+        /*
+        На камере показываем
+        Личи только если она
+        находится здесь.
+        */
 
         updateCameraLichi();
 
@@ -1279,8 +1277,8 @@ function updateEverything() {
 
 function loseGame() {
 
-    if (gameOver)
-        return;
+    if(gameOver)
+    return;
 
 
     gameOver = true;
@@ -1290,106 +1288,99 @@ function loseGame() {
 
 
     /*
-       Скример.
+    Скример.
     */
 
-    lichiScreamer.currentTime = 0;
+    lichiScreamer.currentTime =
+    0;
 
     lichiScreamer.play()
-        .catch(
-            () => {}
-        );
+    .catch(
+        () => {}
+    );
 
 
     /*
-       Показываем Личи
-       поверх всего.
+    Личи на весь экран.
     */
 
     lichi.style.display =
-        "block";
-
+    "block";
 
     lichi.style.position =
-        "fixed";
-
+    "fixed";
 
     lichi.style.left =
-        "50%";
-
+    "50%";
 
     lichi.style.top =
-        "50%";
-
+    "50%";
 
     lichi.style.width =
-        "100vw";
-
+    "100vw";
 
     lichi.style.maxWidth =
-        "100vw";
-
+    "100vw";
 
     lichi.style.transform =
-        "translate(-50%, -50%)";
-
+    "translate(-50%, -50%)";
 
     lichi.style.zIndex =
-        "9999";
+    "9999";
 
 
     setTimeout(
-        function () {
+    function() {
 
-            gameOverScreen.classList.remove(
-                "hidden"
-            );
+        gameOverScreen.classList.remove(
+            "hidden"
+        );
 
-        },
-        1800
+    },
+    1800
     );
 
 }
 
 
 /* =========================
-   ПЕРЕЗАПУСК
+   RESTART
 ========================= */
 
 document
-    .getElementById(
-        "restart"
-    )
-    .onclick = function () {
+.getElementById(
+    "restart"
+)
+.onclick = function() {
 
-        startSelectedNight();
+    startSelectedNight();
 
-    };
+};
 
 
 /* =========================
-   МЕНЮ ПОСЛЕ ПРОИГРЫША
+   МЕНЮ ПОСЛЕ ПОРАЖЕНИЯ
 ========================= */
 
 document
-    .getElementById(
-        "menuAfterLose"
-    )
-    .onclick = function () {
+.getElementById(
+    "menuAfterLose"
+)
+.onclick = function() {
 
-        gameOverScreen.classList.add(
-            "hidden"
-        );
+    gameOverScreen.classList.add(
+        "hidden"
+    );
 
-        game.classList.add(
-            "hidden"
-        );
+    game.classList.add(
+        "hidden"
+    );
 
-        mainMenu.classList.remove(
-            "hidden"
-        );
+    mainMenu.classList.remove(
+        "hidden"
+    );
 
-    };
+};
 
 
 /* =========================
@@ -1398,8 +1389,8 @@ document
 
 function winGame() {
 
-    if (nightFinished)
-        return;
+    if(nightFinished)
+    return;
 
 
     nightFinished = true;
@@ -1408,13 +1399,13 @@ function winGame() {
     humAudio.pause();
 
 
-    if (
+    if(
         selectedNight >
         completedNight
     ) {
 
         completedNight =
-            selectedNight;
+        selectedNight;
 
 
         localStorage.setItem(
@@ -1426,24 +1417,24 @@ function winGame() {
 
 
     winText.textContent =
-        "NIGHT " +
-        selectedNight +
-        " COMPLETE";
+    "NIGHT " +
+    selectedNight +
+    " COMPLETE";
 
 
-    if (
+    if(
         selectedNight >= 13
     ) {
 
         nextNightButton.style.display =
-            "none";
+        "none";
 
     }
 
     else {
 
         nextNightButton.style.display =
-            "block";
+        "block";
 
     }
 
@@ -1460,19 +1451,19 @@ function winGame() {
 ========================= */
 
 nextNightButton.onclick =
-    function () {
+function() {
 
-        if (
-            selectedNight < 13
-        ) {
+    if(
+        selectedNight < 13
+    ) {
 
-            selectedNight++;
+        selectedNight++;
 
-            startSelectedNight();
+        startSelectedNight();
 
-        }
+    }
 
-    };
+};
 
 
 /* =========================
@@ -1480,26 +1471,26 @@ nextNightButton.onclick =
 ========================= */
 
 document
-    .getElementById(
-        "menuAfterWin"
-    )
-    .onclick = function () {
+.getElementById(
+    "menuAfterWin"
+)
+.onclick = function() {
 
-        winScreen.classList.add(
-            "hidden"
-        );
+    winScreen.classList.add(
+        "hidden"
+    );
 
-        game.classList.add(
-            "hidden"
-        );
+    game.classList.add(
+        "hidden"
+    );
 
-        mainMenu.classList.remove(
-            "hidden"
-        );
+    mainMenu.classList.remove(
+        "hidden"
+    );
 
-        renderNights();
+    renderNights();
 
-    };
+};
 
 
 /* =========================
@@ -1507,25 +1498,25 @@ document
 ========================= */
 
 setInterval(
-    function () {
+function() {
 
-        if (!gameStarted)
-            return;
+    if(!gameStarted)
+    return;
 
-        if (gameOver)
-            return;
+    if(gameOver)
+    return;
 
-        if (nightFinished)
-            return;
-
-
-        gameMinutes++;
+    if(nightFinished)
+    return;
 
 
-        moveLichi();
+    gameMinutes++;
 
-    },
-    1000
+
+    moveLichi();
+
+},
+1000
 );
 
 
