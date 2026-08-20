@@ -110,7 +110,7 @@ user-scalable=no">
         </p>
 
         <button id="skipPhoneButton">
-            НАЧАТЬ НОЧЬ
+            ПРОПУСТИТЬ ЗВОНОК
         </button>
 
     </div>
@@ -165,11 +165,17 @@ user-scalable=no">
 
     <div id="officeControls">
 
-        <button id="leftButton">◀</button>
+        <button id="leftButton">
+            ◀
+        </button>
 
-        <button id="frontButton">●</button>
+        <button id="frontButton">
+            ●
+        </button>
 
-        <button id="rightButton">▶</button>
+        <button id="rightButton">
+            ▶
+        </button>
 
     </div>
 
@@ -197,7 +203,8 @@ user-scalable=no">
          КАМЕРЫ
     ========================== -->
 
-    <div id="cameraPanel" class="panel hidden">
+    <div id="cameraPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
@@ -212,34 +219,62 @@ user-scalable=no">
         </div>
 
 
-        <div id="cameraImage">
+        <div class="cameraSystem">
 
-            <div id="cameraStatic"></div>
+            <!-- ИЗОБРАЖЕНИЕ КАМЕРЫ -->
 
-            <div id="cameraNumber">
-                CAM 01
+            <div id="cameraImage">
+
+                <div id="cameraStatic"></div>
+
+                <div id="cameraNumber">
+                    CAM 01
+                </div>
+
+                <img id="cameraLichi"
+                     src="images/lichi.png"
+                     alt="Личи">
+
+                <img id="cameraPancake"
+                     src="images/pancake.png"
+                     alt="Панкейк">
+
             </div>
 
-            <img id="cameraLichi"
-            src="images/lichi.png"
-            alt="Личи">
 
-            <img id="cameraPancake"
-            src="images/pancake.png"
-            alt="Панкейк">
+            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
 
-        </div>
+            <div id="cameraMap">
 
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
 
-        <div id="cameraMap">
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
 
-            <button data-camera="cam01">CAM 01</button>
-            <button data-camera="cam02">CAM 02</button>
-            <button data-camera="cam03">CAM 03</button>
-            <button data-camera="cam04">CAM 04</button>
-            <button data-camera="cam05">CAM 05</button>
-            <button data-camera="cam06">CAM 06</button>
-            <button data-camera="cam07">CAM 07</button>
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
+
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
+
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
+
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
+
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
+
+            </div>
 
         </div>
 
@@ -250,7 +285,8 @@ user-scalable=no">
          ПРОСТАЯ ВЕНТИЛЯЦИЯ
     ========================== -->
 
-    <div id="ventPanel" class="panel hidden">
+    <div id="ventPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
@@ -285,7 +321,6 @@ user-scalable=no">
 
             <div class="ventLine horizontalLine"></div>
 
-
             <button
             class="ventDoor simpleDoor1"
             data-door="1">
@@ -304,11 +339,6 @@ user-scalable=no">
                 ПЕРЕГОРОДКА
             </button>
 
-
-            <div id="pancakeVent">
-                ПАНКЕЙК
-            </div>
-
         </div>
 
 
@@ -323,7 +353,8 @@ user-scalable=no">
          GAME OVER
     ========================== -->
 
-    <div id="gameOver" class="overlay hidden">
+    <div id="gameOver"
+         class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -344,7 +375,8 @@ user-scalable=no">
          ПОБЕДА
     ========================== -->
 
-    <div id="winScreen" class="overlay hidden">
+    <div id="winScreen"
+         class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -368,27 +400,27 @@ user-scalable=no">
 ========================= -->
 
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
+       src="sounds/scream.mp3"></audio>
 
 <audio id="ventAudio"
-src="sounds/vent.mp3"
-loop></audio>
+       src="sounds/vent.mp3"
+       loop></audio>
 
 
 <script src="game.js"></script>
