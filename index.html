@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -28,24 +28,19 @@
 
         <h1>BLOOD GLOW NIGHT</h1>
 
-        <button id="startGameButton">
-            НОВАЯ НОЧЬ
-        </button>
+        <button id="startGameButton">НОВАЯ НОЧЬ</button>
 
-        <button id="nightsButton">
-            НОЧИ
-        </button>
+        <button id="nightsButton">НОЧИ</button>
 
-        <button id="settingsButton">
-            НАСТРОЙКИ
-        </button>
+        <button id="settingsButton">НАСТРОЙКИ</button>
 
     </div>
+
 </div>
 
 
 <!-- =========================
-     ВЫБОР НОЧИ
+     НОЧИ
 ========================= -->
 
 <div id="nightsMenu" class="screen hidden">
@@ -56,11 +51,10 @@
 
         <div id="nightsList"></div>
 
-        <button id="closeNights">
-            НАЗАД
-        </button>
+        <button id="closeNights">НАЗАД</button>
 
     </div>
+
 </div>
 
 
@@ -87,6 +81,7 @@
         </button>
 
     </div>
+
 </div>
 
 
@@ -98,19 +93,16 @@
 
     <div class="phoneBox">
 
-        <h2 id="phoneNight">
-            NIGHT 1
-        </h2>
+        <h2 id="phoneNight">NIGHT 1</h2>
 
-        <p>
-            Входящий звонок...
-        </p>
+        <p>Входящий звонок...</p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
         </button>
 
     </div>
+
 </div>
 
 
@@ -132,42 +124,35 @@
              src="images/pancake.png"
              alt="Панкейк">
 
-        <!-- Рычаг под столом -->
-        <button id="electricLever"
-                aria-label="Рычаг перенаправления электричества">
-            ⚡
-        </button>
+        <!-- Место под столом -->
+        <div id="underTable">
+
+            <div id="energyLeverVisual">
+                РЫЧАГ
+            </div>
+
+        </div>
 
         <div id="flash"></div>
 
     </div>
 
 
-    <!-- =========================
-         HUD
-    ========================== -->
+    <!-- HUD -->
 
     <div id="hud">
 
-        <div id="night">
-            NIGHT 1
-        </div>
+        <div id="night">NIGHT 1</div>
 
-        <div id="time">
-            12:00 AM
-        </div>
+        <div id="time">12:00 AM</div>
 
     </div>
 
 
-    <div id="status">
-        ОФИС
-    </div>
+    <div id="status">ОФИС</div>
 
 
-    <!-- =========================
-         ПОВОРОТЫ
-    ========================== -->
+    <!-- ПОВОРОТЫ -->
 
     <div id="officeControls">
 
@@ -180,9 +165,7 @@
     </div>
 
 
-    <!-- =========================
-         НИЖНИЕ КНОПКИ
-    ========================== -->
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -192,6 +175,10 @@
 
         <button id="flashButton">
             ВСПЫШКА
+        </button>
+
+        <button id="energyButton">
+            ЭНЕРГИЯ
         </button>
 
     </div>
@@ -205,67 +192,66 @@
 
         <div class="panelHeader">
 
-            <span>
-                СИСТЕМА КАМЕР
-            </span>
+            <span>СИСТЕМА КАМЕР</span>
 
-            <button id="closeCameraPanel">
-                ✕
-            </button>
+            <button id="closeCameraPanel">✕</button>
 
         </div>
 
+        <div id="cameraContent">
 
-        <div id="cameraImage">
+            <div id="cameraImage">
 
-            <div id="cameraStatic"></div>
+                <div id="cameraStatic"></div>
 
-            <div id="cameraNumber">
-                CAM 01
+                <div id="cameraNumber">
+                    CAM 01
+                </div>
+
+                <img id="cameraLichi"
+                     src="images/lichi.png"
+                     alt="Личи">
+
+                <img id="cameraPancake"
+                     src="images/pancake.png"
+                     alt="Панкейк">
+
             </div>
 
-            <img id="cameraLichi"
-                 src="images/lichi.png"
-                 alt="Личи">
 
-            <img id="cameraPancake"
-                 src="images/pancake.png"
-                 alt="Панкейк">
+            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
 
-        </div>
+            <div id="cameraMap">
 
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
 
-        <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
 
-        <div id="cameraMap">
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
 
-            <button data-camera="cam01">
-                CAM 01
-            </button>
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
 
-            <button data-camera="cam02">
-                CAM 02
-            </button>
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
 
-            <button data-camera="cam03">
-                CAM 03
-            </button>
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
 
-            <button data-camera="cam04">
-                CAM 04
-            </button>
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
 
-            <button data-camera="cam05">
-                CAM 05
-            </button>
-
-            <button data-camera="cam06">
-                CAM 06
-            </button>
-
-            <button data-camera="cam07">
-                CAM 07
-            </button>
+            </div>
 
         </div>
 
@@ -273,60 +259,58 @@
 
 
     <!-- =========================
-         ПЕРЕНАПРАВЛЕНИЕ
+         ЭНЕРГИЯ
     ========================== -->
 
-    <div id="electricPanel" class="panel hidden">
+    <div id="energyPanel" class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>
-                ПЕРЕНАПРАВЛЕНИЕ ЭЛЕКТРИЧЕСТВА
-            </span>
+            <span>ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ</span>
 
-            <button id="closeElectricPanel">
-                ✕
-            </button>
+            <button id="closeEnergyPanel">✕</button>
 
         </div>
 
 
-        <div class="electricInfo">
+        <div id="energyContent">
 
-            <div id="electricWarning">
-                ВЫБЕРИ КУДА НАПРАВИТЬ ЭНЕРГИЮ
+            <div id="energyWarning">
+                ЭНЕРГИЯ ПОД СТОЛОМ
             </div>
 
-            <div id="electricTimer">
-                ГОТОВО
+            <div id="energyLever">
+
+                <div id="leverHandle"></div>
+
             </div>
 
-        </div>
+            <p id="energyMessage">
+                Выбери направление энергии.
+            </p>
 
 
-        <div id="electricChoices">
+            <div id="energyTargets">
 
-            <button data-power="window">
-                ПЕРЕДНЕЕ ОКНО
-            </button>
+                <button data-target="window">
+                    ПЕРЕДНЕЕ ОКНО
+                </button>
 
-            <button data-power="left">
-                ЛЕВЫЙ КОРИДОР
-            </button>
+                <button data-target="left">
+                    ЛЕВЫЙ КОРИДОР
+                </button>
 
-            <button data-power="right">
-                ПРАВЫЙ КОРИДОР
-            </button>
+                <button data-target="right">
+                    ПРАВЫЙ КОРИДОР
+                </button>
 
-            <button data-power="office">
-                ОФИС
-            </button>
-
-        </div>
+            </div>
 
 
-        <div id="electricStatus">
-            ЭНЕРГИЯ: ОФИС
+            <div id="energyTimer">
+                ЭНЕРГИЯ: 0%
+            </div>
+
         </div>
 
     </div>
@@ -340,9 +324,7 @@
 
         <h1>ТЫ ПРОИГРАЛ</h1>
 
-        <p id="loseReason">
-            ПАНКЕЙК ДОБРАЛСЯ ДО ОКНА
-        </p>
+        <p id="loseReason"></p>
 
         <button id="restart">
             ПОВТОРИТЬ
@@ -383,29 +365,27 @@
 ========================= -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"
-       preload="auto"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
        src="sounds/hum.mp3"
-       preload="auto"
        loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"
-       preload="auto"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"
-       preload="auto"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"
-       preload="auto"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"
-       preload="auto"></audio>
+       src="sounds/scream.mp3"></audio>
+
+<audio id="ventAudio"
+       src="sounds/vent.mp3"
+       loop></audio>
 
 
 <script src="game.js"></script>
