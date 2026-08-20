@@ -6,7 +6,7 @@
 
 
 /* =========================================
-   СОСТОЯНИЕ
+   СОСТОЯНИЕ ИГРЫ
 ========================================= */
 
 let currentView = "front";
@@ -23,13 +23,13 @@ let gameMinutes = 0;
 
 
 /*
-   Позиции Личи:
+   Личи:
 
-   0 — конец коридора
-   1 — середина коридора
-   2 — возле входа
-   3 — частично вошла в офис
-   4 — почти в офисе
+   0 — стоит далеко в коридоре
+   1 — начинает приближаться
+   2 — середина коридора
+   3 — возле офиса
+   4 — входит в офис
 */
 
 
@@ -39,9 +39,9 @@ const LICHIPOSITIONS = {
 
     MIDDLE: 1,
 
-    DOOR: 2,
+    NEAR: 2,
 
-    ENTERING: 3,
+    DOOR: 3,
 
     ATTACK: 4
 
@@ -54,6 +54,9 @@ const LICHIPOSITIONS = {
 
 const view =
     document.getElementById("view");
+
+const lichi =
+    document.getElementById("lichi");
 
 const status =
     document.getElementById("status");
@@ -70,9 +73,14 @@ const gameOverScreen =
 const winScreen =
     document.getElementById("winScreen");
 
+const fullscreenButton =
+    document.getElementById(
+        "fullscreenButton"
+    );
+
 
 /* =========================================
-   КАРТИНКИ
+   КАРТИНКИ ОФИСА
 ========================================= */
 
 const officeViews = {
@@ -110,6 +118,8 @@ function changeView(direction) {
 
 
     updateStatus();
+
+    updateLichiSprite();
 }
 
 
@@ -127,17 +137,7 @@ function updateStatus() {
         ) {
 
             status.textContent =
-                "ЛИЧИ УЖЕ В ОФИСЕ! ВСПЫШКА!";
-
-        }
-
-        else if (
-            lichiPosition >=
-            LICHIPOSITIONS.ENTERING
-        ) {
-
-            status.textContent =
-                "Личи входит в офис.";
+                "ЛИЧИ В ОФИСЕ! ВСПЫШКА!";
 
         }
 
@@ -147,7 +147,17 @@ function updateStatus() {
         ) {
 
             status.textContent =
-                "Личи возле двери.";
+                "Личи возле офиса!";
+
+        }
+
+        else if (
+            lichiPosition >=
+            LICHIPOSITIONS.NEAR
+        ) {
+
+            status.textContent =
+                "Личи быстро приближается.";
 
         }
 
@@ -157,14 +167,14 @@ function updateStatus() {
         ) {
 
             status.textContent =
-                "Личи приближается.";
+                "Личи идёт по коридору.";
 
         }
 
         else {
 
             status.textContent =
-                "Личи в конце коридора.";
+                "Личи стоит в конце коридора.";
         }
 
 
@@ -187,6 +197,116 @@ function updateStatus() {
 
 
 /* =========================================
+   СПРАЙТ ЛИЧИ
+========================================= */
+
+function updateLichiSprite() {
+
+    /*
+       Показываем Личи
+       только когда игрок смотрит
+       в левый коридор.
+    */
+
+    if (currentView !== "left") {
+
+        lichi.style.display =
+            "none";
+
+        return;
+    }
+
+
+    /*
+       Если она ещё слишком далеко,
+       спрайт пока не показываем.
+    */
+
+    if (
+        lichiPosition <=
+        LICHIPOSITIONS.FAR
+    ) {
+
+        lichi.style.display =
+            "none";
+
+        return;
+    }
+
+
+    lichi.style.display =
+        "block";
+
+
+    /*
+       Позиции спрайта.
+    */
+
+    const positions = {
+
+        1: {
+
+            left: "80%",
+
+            top: "44%",
+
+            width: "90px"
+
+        },
+
+        2: {
+
+            left: "68%",
+
+            top: "47%",
+
+            width: "130px"
+
+        },
+
+        3: {
+
+            left: "54%",
+
+            top: "50%",
+
+            width: "180px"
+
+        },
+
+        4: {
+
+            left: "43%",
+
+            top: "52%",
+
+            width: "260px"
+
+        }
+
+    };
+
+
+    const position =
+        positions[lichiPosition];
+
+
+    if (!position)
+        return;
+
+
+    lichi.style.left =
+        position.left;
+
+    lichi.style.top =
+        position.top;
+
+    lichi.style.width =
+        position.width;
+}
+
+
+/* =========================================
    ВСПЫШКА
 ========================================= */
 
@@ -203,23 +323,21 @@ function useFlash() {
 
 
     /*
-       Вспышка работает,
-       только если игрок смотрит
-       в левый коридор.
+       Вспышка работает только
+       когда игрок смотрит влево.
     */
 
     if (currentView !== "left") {
 
         status.textContent =
-            "Здесь вспышка не нужна.";
+            "Сначала посмотри в левый коридор.";
 
         return;
     }
 
 
     /*
-       Личи должна быть
-       достаточно близко.
+       Личи должна быть достаточно близко.
     */
 
     if (
@@ -237,7 +355,9 @@ function useFlash() {
     flashCooldown = true;
 
 
-    /* Белая вспышка */
+    /* =================================
+       ВСПЫШКА
+    ================================= */
 
     flash.style.opacity = "1";
 
@@ -261,10 +381,10 @@ function useFlash() {
 
 
     status.textContent =
-        "ВСПЫШКА! Личи отступила.";
+        "ВСПЫШКА! Личи отступила!";
 
 
-    updateStatus();
+    updateLichiSprite();
 
 
     /*
@@ -297,7 +417,7 @@ function updateLichi() {
 
     /*
        Личи начинает двигаться
-       примерно с 1:00.
+       после 1:00.
     */
 
     if (gameMinutes < 60)
@@ -305,8 +425,11 @@ function updateLichi() {
 
 
     /*
-       Каждые 20 игровых секунд
-       Личи продвигается.
+       Каждые 20 игровых минут
+       она делает шаг.
+
+       Для демки:
+       1 игровая секунда = 1 игровая минута.
     */
 
     if (
@@ -326,10 +449,11 @@ function updateLichi() {
 
     updateStatus();
 
+    updateLichiSprite();
+
 
     /*
-       Личи полностью вошла
-       в офис.
+       Личи достигла офиса.
     */
 
     if (
@@ -338,19 +462,14 @@ function updateLichi() {
     ) {
 
         /*
-           Если игрок смотрит
-           влево — даём небольшой
-           шанс успеть использовать
-           вспышку.
-
-           Сама атака происходит
-           через несколько секунд.
+           Если игрок смотрит влево,
+           можно успеть её ослепить.
         */
 
         if (currentView !== "left") {
 
             status.textContent =
-                "Личи вошла в офис!";
+                "ЛИЧИ ВОШЛА В ОФИС!";
 
 
             setTimeout(
@@ -358,7 +477,8 @@ function updateLichi() {
 
                     if (
                         lichiPosition >=
-                        LICHIPOSITIONS.ATTACK
+                        LICHIPOSITIONS.ATTACK &&
+                        currentView !== "left"
                     ) {
 
                         loseGame();
@@ -368,7 +488,6 @@ function updateLichi() {
                 },
                 2500
             );
-
         }
     }
 }
@@ -409,9 +528,7 @@ function updateClock() {
 
         displayHour = 12;
 
-    }
-
-    else {
+    } else {
 
         displayHour = hour;
 
@@ -430,7 +547,7 @@ function updateClock() {
 
 
 /* =========================================
-   ПОРАЖЕНИЕ
+   GAME OVER
 ========================================= */
 
 function loseGame() {
@@ -466,7 +583,7 @@ function winGame() {
 
 
 /* =========================================
-   КНОПКА ВЛЕВО
+   ПОВОРОТ ВЛЕВО
 ========================================= */
 
 document
@@ -482,7 +599,7 @@ document
 
 
 /* =========================================
-   КНОПКА ВПЕРЁД
+   ПОВОРОТ ВПЕРЁД
 ========================================= */
 
 document
@@ -498,7 +615,7 @@ document
 
 
 /* =========================================
-   КНОПКА ВПРАВО
+   ПОВОРОТ ВПРАВО
 ========================================= */
 
 document
@@ -527,6 +644,39 @@ document
 
         }
     );
+
+
+/* =========================================
+   ПОЛНЫЙ ЭКРАН
+========================================= */
+
+fullscreenButton.addEventListener(
+    "click",
+    function() {
+
+        if (!document.fullscreenElement) {
+
+            document.documentElement
+                .requestFullscreen()
+                .catch(
+                    function(error) {
+
+                        console.log(
+                            "Fullscreen error:",
+                            error
+                        );
+
+                    }
+                );
+
+        } else {
+
+            document.exitFullscreen();
+
+        }
+
+    }
+);
 
 
 /* =========================================
@@ -578,3 +728,5 @@ setInterval(
 updateClock();
 
 updateStatus();
+
+updateLichiSprite();
