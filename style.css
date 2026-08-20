@@ -1,14 +1,12 @@
 * {
     box-sizing: border-box;
-
-    margin: 0;
-    padding: 0;
-
     -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
+    margin: 0;
+    padding: 0;
 
     width: 100%;
     height: 100%;
@@ -17,60 +15,20 @@ body {
 
     background: #000;
 
-    color: #fff;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-family: Arial, sans-serif;
+    color: white;
 }
 
 
 /* =================================================
-   КНОПКИ
+   ВСЕ ЭКРАНЫ
 ================================================= */
 
-button {
-
-    background: #111;
-
-    color: #fff;
-
-    border: 2px solid #777;
-
-    padding: 12px 20px;
-
-    margin: 5px;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-}
-
-button:hover {
-
-    background: #222;
-}
-
-button:active {
-
-    background: #444;
-
-    transform: scale(.96);
-}
-
-button.locked {
-
-    opacity: .35;
-
-}
-
-
-/* =================================================
-   ГЛАВНОЕ МЕНЮ
-================================================= */
-
-#mainMenu {
-
+.screen {
     position: fixed;
 
     inset: 0;
@@ -80,121 +38,139 @@ button.locked {
 
     display: flex;
 
-    flex-direction: column;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    background:
+        linear-gradient(
+            rgba(0,0,0,.72),
+            rgba(0,0,0,.85)
+        ),
+        url("images/background.png");
 
-    text-align: center;
+    background-size: cover;
+    background-position: center;
 
-    background: #000;
-
-    z-index: 1000;
-}
-
-#mainMenu h1 {
-
-    font-size:
-        clamp(30px, 7vw, 70px);
-
-    letter-spacing: 5px;
-
-    margin-bottom: 40px;
+    z-index: 100;
 }
 
 
 /* =================================================
-   МЕНЮ НОЧЕЙ И НАСТРОЕК
+   МЕНЮ
 ================================================= */
 
-#nightsMenu,
-#settingsMenu {
+.menuBox {
+    width: min(90vw, 520px);
 
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: none;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: #000;
-
-    z-index: 1000;
-}
-
-.menuWindow {
-
-    width: min(90%, 600px);
+    padding: 35px;
 
     text-align: center;
 
-    padding: 25px;
+    background:
+        rgba(0,0,0,.82);
+
+    border:
+        2px solid
+        #555;
+
+    box-shadow:
+        0 0 30px
+        rgba(0,0,0,.9);
 }
 
-.menuWindow h2 {
 
-    margin-bottom: 25px;
+.menuBox h1 {
+    margin-top: 0;
+
+    font-size:
+        clamp(28px, 6vw, 54px);
+
+    letter-spacing:
+        5px;
 }
+
+
+.menuBox h2 {
+    font-size: 30px;
+}
+
+
+button {
+    border: 0;
+
+    background: #111;
+
+    color: white;
+
+    padding:
+        14px 22px;
+
+    margin: 6px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    border:
+        1px solid #666;
+}
+
+
+button:hover {
+    background: #292929;
+}
+
+
+button:active {
+    transform: scale(.96);
+}
+
+
+/* =================================================
+   НОЧИ
+================================================= */
 
 #nightsList {
-
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 5px;
+    gap: 8px;
 
     margin-bottom: 20px;
 }
 
 
+.nightButton {
+    width: auto;
+
+    margin: 0;
+}
+
+
+.nightButton.locked {
+    opacity: .35;
+
+    cursor: not-allowed;
+}
+
+
 /* =================================================
-   ЗВОНОК
+   ТЕЛЕФОН
 ================================================= */
 
-#phoneScreen {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: none;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: #000;
-
-    z-index: 900;
-}
-
-.phoneWindow {
+.phoneBox {
+    width: min(90vw, 500px);
 
     text-align: center;
-}
 
-.phoneWindow h2 {
+    padding: 40px;
 
-    font-size: 40px;
+    background: #050505;
 
-    margin-bottom: 25px;
-}
-
-.phoneWindow p {
-
-    margin-bottom: 25px;
+    border:
+        2px solid #555;
 }
 
 
@@ -203,7 +179,6 @@ button.locked {
 ================================================= */
 
 #game {
-
     position: fixed;
 
     inset: 0;
@@ -211,140 +186,134 @@ button.locked {
     width: 100vw;
     height: 100vh;
 
-    display: none;
-
     overflow: hidden;
 
     background: #000;
 }
 
 
-/* =================================================
-   HUD
-================================================= */
-
-#hud {
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    height: 55px;
-
-    padding: 0 20px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
-    background:
-        linear-gradient(
-            rgba(0,0,0,.85),
-            transparent
-        );
-
-    z-index: 30;
-
-    font-size: 20px;
-}
-
-
-/* =================================================
-   ОФИС
-================================================= */
-
-#view {
-
+#background {
     position: absolute;
 
     inset: 0;
 
-    background-image:
-        url("images/office_front.png");
+    background:
+        url("images/background.png")
+        center / cover
+        no-repeat;
 
-    background-size: cover;
+    opacity: .25;
 
-    background-position: center;
+    pointer-events: none;
+}
 
-    background-repeat: no-repeat;
+
+#view {
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+
+    top: 7%;
+    bottom: 17%;
+
+    background:
+        center / cover
+        no-repeat;
+
+    border:
+        2px solid #333;
 
     overflow: hidden;
+
+    z-index: 2;
 }
 
 
 /* =================================================
-   ЛИЧИ В ОФИСЕ
+   ЛИЧИ
 ================================================= */
 
 #lichi {
-
     position: absolute;
 
     display: none;
 
     width: 150px;
 
-    height: auto;
-
-    z-index: 10;
-
-    pointer-events: none;
+    left: 50%;
+    top: 50%;
 
     transform:
         translate(-50%, -50%);
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    user-select: none;
 }
 
 
-/* =================================================
-   ВСПЫШКА
-================================================= */
-
-#flash {
-
+#cameraLichi {
     position: absolute;
 
     inset: 0;
 
-    background: #fff;
-
-    opacity: 0;
-
     pointer-events: none;
-
-    z-index: 50;
-
-    transition:
-        opacity .05s;
 }
 
 
 /* =================================================
-   СТАТУС
+   ВЕРХ
 ================================================= */
 
-#status {
-
+#topBar {
     position: absolute;
 
-    bottom: 145px;
+    top: 0;
+    left: 0;
+    right: 0;
 
-    left: 50%;
+    height: 7%;
 
-    transform:
-        translateX(-50%);
+    display: flex;
 
-    padding: 7px 14px;
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 25px;
 
     background:
         rgba(0,0,0,.75);
 
     z-index: 30;
+
+    font-size:
+        clamp(15px, 2vw, 25px);
+}
+
+
+#status {
+    position: absolute;
+
+    left: 50%;
+
+    top: 8%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 30;
+
+    padding:
+        6px 15px;
+
+    background:
+        rgba(0,0,0,.65);
 
     font-size: 14px;
 }
@@ -354,32 +323,34 @@ button.locked {
    ПОВОРОТЫ
 ================================================= */
 
-#officeControls {
-
+#viewControls {
     position: absolute;
 
-    bottom: 60px;
-
     left: 0;
+    right: 0;
 
-    width: 100%;
+    bottom: 8%;
+
+    height: 9%;
 
     display: flex;
+
+    align-items: center;
 
     justify-content: center;
 
     z-index: 40;
 }
 
-#officeControls button {
 
-    width: 70px;
+#viewControls button {
+    width: 65px;
+    height: 55px;
 
-    height: 45px;
+    margin:
+        0 8px;
 
-    padding: 0;
-
-    font-size: 22px;
+    font-size: 25px;
 }
 
 
@@ -388,72 +359,56 @@ button.locked {
 ================================================= */
 
 #bottomControls {
-
     position: absolute;
 
     left: 0;
+    right: 0;
+
     bottom: 0;
 
-    width: 100%;
-
-    height: 60px;
+    height: 8%;
 
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
 
-    background:
-        rgba(0,0,0,.92);
+    justify-content: center;
 
-    z-index: 100;
+    background:
+        rgba(0,0,0,.85);
+
+    z-index: 50;
 }
+
 
 #bottomControls button {
+    height: 80%;
 
-    min-width: 130px;
-
-    margin: 3px;
+    font-size: 14px;
 }
 
 
 /* =================================================
-   МОНИТОР
+   КАМЕРЫ
 ================================================= */
 
-#cameraPanel {
+#cameraPanel,
+#ventPanel {
+    position: absolute;
 
-    position: fixed;
+    inset: 0;
 
-    left: 0;
-    bottom: 0;
+    background:
+        rgba(0,0,0,.96);
 
-    width: 100vw;
-
-    height: 90vh;
-
-    background: #111;
-
-    border-top: 3px solid #777;
-
-    padding: 10px;
+    z-index: 100;
 
     display: none;
-
-    z-index: 500;
 }
 
 
-/* =================================================
-   ШАПКА
-================================================= */
-
-#cameraHeader {
-
-    width: 100%;
-
-    height: 55px;
+.panelHeader {
+    height: 10%;
 
     display: flex;
 
@@ -462,248 +417,81 @@ button.locked {
     justify-content:
         space-between;
 
+    padding:
+        0 20px;
+
+    background:
+        #101010;
+
     border-bottom:
         2px solid #555;
 
-    gap: 5px;
-}
-
-#cameraHeader button {
-
-    margin: 2px;
-
-    padding:
-        9px 12px;
-
-    font-size: 13px;
+    font-size: 22px;
 }
 
 
-/* =================================================
-   СОДЕРЖИМОЕ КАМЕР
-================================================= */
+#cameraContent,
+#ventContent {
+    position: absolute;
 
-#cameraContent {
-
-    width: 100%;
-
-    height:
-        calc(100% - 55px);
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     display: flex;
 
-    gap: 10px;
+    flex-direction: column;
 
-    padding-top: 10px;
+    align-items: center;
+
+    justify-content: center;
 }
 
 
 /* =================================================
-   ДИСПЛЕЙ КАМЕРЫ
+   ИЗОБРАЖЕНИЕ КАМЕРЫ
 ================================================= */
-
-#cameraScreen {
-
-    position: relative;
-
-    flex: 1;
-
-    min-width: 0;
-
-    height: 100%;
-
-    background: #050505;
-
-    border: 2px solid #777;
-
-    overflow: hidden;
-}
-
-
-/*
-   ФОН ДИСПЛЕЯ.
-
-   Он находится самым нижним слоем.
-*/
-
-#cameraBackground {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    z-index: 1;
-
-    display: block;
-}
-
-
-/*
-   ФОТО КАМЕРЫ.
-
-   Оно находится поверх background.
-*/
 
 #cameraImage {
+    position: relative;
 
-    position: absolute;
+    width: min(75vw, 900px);
 
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    z-index: 2;
-
-    display: block;
-
-    image-rendering: auto;
-}
-
-
-/*
-   ЛЁГКИЙ ЭФФЕКТ ЭКРАНА
-*/
-
-#cameraNoise {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 4;
-
-    pointer-events: none;
-
-    opacity: .12;
+    height: min(55vh, 520px);
 
     background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 3px,
-            rgba(255,255,255,.08) 4px
-        );
-
-    animation:
-        cameraNoiseMove .2s infinite;
-}
-
-@keyframes cameraNoiseMove {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(2px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-
-/* =================================================
-   ЛИЧИ НА КАМЕРЕ
-================================================= */
-
-#cameraLichi {
-
-    position: absolute;
-
-    display: none;
-
-    left: 50%;
-
-    top: 50%;
-
-    width: 170px;
-
-    height: auto;
-
-    transform:
-        translate(-50%, -50%);
-
-    z-index: 6;
-
-    pointer-events: none;
-}
-
-
-/* =================================================
-   НАЗВАНИЕ КАМЕРЫ
-================================================= */
-
-#cameraName {
-
-    position: absolute;
-
-    left: 10px;
-    top: 10px;
-
-    padding:
-        7px 12px;
-
-    background:
-        rgba(0,0,0,.8);
-
-    z-index: 10;
-
-    font-weight: bold;
-}
-
-
-/* =================================================
-   СПИСОК КАМЕР
-================================================= */
-
-#cameraList {
-
-    width: 180px;
-
-    height: 100%;
-
-    overflow-y: auto;
-
-    overflow-x: hidden;
-
-    padding: 5px;
-
-    background: #171717;
+        center / cover
+        no-repeat;
 
     border:
-        2px solid #666;
+        2px solid #555;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,.1);
 }
 
-#cameraList button {
 
-    display: block;
+/* =================================================
+   КАРТА КАМЕР
+================================================= */
 
-    width: 100%;
+#cameraMap {
+    width: min(90vw, 900px);
 
-    margin: 5px 0;
+    display: flex;
 
-    padding: 14px 5px;
+    justify-content: center;
 
-    background: #222;
+    flex-wrap: wrap;
+
+    margin-top: 12px;
 }
 
-#cameraList button.active {
 
-    background: #555;
-
-    border-color: #fff;
+#cameraMap button {
+    min-width: 90px;
 }
 
 
@@ -711,149 +499,113 @@ button.locked {
    ВЕНТИЛЯЦИЯ
 ================================================= */
 
-#ventContent {
+#ventImage {
+    position: relative;
 
-    position: absolute;
+    width: min(70vw, 800px);
 
-    left: 10px;
-    right: 10px;
+    height: min(45vh, 420px);
 
-    top: 65px;
-    bottom: 10px;
+    background:
+        center / cover
+        no-repeat;
 
-    display: none;
+    border:
+        2px solid #555;
 }
 
 
 #ventMap {
-
-    position: relative;
-
-    width: 100%;
-
-    height: 85%;
-
-    background: #080808;
-
-    border:
-        2px solid #666;
-
-    overflow: hidden;
-}
-
-
-.ventPoint {
-
-    position: absolute;
-
-    width: 80px;
-
-    height: 50px;
-
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    background: #151515;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 12px;
+
+    width: 90%;
+}
+
+
+.ventNode {
+    padding:
+        12px 18px;
+
+    background:
+        #151515;
 
     border:
-        2px solid #888;
-
-    z-index: 3;
+        2px solid #777;
 }
 
-
-#vent1 {
-    left: 10%;
-    top: 15%;
-}
-
-#vent2 {
-    left: 40%;
-    top: 15%;
-}
-
-#vent3 {
-    left: 70%;
-    top: 15%;
-}
-
-#vent4 {
-    left: 40%;
-    top: 50%;
-}
-
-#ventOffice {
-    left: 40%;
-    top: 80%;
-}
-
-
-/* ЛИНИИ */
 
 .ventLine {
-
-    position: absolute;
-
-    height: 3px;
-
-    background: #666;
-
-    transform-origin: left center;
-}
-
-.line1 {
-
-    width: 30%;
-
-    left: 18%;
-
-    top: 25%;
-}
-
-.line2 {
-
-    width: 30%;
-
-    left: 48%;
-
-    top: 25%;
-}
-
-.line3 {
-
-    width: 25%;
-
-    left: 48%;
-
-    top: 60%;
-
-    transform:
-        rotate(90deg);
-}
-
-.line4 {
-
-    width: 35%;
-
-    left: 48%;
-
-    top: 75%;
-
-    transform:
-        rotate(90deg);
+    font-size: 25px;
 }
 
 
-#ventStatus {
+/* =================================================
+   ПЕРЕГОРОДКИ
+================================================= */
 
-    text-align: center;
+#barriers {
+    display: flex;
 
-    padding: 12px;
+    justify-content: center;
 
-    font-weight: bold;
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+}
+
+
+.barrier {
+    min-width: 160px;
+}
+
+
+.barrier.closed {
+    background: #321010;
+
+    border-color: #aa4444;
+}
+
+
+.barrier span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    opacity: .7;
+}
+
+
+/* =================================================
+   ВСПЫШКА
+================================================= */
+
+#flash {
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 500;
+
+    transition:
+        opacity .08s linear;
 }
 
 
@@ -861,107 +613,88 @@ button.locked {
    GAME OVER / WIN
 ================================================= */
 
-#gameOver,
-#winScreen {
-
+.overlay {
     position: fixed;
 
     inset: 0;
 
-    width: 100vw;
-    height: 100vh;
-
-    display: none;
-
-    justify-content: center;
+    display: flex;
 
     align-items: center;
 
-    text-align: center;
+    justify-content: center;
 
-    background: #000;
+    background:
+        rgba(0,0,0,.9);
 
     z-index: 1000;
 }
 
-.resultWindow {
 
-    padding: 30px;
+.gameOverBox {
+    width: min(90vw, 500px);
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: #050505;
+
+    border:
+        2px solid #555;
 }
 
-.resultWindow h1 {
 
-    font-size:
-        clamp(40px, 10vw, 90px);
-
-    margin-bottom: 25px;
+.gameOverBox h1 {
+    font-size: 40px;
 }
 
 
 /* =================================================
-   ТЕЛЕФОН
+   МОБИЛЬНЫЕ
 ================================================= */
 
-@media (max-width: 700px) {
+@media
+(max-width: 700px) {
 
-    #cameraPanel {
+    #view {
+        left: 2%;
+        right: 2%;
 
-        height: 94vh;
+        top: 7%;
+        bottom: 18%;
     }
 
-    #cameraContent {
 
-        flex-direction: column;
+    #cameraImage {
+        width: 90vw;
+
+        height: 45vh;
     }
 
-    #cameraScreen {
 
-        height: 65%;
+    #ventImage {
+        width: 90vw;
 
-        flex: none;
+        height: 38vh;
     }
 
-    #cameraList {
 
-        width: 100%;
-
-        height: 35%;
-
-        display: flex;
-
-        flex-direction: row;
-
-        overflow-x: auto;
-
-        overflow-y: hidden;
-
-        gap: 5px;
-    }
-
-    #cameraList button {
-
-        flex:
-            0 0 90px;
-
-        height: 45px;
-    }
-
-    #cameraHeader button {
-
-        font-size: 10px;
+    #cameraMap button {
+        min-width: 70px;
 
         padding:
-            8px 7px;
+            10px 12px;
+
+        font-size: 12px;
     }
+
 
     #bottomControls button {
+        padding:
+            8px 10px;
 
-        min-width: 110px;
+        font-size: 11px;
     }
 
-    #status {
-
-        bottom: 125px;
-    }
-
-    }
+}
