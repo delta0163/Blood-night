@@ -1,11 +1,9 @@
 * {
     box-sizing: border-box;
-
     margin: 0;
     padding: 0;
 
-    -webkit-tap-highlight-color:
-        transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -24,17 +22,21 @@ body {
 }
 
 
-button {
+/* =================================================
+   КНОПКИ
+================================================= */
 
-    border: 2px solid #777;
+button {
 
     background: #111;
 
-    color: white;
+    color: #fff;
 
-    padding: 13px 20px;
+    border: 2px solid #777;
 
-    margin: 6px;
+    padding: 12px 20px;
+
+    margin: 5px;
 
     font-size: 16px;
 
@@ -43,7 +45,6 @@ button {
     touch-action: manipulation;
 }
 
-
 button:active {
 
     background: #444;
@@ -51,18 +52,18 @@ button:active {
     transform: scale(.96);
 }
 
-
-button:disabled {
+button.locked {
 
     opacity: .35;
+
 }
 
 
-/* =========================
-   ОБЩИЕ ЭКРАНЫ
-========================= */
+/* =================================================
+   ГЛАВНОЕ МЕНЮ
+================================================= */
 
-.screen {
+#mainMenu {
 
     position: fixed;
 
@@ -71,48 +72,70 @@ button:disabled {
     width: 100vw;
     height: 100vh;
 
-    background: #000;
-
     display: flex;
+
+    flex-direction: column;
 
     justify-content: center;
 
     align-items: center;
 
+    text-align: center;
+
+    background: #000;
+
     z-index: 1000;
 }
 
-
-/* =========================
-   МЕНЮ
-========================= */
-
-.menuBox {
-
-    width: min(90vw, 600px);
-
-    padding: 30px;
-
-    text-align: center;
-}
-
-
-.menuBox h1 {
+#mainMenu h1 {
 
     font-size:
         clamp(30px, 7vw, 70px);
 
     letter-spacing: 5px;
 
-    margin-bottom: 45px;
+    margin-bottom: 40px;
 }
 
 
-.menuBox h2 {
+/* =================================================
+   МЕНЮ НОЧЕЙ / НАСТРОЕК
+================================================= */
+
+#nightsMenu,
+#settingsMenu {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #000;
+
+    z-index: 1000;
+}
+
+.menuWindow {
+
+    width: min(90%, 600px);
+
+    text-align: center;
+
+    padding: 25px;
+}
+
+.menuWindow h2 {
 
     margin-bottom: 25px;
 }
-
 
 #nightsList {
 
@@ -127,35 +150,46 @@ button:disabled {
 }
 
 
-.nightButton {
+/* =================================================
+   ЗВОНОК
+================================================= */
 
-    margin: 2px;
+#phoneScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #000;
+
+    z-index: 900;
 }
 
-
-/* =========================
-   ТЕЛЕФОН
-========================= */
-
-.phoneBox {
+.phoneWindow {
 
     text-align: center;
-
-    padding: 30px;
 }
 
-
-.phoneBox h2 {
+.phoneWindow h2 {
 
     font-size: 40px;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 
-/* =========================
+/* =================================================
    ИГРА
-========================= */
+================================================= */
 
 #game {
 
@@ -166,15 +200,17 @@ button:disabled {
     width: 100vw;
     height: 100vh;
 
-    background: #000;
+    display: none;
 
     overflow: hidden;
+
+    background: #000;
 }
 
 
-/* =========================
+/* =================================================
    HUD
-========================= */
+================================================= */
 
 #hud {
 
@@ -187,6 +223,8 @@ button:disabled {
 
     height: 55px;
 
+    padding: 0 20px;
+
     display: flex;
 
     justify-content:
@@ -194,23 +232,21 @@ button:disabled {
 
     align-items: center;
 
-    padding: 0 20px;
-
     background:
         linear-gradient(
             rgba(0,0,0,.8),
             transparent
         );
 
-    z-index: 20;
+    z-index: 30;
 
     font-size: 20px;
 }
 
 
-/* =========================
+/* =================================================
    ОФИС
-========================= */
+================================================= */
 
 #view {
 
@@ -218,18 +254,22 @@ button:disabled {
 
     inset: 0;
 
-    background:
-        url("images/office_front.png")
-        center / cover
-        no-repeat;
+    background-image:
+        url("images/office_front.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
 
     overflow: hidden;
 }
 
 
-/* =========================
-   ЛИЧИ
-========================= */
+/* =================================================
+   ЛИЧИ В ОФИСЕ
+================================================= */
 
 #lichi {
 
@@ -250,9 +290,9 @@ button:disabled {
 }
 
 
-/* =========================
+/* =================================================
    ВСПЫШКА
-========================= */
+================================================= */
 
 #flash {
 
@@ -270,41 +310,41 @@ button:disabled {
 }
 
 
-/* =========================
-   STATUS
-========================= */
+/* =================================================
+   СТАТУС
+================================================= */
 
 #status {
 
     position: absolute;
 
-    left: 50%;
-
     bottom: 145px;
+
+    left: 50%;
 
     transform:
         translateX(-50%);
 
-    z-index: 30;
-
-    padding: 8px 15px;
+    padding: 7px 14px;
 
     background:
-        rgba(0,0,0,.7);
+        rgba(0,0,0,.75);
+
+    z-index: 30;
 
     font-size: 14px;
 }
 
 
-/* =========================
+/* =================================================
    ПОВОРОТЫ
-========================= */
+================================================= */
 
 #officeControls {
 
     position: absolute;
 
-    bottom: 65px;
+    bottom: 60px;
 
     left: 0;
 
@@ -314,39 +354,31 @@ button:disabled {
 
     justify-content: center;
 
-    z-index: 30;
+    z-index: 40;
 }
-
 
 #officeControls button {
 
-    min-width: 80px;
+    width: 70px;
 
-    background:
-        rgba(0,0,0,.8);
+    height: 45px;
+
+    padding: 0;
+
+    font-size: 22px;
 }
 
 
-#officeControls span {
-
-    display: block;
-
-    font-size: 10px;
-
-    margin-top: 4px;
-}
-
-
-/* =========================
+/* =================================================
    НИЖНИЕ КНОПКИ
-========================= */
+================================================= */
 
 #bottomControls {
 
     position: absolute;
 
-    bottom: 0;
     left: 0;
+    bottom: 0;
 
     width: 100%;
 
@@ -364,16 +396,17 @@ button:disabled {
     z-index: 100;
 }
 
-
 #bottomControls button {
 
     min-width: 130px;
+
+    margin: 3px;
 }
 
 
-/* =========================
+/* =================================================
    МОНИТОР
-========================= */
+================================================= */
 
 #cameraPanel {
 
@@ -382,50 +415,29 @@ button:disabled {
     left: 0;
     bottom: 0;
 
-    width: 100%;
+    width: 100vw;
 
     height: 90vh;
 
     background: #111;
 
-    z-index: 500;
-
-    display: none;
-
-    border-top:
-        3px solid #777;
+    border-top: 3px solid #777;
 
     padding: 10px;
 
-    animation:
-        monitorUp .25s ease-out;
+    display: none;
+
+    z-index: 500;
 }
 
 
-@keyframes monitorUp {
+/* =================================================
+   ШАПКА МОНИТОРА
+================================================= */
 
-    from {
+#cameraHeader {
 
-        transform:
-            translateY(100%);
-
-    }
-
-    to {
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* =========================
-   ВЕРХНЯЯ ПАНЕЛЬ
-========================= */
-
-#cameraTop {
+    width: 100%;
 
     height: 55px;
 
@@ -436,29 +448,30 @@ button:disabled {
     justify-content:
         space-between;
 
-    gap: 5px;
-
     border-bottom:
         2px solid #555;
+
+    gap: 5px;
 }
 
-
-#cameraTop button {
+#cameraHeader button {
 
     margin: 2px;
 
     padding:
-        10px 12px;
+        9px 12px;
 
     font-size: 13px;
 }
 
 
-/* =========================
-   КАМЕРЫ
-========================= */
+/* =================================================
+   ЭКРАН КАМЕР
+================================================= */
 
 #cameraContent {
+
+    width: 100%;
 
     height:
         calc(100% - 55px);
@@ -471,6 +484,13 @@ button:disabled {
 }
 
 
+/*
+    ВАЖНО:
+    Это настоящий IMG,
+    поэтому cam01.png и остальные
+    должны отображаться напрямую.
+*/
+
 #cameraScreen {
 
     position: relative;
@@ -479,46 +499,37 @@ button:disabled {
 
     min-width: 0;
 
+    height: 100%;
+
     background: #000;
 
-    border:
-        2px solid #777;
+    border: 2px solid #777;
 
     overflow: hidden;
 }
 
 
-#cameraScreenImage {
+#cameraImage {
 
     position: absolute;
 
     inset: 0;
 
-    background-size: cover;
+    width: 100%;
 
-    background-position: center;
+    height: 100%;
 
-    background-repeat: no-repeat;
+    object-fit: cover;
+
+    display: block;
+
+    z-index: 1;
 }
 
 
-#cameraScreenName {
-
-    position: absolute;
-
-    top: 10px;
-    left: 10px;
-
-    padding: 8px 12px;
-
-    background:
-        rgba(0,0,0,.8);
-
-    font-weight: bold;
-
-    z-index: 3;
-}
-
+/* =================================================
+   ЛИЧИ НА КАМЕРЕ
+================================================= */
 
 #cameraLichi {
 
@@ -526,10 +537,13 @@ button:disabled {
 
     display: none;
 
-    width: 150px;
-
     left: 50%;
+
     top: 50%;
+
+    width: 170px;
+
+    height: auto;
 
     transform:
         translate(-50%, -50%);
@@ -540,9 +554,32 @@ button:disabled {
 }
 
 
-/* =========================
+/* =================================================
+   НАЗВАНИЕ КАМЕРЫ
+================================================= */
+
+#cameraName {
+
+    position: absolute;
+
+    left: 10px;
+    top: 10px;
+
+    padding:
+        7px 12px;
+
+    background:
+        rgba(0,0,0,.8);
+
+    z-index: 10;
+
+    font-weight: bold;
+}
+
+
+/* =================================================
    СПИСОК КАМЕР
-========================= */
+================================================= */
 
 #cameraList {
 
@@ -562,7 +599,6 @@ button:disabled {
         2px solid #666;
 }
 
-
 #cameraList button {
 
     display: block;
@@ -576,22 +612,19 @@ button:disabled {
     background: #222;
 }
 
-
 #cameraList button.active {
 
     background: #555;
 
-    border-color: white;
+    border-color: #fff;
 }
 
 
-/* =========================
+/* =================================================
    ВЕНТИЛЯЦИЯ
-========================= */
+================================================= */
 
 #ventContent {
-
-    display: none;
 
     position: absolute;
 
@@ -600,6 +633,8 @@ button:disabled {
 
     top: 65px;
     bottom: 10px;
+
+    display: none;
 }
 
 
@@ -608,12 +643,15 @@ button:disabled {
     position: relative;
 
     width: 100%;
+
     height: 85%;
 
     background: #080808;
 
     border:
         2px solid #666;
+
+    overflow: hidden;
 }
 
 
@@ -622,6 +660,7 @@ button:disabled {
     position: absolute;
 
     width: 80px;
+
     height: 50px;
 
     display: flex;
@@ -634,6 +673,8 @@ button:disabled {
 
     border:
         2px solid #888;
+
+    z-index: 3;
 }
 
 
@@ -643,13 +684,11 @@ button:disabled {
     top: 15%;
 }
 
-
 #vent2 {
 
     left: 40%;
     top: 15%;
 }
-
 
 #vent3 {
 
@@ -657,13 +696,11 @@ button:disabled {
     top: 15%;
 }
 
-
 #vent4 {
 
     left: 40%;
     top: 50%;
 }
-
 
 #ventOffice {
 
@@ -672,128 +709,177 @@ button:disabled {
 }
 
 
+/* ЛИНИИ КАРТЫ */
+
+.ventLine {
+
+    position: absolute;
+
+    height: 3px;
+
+    background: #666;
+
+    transform-origin: left center;
+}
+
+.line1 {
+
+    width: 30%;
+
+    left: 18%;
+
+    top: 25%;
+}
+
+.line2 {
+
+    width: 30%;
+
+    left: 48%;
+
+    top: 25%;
+}
+
+.line3 {
+
+    width: 25%;
+
+    left: 48%;
+
+    top: 60%;
+
+    transform:
+        rotate(90deg);
+}
+
+.line4 {
+
+    width: 35%;
+
+    left: 48%;
+
+    top: 75%;
+
+    transform:
+        rotate(90deg);
+}
+
+
 #ventStatus {
 
     text-align: center;
 
     padding: 12px;
+
+    font-weight: bold;
 }
 
 
-/* =========================
-   GAME OVER / ПОБЕДА
-========================= */
+/* =================================================
+   GAME OVER / WIN
+================================================= */
 
-.gameOverBox {
+#gameOver,
+#winScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
 
     text-align: center;
+
+    background: #000;
+
+    z-index: 1000;
 }
 
+.resultWindow {
 
-.gameOverBox h1 {
+    padding: 30px;
+}
+
+.resultWindow h1 {
 
     font-size:
-        clamp(40px, 10vw, 100px);
+        clamp(40px, 10vw, 90px);
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 
-/* =========================
+/* =================================================
    ТЕЛЕФОН
-========================= */
+================================================= */
 
 @media (max-width: 700px) {
 
     #cameraPanel {
 
         height: 94vh;
-
     }
-
-
-    #cameraTop {
-
-        height: 50px;
-
-    }
-
-
-    #cameraTop button {
-
-        font-size: 10px;
-
-        padding:
-            8px 7px;
-
-    }
-
 
     #cameraContent {
 
-        flex-direction:
-            column;
-
+        flex-direction: column;
     }
-
 
     #cameraScreen {
 
-        height: 64%;
+        height: 65%;
 
         flex: none;
-
     }
-
 
     #cameraList {
 
         width: 100%;
 
-        height: 36%;
+        height: 35%;
 
         display: flex;
+
+        flex-direction: row;
 
         overflow-x: auto;
 
         overflow-y: hidden;
 
         gap: 5px;
-
     }
-
 
     #cameraList button {
 
-        min-width: 90px;
+        flex:
+            0 0 90px;
 
         height: 45px;
-
     }
 
+    #cameraHeader button {
 
-    #officeControls button {
+        font-size: 10px;
 
-        min-width: 65px;
-
-        padding: 8px;
-
+        padding:
+            8px 7px;
     }
-
 
     #bottomControls button {
 
         min-width: 110px;
-
-        padding: 10px;
-
     }
-
 
     #status {
 
         bottom: 125px;
-
     }
 
-    }
+}
