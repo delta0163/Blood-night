@@ -2,12 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -15,6 +12,8 @@ user-scalable=no">
 </head>
 
 <body>
+
+<!-- ================= МЕНЮ ================= -->
 
 <div id="mainMenu" class="screen">
 
@@ -29,9 +28,10 @@ user-scalable=no">
         <button id="settingsButton">НАСТРОЙКИ</button>
 
     </div>
-
 </div>
 
+
+<!-- ================= НОЧИ ================= -->
 
 <div id="nightsMenu" class="screen hidden">
 
@@ -44,9 +44,10 @@ user-scalable=no">
         <button id="closeNights">НАЗАД</button>
 
     </div>
-
 </div>
 
+
+<!-- ================= НАСТРОЙКИ ================= -->
 
 <div id="settingsMenu" class="screen hidden">
 
@@ -54,22 +55,19 @@ user-scalable=no">
 
         <h2>НАСТРОЙКИ</h2>
 
-        <button id="fullscreenButton">
-            ПОЛНЫЙ ЭКРАН
-        </button>
+        <button id="fullscreenButton">ПОЛНЫЙ ЭКРАН</button>
 
         <button id="resetProgress">
             СБРОСИТЬ ПРОГРЕСС
         </button>
 
-        <button id="closeSettings">
-            НАЗАД
-        </button>
+        <button id="closeSettings">НАЗАД</button>
 
     </div>
-
 </div>
 
+
+<!-- ================= ЗВОНОК ================= -->
 
 <div id="phoneScreen" class="screen hidden">
 
@@ -84,9 +82,10 @@ user-scalable=no">
         </button>
 
     </div>
-
 </div>
 
+
+<!-- ================= ИГРА ================= -->
 
 <div id="game" class="hidden">
 
@@ -95,17 +94,23 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-        src="images/lichi.png"
-        alt="Личи">
+             src="images/lichi.png"
+             alt="Личи">
 
         <img id="pancake"
-        src="images/pancake.png"
-        alt="Панкейк">
+             src="images/pancake.png"
+             alt="Панкейк">
+
+        <img id="nemka"
+             src="images/nemka.png"
+             alt="Немка">
 
         <div id="flash"></div>
 
     </div>
 
+
+    <!-- HUD -->
 
     <div id="hud">
 
@@ -116,10 +121,10 @@ user-scalable=no">
     </div>
 
 
-    <div id="status">
-        ОФИС
-    </div>
+    <div id="status">ОФИС</div>
 
+
+    <!-- ПОВОРОТЫ -->
 
     <div id="officeControls">
 
@@ -131,6 +136,8 @@ user-scalable=no">
 
     </div>
 
+
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -149,7 +156,7 @@ user-scalable=no">
     </div>
 
 
-    <!-- КАМЕРЫ -->
+    <!-- ================= КАМЕРЫ ================= -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -157,14 +164,14 @@ user-scalable=no">
 
             <span>СИСТЕМА КАМЕР</span>
 
-            <button id="closeCameraPanel">
-                ✕
-            </button>
+            <button id="closeCameraPanel">✕</button>
 
         </div>
 
 
         <div class="cameraBody">
+
+            <!-- КАРТИНКА СЛЕВА -->
 
             <div id="cameraImage">
 
@@ -175,44 +182,34 @@ user-scalable=no">
                 </div>
 
                 <img id="cameraLichi"
-                src="images/lichi.png"
-                alt="Личи">
+                     src="images/lichi.png"
+                     alt="Личи">
 
                 <img id="cameraPancake"
-                src="images/pancake.png"
-                alt="Панкейк">
+                     src="images/pancake.png"
+                     alt="Панкейк">
+
+                <img id="cameraNemka"
+                     src="images/nemka.png"
+                     alt="Немка">
 
             </div>
 
 
+            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
+
             <div id="cameraMap">
 
-                <button data-camera="cam01">
-                    CAM 01
-                </button>
+                <button data-camera="cam01">CAM 01</button>
+                <button data-camera="cam02">CAM 02</button>
+                <button data-camera="cam03">CAM 03</button>
+                <button data-camera="cam04">CAM 04</button>
+                <button data-camera="cam05">CAM 05</button>
+                <button data-camera="cam06">CAM 06</button>
+                <button data-camera="cam07">CAM 07</button>
 
-                <button data-camera="cam02">
-                    CAM 02
-                </button>
-
-                <button data-camera="cam03">
-                    CAM 03
-                </button>
-
-                <button data-camera="cam04">
-                    CAM 04
-                </button>
-
-                <button data-camera="cam05">
-                    CAM 05
-                </button>
-
-                <button data-camera="cam06">
-                    CAM 06
-                </button>
-
-                <button data-camera="cam07">
-                    CAM 07
+                <button id="catButton">
+                    МЯУКАНЬЕ
                 </button>
 
             </div>
@@ -222,19 +219,15 @@ user-scalable=no">
     </div>
 
 
-    <!-- ЭНЕРГИЯ -->
+    <!-- ================= ЭНЕРГИЯ ================= -->
 
     <div id="energyPanel" class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>
-                ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ
-            </span>
+            <span>ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ</span>
 
-            <button id="closeEnergyPanel">
-                ✕
-            </button>
+            <button id="closeEnergyPanel">✕</button>
 
         </div>
 
@@ -251,6 +244,8 @@ user-scalable=no">
 
             </div>
 
+
+            <!-- РЫЧАГ -->
 
             <div id="leverArea">
 
@@ -275,6 +270,8 @@ user-scalable=no">
             </div>
 
 
+            <!-- НАПРАВЛЕНИЯ -->
+
             <div id="energyDirections">
 
                 <div class="energyDirection cameraDirection">
@@ -282,7 +279,7 @@ user-scalable=no">
                     <strong>КАМЕРА</strong>
 
                     <span>
-                        ВСПЫШКА ДОСТУПНА
+                        ВСПЫШКА И КАМЕРЫ
                     </span>
 
                 </div>
@@ -293,7 +290,18 @@ user-scalable=no">
                     <strong>ОКНО</strong>
 
                     <span>
-                        ЗАЩИТА ОКНА ДОСТУПНА
+                        ЗАЩИТА ПЕРЕДНЕГО ОКНА
+                    </span>
+
+                </div>
+
+
+                <div class="energyDirection doorDirection">
+
+                    <strong>ПРАВАЯ ДВЕРЬ</strong>
+
+                    <span>
+                        ДВЕРЬ ЗАКРЫТА
                     </span>
 
                 </div>
@@ -310,7 +318,7 @@ user-scalable=no">
     </div>
 
 
-    <!-- GAME OVER -->
+    <!-- ================= GAME OVER ================= -->
 
     <div id="gameOver" class="overlay hidden">
 
@@ -327,7 +335,7 @@ user-scalable=no">
     </div>
 
 
-    <!-- WIN -->
+    <!-- ================= ПОБЕДА ================= -->
 
     <div id="winScreen" class="overlay hidden">
 
@@ -348,33 +356,32 @@ user-scalable=no">
 </div>
 
 
-<!-- ЗВУКИ -->
+<!-- ================= ЗВУКИ ================= -->
 
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
+       src="sounds/scream.mp3"></audio>
 
-<audio id="ventAudio"
-src="sounds/vent.mp3"
-loop></audio>
+<audio id="catAudio"
+       src="sounds/cat.mp3"></audio>
 
 
 <script src="game.js"></script>
 
 </body>
-</html>
+            </html>
