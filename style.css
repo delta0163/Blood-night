@@ -24,6 +24,7 @@ button {
     cursor: pointer;
 
     color: white;
+
     background: #111;
 
     border: 2px solid #777;
@@ -42,11 +43,12 @@ button:active {
 }
 
 
-/* ================= ЭКРАНЫ ================= */
+/* =========================
+   ЭКРАНЫ
+========================= */
 
 .screen {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -61,7 +63,9 @@ button:active {
 }
 
 
-/* ================= МЕНЮ ================= */
+/* =========================
+   МЕНЮ
+========================= */
 
 #mainMenu {
     background: #050505;
@@ -69,7 +73,6 @@ button:active {
 
 .menuBackground {
     position: absolute;
-
     inset: 0;
 
     background:
@@ -119,7 +122,9 @@ button:active {
 }
 
 
-/* ================= НОЧИ ================= */
+/* =========================
+   НОЧИ
+========================= */
 
 #nightsList {
     display: grid;
@@ -143,7 +148,9 @@ button:active {
 }
 
 
-/* ================= ЗВОНОК ================= */
+/* =========================
+   ЗВОНОК
+========================= */
 
 #phoneScreen {
     background: #000;
@@ -156,7 +163,9 @@ button:active {
 }
 
 
-/* ================= ИГРА ================= */
+/* =========================
+   ИГРА
+========================= */
 
 #game {
     position: fixed;
@@ -198,7 +207,9 @@ button:active {
 }
 
 
-/* ================= ПЕРСОНАЖИ ================= */
+/* =========================
+   ПЕРСОНАЖИ
+========================= */
 
 #lichi,
 #pancake,
@@ -230,7 +241,9 @@ button:active {
 }
 
 
-/* ================= HUD ================= */
+/* =========================
+   HUD
+========================= */
 
 #hud {
     position: absolute;
@@ -257,21 +270,24 @@ button:active {
     top: 55px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     z-index: 50;
 
     font-size: 16px;
 
-    text-align: center;
-
     text-shadow:
         2px 2px 5px #000;
+
+    text-align: center;
+
+    width: 90%;
 }
 
 
-/* ================= ПОВОРОТЫ ================= */
+/* =========================
+   ПОВОРОТЫ
+========================= */
 
 #officeControls {
     position: absolute;
@@ -280,8 +296,7 @@ button:active {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
@@ -298,7 +313,9 @@ button:active {
 }
 
 
-/* ================= НИЖНИЕ КНОПКИ ================= */
+/* =========================
+   НИЖНИЕ КНОПКИ
+========================= */
 
 #bottomControls {
     position: absolute;
@@ -307,8 +324,7 @@ button:active {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
@@ -321,12 +337,12 @@ button:active {
 
 #bottomControls button {
     flex: 1;
-
-    min-width: 0;
 }
 
 
-/* ================= ПАНЕЛИ ================= */
+/* =========================
+   ПАНЕЛИ
+========================= */
 
 .panel {
     position: absolute;
@@ -366,7 +382,9 @@ button:active {
 }
 
 
-/* ================= КАМЕРЫ ================= */
+/* =========================
+   КАМЕРЫ
+========================= */
 
 .cameraBody {
     flex: 1;
@@ -428,6 +446,9 @@ button:active {
     z-index: 30;
 
     font-size: 20px;
+
+    text-shadow:
+        2px 2px 5px #000;
 }
 
 #cameraLichi,
@@ -449,10 +470,12 @@ button:active {
 }
 
 
-/* ВЕРТИКАЛЬНЫЙ СПИСОК */
+/* =========================
+   ВЕРТИКАЛЬНЫЙ СПИСОК
+========================= */
 
 #cameraMap {
-    width: 120px;
+    width: 125px;
 
     display: flex;
 
@@ -481,16 +504,15 @@ button:active {
     white-space: nowrap;
 }
 
-#catButton {
+#meowButton {
     border-color: #aaa;
-
-    margin-top: 8px;
-
-    font-size: 12px;
+    background: #181818;
 }
 
 
-/* ================= ЭНЕРГИЯ ================= */
+/* =========================
+   ЭНЕРГИЯ
+========================= */
 
 #energyContent {
     flex: 1;
@@ -525,7 +547,9 @@ button:active {
 }
 
 
-/* ================= РЫЧАГ ================= */
+/* =========================
+   РЫЧАГ
+========================= */
 
 #leverArea {
     width: min(90%, 420px);
@@ -556,8 +580,7 @@ button:active {
     left: 50%;
     top: 20px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width: 50px;
     height: 80px;
@@ -590,18 +613,23 @@ button:active {
 
 #leverProgressBar {
     width: 0%;
+
     height: 100%;
 
     background: #ddd;
+
+    transition: width .05s linear;
 }
 
 
-/* ================= НАПРАВЛЕНИЯ ================= */
+/* =========================
+   НАПРАВЛЕНИЯ ЭНЕРГИИ
+========================= */
 
 #energyDirections {
     display: flex;
 
-    gap: 15px;
+    gap: 10px;
 
     width: min(95%, 700px);
 }
@@ -627,7 +655,7 @@ button:active {
 }
 
 .energyDirection span {
-    font-size: 12px;
+    font-size: 11px;
 
     color: #aaa;
 }
@@ -641,7 +669,9 @@ button:active {
 }
 
 
-/* ================= GAME OVER ================= */
+/* =========================
+   ОБЩИЙ OVERLAY
+========================= */
 
 .overlay {
     position: absolute;
@@ -650,7 +680,7 @@ button:active {
 
     z-index: 500;
 
-    background: rgba(0,0,0,.9);
+    background: rgba(0,0,0,.92);
 
     display: flex;
 
@@ -666,7 +696,94 @@ button:active {
 }
 
 
-/* ================= МОБИЛЬНЫЙ ================= */
+/* =========================
+   ПРОВОДА
+========================= */
+
+#wirePanel {
+    z-index: 800;
+}
+
+#wireBox {
+    width: min(92%, 600px);
+
+    padding: 25px;
+
+    border: 2px solid #777;
+
+    background: #080808;
+
+    text-align: center;
+}
+
+#wireBoard {
+    display: flex;
+
+    justify-content: space-between;
+
+    width: min(90%, 400px);
+
+    margin: 25px auto;
+}
+
+.wireColumn {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.wire {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    padding: 0;
+
+    font-size: 28px;
+}
+
+.wire.blue {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.wire.red {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.wire.yellow {
+    border-color: #f1c40f;
+    color: #f1c40f;
+}
+
+.wire.green {
+    border-color: #2ecc71;
+    color: #2ecc71;
+}
+
+.wire.selected {
+    box-shadow:
+        0 0 15px white;
+    transform: scale(1.1);
+}
+
+.wire.connected {
+    opacity: .25;
+    pointer-events: none;
+}
+
+#wireStatus {
+    min-height: 25px;
+}
+
+
+/* =========================
+   МОБИЛЬНЫЙ
+========================= */
 
 @media (max-width: 600px) {
 
@@ -677,6 +794,10 @@ button:active {
     #bottomControls button {
         padding: 10px 5px;
         font-size: 12px;
+    }
+
+    #officeControls {
+        bottom: 100px;
     }
 
     .panel {
@@ -698,4 +819,9 @@ button:active {
     .energyDirection {
         width: 100%;
     }
-}
+
+    #wireBox {
+        padding: 15px;
+    }
+
+    }
