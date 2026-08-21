@@ -24,7 +24,6 @@ button {
     cursor: pointer;
 
     color: white;
-
     background: #111;
 
     border: 2px solid #777;
@@ -43,9 +42,7 @@ button:active {
 }
 
 
-/* =========================
-   ЭКРАНЫ
-========================= */
+/* ЭКРАНЫ */
 
 .screen {
     position: fixed;
@@ -63,9 +60,7 @@ button:active {
 }
 
 
-/* =========================
-   МЕНЮ
-========================= */
+/* МЕНЮ */
 
 #mainMenu {
     background: #050505;
@@ -115,6 +110,7 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
+    margin-bottom: 20px;
 }
 
 .menuContent button {
@@ -122,9 +118,7 @@ button:active {
 }
 
 
-/* =========================
-   НОЧИ
-========================= */
+/* НОЧИ */
 
 #nightsList {
     display: grid;
@@ -148,9 +142,7 @@ button:active {
 }
 
 
-/* =========================
-   ЗВОНОК
-========================= */
+/* ЗВОНОК */
 
 #phoneScreen {
     background: #000;
@@ -162,10 +154,18 @@ button:active {
     width: min(90%, 500px);
 }
 
+.phoneBox h2 {
+    font-size: 35px;
+}
 
-/* =========================
-   ИГРА
-========================= */
+.phoneBox p {
+    font-size: 20px;
+
+    margin: 30px;
+}
+
+
+/* ИГРА */
 
 #game {
     position: fixed;
@@ -207,13 +207,10 @@ button:active {
 }
 
 
-/* =========================
-   ПЕРСОНАЖИ
-========================= */
+/* ПЕРСОНАЖИ */
 
 #lichi,
-#pancake,
-#nemka {
+#pancake {
     position: absolute;
 
     z-index: 20;
@@ -226,6 +223,69 @@ button:active {
         translate(-50%, -50%);
 }
 
+
+/* ГЛАЗА НЕМКИ */
+
+#nemkaEyes,
+#cameraNemkaEyes {
+    position: absolute;
+
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    left: 0;
+    top: 0;
+
+    pointer-events: none;
+
+    z-index: 80;
+
+    background:
+        radial-gradient(
+            ellipse at 35% 45%,
+            white 0,
+            white 7px,
+            black 8px,
+            transparent 15px
+        ),
+        radial-gradient(
+            ellipse at 65% 45%,
+            white 0,
+            white 7px,
+            black 8px,
+            transparent 15px
+        );
+
+    background-repeat: no-repeat;
+
+    background-size: 50% 50%;
+    background-position: center;
+}
+
+.nemkaEyesActive {
+    display: block !important;
+
+    animation:
+        eyeFlicker .12s infinite alternate;
+}
+
+@keyframes eyeFlicker {
+
+    from {
+        opacity: .65;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* ВСПЫШКА */
+
 #flash {
     position: absolute;
 
@@ -237,13 +297,13 @@ button:active {
 
     pointer-events: none;
 
-    z-index: 100;
+    z-index: 300;
+
+    transition: opacity .1s;
 }
 
 
-/* =========================
-   HUD
-========================= */
+/* HUD */
 
 #hud {
     position: absolute;
@@ -270,7 +330,8 @@ button:active {
     top: 55px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     z-index: 50;
 
@@ -285,9 +346,7 @@ button:active {
 }
 
 
-/* =========================
-   ПОВОРОТЫ
-========================= */
+/* ПОВОРОТЫ */
 
 #officeControls {
     position: absolute;
@@ -296,7 +355,8 @@ button:active {
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     display: flex;
 
@@ -309,13 +369,13 @@ button:active {
     width: 60px;
     height: 55px;
 
+    border-radius: 8px;
+
     font-size: 24px;
 }
 
 
-/* =========================
-   НИЖНИЕ КНОПКИ
-========================= */
+/* НИЖНИЕ КНОПКИ */
 
 #bottomControls {
     position: absolute;
@@ -324,7 +384,8 @@ button:active {
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     display: flex;
 
@@ -337,12 +398,12 @@ button:active {
 
 #bottomControls button {
     flex: 1;
+
+    min-width: 0;
 }
 
 
-/* =========================
-   ПАНЕЛИ
-========================= */
+/* ПАНЕЛИ */
 
 .panel {
     position: absolute;
@@ -381,10 +442,12 @@ button:active {
     flex-shrink: 0;
 }
 
+.panelHeader button {
+    padding: 5px 12px;
+}
 
-/* =========================
-   КАМЕРЫ
-========================= */
+
+/* КАМЕРЫ */
 
 .cameraBody {
     flex: 1;
@@ -397,6 +460,9 @@ button:active {
 
     padding: 10px;
 }
+
+
+/* КАРТИНКА СЛЕВА */
 
 #cameraImage {
     position: relative;
@@ -452,8 +518,7 @@ button:active {
 }
 
 #cameraLichi,
-#cameraPancake,
-#cameraNemka {
+#cameraPancake {
     position: absolute;
 
     display: none;
@@ -470,12 +535,10 @@ button:active {
 }
 
 
-/* =========================
-   ВЕРТИКАЛЬНЫЙ СПИСОК
-========================= */
+/* ВЕРТИКАЛЬНЫЕ КАМЕРЫ */
 
 #cameraMap {
-    width: 125px;
+    width: 120px;
 
     display: flex;
 
@@ -486,7 +549,6 @@ button:active {
     padding: 5px;
 
     overflow-y: auto;
-
     overflow-x: hidden;
 
     flex-shrink: 0;
@@ -504,15 +566,39 @@ button:active {
     white-space: nowrap;
 }
 
-#meowButton {
-    border-color: #aaa;
-    background: #181818;
+
+/* МЯУКАНЬЕ */
+
+#catControl {
+    min-height: 85px;
+
+    padding: 10px;
+
+    border-top: 2px solid #555;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    text-align: center;
+}
+
+#catControl span {
+    font-size: 13px;
+}
+
+#catMessage {
+    color: #aaa;
 }
 
 
-/* =========================
-   ЭНЕРГИЯ
-========================= */
+/* ЭНЕРГИЯ */
 
 #energyContent {
     flex: 1;
@@ -547,9 +633,7 @@ button:active {
 }
 
 
-/* =========================
-   РЫЧАГ
-========================= */
+/* РЫЧАГ */
 
 #leverArea {
     width: min(90%, 420px);
@@ -580,7 +664,8 @@ button:active {
     left: 50%;
     top: 20px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     width: 50px;
     height: 80px;
@@ -598,7 +683,19 @@ button:active {
 
     font-size: 30px;
 
+    cursor: grab;
+
     touch-action: none;
+}
+
+#lever:active {
+    cursor: grabbing;
+}
+
+#leverArea p {
+    margin: 10px 0;
+
+    font-size: 14px;
 }
 
 #leverProgress {
@@ -622,16 +719,14 @@ button:active {
 }
 
 
-/* =========================
-   НАПРАВЛЕНИЯ ЭНЕРГИИ
-========================= */
+/* НАПРАВЛЕНИЯ */
 
 #energyDirections {
     display: flex;
 
-    gap: 10px;
+    gap: 15px;
 
-    width: min(95%, 700px);
+    width: min(95%, 600px);
 }
 
 .energyDirection {
@@ -649,13 +744,13 @@ button:active {
 .energyDirection strong {
     display: block;
 
-    font-size: 18px;
+    font-size: 20px;
 
     margin-bottom: 8px;
 }
 
 .energyDirection span {
-    font-size: 11px;
+    font-size: 12px;
 
     color: #aaa;
 }
@@ -669,9 +764,61 @@ button:active {
 }
 
 
-/* =========================
-   ОБЩИЙ OVERLAY
-========================= */
+/* РЕЗЕРВ */
+
+#backupContent,
+#fenceContent {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 20px;
+
+    padding: 20px;
+}
+
+#backupWires,
+#fenceWires {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    width: min(90%, 400px);
+}
+
+#backupWires button,
+#fenceWires button {
+    min-height: 70px;
+
+    font-size: 20px;
+}
+
+.wireSelected {
+    border-color: white !important;
+
+    background: #333 !important;
+}
+
+#backupMessage,
+#fenceMessage {
+    min-height: 25px;
+
+    color: #aaa;
+}
+
+
+/* GAME OVER / WIN */
 
 .overlay {
     position: absolute;
@@ -680,7 +827,7 @@ button:active {
 
     z-index: 500;
 
-    background: rgba(0,0,0,.92);
+    background: rgba(0,0,0,.9);
 
     display: flex;
 
@@ -695,95 +842,13 @@ button:active {
     text-align: center;
 }
 
-
-/* =========================
-   ПРОВОДА
-========================= */
-
-#wirePanel {
-    z-index: 800;
-}
-
-#wireBox {
-    width: min(92%, 600px);
-
-    padding: 25px;
-
-    border: 2px solid #777;
-
-    background: #080808;
-
-    text-align: center;
-}
-
-#wireBoard {
-    display: flex;
-
-    justify-content: space-between;
-
-    width: min(90%, 400px);
-
-    margin: 25px auto;
-}
-
-.wireColumn {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 20px;
-}
-
-.wire {
-    width: 55px;
-    height: 55px;
-
-    border-radius: 50%;
-
-    padding: 0;
-
-    font-size: 28px;
-}
-
-.wire.blue {
-    border-color: #3498db;
-    color: #3498db;
-}
-
-.wire.red {
-    border-color: #e74c3c;
-    color: #e74c3c;
-}
-
-.wire.yellow {
-    border-color: #f1c40f;
-    color: #f1c40f;
-}
-
-.wire.green {
-    border-color: #2ecc71;
-    color: #2ecc71;
-}
-
-.wire.selected {
-    box-shadow:
-        0 0 15px white;
-    transform: scale(1.1);
-}
-
-.wire.connected {
-    opacity: .25;
-    pointer-events: none;
-}
-
-#wireStatus {
-    min-height: 25px;
+.overlay h1 {
+    font-size:
+        clamp(30px, 7vw, 60px);
 }
 
 
-/* =========================
-   МОБИЛЬНЫЙ
-========================= */
+/* МОБИЛЬНЫЙ */
 
 @media (max-width: 600px) {
 
@@ -793,6 +858,7 @@ button:active {
 
     #bottomControls button {
         padding: 10px 5px;
+
         font-size: 12px;
     }
 
@@ -820,8 +886,8 @@ button:active {
         width: 100%;
     }
 
-    #wireBox {
-        padding: 15px;
+    #catControl {
+        font-size: 11px;
     }
 
-    }
+}
