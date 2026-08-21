@@ -17,21 +17,15 @@ user-scalable=no">
 <body>
 
 <div id="mainMenu" class="screen">
-
     <div class="menuBackground"></div>
 
     <div class="menuContent">
-
         <h1>BLOOD GLOW NIGHT</h1>
 
         <button id="startGameButton">НОВАЯ НОЧЬ</button>
-
         <button id="nightsButton">НОЧИ</button>
-
         <button id="settingsButton">НАСТРОЙКИ</button>
-
     </div>
-
 </div>
 
 
@@ -56,11 +50,17 @@ user-scalable=no">
 
         <h2>НАСТРОЙКИ</h2>
 
-        <button id="fullscreenButton">ПОЛНЫЙ ЭКРАН</button>
+        <button id="fullscreenButton">
+            ПОЛНЫЙ ЭКРАН
+        </button>
 
-        <button id="resetProgress">СБРОСИТЬ ПРОГРЕСС</button>
+        <button id="resetProgress">
+            СБРОСИТЬ ПРОГРЕСС
+        </button>
 
-        <button id="closeSettings">НАЗАД</button>
+        <button id="closeSettings">
+            НАЗАД
+        </button>
 
     </div>
 
@@ -71,7 +71,9 @@ user-scalable=no">
 
     <div class="phoneBox">
 
-        <h2 id="phoneNight">NIGHT 1</h2>
+        <h2 id="phoneNight">
+            NIGHT 1
+        </h2>
 
         <p>Входящий звонок...</p>
 
@@ -91,16 +93,14 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-        src="images/lichi.png"
-        alt="Личи">
+             src="images/lichi.png"
+             alt="Личи">
 
         <img id="pancake"
-        src="images/pancake.png"
-        alt="Панкейк">
+             src="images/pancake.png"
+             alt="Панкейк">
 
-        <img id="nemka"
-        src="images/nemka.png"
-        alt="Немка">
+        <div id="nemkaEyes"></div>
 
         <div id="flash"></div>
 
@@ -109,22 +109,26 @@ user-scalable=no">
 
     <div id="hud">
 
-        <div id="night">NIGHT 1</div>
+        <div id="night">
+            NIGHT 1
+        </div>
 
-        <div id="time">12:00 AM</div>
+        <div id="time">
+            12:00 AM
+        </div>
 
     </div>
 
 
-    <div id="status">ОФИС</div>
+    <div id="status">
+        ОФИС
+    </div>
 
 
     <div id="officeControls">
 
         <button id="leftButton">◀</button>
-
         <button id="frontButton">●</button>
-
         <button id="rightButton">▶</button>
 
     </div>
@@ -132,26 +136,34 @@ user-scalable=no">
 
     <div id="bottomControls">
 
-        <button id="cameraButton">КАМЕРЫ</button>
+        <button id="cameraButton">
+            КАМЕРЫ
+        </button>
 
-        <button id="flashButton">ВСПЫШКА</button>
+        <button id="flashButton">
+            ВСПЫШКА
+        </button>
 
-        <button id="energyButton">ЭНЕРГИЯ</button>
+        <button id="energyButton">
+            ЭНЕРГИЯ
+        </button>
 
     </div>
 
 
-    <!-- =========================
-         КАМЕРЫ
-    ========================== -->
+    <!-- КАМЕРЫ -->
 
     <div id="cameraPanel" class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>СИСТЕМА КАМЕР</span>
+            <span>
+                СИСТЕМА КАМЕР
+            </span>
 
-            <button id="closeCameraPanel">✕</button>
+            <button id="closeCameraPanel">
+                ✕
+            </button>
 
         </div>
 
@@ -167,72 +179,67 @@ user-scalable=no">
                 </div>
 
                 <img id="cameraLichi"
-                src="images/lichi.png"
-                alt="Личи">
+                     src="images/lichi.png"
+                     alt="Личи">
 
                 <img id="cameraPancake"
-                src="images/pancake.png"
-                alt="Панкейк">
+                     src="images/pancake.png"
+                     alt="Панкейк">
 
-                <img id="cameraNemka"
-                src="images/nemka.png"
-                alt="Немка">
+                <div id="cameraNemkaEyes"></div>
 
             </div>
 
 
             <div id="cameraMap">
 
-                <button data-camera="cam01">
-                    CAM 01
-                </button>
-
-                <button data-camera="cam02">
-                    CAM 02
-                </button>
-
-                <button data-camera="cam03">
-                    CAM 03
-                </button>
-
-                <button data-camera="cam04">
-                    CAM 04
-                </button>
-
-                <button data-camera="cam05">
-                    CAM 05
-                </button>
-
-                <button data-camera="cam06">
-                    CAM 06
-                </button>
-
-                <button data-camera="cam07">
-                    CAM 07
-                </button>
-
-                <button id="meowButton">
-                    МЯУКАНЬЕ
-                </button>
+                <button data-camera="cam01">CAM 01</button>
+                <button data-camera="cam02">CAM 02</button>
+                <button data-camera="cam03">CAM 03</button>
+                <button data-camera="cam04">CAM 04</button>
+                <button data-camera="cam05">CAM 05</button>
+                <button data-camera="cam06">CAM 06</button>
+                <button data-camera="cam07">CAM 07</button>
 
             </div>
+
+        </div>
+
+
+        <!-- ЗВУК МЯУКАНЬЯ -->
+
+        <div id="catControl">
+
+            <span>
+                ОТВЛЕЧЕНИЕ НЕМКИ
+            </span>
+
+            <button id="catMeowButton">
+                🐈 МЯУКАНЬЕ
+            </button>
+
+            <span id="catMessage">
+                Выберите камеру и воспроизведите мяуканье.
+            </span>
 
         </div>
 
     </div>
 
 
-    <!-- =========================
-         ЭНЕРГИЯ
-    ========================== -->
+    <!-- ЭНЕРГИЯ -->
 
     <div id="energyPanel" class="panel hidden">
 
         <div class="panelHeader">
 
-            <span>ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ</span>
+            <span>
+                ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ
+            </span>
 
-            <button id="closeEnergyPanel">✕</button>
+            <button id="closeEnergyPanel">
+                ✕
+            </button>
 
         </div>
 
@@ -261,7 +268,7 @@ user-scalable=no">
                 </div>
 
                 <p>
-                    ТЯНИТЕ РЫЧАГ ВНИЗ 3 СЕКУНДЫ
+                    ТЯНИТЕ РЫЧАГ 3 СЕКУНДЫ
                 </p>
 
                 <div id="leverProgress">
@@ -275,31 +282,24 @@ user-scalable=no">
 
             <div id="energyDirections">
 
-                <div class="energyDirection cameraDirection">
+                <div class="energyDirection">
 
-                    <strong>КАМЕРА</strong>
+                    <strong>
+                        КАМЕРА
+                    </strong>
 
                     <span>
-                        ВСПЫШКА И КАМЕРЫ
+                        ВСПЫШКА ДОСТУПНА
                     </span>
 
                 </div>
 
 
-                <div class="energyDirection windowDirection">
+                <div class="energyDirection">
 
-                    <strong>ОКНО</strong>
-
-                    <span>
-                        ЗАЩИТА ОТ ПАНКЕЙКА
-                    </span>
-
-                </div>
-
-
-                <div class="energyDirection doorDirection">
-
-                    <strong>ПРАВАЯ ДВЕРЬ</strong>
+                    <strong>
+                        ПРАВАЯ ДВЕРЬ
+                    </strong>
 
                     <span>
                         ДВЕРЬ ЗАКРЫТА
@@ -311,7 +311,7 @@ user-scalable=no">
 
 
             <div id="energyMessage">
-                Выберите направление энергии рычагом.
+                Энергия направлена на камеры.
             </div>
 
         </div>
@@ -319,71 +319,51 @@ user-scalable=no">
     </div>
 
 
-    <!-- =========================
-         ПРОВОДА
-    ========================== -->
+    <!-- РЕЗЕРВНАЯ СИСТЕМА -->
 
-    <div id="wirePanel" class="overlay hidden">
+    <div id="backupPanel" class="panel hidden">
 
-        <div id="wireBox">
+        <div class="panelHeader">
 
-            <h2>АВАРИЯ ПИТАНИЯ</h2>
+            <span>
+                АВАРИЙНОЕ ПИТАНИЕ
+            </span>
+
+        </div>
+
+
+        <div id="backupContent">
+
+            <h2>
+                ОСНОВНОЕ ПИТАНИЕ ОТКЛЮЧЕНО
+            </h2>
 
             <p>
-                НЕМКА ОТКЛЮЧИЛА СВЕТ
+                НЕОБХОДИМО СОЕДИНИТЬ ПРОВОДА
             </p>
 
-            <p>
-                СОЕДИНИТЕ ОДИНАКОВЫЕ ПРОВОДА
-            </p>
+            <div id="backupWires">
 
-            <div id="wireBoard">
+                <button data-wire="1">
+                    ПРОВОД 1
+                </button>
 
-                <div class="wireColumn" id="wireLeft">
+                <button data-wire="2">
+                    ПРОВОД 2
+                </button>
 
-                    <button class="wire blue" data-wire="blue">
-                        ●
-                    </button>
+                <button data-wire="3">
+                    ПРОВОД 3
+                </button>
 
-                    <button class="wire red" data-wire="red">
-                        ●
-                    </button>
-
-                    <button class="wire yellow" data-wire="yellow">
-                        ●
-                    </button>
-
-                    <button class="wire green" data-wire="green">
-                        ●
-                    </button>
-
-                </div>
-
-
-                <div class="wireColumn" id="wireRight">
-
-                    <button class="wire green" data-wire="green">
-                        ●
-                    </button>
-
-                    <button class="wire yellow" data-wire="yellow">
-                        ●
-                    </button>
-
-                    <button class="wire blue" data-wire="blue">
-                        ●
-                    </button>
-
-                    <button class="wire red" data-wire="red">
-                        ●
-                    </button>
-
-                </div>
+                <button data-wire="4">
+                    ПРОВОД 4
+                </button>
 
             </div>
 
-            <div id="wireStatus">
-                Выберите провод слева.
+            <div id="backupMessage">
+                Соедините провода в правильном порядке.
             </div>
 
         </div>
@@ -391,13 +371,60 @@ user-scalable=no">
     </div>
 
 
-    <!-- =========================
-         GAME OVER
-    ========================== -->
+    <!-- ЭЛЕКТРИЧЕСКИЙ ЗАБОР ЛИЗКИ -->
+
+    <div id="fencePanel" class="panel hidden">
+
+        <div class="panelHeader">
+
+            <span>
+                РЕЗЕРВНЫЙ ЭЛЕКТРИЧЕСКИЙ ЗАБОР
+            </span>
+
+            <button id="closeFencePanel">
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="fenceContent">
+
+            <h2>
+                ЛИЗКА У РЕЗЕРВА
+            </h2>
+
+            <p>
+                ПОДКЛЮЧИТЕ ПРОВОДА К ЗАБОРУ
+            </p>
+
+            <div id="fenceWires">
+
+                <button data-fence="1">A</button>
+                <button data-fence="2">B</button>
+                <button data-fence="3">C</button>
+                <button data-fence="4">D</button>
+
+            </div>
+
+            <div id="fenceMessage">
+                Соедините цепь.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME OVER -->
 
     <div id="gameOver" class="overlay hidden">
 
-        <h1>ТЫ ПРОИГРАЛ</h1>
+        <h1>
+            ТЫ ПРОИГРАЛ
+        </h1>
+
+        <p id="loseReason"></p>
 
         <button id="restart">
             ПОВТОРИТЬ
@@ -410,9 +437,7 @@ user-scalable=no">
     </div>
 
 
-    <!-- =========================
-         ПОБЕДА
-    ========================== -->
+    <!-- ПОБЕДА -->
 
     <div id="winScreen" class="overlay hidden">
 
@@ -433,37 +458,44 @@ user-scalable=no">
 </div>
 
 
-<!-- =========================
-     ЗВУКИ
-========================== -->
+<!-- ЗВУКИ -->
 
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
-
-<audio id="nemkaAudio"
-src="sounds/nemka.mp3"></audio>
-
-<audio id="meowAudio"
-src="sounds/meow.mp3"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
+       src="sounds/scream.mp3"></audio>
 
-<audio id="wireAudio"
-src="sounds/wire.mp3"></audio>
+<audio id="ventAudio"
+       src="sounds/vent.mp3"
+       loop></audio>
+
+<!-- НОВЫЙ ЗВУК -->
+
+<audio id="catAudio"
+       src="sounds/cat.mp3"></audio>
+
+<audio id="nemkaAudio"
+       src="sounds/nemka.mp3"></audio>
+
+<audio id="powerOffAudio"
+       src="sounds/poweroff.mp3"></audio>
+
+<audio id="backupAudio"
+       src="sounds/backup.mp3"></audio>
 
 
 <script src="game.js"></script>
