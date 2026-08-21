@@ -1,882 +1,750 @@
 * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  }
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
 
 html,
 body {
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 
-width: 100%;
-height: 100%;
+    width: 100%;
+    height: 100%;
 
-overflow: hidden;
+    overflow: hidden;
 
-background: #000;
-color: white;
+    background: #000;
+    color: white;
 
-font-family: Arial, sans-serif;
-
+    font-family: Arial, sans-serif;
 }
 
 button {
-cursor: pointer;
+    cursor: pointer;
 
-color: white;
-background: #111;
+    color: white;
 
-border: 2px solid #777;
+    background: #111;
 
-padding: 12px 20px;
+    border: 2px solid #777;
 
-font-size: 16px;
+    padding: 12px 20px;
 
+    font-size: 16px;
 }
 
 button:active {
-transform: scale(.96);
+    transform: scale(.96);
 }
 
 .hidden {
-display: none !important;
+    display: none !important;
 }
 
-/* =========================
-ЭКРАНЫ
-========================= */
+
+/* ЭКРАНЫ */
 
 .screen {
-position: fixed;
-inset: 0;
+    position: fixed;
 
-width: 100%;
-height: 100%;
+    inset: 0;
 
-display: flex;
+    width: 100%;
+    height: 100%;
 
-justify-content: center;
-align-items: center;
+    display: flex;
 
-z-index: 100;
+    justify-content: center;
+    align-items: center;
 
+    z-index: 100;
 }
 
-/* =========================
-МЕНЮ
-========================= */
+
+/* МЕНЮ */
 
 #mainMenu {
-background: #050505;
+    background: #050505;
 }
 
 .menuBackground {
-position: absolute;
-inset: 0;
+    position: absolute;
 
-background:
-    linear-gradient(
-        rgba(0,0,0,.65),
-        rgba(0,0,0,.85)
-    ),
-    url("images/menu_bg.png");
+    inset: 0;
 
-background-size: cover;
-background-position: center;
+    background:
+        linear-gradient(
+            rgba(0,0,0,.65),
+            rgba(0,0,0,.85)
+        ),
+        url("images/menu_bg.png");
 
-filter: brightness(.6);
+    background-size: cover;
+    background-position: center;
 
-z-index: -1;
+    filter: brightness(.6);
 
+    z-index: -1;
 }
 
 .menuContent {
-width: min(90%, 500px);
+    width: min(90%, 500px);
 
-display: flex;
-flex-direction: column;
+    display: flex;
 
-gap: 18px;
+    flex-direction: column;
 
-text-align: center;
+    gap: 18px;
 
+    text-align: center;
 }
 
 .menuContent h1 {
-font-size: clamp(30px, 7vw, 60px);
+    font-size: clamp(30px, 7vw, 60px);
 
-margin-bottom: 25px;
+    margin-bottom: 25px;
 
-letter-spacing: 4px;
+    letter-spacing: 4px;
 
-text-shadow:
-    0 0 10px #000,
-    0 0 25px #000;
-
+    text-shadow:
+        0 0 10px #000,
+        0 0 25px #000;
 }
 
 .menuContent h2 {
-font-size: 30px;
-margin-bottom: 20px;
+    font-size: 30px;
+
+    margin-bottom: 20px;
 }
 
 .menuContent button {
-width: 100%;
-}
-
-/* =========================
-НОЧИ
-========================= */
-
-#nightsList {
-display: grid;
-
-grid-template-columns:
-    repeat(2, 1fr);
-
-gap: 10px;
-
-max-height: 60vh;
-
-overflow-y: auto;
-
-}
-
-.nightButton {
-min-height: 50px;
-}
-
-.nightButton.locked {
-opacity: .4;
-}
-
-/* =========================
-ТЕЛЕФОН
-========================= */
-
-#phoneScreen {
-background: #000;
-}
-
-.phoneBox {
-text-align: center;
-
-width: min(90%, 500px);
-
-}
-
-.phoneBox h2 {
-font-size: 35px;
-}
-
-.phoneBox p {
-font-size: 20px;
-margin: 30px;
-}
-
-/* =========================
-ИГРА
-========================= */
-
-#game {
-position: fixed;
-
-inset: 0;
-
-width: 100%;
-height: 100%;
-
-overflow: hidden;
-
-background: #000;
-
-}
-
-#background {
-position: absolute;
-inset: 0;
-
-background:
-    url("images/game_bg.png")
-    center / cover no-repeat;
-
-opacity: .35;
-
-pointer-events: none;
-
-}
-
-#view {
-position: absolute;
-
-inset: 0;
-
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-
-overflow: hidden;
-
-}
-
-/* =========================
-ПЕРСОНАЖИ
-========================= */
-
-#lichi,
-#pancake {
-position: absolute;
-
-z-index: 20;
-
-display: none;
-
-pointer-events: none;
-
-transform:
-    translate(-50%, -50%);
-
-}
-
-#flash {
-position: absolute;
-
-inset: 0;
-
-background: white;
-
-opacity: 0;
-
-pointer-events: none;
-
-z-index: 100;
-
-}
-
-/* =========================
-HUD
-========================= */
-
-#hud {
-position: absolute;
-
-top: 15px;
-left: 15px;
-right: 15px;
-
-display: flex;
-
-justify-content: space-between;
-
-z-index: 50;
-
-font-size: 20px;
-
-text-shadow:
-    2px 2px 5px #000;
-
-}
-
-#status {
-position: absolute;
-
-top: 55px;
-left: 50%;
-
-transform:
-    translateX(-50%);
-
-z-index: 50;
-
-font-size: 16px;
-
-text-shadow:
-    2px 2px 5px #000;
-
-text-align: center;
-
-width: 90%;
-
-}
-
-/* =========================
-ПОВОРОТЫ
-========================= */
-
-#officeControls {
-position: absolute;
-
-bottom: 105px;
-
-left: 50%;
-
-transform:
-    translateX(-50%);
-
-display: flex;
-
-gap: 15px;
-
-z-index: 60;
-
-}
-
-#officeControls button {
-width: 60px;
-height: 55px;
-
-border-radius: 8px;
-
-font-size: 24px;
-
-}
-
-/* =========================
-НИЖНИЕ КНОПКИ
-========================= */
-
-#bottomControls {
-position: absolute;
-
-bottom: 15px;
-
-left: 50%;
-
-transform:
-    translateX(-50%);
-
-display: flex;
-
-gap: 10px;
-
-z-index: 60;
-
-width: min(95%, 600px);
-
-}
-
-#bottomControls button {
-flex: 1;
-
-min-width: 0;
-
-}
-
-/* =========================
-ПАНЕЛИ
-========================= */
-
-.panel {
-position: absolute;
-
-inset: 4%;
-
-z-index: 200;
-
-background: #050505;
-
-border: 2px solid #888;
-
-box-shadow:
-    0 0 30px #000;
-
-display: flex;
-
-flex-direction: column;
-
-}
-
-.panelHeader {
-min-height: 55px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: space-between;
-
-padding: 8px 15px;
-
-border-bottom: 2px solid #555;
-
-font-size: 20px;
-
-flex-shrink: 0;
-
-}
-
-.panelHeader button {
-padding: 5px 12px;
-}
-
-/* =========================
-КАМЕРЫ
-========================= */
-
-.cameraBody {
-flex: 1;
-
-min-height: 0;
-
-display: flex;
-
-gap: 12px;
-
-padding: 10px;
-
-}
-
-/* КАРТИНКА СЛЕВА */
-
-#cameraImage {
-position: relative;
-
-flex: 1;
-
-min-width: 0;
-min-height: 0;
-
-overflow: hidden;
-
-background: #111;
-
-border: 2px solid #555;
-
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
-
-}
-
-#cameraStatic {
-position: absolute;
-
-inset: 0;
-
-pointer-events: none;
-
-opacity: .12;
-
-background:
-    repeating-linear-gradient(
-        0deg,
-        transparent 0px,
-        transparent 3px,
-        rgba(255,255,255,.15) 4px
-    );
-
-z-index: 10;
-
-}
-
-#cameraNumber {
-position: absolute;
-
-top: 10px;
-left: 10px;
-
-z-index: 30;
-
-font-size: 20px;
-
-text-shadow:
-    2px 2px 5px #000;
-
-}
-
-#cameraLichi,
-#cameraPancake {
-position: absolute;
-
-display: none;
-
-width: 180px;
-
-left: 50%;
-top: 50%;
-
-transform:
-    translate(-50%, -50%);
-
-z-index: 20;
-
-}
-
-/* ВЕРТИКАЛЬНЫЙ СПИСОК */
-
-#cameraMap {
-width: 120px;
-
-display: flex;
-
-flex-direction: column;
-
-gap: 8px;
-
-padding: 5px;
-
-overflow-y: auto;
-overflow-x: hidden;
-
-flex-shrink: 0;
-
-}
-
-#cameraMap button {
-width: 100%;
-
-min-height: 55px;
-
-flex-shrink: 0;
-
-padding: 8px 4px;
-
-white-space: nowrap;
-
-}
-
-/* =========================
-ЭНЕРГИЯ
-========================= */
-
-#energyContent {
-flex: 1;
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-justify-content: center;
-
-gap: 20px;
-
-padding: 20px;
-
-overflow-y: auto;
-
-}
-
-#energyTarget {
-text-align: center;
-
-font-size: 20px;
-
-}
-
-#energyTargetText {
-display: block;
-
-margin-top: 8px;
-
-font-size: 28px;
-
-}
-
-/* =========================
-РЫЧАГ
-========================= */
-
-#leverArea {
-width: min(90%, 420px);
-
-text-align: center;
-
-}
-
-#leverBase {
-position: relative;
-
-width: 90px;
-height: 190px;
-
-margin: auto;
-
-border: 3px solid #777;
-
-background: #111;
-
-border-radius: 10px;
-
-touch-action: none;
-
-}
-
-#lever {
-position: absolute;
-
-left: 50%;
-
-top: 20px;
-
-transform:
-    translateX(-50%);
-
-width: 50px;
-height: 80px;
-
-border: 3px solid #aaa;
-
-border-radius: 12px;
-
-background: #333;
-
-display: flex;
-
-justify-content: center;
-align-items: center;
-
-font-size: 30px;
-
-cursor: grab;
-
-touch-action: none;
-
-}
-
-#lever:active {
-cursor: grabbing;
-}
-
-#leverArea p {
-margin: 10px 0;
-
-font-size: 14px;
-
-}
-
-#leverProgress {
-width: 100%;
-
-height: 12px;
-
-border: 2px solid #555;
-
-background: #111;
-
-}
-
-#leverProgressBar {
-width: 0%;
-
-height: 100%;
-
-background: #ddd;
-
-transition: width .05s linear;
-
-}
-
-/* =========================
-НАПРАВЛЕНИЯ
-========================= */
-
-#energyDirections {
-display: flex;
-
-gap: 15px;
-
-width: min(95%, 600px);
-
-}
-
-.energyDirection {
-flex: 1;
-
-border: 2px solid #555;
-
-padding: 15px;
-
-text-align: center;
-
-background: #101010;
-
-}
-
-.energyDirection strong {
-display: block;
-
-font-size: 20px;
-
-margin-bottom: 8px;
-
-}
-
-.energyDirection span {
-font-size: 12px;
-
-color: #aaa;
-
-}
-
-#energyMessage {
-min-height: 24px;
-
-text-align: center;
-
-color: #ccc;
-
-}
-
-/* =========================
-GAME OVER / ПОБЕДА
-========================= */
-
-.overlay {
-position: absolute;
-
-inset: 0;
-
-z-index: 500;
-
-background: rgba(0,0,0,.9);
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-justify-content: center;
-
-gap: 20px;
-
-text-align: center;
-
-}
-
-.overlay h1 {
-font-size:
-clamp(30px, 7vw, 60px);
-}
-
-/* =========================
-СКРИМЕР
-========================= */
-
-#jumpscare {
-position: fixed;
-
-inset: 0;
-
-z-index: 9999;
-
-display: flex;
-
-align-items: center;
-justify-content: center;
-
-background: #000;
-
-overflow: hidden;
-
-pointer-events: none;
-
-}
-
-#jumpscareImage {
-width: 100%;
-height: 100%;
-
-object-fit: contain;
-
-transform: scale(.2);
-
-animation:
-    jumpscareZoom .35s
-    ease-out forwards,
-    jumpscareShake .08s
-    linear infinite;
-
-}
-
-@keyframes jumpscareZoom {
-
-0% {
-    transform: scale(.2);
-    opacity: 0;
-}
-
-25% {
-    transform: scale(1.4);
-    opacity: 1;
-}
-
-100% {
-    transform: scale(1.05);
-    opacity: 1;
-}
-
-}
-
-@keyframes jumpscareShake {
-
-0% {
-    margin-left: -15px;
-}
-
-25% {
-    margin-left: 15px;
-}
-
-50% {
-    margin-left: -10px;
-}
-
-75% {
-    margin-left: 10px;
-}
-
-100% {
-    margin-left: -15px;
-}
-
-}
-
-/* =========================
-МОБИЛЬНЫЙ ЭКРАН
-========================= */
-
-@media (max-width: 600px) {
-
-#bottomControls {
-    width: 95%;
-}
-
-#bottomControls button {
-    padding: 10px 5px;
-    font-size: 12px;
-}
-
-#officeControls {
-    bottom: 100px;
-}
-
-.panel {
-    inset: 2%;
-}
-
-#cameraMap {
-    width: 95px;
-}
-
-#cameraMap button {
-    font-size: 11px;
-}
-
-#energyDirections {
-    flex-direction: column;
-}
-
-.energyDirection {
     width: 100%;
 }
 
-#cameraLichi,
-#cameraPancake {
-    width: 130px;
+
+/* НОЧИ */
+
+#nightsList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+    max-height: 60vh;
+
+    overflow-y: auto;
 }
 
+.nightButton {
+    min-height: 50px;
+}
+
+.nightButton.locked {
+    opacity: .4;
+}
+
+
+/* ЗВОНОК */
+
+#phoneScreen {
+    background: #000;
+}
+
+.phoneBox {
+    text-align: center;
+
+    width: min(90%, 500px);
+}
+
+.phoneBox h2 {
+    font-size: 35px;
+}
+
+.phoneBox p {
+    font-size: 20px;
+
+    margin: 30px;
+}
+
+
+/* ИГРА */
+
+#game {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+#background {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        url("images/game_bg.png")
+        center / cover no-repeat;
+
+    opacity: .35;
+
+    pointer-events: none;
+}
+
+#view {
+    position: absolute;
+
+    inset: 0;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* ПЕРСОНАЖИ */
+
+#lichi,
+#pancake {
+    position: absolute;
+
+    z-index: 20;
+
+    display: none;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+#flash {
+    position: absolute;
+
+    inset: 0;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    transition: opacity .1s;
+}
+
+
+/* HUD */
+
+#hud {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    z-index: 50;
+
+    font-size: 20px;
+
+    text-shadow:
+        2px 2px 5px #000;
+}
+
+#status {
+    position: absolute;
+
+    top: 55px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 50;
+
+    font-size: 16px;
+
+    text-shadow:
+        2px 2px 5px #000;
+
+    text-align: center;
+
+    width: 90%;
+}
+
+
+/* ПОВОРОТЫ */
+
+#officeControls {
+    position: absolute;
+
+    bottom: 105px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 15px;
+
+    z-index: 60;
+}
+
+#officeControls button {
+    width: 60px;
+    height: 55px;
+
+    border-radius: 8px;
+
+    font-size: 24px;
+}
+
+
+/* НИЖНИЕ КНОПКИ */
+
+#bottomControls {
+    position: absolute;
+
+    bottom: 15px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 10px;
+
+    z-index: 60;
+
+    width: min(95%, 600px);
+}
+
+#bottomControls button {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* ПАНЕЛИ */
+
+.panel {
+    position: absolute;
+
+    inset: 4%;
+
+    z-index: 200;
+
+    background: #050505;
+
+    border: 2px solid #888;
+
+    box-shadow:
+        0 0 30px #000;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.panelHeader {
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 8px 15px;
+
+    border-bottom: 2px solid #555;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+.panelHeader button {
+    padding: 5px 12px;
+}
+
+
+/* КАМЕРЫ */
+
+.cameraBody {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 10px;
+}
+
+#cameraImage {
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #111;
+
+    border: 2px solid #555;
+
+    background-position: center;
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+}
+
+#cameraStatic {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .12;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.15) 4px
+        );
+
+    z-index: 10;
+}
+
+#cameraNumber {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    z-index: 30;
+
+    font-size: 20px;
+
+    text-shadow:
+        2px 2px 5px #000;
+}
+
+#cameraLichi,
+#cameraPancake {
+    position: absolute;
+
+    display: none;
+
+    width: 180px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 20;
+}
+
+
+/* ВЕРТИКАЛЬНЫЙ СПИСОК КАМЕР */
+
+#cameraMap {
+    width: 120px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 5px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    flex-shrink: 0;
+}
+
+#cameraMap button {
+    width: 100%;
+
+    min-height: 55px;
+
+    flex-shrink: 0;
+
+    padding: 8px 4px;
+
+    white-space: nowrap;
+}
+
+
+/* ЭНЕРГИЯ */
+
+#energyContent {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    overflow-y: auto;
+}
+
+#energyTarget {
+    text-align: center;
+
+    font-size: 20px;
+}
+
+#energyTargetText {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 28px;
+}
+
+
+/* РЫЧАГ */
+
+#leverArea {
+    width: min(90%, 420px);
+
+    text-align: center;
+}
+
+#leverBase {
+    position: relative;
+
+    width: 90px;
+    height: 190px;
+
+    margin: auto;
+
+    border: 3px solid #777;
+
+    background: #111;
+
+    border-radius: 10px;
+
+    touch-action: none;
+}
+
+#lever {
+    position: absolute;
+
+    left: 50%;
+
+    top: 20px;
+
+    transform:
+        translateX(-50%);
+
+    width: 50px;
+    height: 80px;
+
+    border: 3px solid #aaa;
+
+    border-radius: 12px;
+
+    background: #333;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 30px;
+
+    cursor: grab;
+
+    touch-action: none;
+}
+
+#lever:active {
+    cursor: grabbing;
+}
+
+#leverArea p {
+    margin: 10px 0;
+
+    font-size: 14px;
+}
+
+#leverProgress {
+    width: 100%;
+
+    height: 12px;
+
+    border: 2px solid #555;
+
+    background: #111;
+}
+
+#leverProgressBar {
+    width: 0%;
+
+    height: 100%;
+
+    background: #ddd;
+
+    transition: width .05s linear;
+}
+
+
+/* НАПРАВЛЕНИЯ */
+
+#energyDirections {
+    display: flex;
+
+    gap: 15px;
+
+    width: min(95%, 600px);
+}
+
+.energyDirection {
+    flex: 1;
+
+    border: 2px solid #555;
+
+    padding: 15px;
+
+    text-align: center;
+
+    background: #101010;
+}
+
+.energyDirection strong {
+    display: block;
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+.energyDirection span {
+    font-size: 12px;
+
+    color: #aaa;
+}
+
+#energyMessage {
+    min-height: 24px;
+
+    text-align: center;
+
+    color: #ccc;
+}
+
+
+/* GAME OVER / WIN */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 500;
+
+    background: rgba(0,0,0,.9);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    text-align: center;
+}
+
+.overlay h1 {
+    font-size:
+        clamp(30px, 7vw, 60px);
+}
+
+
+/* МОБИЛЬНЫЙ ЭКРАН */
+
+@media (max-width: 600px) {
+
+    #bottomControls {
+        width: 95%;
     }
+
+    #bottomControls button {
+        padding: 10px 5px;
+
+        font-size: 12px;
+    }
+
+    #officeControls {
+        bottom: 100px;
+    }
+
+    .panel {
+        inset: 2%;
+    }
+
+    #cameraMap {
+        width: 95px;
+    }
+
+    #cameraMap button {
+        font-size: 11px;
+    }
+
+    #energyDirections {
+        flex-direction: column;
+    }
+
+    .energyDirection {
+        width: 100%;
+    }
+
+}
