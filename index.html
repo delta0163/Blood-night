@@ -2,9 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0, user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -12,8 +15,6 @@
 </head>
 
 <body>
-
-<!-- ================= МЕНЮ ================= -->
 
 <div id="mainMenu" class="screen">
 
@@ -24,14 +25,15 @@
         <h1>BLOOD GLOW NIGHT</h1>
 
         <button id="startGameButton">НОВАЯ НОЧЬ</button>
+
         <button id="nightsButton">НОЧИ</button>
+
         <button id="settingsButton">НАСТРОЙКИ</button>
 
     </div>
+
 </div>
 
-
-<!-- ================= НОЧИ ================= -->
 
 <div id="nightsMenu" class="screen hidden">
 
@@ -44,10 +46,9 @@
         <button id="closeNights">НАЗАД</button>
 
     </div>
+
 </div>
 
-
-<!-- ================= НАСТРОЙКИ ================= -->
 
 <div id="settingsMenu" class="screen hidden">
 
@@ -57,17 +58,14 @@
 
         <button id="fullscreenButton">ПОЛНЫЙ ЭКРАН</button>
 
-        <button id="resetProgress">
-            СБРОСИТЬ ПРОГРЕСС
-        </button>
+        <button id="resetProgress">СБРОСИТЬ ПРОГРЕСС</button>
 
         <button id="closeSettings">НАЗАД</button>
 
     </div>
+
 </div>
 
-
-<!-- ================= ЗВОНОК ================= -->
 
 <div id="phoneScreen" class="screen hidden">
 
@@ -82,10 +80,9 @@
         </button>
 
     </div>
+
 </div>
 
-
-<!-- ================= ИГРА ================= -->
 
 <div id="game" class="hidden">
 
@@ -94,23 +91,21 @@
     <div id="view">
 
         <img id="lichi"
-             src="images/lichi.png"
-             alt="Личи">
+        src="images/lichi.png"
+        alt="Личи">
 
         <img id="pancake"
-             src="images/pancake.png"
-             alt="Панкейк">
+        src="images/pancake.png"
+        alt="Панкейк">
 
         <img id="nemka"
-             src="images/nemka.png"
-             alt="Немка">
+        src="images/nemka.png"
+        alt="Немка">
 
         <div id="flash"></div>
 
     </div>
 
-
-    <!-- HUD -->
 
     <div id="hud">
 
@@ -124,8 +119,6 @@
     <div id="status">ОФИС</div>
 
 
-    <!-- ПОВОРОТЫ -->
-
     <div id="officeControls">
 
         <button id="leftButton">◀</button>
@@ -137,26 +130,20 @@
     </div>
 
 
-    <!-- НИЖНИЕ КНОПКИ -->
-
     <div id="bottomControls">
 
-        <button id="cameraButton">
-            КАМЕРЫ
-        </button>
+        <button id="cameraButton">КАМЕРЫ</button>
 
-        <button id="flashButton">
-            ВСПЫШКА
-        </button>
+        <button id="flashButton">ВСПЫШКА</button>
 
-        <button id="energyButton">
-            ЭНЕРГИЯ
-        </button>
+        <button id="energyButton">ЭНЕРГИЯ</button>
 
     </div>
 
 
-    <!-- ================= КАМЕРЫ ================= -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================== -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -171,8 +158,6 @@
 
         <div class="cameraBody">
 
-            <!-- КАРТИНКА СЛЕВА -->
-
             <div id="cameraImage">
 
                 <div id="cameraStatic"></div>
@@ -182,33 +167,51 @@
                 </div>
 
                 <img id="cameraLichi"
-                     src="images/lichi.png"
-                     alt="Личи">
+                src="images/lichi.png"
+                alt="Личи">
 
                 <img id="cameraPancake"
-                     src="images/pancake.png"
-                     alt="Панкейк">
+                src="images/pancake.png"
+                alt="Панкейк">
 
                 <img id="cameraNemka"
-                     src="images/nemka.png"
-                     alt="Немка">
+                src="images/nemka.png"
+                alt="Немка">
 
             </div>
 
 
-            <!-- ВЕРТИКАЛЬНЫЙ СПИСОК -->
-
             <div id="cameraMap">
 
-                <button data-camera="cam01">CAM 01</button>
-                <button data-camera="cam02">CAM 02</button>
-                <button data-camera="cam03">CAM 03</button>
-                <button data-camera="cam04">CAM 04</button>
-                <button data-camera="cam05">CAM 05</button>
-                <button data-camera="cam06">CAM 06</button>
-                <button data-camera="cam07">CAM 07</button>
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
 
-                <button id="catButton">
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
+
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
+
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
+
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
+
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
+
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
+
+                <button id="meowButton">
                     МЯУКАНЬЕ
                 </button>
 
@@ -219,7 +222,9 @@
     </div>
 
 
-    <!-- ================= ЭНЕРГИЯ ================= -->
+    <!-- =========================
+         ЭНЕРГИЯ
+    ========================== -->
 
     <div id="energyPanel" class="panel hidden">
 
@@ -245,8 +250,6 @@
             </div>
 
 
-            <!-- РЫЧАГ -->
-
             <div id="leverArea">
 
                 <div id="leverBase">
@@ -270,8 +273,6 @@
             </div>
 
 
-            <!-- НАПРАВЛЕНИЯ -->
-
             <div id="energyDirections">
 
                 <div class="energyDirection cameraDirection">
@@ -290,7 +291,7 @@
                     <strong>ОКНО</strong>
 
                     <span>
-                        ЗАЩИТА ПЕРЕДНЕГО ОКНА
+                        ЗАЩИТА ОТ ПАНКЕЙКА
                     </span>
 
                 </div>
@@ -310,7 +311,7 @@
 
 
             <div id="energyMessage">
-                Энергия направлена на камеры.
+                Выберите направление энергии рычагом.
             </div>
 
         </div>
@@ -318,7 +319,81 @@
     </div>
 
 
-    <!-- ================= GAME OVER ================= -->
+    <!-- =========================
+         ПРОВОДА
+    ========================== -->
+
+    <div id="wirePanel" class="overlay hidden">
+
+        <div id="wireBox">
+
+            <h2>АВАРИЯ ПИТАНИЯ</h2>
+
+            <p>
+                НЕМКА ОТКЛЮЧИЛА СВЕТ
+            </p>
+
+            <p>
+                СОЕДИНИТЕ ОДИНАКОВЫЕ ПРОВОДА
+            </p>
+
+            <div id="wireBoard">
+
+                <div class="wireColumn" id="wireLeft">
+
+                    <button class="wire blue" data-wire="blue">
+                        ●
+                    </button>
+
+                    <button class="wire red" data-wire="red">
+                        ●
+                    </button>
+
+                    <button class="wire yellow" data-wire="yellow">
+                        ●
+                    </button>
+
+                    <button class="wire green" data-wire="green">
+                        ●
+                    </button>
+
+                </div>
+
+
+                <div class="wireColumn" id="wireRight">
+
+                    <button class="wire green" data-wire="green">
+                        ●
+                    </button>
+
+                    <button class="wire yellow" data-wire="yellow">
+                        ●
+                    </button>
+
+                    <button class="wire blue" data-wire="blue">
+                        ●
+                    </button>
+
+                    <button class="wire red" data-wire="red">
+                        ●
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="wireStatus">
+                Выберите провод слева.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         GAME OVER
+    ========================== -->
 
     <div id="gameOver" class="overlay hidden">
 
@@ -335,7 +410,9 @@
     </div>
 
 
-    <!-- ================= ПОБЕДА ================= -->
+    <!-- =========================
+         ПОБЕДА
+    ========================== -->
 
     <div id="winScreen" class="overlay hidden">
 
@@ -356,32 +433,40 @@
 </div>
 
 
-<!-- ================= ЗВУКИ ================= -->
+<!-- =========================
+     ЗВУКИ
+========================== -->
 
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
+
+<audio id="nemkaAudio"
+src="sounds/nemka.mp3"></audio>
+
+<audio id="meowAudio"
+src="sounds/meow.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
 
-<audio id="catAudio"
-       src="sounds/cat.mp3"></audio>
+<audio id="wireAudio"
+src="sounds/wire.mp3"></audio>
 
 
 <script src="game.js"></script>
 
 </body>
-            </html>
+</html>
