@@ -24,7 +24,6 @@ button {
     cursor: pointer;
 
     color: white;
-
     background: #111;
 
     border: 2px solid #777;
@@ -43,7 +42,7 @@ button:active {
 }
 
 
-/* ЭКРАНЫ */
+/* ================= ЭКРАНЫ ================= */
 
 .screen {
     position: fixed;
@@ -62,7 +61,7 @@ button:active {
 }
 
 
-/* МЕНЮ */
+/* ================= МЕНЮ ================= */
 
 #mainMenu {
     background: #050505;
@@ -92,7 +91,6 @@ button:active {
     width: min(90%, 500px);
 
     display: flex;
-
     flex-direction: column;
 
     gap: 18px;
@@ -114,8 +112,6 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
-
-    margin-bottom: 20px;
 }
 
 .menuContent button {
@@ -123,7 +119,7 @@ button:active {
 }
 
 
-/* НОЧИ */
+/* ================= НОЧИ ================= */
 
 #nightsList {
     display: grid;
@@ -147,7 +143,7 @@ button:active {
 }
 
 
-/* ЗВОНОК */
+/* ================= ЗВОНОК ================= */
 
 #phoneScreen {
     background: #000;
@@ -159,18 +155,8 @@ button:active {
     width: min(90%, 500px);
 }
 
-.phoneBox h2 {
-    font-size: 35px;
-}
 
-.phoneBox p {
-    font-size: 20px;
-
-    margin: 30px;
-}
-
-
-/* ИГРА */
+/* ================= ИГРА ================= */
 
 #game {
     position: fixed;
@@ -205,19 +191,18 @@ button:active {
     inset: 0;
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     overflow: hidden;
 }
 
 
-/* ПЕРСОНАЖИ */
+/* ================= ПЕРСОНАЖИ ================= */
 
 #lichi,
-#pancake {
+#pancake,
+#nemka {
     position: absolute;
 
     z-index: 20;
@@ -242,12 +227,10 @@ button:active {
     pointer-events: none;
 
     z-index: 100;
-
-    transition: opacity .1s;
 }
 
 
-/* HUD */
+/* ================= HUD ================= */
 
 #hud {
     position: absolute;
@@ -281,16 +264,14 @@ button:active {
 
     font-size: 16px;
 
-    text-shadow:
-        2px 2px 5px #000;
-
     text-align: center;
 
-    width: 90%;
+    text-shadow:
+        2px 2px 5px #000;
 }
 
 
-/* ПОВОРОТЫ */
+/* ================= ПОВОРОТЫ ================= */
 
 #officeControls {
     position: absolute;
@@ -313,13 +294,11 @@ button:active {
     width: 60px;
     height: 55px;
 
-    border-radius: 8px;
-
     font-size: 24px;
 }
 
 
-/* НИЖНИЕ КНОПКИ */
+/* ================= НИЖНИЕ КНОПКИ ================= */
 
 #bottomControls {
     position: absolute;
@@ -347,7 +326,7 @@ button:active {
 }
 
 
-/* ПАНЕЛИ */
+/* ================= ПАНЕЛИ ================= */
 
 .panel {
     position: absolute;
@@ -386,12 +365,8 @@ button:active {
     flex-shrink: 0;
 }
 
-.panelHeader button {
-    padding: 5px 12px;
-}
 
-
-/* КАМЕРЫ */
+/* ================= КАМЕРЫ ================= */
 
 .cameraBody {
     flex: 1;
@@ -420,9 +395,7 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
-
     background-size: cover;
-
     background-repeat: no-repeat;
 }
 
@@ -455,13 +428,11 @@ button:active {
     z-index: 30;
 
     font-size: 20px;
-
-    text-shadow:
-        2px 2px 5px #000;
 }
 
 #cameraLichi,
-#cameraPancake {
+#cameraPancake,
+#cameraNemka {
     position: absolute;
 
     display: none;
@@ -478,7 +449,7 @@ button:active {
 }
 
 
-/* ВЕРТИКАЛЬНЫЙ СПИСОК КАМЕР */
+/* ВЕРТИКАЛЬНЫЙ СПИСОК */
 
 #cameraMap {
     width: 120px;
@@ -510,8 +481,16 @@ button:active {
     white-space: nowrap;
 }
 
+#catButton {
+    border-color: #aaa;
 
-/* ЭНЕРГИЯ */
+    margin-top: 8px;
+
+    font-size: 12px;
+}
+
+
+/* ================= ЭНЕРГИЯ ================= */
 
 #energyContent {
     flex: 1;
@@ -546,7 +525,7 @@ button:active {
 }
 
 
-/* РЫЧАГ */
+/* ================= РЫЧАГ ================= */
 
 #leverArea {
     width: min(90%, 420px);
@@ -575,7 +554,6 @@ button:active {
     position: absolute;
 
     left: 50%;
-
     top: 20px;
 
     transform:
@@ -593,24 +571,11 @@ button:active {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     font-size: 30px;
 
-    cursor: grab;
-
     touch-action: none;
-}
-
-#lever:active {
-    cursor: grabbing;
-}
-
-#leverArea p {
-    margin: 10px 0;
-
-    font-size: 14px;
 }
 
 #leverProgress {
@@ -625,23 +590,20 @@ button:active {
 
 #leverProgressBar {
     width: 0%;
-
     height: 100%;
 
     background: #ddd;
-
-    transition: width .05s linear;
 }
 
 
-/* НАПРАВЛЕНИЯ */
+/* ================= НАПРАВЛЕНИЯ ================= */
 
 #energyDirections {
     display: flex;
 
     gap: 15px;
 
-    width: min(95%, 600px);
+    width: min(95%, 700px);
 }
 
 .energyDirection {
@@ -659,7 +621,7 @@ button:active {
 .energyDirection strong {
     display: block;
 
-    font-size: 20px;
+    font-size: 18px;
 
     margin-bottom: 8px;
 }
@@ -679,7 +641,7 @@ button:active {
 }
 
 
-/* GAME OVER / WIN */
+/* ================= GAME OVER ================= */
 
 .overlay {
     position: absolute;
@@ -703,13 +665,8 @@ button:active {
     text-align: center;
 }
 
-.overlay h1 {
-    font-size:
-        clamp(30px, 7vw, 60px);
-}
 
-
-/* МОБИЛЬНЫЙ ЭКРАН */
+/* ================= МОБИЛЬНЫЙ ================= */
 
 @media (max-width: 600px) {
 
@@ -719,12 +676,7 @@ button:active {
 
     #bottomControls button {
         padding: 10px 5px;
-
         font-size: 12px;
-    }
-
-    #officeControls {
-        bottom: 100px;
     }
 
     .panel {
@@ -746,5 +698,4 @@ button:active {
     .energyDirection {
         width: 100%;
     }
-
 }
