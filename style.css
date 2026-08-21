@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 html,
@@ -14,7 +15,6 @@ body {
     overflow: hidden;
 
     background: #000;
-
     color: white;
 
     font-family: Arial, sans-serif;
@@ -38,11 +38,6 @@ button:active {
     transform: scale(.96);
 }
 
-
-/* =========================
-   ГЛОБАЛЬНОЕ СКРЫТИЕ
-========================= */
-
 .hidden {
     display: none !important;
 }
@@ -54,7 +49,6 @@ button:active {
 
 .screen {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -85,12 +79,11 @@ button:active {
     background:
         linear-gradient(
             rgba(0,0,0,.65),
-            rgba(0,0,0,.8)
+            rgba(0,0,0,.85)
         ),
         url("images/menu_bg.png");
 
     background-size: cover;
-
     background-position: center;
 
     filter: brightness(.6);
@@ -102,7 +95,6 @@ button:active {
     width: min(90%, 500px);
 
     display: flex;
-
     flex-direction: column;
 
     gap: 18px;
@@ -221,9 +213,7 @@ button:active {
     inset: 0;
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     overflow: hidden;
@@ -244,19 +234,9 @@ button:active {
 
     pointer-events: none;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 }
-
-#pancake.attack {
-    left: 50% !important;
-    top: 50% !important;
-    width: min(55vw, 420px) !important;
-}
-
-
-/* =========================
-   ВСПЫШКА
-========================= */
 
 #flash {
     position: absolute;
@@ -304,7 +284,8 @@ button:active {
     top: 55px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     z-index: 50;
 
@@ -312,8 +293,6 @@ button:active {
 
     text-shadow:
         2px 2px 5px #000;
-
-    text-align: center;
 }
 
 
@@ -328,7 +307,8 @@ button:active {
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     display: flex;
 
@@ -358,7 +338,8 @@ button:active {
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     display: flex;
 
@@ -383,7 +364,7 @@ button:active {
 .panel {
     position: absolute;
 
-    inset: 3%;
+    inset: 4%;
 
     z-index: 200;
 
@@ -413,6 +394,8 @@ button:active {
     border-bottom: 2px solid #555;
 
     font-size: 20px;
+
+    flex-shrink: 0;
 }
 
 .panelHeader button {
@@ -424,14 +407,28 @@ button:active {
    КАМЕРЫ
 ========================= */
 
+.cameraBody {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 10px;
+}
+
+
+/* КАРТИНКА СЛЕВА */
+
 #cameraImage {
     position: relative;
 
     flex: 1;
 
+    min-width: 0;
     min-height: 0;
-
-    margin: 10px;
 
     overflow: hidden;
 
@@ -440,9 +437,7 @@ button:active {
     border: 2px solid #555;
 
     background-position: center;
-
     background-size: cover;
-
     background-repeat: no-repeat;
 }
 
@@ -497,18 +492,11 @@ button:active {
     z-index: 20;
 }
 
-#cameraPancake {
-    width: 220px;
-}
+
+/* ВЕРТИКАЛЬНЫЙ СПИСОК */
 
 #cameraMap {
-    width: 150px;
-
-    max-height: 190px;
-
-    margin: 10px auto 15px;
-
-    padding: 5px;
+    width: 120px;
 
     display: flex;
 
@@ -516,172 +504,194 @@ button:active {
 
     gap: 8px;
 
+    padding: 5px;
+
     overflow-y: auto;
 
     overflow-x: hidden;
 
     flex-shrink: 0;
-
-    border: 2px solid #555;
-
-    background: #090909;
-
-    scrollbar-width: auto;
 }
 
 #cameraMap button {
     width: 100%;
 
-    min-height: 48px;
+    min-height: 55px;
 
     flex-shrink: 0;
-}
 
-#cameraMap::-webkit-scrollbar {
-    width: 10px;
-}
+    padding: 8px 4px;
 
-#cameraMap::-webkit-scrollbar-track {
-    background: #111;
-}
-
-#cameraMap::-webkit-scrollbar-thumb {
-    background: #777;
-
-    border: 2px solid #111;
+    white-space: nowrap;
 }
 
 
 /* =========================
-   ПАНЕЛЬ ЭНЕРГИИ
+   ЭНЕРГИЯ
 ========================= */
 
-#powerPanel {
-    background:
-        linear-gradient(
-            rgba(0,0,0,.85),
-            rgba(0,0,0,.95)
-        );
-}
-
-#underTable {
-    position: relative;
-
+#energyContent {
     flex: 1;
 
-    margin: 15px;
+    display: flex;
 
-    border: 2px solid #555;
+    flex-direction: column;
 
-    background:
-        url("images/under_table.png")
-        center / cover no-repeat;
+    align-items: center;
 
-    min-height: 280px;
+    justify-content: center;
 
-    overflow: hidden;
+    gap: 20px;
+
+    padding: 20px;
+
+    overflow-y: auto;
 }
 
-#tableShadow {
-    position: absolute;
+#energyTarget {
+    text-align: center;
 
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 0%,
-            rgba(0,0,0,.25) 45%,
-            rgba(0,0,0,.8) 100%
-        );
-
-    pointer-events: none;
+    font-size: 20px;
 }
+
+#energyTargetText {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 28px;
+}
+
+
+/* РЫЧАГ */
 
 #leverArea {
+    width: min(90%, 420px);
+
+    text-align: center;
+}
+
+#leverBase {
+    position: relative;
+
+    width: 90px;
+    height: 190px;
+
+    margin: auto;
+
+    border: 3px solid #777;
+
+    background: #111;
+
+    border-radius: 10px;
+
+    touch-action: none;
+}
+
+#lever {
     position: absolute;
 
     left: 50%;
 
-    top: 50%;
+    top: 20px;
 
     transform:
-        translate(-50%, -50%);
+        translateX(-50%);
 
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 15px;
-}
-
-#lever {
-    width: 80px;
-    height: 100px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
+    width: 50px;
+    height: 80px;
 
     border: 3px solid #aaa;
 
-    background: #181818;
+    border-radius: 12px;
 
-    transform:
-        rotate(-15deg);
-
-    font-size: 12px;
-
-    text-align: center;
-}
-
-#switchLever {
-    white-space: nowrap;
-}
-
-#powerDirection {
-    padding: 15px;
-
-    border-top: 2px solid #555;
+    background: #333;
 
     display: flex;
 
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    gap: 10px;
+    font-size: 30px;
+
+    cursor: grab;
+
+    touch-action: none;
+}
+
+#lever:active {
+    cursor: grabbing;
+}
+
+#leverArea p {
+    margin: 10px 0;
+
+    font-size: 14px;
+}
+
+#leverProgress {
+    width: 100%;
+
+    height: 12px;
+
+    border: 2px solid #555;
+
+    background: #111;
+}
+
+#leverProgressBar {
+    width: 0%;
+
+    height: 100%;
+
+    background: #ddd;
+
+    transition: width .05s linear;
+}
+
+
+/* НАПРАВЛЕНИЯ */
+
+#energyDirections {
+    display: flex;
+
+    gap: 15px;
+
+    width: min(95%, 600px);
+}
+
+.energyDirection {
+    flex: 1;
+
+    border: 2px solid #555;
+
+    padding: 15px;
 
     text-align: center;
+
+    background: #101010;
 }
 
-#currentPower {
-    font-size: 18px;
+.energyDirection strong {
+    display: block;
 
-    font-weight: bold;
+    font-size: 20px;
+
+    margin-bottom: 8px;
 }
 
-#powerTimer {
-    font-size: 14px;
+.energyDirection span {
+    font-size: 12px;
 
-    min-height: 20px;
+    color: #aaa;
 }
 
-.powerChoice {
-    width: 100%;
-}
+#energyMessage {
+    min-height: 24px;
 
-.powerChoice.active {
-    border-color: white;
+    text-align: center;
 
-    background: #444;
-}
-
-.powerChoice:disabled {
-    opacity: .5;
-
-    cursor: not-allowed;
+    color: #ccc;
 }
 
 
@@ -696,7 +706,7 @@ button:active {
 
     z-index: 500;
 
-    background: rgba(0,0,0,.92);
+    background: rgba(0,0,0,.9);
 
     display: flex;
 
@@ -716,15 +726,9 @@ button:active {
         clamp(30px, 7vw, 60px);
 }
 
-.overlay p {
-    max-width: 80%;
-
-    font-size: 18px;
-}
-
 
 /* =========================
-   ТЕЛЕФОН
+   МОБИЛЬНЫЙ ЭКРАН
 ========================= */
 
 @media (max-width: 600px) {
@@ -748,9 +752,19 @@ button:active {
     }
 
     #cameraMap {
-        width: 130px;
+        width: 95px;
+    }
 
-        max-height: 165px;
+    #cameraMap button {
+        font-size: 11px;
+    }
+
+    #energyDirections {
+        flex-direction: column;
+    }
+
+    .energyDirection {
+        width: 100%;
     }
 
 }
