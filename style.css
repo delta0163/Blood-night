@@ -222,7 +222,8 @@ button:active {
 ========================= */
 
 #lichi,
-#pancake {
+#pancake,
+#delta {
     position: absolute;
 
     z-index: 20;
@@ -233,6 +234,17 @@ button:active {
 
     transform:
         translate(-50%, -50%);
+}
+
+
+/* =========================
+   ДЕЛЬТА
+========================= */
+
+#delta {
+    width: 260px;
+
+    z-index: 25;
 }
 
 
@@ -316,6 +328,80 @@ button:active {
     z-index: 300;
 
     transition: opacity .1s;
+}
+
+
+/* =========================
+   ВЕРХНЯЯ ШАХТА
+========================= */
+
+#upperVent {
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    z-index: 70;
+
+    background:
+        url("images/upper_vent.png")
+        center / cover no-repeat;
+
+    pointer-events: none;
+}
+
+.upperVentActive {
+    display: block !important;
+}
+
+#upperVentButton {
+    position: absolute;
+
+    right: 20px;
+    top: 70px;
+
+    width: 65px;
+    height: 55px;
+
+    padding: 0;
+
+    font-size: 30px;
+
+    z-index: 90;
+
+    display: none;
+
+    background: rgba(0,0,0,.75);
+
+    border: 2px solid #777;
+
+    border-radius: 8px;
+}
+
+
+/* =========================
+   СЖИГАТЕЛЬ
+========================= */
+
+#incineratorButton {
+    position: absolute;
+
+    left: 20px;
+    bottom: 130px;
+
+    width: 60px;
+    height: 55px;
+
+    z-index: 90;
+
+    display: none;
+
+    font-size: 25px;
+
+    padding: 0;
+
+    background: rgba(0,0,0,.75);
 }
 
 
@@ -487,9 +573,6 @@ button:active {
     padding: 10px;
 }
 
-
-/* ИЗОБРАЖЕНИЕ */
-
 #cameraImage {
     position: relative;
 
@@ -562,7 +645,7 @@ button:active {
 
 
 /* =========================
-   КОЛОНКА КАМЕР
+   КАМЕРЫ — ПРАВАЯ КОЛОНКА
 ========================= */
 
 #cameraMap {
@@ -597,8 +680,6 @@ button:active {
 
 /* =========================
    МЯУКАНЬЕ
-   НАХОДИТСЯ ПРЯМО В КОЛОНКЕ
-   С CAM 01 - CAM 07
 ========================= */
 
 #catControl {
@@ -686,7 +767,40 @@ button:active {
 }
 
 
-/* РЫЧАГ */
+/* =========================
+   ВЫБОР ЭНЕРГИИ
+========================= */
+
+#energyTargets {
+    width: min(95%, 650px);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+#energyTargets button {
+    min-height: 60px;
+
+    font-size: 14px;
+}
+
+.energyTargetActive {
+    border-color: white !important;
+
+    background: #333 !important;
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,.3);
+}
+
+
+/* =========================
+   РЫЧАГ
+========================= */
 
 #leverArea {
     width: min(90%, 420px);
@@ -769,43 +883,6 @@ button:active {
     background: #ddd;
 
     transition: width .05s linear;
-}
-
-
-/* НАПРАВЛЕНИЯ */
-
-#energyDirections {
-    display: flex;
-
-    gap: 15px;
-
-    width: min(95%, 600px);
-}
-
-.energyDirection {
-    flex: 1;
-
-    border: 2px solid #555;
-
-    padding: 15px;
-
-    text-align: center;
-
-    background: #101010;
-}
-
-.energyDirection strong {
-    display: block;
-
-    font-size: 20px;
-
-    margin-bottom: 8px;
-}
-
-.energyDirection span {
-    font-size: 12px;
-
-    color: #aaa;
 }
 
 #energyMessage {
@@ -945,12 +1022,38 @@ button:active {
         font-size: 8px;
     }
 
+    #energyTargets {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    #energyTargets button {
+        min-height: 52px;
+
+        padding: 6px;
+
+        font-size: 11px;
+    }
+
     #energyDirections {
         flex-direction: column;
     }
 
-    .energyDirection {
-        width: 100%;
+    #delta {
+        width: 210px;
     }
 
-}
+    #upperVentButton {
+        right: 10px;
+        top: 65px;
+
+        width: 55px;
+        height: 48px;
+    }
+
+    #incineratorButton {
+        left: 10px;
+        bottom: 125px;
+    }
+
+            }
