@@ -42,7 +42,9 @@ button:active {
 }
 
 
-/* ЭКРАНЫ */
+/* =========================
+   ЭКРАНЫ
+========================= */
 
 .screen {
     position: fixed;
@@ -60,7 +62,9 @@ button:active {
 }
 
 
-/* МЕНЮ */
+/* =========================
+   МЕНЮ
+========================= */
 
 #mainMenu {
     background: #050505;
@@ -118,7 +122,9 @@ button:active {
 }
 
 
-/* НОЧИ */
+/* =========================
+   НОЧИ
+========================= */
 
 #nightsList {
     display: grid;
@@ -142,7 +148,9 @@ button:active {
 }
 
 
-/* ЗВОНОК */
+/* =========================
+   ЗВОНОК
+========================= */
 
 #phoneScreen {
     background: #000;
@@ -165,7 +173,9 @@ button:active {
 }
 
 
-/* ИГРА */
+/* =========================
+   ИГРА
+========================= */
 
 #game {
     position: fixed;
@@ -207,7 +217,9 @@ button:active {
 }
 
 
-/* ПЕРСОНАЖИ */
+/* =========================
+   ПЕРСОНАЖИ
+========================= */
 
 #lichi,
 #pancake {
@@ -224,7 +236,9 @@ button:active {
 }
 
 
-/* ГЛАЗА НЕМКИ */
+/* =========================
+   ГЛАЗА НЕМКИ
+========================= */
 
 #nemkaEyes,
 #cameraNemkaEyes {
@@ -284,7 +298,9 @@ button:active {
 }
 
 
-/* ВСПЫШКА */
+/* =========================
+   ВСПЫШКА
+========================= */
 
 #flash {
     position: absolute;
@@ -303,7 +319,9 @@ button:active {
 }
 
 
-/* HUD */
+/* =========================
+   HUD
+========================= */
 
 #hud {
     position: absolute;
@@ -346,7 +364,9 @@ button:active {
 }
 
 
-/* ПОВОРОТЫ */
+/* =========================
+   ПОВОРОТЫ
+========================= */
 
 #officeControls {
     position: absolute;
@@ -375,7 +395,9 @@ button:active {
 }
 
 
-/* НИЖНИЕ КНОПКИ */
+/* =========================
+   НИЖНИЕ КНОПКИ
+========================= */
 
 #bottomControls {
     position: absolute;
@@ -403,7 +425,9 @@ button:active {
 }
 
 
-/* ПАНЕЛИ */
+/* =========================
+   ПАНЕЛИ
+========================= */
 
 .panel {
     position: absolute;
@@ -447,7 +471,9 @@ button:active {
 }
 
 
-/* КАМЕРЫ */
+/* =========================
+   КАМЕРЫ
+========================= */
 
 .cameraBody {
     flex: 1;
@@ -462,7 +488,7 @@ button:active {
 }
 
 
-/* КАРТИНКА СЛЕВА */
+/* ИЗОБРАЖЕНИЕ */
 
 #cameraImage {
     position: relative;
@@ -535,10 +561,12 @@ button:active {
 }
 
 
-/* ВЕРТИКАЛЬНЫЕ КАМЕРЫ */
+/* =========================
+   КОЛОНКА КАМЕР
+========================= */
 
 #cameraMap {
-    width: 120px;
+    width: 125px;
 
     display: flex;
 
@@ -554,7 +582,7 @@ button:active {
     flex-shrink: 0;
 }
 
-#cameraMap button {
+#cameraMap > button {
     width: 100%;
 
     min-height: 55px;
@@ -567,38 +595,63 @@ button:active {
 }
 
 
-/* МЯУКАНЬЕ */
+/* =========================
+   МЯУКАНЬЕ
+   НАХОДИТСЯ ПРЯМО В КОЛОНКЕ
+   С CAM 01 - CAM 07
+========================= */
 
 #catControl {
-    min-height: 85px;
+    width: 100%;
 
-    padding: 10px;
+    margin-top: 4px;
+    padding-top: 9px;
 
     border-top: 2px solid #555;
 
     display: flex;
 
+    flex-direction: column;
+
     align-items: center;
 
     justify-content: center;
 
-    gap: 12px;
-
-    flex-wrap: wrap;
+    gap: 7px;
 
     text-align: center;
+
+    flex-shrink: 0;
 }
 
-#catControl span {
-    font-size: 13px;
+#catControl .catTitle {
+    font-size: 11px;
+
+    color: #ddd;
+}
+
+#catMeowButton {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 6px 2px;
+
+    font-size: 11px;
 }
 
 #catMessage {
     color: #aaa;
+
+    font-size: 9px;
+
+    line-height: 1.2;
 }
 
 
-/* ЭНЕРГИЯ */
+/* =========================
+   ЭНЕРГИЯ
+========================= */
 
 #energyContent {
     flex: 1;
@@ -764,10 +817,11 @@ button:active {
 }
 
 
-/* РЕЗЕРВ */
+/* =========================
+   РЕЗЕРВ
+========================= */
 
-#backupContent,
-#fenceContent {
+#backupContent {
     flex: 1;
 
     display: flex;
@@ -785,8 +839,7 @@ button:active {
     padding: 20px;
 }
 
-#backupWires,
-#fenceWires {
+#backupWires {
     display: grid;
 
     grid-template-columns:
@@ -797,8 +850,7 @@ button:active {
     width: min(90%, 400px);
 }
 
-#backupWires button,
-#fenceWires button {
+#backupWires button {
     min-height: 70px;
 
     font-size: 20px;
@@ -810,15 +862,16 @@ button:active {
     background: #333 !important;
 }
 
-#backupMessage,
-#fenceMessage {
+#backupMessage {
     min-height: 25px;
 
     color: #aaa;
 }
 
 
-/* GAME OVER / WIN */
+/* =========================
+   GAME OVER / WIN
+========================= */
 
 .overlay {
     position: absolute;
@@ -848,7 +901,9 @@ button:active {
 }
 
 
-/* МОБИЛЬНЫЙ */
+/* =========================
+   МОБИЛЬНЫЙ
+========================= */
 
 @media (max-width: 600px) {
 
@@ -871,11 +926,23 @@ button:active {
     }
 
     #cameraMap {
-        width: 95px;
+        width: 100px;
     }
 
-    #cameraMap button {
+    #cameraMap > button {
         font-size: 11px;
+
+        min-height: 48px;
+    }
+
+    #catMeowButton {
+        font-size: 10px;
+
+        min-height: 45px;
+    }
+
+    #catMessage {
+        font-size: 8px;
     }
 
     #energyDirections {
@@ -884,10 +951,6 @@ button:active {
 
     .energyDirection {
         width: 100%;
-    }
-
-    #catControl {
-        font-size: 11px;
     }
 
 }
