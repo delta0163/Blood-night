@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -136,14 +136,34 @@ user-scalable=no">
              src="images/pancake.png"
              alt="Панкейк">
 
+        <img id="delta"
+             src="images/delta.png"
+             alt="Дельта">
+
         <div id="nemkaEyes"></div>
 
         <div id="flash"></div>
 
+        <!-- ВЕРХНЯЯ ШАХТА -->
+
+        <div id="upperVent"></div>
+
+        <button id="upperVentButton">
+            ▲
+        </button>
+
+        <!-- СЖИГАТЕЛЬ -->
+
+        <button id="incineratorButton">
+            🔥
+        </button>
+
     </div>
 
 
-    <!-- HUD -->
+    <!-- =========================
+         HUD
+    ========================= -->
 
     <div id="hud">
 
@@ -163,7 +183,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- ПОВОРОТЫ -->
+    <!-- =========================
+         ПОВОРОТЫ
+    ========================= -->
 
     <div id="officeControls">
 
@@ -182,7 +204,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- НИЖНИЕ КНОПКИ -->
+    <!-- =========================
+         НИЖНИЕ КНОПКИ
+    ========================= -->
 
     <div id="bottomControls">
 
@@ -222,8 +246,6 @@ user-scalable=no">
 
         <div class="cameraBody">
 
-            <!-- ИЗОБРАЖЕНИЕ КАМЕРЫ -->
-
             <div id="cameraImage">
 
                 <div id="cameraStatic"></div>
@@ -244,10 +266,6 @@ user-scalable=no">
 
             </div>
 
-
-            <!-- =========================
-                 ПРАВАЯ КОЛОНКА
-            ========================= -->
 
             <div id="cameraMap">
 
@@ -279,9 +297,6 @@ user-scalable=no">
                     CAM 07
                 </button>
 
-
-                <!-- МЯУКАНЬЕ
-                     ТЕПЕРЬ В РЯДУ С КАМЕРАМИ -->
 
                 <div id="catControl">
 
@@ -332,11 +347,36 @@ user-scalable=no">
                 ЭНЕРГИЯ СЕЙЧАС:
 
                 <strong id="energyTargetText">
-                    КАМЕРА
+                    КАМЕРЫ
                 </strong>
 
             </div>
 
+
+            <!-- ВЫБОР НАПРАВЛЕНИЯ -->
+
+            <div id="energyTargets">
+
+                <button data-energy="camera">
+                    📹 КАМЕРЫ
+                </button>
+
+                <button data-energy="window">
+                    🪟 ОКНО
+                </button>
+
+                <button data-energy="incinerator">
+                    🔥 СЖИГАТЕЛЬ
+                </button>
+
+                <button data-energy="door">
+                    🚪 ПРАВАЯ ДВЕРЬ
+                </button>
+
+            </div>
+
+
+            <!-- РЫЧАГ -->
 
             <div id="leverArea">
 
@@ -361,36 +401,6 @@ user-scalable=no">
             </div>
 
 
-            <div id="energyDirections">
-
-                <div class="energyDirection">
-
-                    <strong>
-                        КАМЕРА
-                    </strong>
-
-                    <span>
-                        ВСПЫШКА ДОСТУПНА
-                    </span>
-
-                </div>
-
-
-                <div class="energyDirection">
-
-                    <strong>
-                        ПРАВАЯ ДВЕРЬ
-                    </strong>
-
-                    <span>
-                        ДВЕРЬ ЗАКРЫТА
-                    </span>
-
-                </div>
-
-            </div>
-
-
             <div id="energyMessage">
                 Энергия направлена на камеры.
             </div>
@@ -401,7 +411,7 @@ user-scalable=no">
 
 
     <!-- =========================
-         РЕЗЕРВНАЯ СИСТЕМА
+         РЕЗЕРВ
     ========================= -->
 
     <div id="backupPanel" class="panel hidden">
@@ -545,4 +555,4 @@ user-scalable=no">
 <script src="game.js"></script>
 
 </body>
-    </html>
+</html>
