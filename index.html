@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -15,10 +15,6 @@
 </head>
 
 <body>
-
-<!-- =========================
-     ГЛАВНОЕ МЕНЮ
-========================= -->
 
 <div id="mainMenu" class="screen">
 
@@ -45,10 +41,6 @@
 </div>
 
 
-<!-- =========================
-     ВЫБОР НОЧИ
-========================= -->
-
 <div id="nightsMenu" class="screen hidden">
 
     <div class="menuContent">
@@ -65,10 +57,6 @@
 
 </div>
 
-
-<!-- =========================
-     НАСТРОЙКИ
-========================= -->
 
 <div id="settingsMenu" class="screen hidden">
 
@@ -93,10 +81,6 @@
 </div>
 
 
-<!-- =========================
-     ТЕЛЕФОННЫЙ ЗВОНОК
-========================= -->
-
 <div id="phoneScreen" class="screen hidden">
 
     <div class="phoneBox">
@@ -118,10 +102,6 @@
 </div>
 
 
-<!-- =========================
-     ИГРА
-========================= -->
-
 <div id="game" class="hidden">
 
     <div id="background"></div>
@@ -129,28 +109,22 @@
     <div id="view">
 
         <img id="lichi"
-             src="images/lichi.png"
-             alt="Личи">
+        src="images/lichi.png"
+        alt="Личи">
 
         <img id="pancake"
-             src="images/pancake.png"
-             alt="Панкейк">
+        src="images/pancake.png"
+        alt="Панкейк">
 
         <img id="delta"
-             src="images/delta.png"
-             alt="Дельта">
+        src="images/delta.png"
+        alt="Дельта">
 
         <div id="nemkaEyes"></div>
 
         <div id="flash"></div>
 
-        <!-- ВЕРХНЯЯ ШАХТА -->
-
         <div id="upperVent"></div>
-
-        <button id="upperVentButton">
-            ▲
-        </button>
 
         <!-- СЖИГАТЕЛЬ -->
 
@@ -160,10 +134,6 @@
 
     </div>
 
-
-    <!-- =========================
-         HUD
-    ========================= -->
 
     <div id="hud">
 
@@ -183,9 +153,7 @@
     </div>
 
 
-    <!-- =========================
-         ПОВОРОТЫ
-    ========================= -->
+    <!-- ПОВОРОТЫ + ВЕРХНЯЯ ШАХТА -->
 
     <div id="officeControls">
 
@@ -201,12 +169,12 @@
             ▶
         </button>
 
+        <button id="upperVentButton">
+            ▲
+        </button>
+
     </div>
 
-
-    <!-- =========================
-         НИЖНИЕ КНОПКИ
-    ========================= -->
 
     <div id="bottomControls">
 
@@ -225,9 +193,7 @@
     </div>
 
 
-    <!-- =========================
-         КАМЕРЫ
-    ========================= -->
+    <!-- КАМЕРЫ -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -243,7 +209,6 @@
 
         </div>
 
-
         <div class="cameraBody">
 
             <div id="cameraImage">
@@ -255,12 +220,12 @@
                 </div>
 
                 <img id="cameraLichi"
-                     src="images/lichi.png"
-                     alt="Личи">
+                src="images/lichi.png"
+                alt="Личи">
 
                 <img id="cameraPancake"
-                     src="images/pancake.png"
-                     alt="Панкейк">
+                src="images/pancake.png"
+                alt="Панкейк">
 
                 <div id="cameraNemkaEyes"></div>
 
@@ -321,9 +286,7 @@
     </div>
 
 
-    <!-- =========================
-         ЭНЕРГИЯ
-    ========================= -->
+    <!-- ЭНЕРГИЯ -->
 
     <div id="energyPanel" class="panel hidden">
 
@@ -353,8 +316,6 @@
             </div>
 
 
-            <!-- ВЫБОР НАПРАВЛЕНИЯ -->
-
             <div id="energyTargets">
 
                 <button data-energy="camera">
@@ -375,8 +336,6 @@
 
             </div>
 
-
-            <!-- РЫЧАГ -->
 
             <div id="leverArea">
 
@@ -410,9 +369,7 @@
     </div>
 
 
-    <!-- =========================
-         РЕЗЕРВ
-    ========================= -->
+    <!-- РЕЗЕРВ -->
 
     <div id="backupPanel" class="panel hidden">
 
@@ -464,12 +421,10 @@
     </div>
 
 
-    <!-- =========================
-         GAME OVER
-    ========================= -->
+    <!-- GAME OVER -->
 
     <div id="gameOver"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -488,12 +443,10 @@
     </div>
 
 
-    <!-- =========================
-         ПОБЕДА
-    ========================= -->
+    <!-- ПОБЕДА -->
 
     <div id="winScreen"
-         class="overlay hidden">
+    class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -512,47 +465,43 @@
 </div>
 
 
-<!-- =========================
-     ЗВУКИ
-========================= -->
-
 <audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-       src="sounds/hum.mp3"
-       loop></audio>
+src="sounds/hum.mp3"
+loop></audio>
 
 <audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+src="sounds/scream.mp3"></audio>
 
 <audio id="ventAudio"
-       src="sounds/vent.mp3"
-       loop></audio>
+src="sounds/vent.mp3"
+loop></audio>
 
 <audio id="catAudio"
-       src="sounds/cat.mp3"></audio>
+src="sounds/cat.mp3"></audio>
 
 <audio id="nemkaAudio"
-       src="sounds/nemka.mp3"></audio>
+src="sounds/nemka.mp3"></audio>
 
 <audio id="powerOffAudio"
-       src="sounds/poweroff.mp3"></audio>
+src="sounds/poweroff.mp3"></audio>
 
 <audio id="backupAudio"
-       src="sounds/backup.mp3"></audio>
+src="sounds/backup.mp3"></audio>
 
 
 <script src="game.js"></script>
 
 </body>
-</html>
+      </html>
