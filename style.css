@@ -153,7 +153,8 @@ button:active {
 
 #lichi,
 #pancake,
-#delta {
+#delta,
+#nemka {
     position: absolute;
     z-index: 20;
     display: none;
@@ -161,13 +162,20 @@ button:active {
     transform: translate(-50%, -50%);
 }
 
-/* Дельта показывается только поверх верхней шахты */
 #delta {
     width: 260px;
     z-index: 76;
 }
 
-/* НЕМКА */
+
+/* =========================
+   НЕМКА
+========================= */
+
+#nemka {
+    width: 240px;
+    z-index: 75;
+}
 
 #nemkaEyes,
 #cameraNemkaEyes {
@@ -207,9 +215,19 @@ button:active {
 }
 
 @keyframes eyeFlicker {
-    from { opacity: .65; }
-    to { opacity: 1; }
+    from {
+        opacity: .65;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
+
+/* =========================
+   ВСПЫШКА
+========================= */
 
 #flash {
     position: absolute;
@@ -409,10 +427,6 @@ button:active {
     flex-shrink: 0;
 }
 
-.panelHeader button {
-    padding: 5px 12px;
-}
-
 
 /* =========================
    КАМЕРЫ
@@ -480,12 +494,11 @@ button:active {
 }
 
 #cameraLichi,
-#cameraPancake {
+#cameraPancake,
+#cameraNemka {
     position: absolute;
 
     display: none;
-
-    width: 180px;
 
     left: 50%;
     top: 50%;
@@ -493,11 +506,23 @@ button:active {
     transform: translate(-50%, -50%);
 
     z-index: 20;
+
+    pointer-events: none;
+}
+
+#cameraLichi,
+#cameraPancake {
+    width: 180px;
+}
+
+#cameraNemka {
+    width: 210px;
+    z-index: 21;
 }
 
 
 /* =========================
-   КАРТА КАМЕР
+   КАРТА
 ========================= */
 
 #cameraMap {
@@ -585,11 +610,11 @@ button:active {
     flex-direction: column;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
-    gap: 20px;
+    gap: 16px;
 
-    padding: 20px;
+    padding: 10px 20px 20px;
 
     overflow-y: auto;
 }
@@ -634,11 +659,14 @@ button:active {
 
 /* =========================
    РЫЧАГ
+   ПОДНЯТ ВЫШЕ
 ========================= */
 
 #leverArea {
     width: min(90%, 420px);
     text-align: center;
+
+    margin-top: -5px;
 }
 
 #leverBase {
@@ -647,7 +675,7 @@ button:active {
     width: 90px;
     height: 190px;
 
-    margin: auto;
+    margin: 0 auto;
 
     border: 3px solid #777;
 
@@ -692,7 +720,7 @@ button:active {
 }
 
 #leverArea p {
-    margin: 10px 0;
+    margin: 8px 0;
     font-size: 14px;
 }
 
@@ -769,7 +797,7 @@ button:active {
 
 
 /* =========================
-   GAME OVER / WIN
+   OVERLAY
 ========================= */
 
 .overlay {
@@ -853,6 +881,14 @@ button:active {
         width: 210px;
     }
 
+    #nemka {
+        width: 190px;
+    }
+
+    #cameraNemka {
+        width: 170px;
+    }
+
     #upperVentButton {
         right: 10px;
         top: 65px;
@@ -864,5 +900,14 @@ button:active {
     #incineratorButton {
         left: 10px;
         bottom: 125px;
+    }
+
+    #energyContent {
+        padding-top: 5px;
+        gap: 10px;
+    }
+
+    #leverBase {
+        height: 165px;
     }
 }
