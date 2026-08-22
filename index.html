@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -15,6 +15,10 @@ user-scalable=no">
 </head>
 
 <body>
+
+<!-- =========================
+     ГЛАВНОЕ МЕНЮ
+========================= -->
 
 <div id="mainMenu" class="screen">
 
@@ -41,6 +45,10 @@ user-scalable=no">
 </div>
 
 
+<!-- =========================
+     ВЫБОР НОЧИ
+========================= -->
+
 <div id="nightsMenu" class="screen hidden">
 
     <div class="menuContent">
@@ -57,6 +65,10 @@ user-scalable=no">
 
 </div>
 
+
+<!-- =========================
+     НАСТРОЙКИ
+========================= -->
 
 <div id="settingsMenu" class="screen hidden">
 
@@ -81,6 +93,10 @@ user-scalable=no">
 </div>
 
 
+<!-- =========================
+     ТЕЛЕФОННЫЙ ЗВОНОК
+========================= -->
+
 <div id="phoneScreen" class="screen hidden">
 
     <div class="phoneBox">
@@ -102,6 +118,10 @@ user-scalable=no">
 </div>
 
 
+<!-- =========================
+     ИГРА
+========================= -->
+
 <div id="game" class="hidden">
 
     <div id="background"></div>
@@ -109,22 +129,29 @@ user-scalable=no">
     <div id="view">
 
         <img id="lichi"
-        src="images/lichi.png"
-        alt="Личи">
+             src="images/lichi.png"
+             alt="Личи">
 
         <img id="pancake"
-        src="images/pancake.png"
-        alt="Панкейк">
+             src="images/pancake.png"
+             alt="Панкейк">
 
+        <!-- ДЕЛЬТА -->
         <img id="delta"
-        src="images/delta.png"
-        alt="Дельта">
+             src="images/delta.png"
+             alt="Дельта">
 
         <div id="nemkaEyes"></div>
 
         <div id="flash"></div>
 
+        <!-- ВЕРХНЯЯ ШАХТА -->
+
         <div id="upperVent"></div>
+
+        <button id="upperVentButton">
+            ▲
+        </button>
 
         <!-- СЖИГАТЕЛЬ -->
 
@@ -134,6 +161,10 @@ user-scalable=no">
 
     </div>
 
+
+    <!-- =========================
+         HUD
+    ========================= -->
 
     <div id="hud">
 
@@ -153,7 +184,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- ПОВОРОТЫ + ВЕРХНЯЯ ШАХТА -->
+    <!-- =========================
+         ПОВОРОТЫ
+    ========================= -->
 
     <div id="officeControls">
 
@@ -169,12 +202,12 @@ user-scalable=no">
             ▶
         </button>
 
-        <button id="upperVentButton">
-            ▲
-        </button>
-
     </div>
 
+
+    <!-- =========================
+         НИЖНИЕ КНОПКИ
+    ========================= -->
 
     <div id="bottomControls">
 
@@ -193,7 +226,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- КАМЕРЫ -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================= -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -209,6 +244,7 @@ user-scalable=no">
 
         </div>
 
+
         <div class="cameraBody">
 
             <div id="cameraImage">
@@ -220,12 +256,12 @@ user-scalable=no">
                 </div>
 
                 <img id="cameraLichi"
-                src="images/lichi.png"
-                alt="Личи">
+                     src="images/lichi.png"
+                     alt="Личи">
 
                 <img id="cameraPancake"
-                src="images/pancake.png"
-                alt="Панкейк">
+                     src="images/pancake.png"
+                     alt="Панкейк">
 
                 <div id="cameraNemkaEyes"></div>
 
@@ -263,6 +299,8 @@ user-scalable=no">
                 </button>
 
 
+                <!-- МЯУКАНЬЕ ОСТАЁТСЯ В РЯДУ КАМЕР -->
+
                 <div id="catControl">
 
                     <span class="catTitle">
@@ -286,7 +324,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- ЭНЕРГИЯ -->
+    <!-- =========================
+         ЭНЕРГИЯ
+    ========================= -->
 
     <div id="energyPanel" class="panel hidden">
 
@@ -369,7 +409,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- РЕЗЕРВ -->
+    <!-- =========================
+         РЕЗЕРВ
+========================= -->
 
     <div id="backupPanel" class="panel hidden">
 
@@ -421,10 +463,12 @@ user-scalable=no">
     </div>
 
 
-    <!-- GAME OVER -->
+    <!-- =========================
+         GAME OVER
+    ========================= -->
 
     <div id="gameOver"
-    class="overlay hidden">
+         class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -443,10 +487,12 @@ user-scalable=no">
     </div>
 
 
-    <!-- ПОБЕДА -->
+    <!-- =========================
+         ПОБЕДА
+    ========================= -->
 
     <div id="winScreen"
-    class="overlay hidden">
+         class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -465,43 +511,47 @@ user-scalable=no">
 </div>
 
 
+<!-- =========================
+     ЗВУКИ
+========================= -->
+
 <audio id="phoneAudio"
-src="sounds/phone.mp3"></audio>
+       src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
-src="sounds/hum.mp3"
-loop></audio>
+       src="sounds/hum.mp3"
+       loop></audio>
 
 <audio id="flashAudio"
-src="sounds/flash.mp3"></audio>
+       src="sounds/flash.mp3"></audio>
 
 <audio id="lichiAudio"
-src="sounds/lichi.mp3"></audio>
+       src="sounds/lichi.mp3"></audio>
 
 <audio id="pancakeAudio"
-src="sounds/pancake.mp3"></audio>
+       src="sounds/pancake.mp3"></audio>
 
 <audio id="screamAudio"
-src="sounds/scream.mp3"></audio>
+       src="sounds/scream.mp3"></audio>
 
 <audio id="ventAudio"
-src="sounds/vent.mp3"
-loop></audio>
+       src="sounds/vent.mp3"
+       loop></audio>
 
 <audio id="catAudio"
-src="sounds/cat.mp3"></audio>
+       src="sounds/cat.mp3"></audio>
 
 <audio id="nemkaAudio"
-src="sounds/nemka.mp3"></audio>
+       src="sounds/nemka.mp3"></audio>
 
 <audio id="powerOffAudio"
-src="sounds/poweroff.mp3"></audio>
+       src="sounds/poweroff.mp3"></audio>
 
 <audio id="backupAudio"
-src="sounds/backup.mp3"></audio>
+       src="sounds/backup.mp3"></audio>
 
 
 <script src="game.js"></script>
 
 </body>
-      </html>
+</html>
