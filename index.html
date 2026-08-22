@@ -16,33 +16,62 @@
 
 <body>
 
+<!-- =========================
+     ГЛАВНОЕ МЕНЮ
+========================= -->
+
 <div id="mainMenu" class="screen">
+
     <div class="menuBackground"></div>
 
     <div class="menuContent">
+
         <h1>BLOOD GLOW NIGHT</h1>
 
-        <button id="startGameButton">НОВАЯ НОЧЬ</button>
-        <button id="nightsButton">НОЧИ</button>
-        <button id="settingsButton">НАСТРОЙКИ</button>
+        <button id="startGameButton">
+            НОВАЯ НОЧЬ
+        </button>
+
+        <button id="nightsButton">
+            НОЧИ
+        </button>
+
+        <button id="settingsButton">
+            НАСТРОЙКИ
+        </button>
+
     </div>
+
 </div>
 
 
+<!-- =========================
+     ВЫБОР НОЧИ
+========================= -->
+
 <div id="nightsMenu" class="screen hidden">
+
     <div class="menuContent">
 
         <h2>ВЫБОР НОЧИ</h2>
 
         <div id="nightsList"></div>
 
-        <button id="closeNights">НАЗАД</button>
+        <button id="closeNights">
+            НАЗАД
+        </button>
 
     </div>
+
 </div>
 
 
+<!-- =========================
+     НАСТРОЙКИ
+========================= -->
+
 <div id="settingsMenu" class="screen hidden">
+
     <div class="menuContent">
 
         <h2>НАСТРОЙКИ</h2>
@@ -60,8 +89,13 @@
         </button>
 
     </div>
+
 </div>
 
+
+<!-- =========================
+     ТЕЛЕФОННЫЙ ЗВОНОК
+========================= -->
 
 <div id="phoneScreen" class="screen hidden">
 
@@ -71,7 +105,9 @@
             NIGHT 1
         </h2>
 
-        <p>Входящий звонок...</p>
+        <p>
+            Входящий звонок...
+        </p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
@@ -81,6 +117,10 @@
 
 </div>
 
+
+<!-- =========================
+     ИГРА
+========================= -->
 
 <div id="game" class="hidden">
 
@@ -96,18 +136,22 @@
              src="images/pancake.png"
              alt="Панкейк">
 
-        <img id="delta"
-             src="images/delta.png"
-             alt="Дельта">
-
-        <!-- СПРАЙТ НЕМКИ -->
+        <!-- НЕМКА -->
         <img id="nemka"
              src="images/nemka.png"
              alt="Немка">
 
+        <!-- ДЕЛЬТА ТОЛЬКО В ШАХТЕ -->
+        <img id="delta"
+             src="images/delta.png"
+             alt="Дельта">
+
         <div id="nemkaEyes"></div>
 
         <div id="flash"></div>
+
+
+        <!-- ВЕРХНЯЯ ШАХТА -->
 
         <div id="upperVent"></div>
 
@@ -115,12 +159,17 @@
             ▲
         </button>
 
+
+        <!-- СЖИГАТЕЛЬ -->
+
         <button id="incineratorButton">
             🔥
         </button>
 
     </div>
 
+
+    <!-- HUD -->
 
     <div id="hud">
 
@@ -140,14 +189,26 @@
     </div>
 
 
+    <!-- ПОВОРОТЫ -->
+
     <div id="officeControls">
 
-        <button id="leftButton">◀</button>
-        <button id="frontButton">●</button>
-        <button id="rightButton">▶</button>
+        <button id="leftButton">
+            ◀
+        </button>
+
+        <button id="frontButton">
+            ●
+        </button>
+
+        <button id="rightButton">
+            ▶
+        </button>
 
     </div>
 
+
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -166,7 +227,9 @@
     </div>
 
 
-    <!-- КАМЕРЫ -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================= -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -200,11 +263,6 @@
                 <img id="cameraPancake"
                      src="images/pancake.png"
                      alt="Панкейк">
-
-                <!-- НЕМКА -->
-                <img id="cameraNemka"
-                     src="images/nemka.png"
-                     alt="Немка">
 
                 <div id="cameraNemkaEyes"></div>
 
@@ -241,6 +299,9 @@
                     CAM 07
                 </button>
 
+
+                <!-- МЯУКАНЬЕ В РЯДУ С КАМЕРАМИ -->
+
                 <div id="catControl">
 
                     <span class="catTitle">
@@ -264,7 +325,9 @@
     </div>
 
 
-    <!-- ЭНЕРГИЯ -->
+    <!-- =========================
+         ЭНЕРГИЯ
+    ========================= -->
 
     <div id="energyPanel" class="panel hidden">
 
@@ -347,7 +410,9 @@
     </div>
 
 
-    <!-- РЕЗЕРВ -->
+    <!-- =========================
+         РЕЗЕРВ
+    ========================= -->
 
     <div id="backupPanel" class="panel hidden">
 
@@ -403,7 +468,9 @@
     </div>
 
 
-    <!-- GAME OVER -->
+    <!-- =========================
+         GAME OVER
+    ========================= -->
 
     <div id="gameOver"
          class="overlay hidden">
@@ -425,7 +492,9 @@
     </div>
 
 
-    <!-- ПОБЕДА -->
+    <!-- =========================
+         ПОБЕДА
+    ========================= -->
 
     <div id="winScreen"
          class="overlay hidden">
@@ -446,6 +515,10 @@
 
 </div>
 
+
+<!-- =========================
+     ЗВУКИ
+========================= -->
 
 <audio id="phoneAudio"
        src="sounds/phone.mp3"></audio>
@@ -483,7 +556,9 @@
        src="sounds/backup.mp3"></audio>
 
 
+<!-- ВАЖНО: JS ПОДКЛЮЧАЕТСЯ ПОСЛЕДНИМ -->
+
 <script src="game.js"></script>
 
 </body>
-</html>
+      </html>
