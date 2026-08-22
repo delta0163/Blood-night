@@ -16,18 +16,38 @@ user-scalable=no">
 
 <body>
 
+<!-- =========================
+     ГЛАВНОЕ МЕНЮ
+========================= -->
+
 <div id="mainMenu" class="screen">
+
     <div class="menuBackground"></div>
 
     <div class="menuContent">
+
         <h1>BLOOD GLOW NIGHT</h1>
 
-        <button id="startGameButton">НОВАЯ НОЧЬ</button>
-        <button id="nightsButton">НОЧИ</button>
-        <button id="settingsButton">НАСТРОЙКИ</button>
+        <button id="startGameButton">
+            НОВАЯ НОЧЬ
+        </button>
+
+        <button id="nightsButton">
+            НОЧИ
+        </button>
+
+        <button id="settingsButton">
+            НАСТРОЙКИ
+        </button>
+
     </div>
+
 </div>
 
+
+<!-- =========================
+     ВЫБОР НОЧИ
+========================= -->
 
 <div id="nightsMenu" class="screen hidden">
 
@@ -37,12 +57,18 @@ user-scalable=no">
 
         <div id="nightsList"></div>
 
-        <button id="closeNights">НАЗАД</button>
+        <button id="closeNights">
+            НАЗАД
+        </button>
 
     </div>
 
 </div>
 
+
+<!-- =========================
+     НАСТРОЙКИ
+========================= -->
 
 <div id="settingsMenu" class="screen hidden">
 
@@ -67,6 +93,10 @@ user-scalable=no">
 </div>
 
 
+<!-- =========================
+     ТЕЛЕФОННЫЙ ЗВОНОК
+========================= -->
+
 <div id="phoneScreen" class="screen hidden">
 
     <div class="phoneBox">
@@ -75,7 +105,9 @@ user-scalable=no">
             NIGHT 1
         </h2>
 
-        <p>Входящий звонок...</p>
+        <p>
+            Входящий звонок...
+        </p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
@@ -85,6 +117,10 @@ user-scalable=no">
 
 </div>
 
+
+<!-- =========================
+     ИГРА
+========================= -->
 
 <div id="game" class="hidden">
 
@@ -107,6 +143,8 @@ user-scalable=no">
     </div>
 
 
+    <!-- HUD -->
+
     <div id="hud">
 
         <div id="night">
@@ -125,14 +163,26 @@ user-scalable=no">
     </div>
 
 
+    <!-- ПОВОРОТЫ -->
+
     <div id="officeControls">
 
-        <button id="leftButton">◀</button>
-        <button id="frontButton">●</button>
-        <button id="rightButton">▶</button>
+        <button id="leftButton">
+            ◀
+        </button>
+
+        <button id="frontButton">
+            ●
+        </button>
+
+        <button id="rightButton">
+            ▶
+        </button>
 
     </div>
 
+
+    <!-- НИЖНИЕ КНОПКИ -->
 
     <div id="bottomControls">
 
@@ -151,7 +201,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- КАМЕРЫ -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================= -->
 
     <div id="cameraPanel" class="panel hidden">
 
@@ -169,6 +221,8 @@ user-scalable=no">
 
 
         <div class="cameraBody">
+
+            <!-- ИЗОБРАЖЕНИЕ КАМЕРЫ -->
 
             <div id="cameraImage">
 
@@ -191,43 +245,70 @@ user-scalable=no">
             </div>
 
 
+            <!-- =========================
+                 ПРАВАЯ КОЛОНКА
+            ========================= -->
+
             <div id="cameraMap">
 
-                <button data-camera="cam01">CAM 01</button>
-                <button data-camera="cam02">CAM 02</button>
-                <button data-camera="cam03">CAM 03</button>
-                <button data-camera="cam04">CAM 04</button>
-                <button data-camera="cam05">CAM 05</button>
-                <button data-camera="cam06">CAM 06</button>
-                <button data-camera="cam07">CAM 07</button>
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
+
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
+
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
+
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
+
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
+
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
+
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
+
+
+                <!-- МЯУКАНЬЕ
+                     ТЕПЕРЬ В РЯДУ С КАМЕРАМИ -->
+
+                <div id="catControl">
+
+                    <span class="catTitle">
+                        ОТВЛЕЧЕНИЕ НЕМКИ
+                    </span>
+
+                    <button id="catMeowButton">
+                        🐈 МЯУКАНЬЕ
+                    </button>
+
+                    <span id="catMessage">
+                        Выберите камеру.
+                    </span>
+
+                </div>
 
             </div>
-
-        </div>
-
-
-        <!-- ЗВУК МЯУКАНЬЯ -->
-
-        <div id="catControl">
-
-            <span>
-                ОТВЛЕЧЕНИЕ НЕМКИ
-            </span>
-
-            <button id="catMeowButton">
-                🐈 МЯУКАНЬЕ
-            </button>
-
-            <span id="catMessage">
-                Выберите камеру и воспроизведите мяуканье.
-            </span>
 
         </div>
 
     </div>
 
 
-    <!-- ЭНЕРГИЯ -->
+    <!-- =========================
+         ЭНЕРГИЯ
+    ========================= -->
 
     <div id="energyPanel" class="panel hidden">
 
@@ -319,7 +400,9 @@ user-scalable=no">
     </div>
 
 
-    <!-- РЕЗЕРВНАЯ СИСТЕМА -->
+    <!-- =========================
+         РЕЗЕРВНАЯ СИСТЕМА
+    ========================= -->
 
     <div id="backupPanel" class="panel hidden">
 
@@ -371,54 +454,12 @@ user-scalable=no">
     </div>
 
 
-    <!-- ЭЛЕКТРИЧЕСКИЙ ЗАБОР ЛИЗКИ -->
+    <!-- =========================
+         GAME OVER
+    ========================= -->
 
-    <div id="fencePanel" class="panel hidden">
-
-        <div class="panelHeader">
-
-            <span>
-                РЕЗЕРВНЫЙ ЭЛЕКТРИЧЕСКИЙ ЗАБОР
-            </span>
-
-            <button id="closeFencePanel">
-                ✕
-            </button>
-
-        </div>
-
-
-        <div id="fenceContent">
-
-            <h2>
-                ЛИЗКА У РЕЗЕРВА
-            </h2>
-
-            <p>
-                ПОДКЛЮЧИТЕ ПРОВОДА К ЗАБОРУ
-            </p>
-
-            <div id="fenceWires">
-
-                <button data-fence="1">A</button>
-                <button data-fence="2">B</button>
-                <button data-fence="3">C</button>
-                <button data-fence="4">D</button>
-
-            </div>
-
-            <div id="fenceMessage">
-                Соедините цепь.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- GAME OVER -->
-
-    <div id="gameOver" class="overlay hidden">
+    <div id="gameOver"
+         class="overlay hidden">
 
         <h1>
             ТЫ ПРОИГРАЛ
@@ -437,9 +478,12 @@ user-scalable=no">
     </div>
 
 
-    <!-- ПОБЕДА -->
+    <!-- =========================
+         ПОБЕДА
+    ========================= -->
 
-    <div id="winScreen" class="overlay hidden">
+    <div id="winScreen"
+         class="overlay hidden">
 
         <h1 id="winText">
             NIGHT 1 COMPLETE
@@ -458,7 +502,9 @@ user-scalable=no">
 </div>
 
 
-<!-- ЗВУКИ -->
+<!-- =========================
+     ЗВУКИ
+========================= -->
 
 <audio id="phoneAudio"
        src="sounds/phone.mp3"></audio>
@@ -483,8 +529,6 @@ user-scalable=no">
        src="sounds/vent.mp3"
        loop></audio>
 
-<!-- НОВЫЙ ЗВУК -->
-
 <audio id="catAudio"
        src="sounds/cat.mp3"></audio>
 
@@ -501,4 +545,4 @@ user-scalable=no">
 <script src="game.js"></script>
 
 </body>
-</html>
+    </html>
