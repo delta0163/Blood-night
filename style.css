@@ -8,28 +8,20 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     background: #000;
     color: white;
-
     font-family: Arial, sans-serif;
 }
 
 button {
     cursor: pointer;
-
     color: white;
     background: #111;
-
     border: 2px solid #777;
-
     padding: 12px 20px;
-
     font-size: 16px;
 }
 
@@ -42,30 +34,21 @@ button:active {
 }
 
 
-/* =========================
-   ЭКРАНЫ
-========================= */
+/* ЭКРАНЫ */
 
 .screen {
     position: fixed;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     z-index: 100;
 }
 
 
-/* =========================
-   ГЛАВНОЕ МЕНЮ
-========================= */
+/* МЕНЮ */
 
 #mainMenu {
     background: #050505;
@@ -73,7 +56,6 @@ button:active {
 
 .menuBackground {
     position: absolute;
-
     inset: 0;
 
     background:
@@ -95,17 +77,14 @@ button:active {
     width: min(90%, 500px);
 
     display: flex;
-
     flex-direction: column;
-
     gap: 18px;
 
     text-align: center;
 }
 
 .menuContent h1 {
-    font-size:
-        clamp(30px, 7vw, 60px);
+    font-size: clamp(30px, 7vw, 60px);
 
     margin-bottom: 25px;
 
@@ -118,7 +97,6 @@ button:active {
 
 .menuContent h2 {
     font-size: 30px;
-
     margin-bottom: 20px;
 }
 
@@ -127,9 +105,7 @@ button:active {
 }
 
 
-/* =========================
-   НОЧИ
-========================= */
+/* НОЧИ */
 
 #nightsList {
     display: grid;
@@ -153,9 +129,7 @@ button:active {
 }
 
 
-/* =========================
-   ЗВОНОК
-========================= */
+/* ТЕЛЕФОН */
 
 #phoneScreen {
     background: #000;
@@ -163,7 +137,6 @@ button:active {
 
 .phoneBox {
     text-align: center;
-
     width: min(90%, 500px);
 }
 
@@ -173,18 +146,14 @@ button:active {
 
 .phoneBox p {
     font-size: 20px;
-
     margin: 30px;
 }
 
 
-/* =========================
-   ИГРА
-========================= */
+/* ИГРА */
 
 #game {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -197,7 +166,6 @@ button:active {
 
 #background {
     position: absolute;
-
     inset: 0;
 
     background:
@@ -211,21 +179,17 @@ button:active {
 
 #view {
     position: absolute;
-
     inset: 0;
 
     background-size: cover;
     background-position: center;
-
     background-repeat: no-repeat;
 
     overflow: hidden;
 }
 
 
-/* =========================
-   ПЕРСОНАЖИ
-========================= */
+/* ПЕРСОНАЖИ */
 
 #lichi,
 #pancake,
@@ -248,20 +212,16 @@ button:active {
 
 #nemka {
     z-index: 75;
-
     width: 260px;
 }
 
 #delta {
     z-index: 76;
-
     width: 260px;
 }
 
 
-/* =========================
-   ГЛАЗА НЕМКИ
-========================= */
+/* ГЛАЗА */
 
 #nemkaEyes,
 #cameraNemkaEyes {
@@ -297,9 +257,7 @@ button:active {
 
     background-repeat: no-repeat;
 
-    background-size:
-        50% 50%;
-
+    background-size: 50% 50%;
     background-position: center;
 }
 
@@ -312,7 +270,6 @@ button:active {
 }
 
 @keyframes eyeFlicker {
-
     from {
         opacity: .65;
     }
@@ -323,13 +280,10 @@ button:active {
 }
 
 
-/* =========================
-   ВСПЫШКА
-========================= */
+/* ВСПЫШКА */
 
 #flash {
     position: absolute;
-
     inset: 0;
 
     background: white;
@@ -345,13 +299,10 @@ button:active {
 }
 
 
-/* =========================
-   ВЕРХНЯЯ ШАХТА
-========================= */
+/* ВЕРХНЯЯ ШАХТА */
 
 #upperVent {
     position: absolute;
-
     inset: 0;
 
     display: none;
@@ -395,9 +346,7 @@ button:active {
 }
 
 
-/* =========================
-   СЖИГАТЕЛЬ
-========================= */
+/* СЖИГАТЕЛЬ */
 
 #incineratorButton {
     position: absolute;
@@ -421,9 +370,7 @@ button:active {
 }
 
 
-/* =========================
-   HUD
-========================= */
+/* HUD */
 
 #hud {
     position: absolute;
@@ -467,9 +414,7 @@ button:active {
 }
 
 
-/* =========================
-   ПОВОРОТЫ
-========================= */
+/* ПОВОРОТЫ */
 
 #officeControls {
     position: absolute;
@@ -497,9 +442,7 @@ button:active {
 }
 
 
-/* =========================
-   НИЖНИЕ КНОПКИ
-========================= */
+/* НИЖНИЕ КНОПКИ */
 
 #bottomControls {
     position: absolute;
@@ -522,14 +465,11 @@ button:active {
 
 #bottomControls button {
     flex: 1;
-
     min-width: 0;
 }
 
 
-/* =========================
-   ПАНЕЛИ
-========================= */
+/* ПАНЕЛИ */
 
 .panel {
     position: absolute;
@@ -575,9 +515,7 @@ button:active {
 }
 
 
-/* =========================
-   КАМЕРЫ
-========================= */
+/* КАМЕРЫ */
 
 .cameraBody {
     flex: 1;
@@ -614,7 +552,6 @@ button:active {
 
 #cameraStatic {
     position: absolute;
-
     inset: 0;
 
     pointer-events: none;
@@ -664,9 +601,7 @@ button:active {
 }
 
 
-/* =========================
-   КАРТА
-========================= */
+/* КАРТА */
 
 #cameraMap {
     width: 125px;
@@ -698,9 +633,7 @@ button:active {
 }
 
 
-/* =========================
-   МЯУКАНЬЕ
-========================= */
+/* МЯУКАНЬЕ */
 
 #catControl {
     width: 100%;
@@ -729,7 +662,6 @@ button:active {
 
 #catControl .catTitle {
     font-size: 11px;
-
     color: #ddd;
 }
 
@@ -752,9 +684,7 @@ button:active {
 }
 
 
-/* =========================
-   ЭНЕРГИЯ
-========================= */
+/* ЭНЕРГИЯ */
 
 #energyContent {
     flex: 1;
@@ -776,7 +706,6 @@ button:active {
 
 #energyTarget {
     text-align: center;
-
     font-size: 20px;
 }
 
@@ -802,7 +731,6 @@ button:active {
 
 #energyTargets button {
     min-height: 60px;
-
     font-size: 14px;
 }
 
@@ -817,9 +745,7 @@ button:active {
 }
 
 
-/* =========================
-   РЫЧАГ
-========================= */
+/* РЫЧАГ */
 
 #leverArea {
     width:
@@ -881,7 +807,6 @@ button:active {
 
 #leverArea p {
     margin: 10px 0;
-
     font-size: 14px;
 }
 
@@ -915,9 +840,7 @@ button:active {
 }
 
 
-/* =========================
-   РЕЗЕРВНАЯ СИСТЕМА
-========================= */
+/* РЕЗЕРВ */
 
 #backupContent {
     flex: 1;
@@ -942,7 +865,6 @@ button:active {
 
 #backupContent h2 {
     margin-top: 0;
-
     margin-bottom: 4px;
 }
 
@@ -966,30 +888,24 @@ button:active {
 
 #backupWires button {
     min-height: 65px;
-
     font-size: 18px;
 }
 
 .wireSelected {
     border-color: white !important;
-
     background: #333 !important;
 }
 
 #backupMessage {
     min-height: 25px;
-
     color: #aaa;
 }
 
 
-/* =========================
-   GAME OVER / WIN
-========================= */
+/* GAME OVER / WIN */
 
 .overlay {
     position: absolute;
-
     inset: 0;
 
     z-index: 500;
@@ -1016,9 +932,7 @@ button:active {
 }
 
 
-/* =========================
-   МОБИЛЬНЫЙ
-========================= */
+/* МОБИЛЬНЫЙ */
 
 @media (max-width: 600px) {
 
@@ -1028,7 +942,6 @@ button:active {
 
     #bottomControls button {
         padding: 10px 5px;
-
         font-size: 12px;
     }
 
@@ -1046,13 +959,11 @@ button:active {
 
     #cameraMap > button {
         font-size: 11px;
-
         min-height: 48px;
     }
 
     #catMeowButton {
         font-size: 10px;
-
         min-height: 45px;
     }
 
@@ -1067,9 +978,7 @@ button:active {
 
     #energyTargets button {
         min-height: 52px;
-
         padding: 6px;
-
         font-size: 11px;
     }
 
@@ -1083,16 +992,13 @@ button:active {
 
     #upperVentButton {
         right: 10px;
-
         top: 65px;
-
         width: 55px;
         height: 48px;
     }
 
     #incineratorButton {
         left: 10px;
-
         bottom: 125px;
     }
 
@@ -1106,7 +1012,6 @@ button:active {
 
     #backupWires button {
         min-height: 58px;
-
         font-size: 15px;
     }
     }
