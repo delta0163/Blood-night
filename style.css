@@ -1,1059 +1,507 @@
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
 
-html,
-body {
-    margin: 0;
-    padding: 0;
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
-    width: 100%;
-    height: 100%;
+<title>Blood Glow Night</title>
 
-    overflow: hidden;
+<link rel="stylesheet" href="style.css">
+</head>
 
-    background: #000;
-    color: white;
+<body>
 
-    font-family: Arial, sans-serif;
-}
+<div id="mainMenu" class="screen">
 
-button {
-    cursor: pointer;
+    <div class="menuBackground"></div>
 
-    color: white;
-    background: #111;
+    <div class="menuContent">
 
-    border: 2px solid #777;
+        <h1>BLOOD GLOW NIGHT</h1>
 
-    padding: 12px 20px;
+        <button id="startGameButton">
+            НОВАЯ НОЧЬ
+        </button>
 
-    font-size: 16px;
-}
+        <button id="nightsButton">
+            НОЧИ
+        </button>
 
-button:active {
-    transform: scale(.96);
-}
+        <button id="settingsButton">
+            НАСТРОЙКИ
+        </button>
 
-.hidden {
-    display: none !important;
-}
+    </div>
 
+</div>
 
-/* =========================
-   ЭКРАНЫ
-========================= */
 
-.screen {
-    position: fixed;
-    inset: 0;
+<div id="nightsMenu" class="screen hidden">
 
-    width: 100%;
-    height: 100%;
+    <div class="menuContent">
 
-    display: flex;
+        <h2>ВЫБОР НОЧИ</h2>
 
-    justify-content: center;
-    align-items: center;
+        <div id="nightsList"></div>
 
-    z-index: 100;
-}
+        <button id="closeNights">
+            НАЗАД
+        </button>
 
+    </div>
 
-/* =========================
-   МЕНЮ
-========================= */
+</div>
 
-#mainMenu {
-    background: #050505;
-}
 
-.menuBackground {
-    position: absolute;
-    inset: 0;
+<div id="settingsMenu" class="screen hidden">
 
-    background:
-        linear-gradient(
-            rgba(0,0,0,.65),
-            rgba(0,0,0,.85)
-        ),
-        url("images/menu_bg.png");
+    <div class="menuContent">
 
-    background-size: cover;
-    background-position: center;
+        <h2>НАСТРОЙКИ</h2>
 
-    filter: brightness(.6);
+        <button id="fullscreenButton">
+            ПОЛНЫЙ ЭКРАН
+        </button>
 
-    z-index: -1;
-}
+        <button id="resetProgress">
+            СБРОСИТЬ ПРОГРЕСС
+        </button>
 
-.menuContent {
-    width: min(90%, 500px);
+        <button id="closeSettings">
+            НАЗАД
+        </button>
 
-    display: flex;
-    flex-direction: column;
+    </div>
 
-    gap: 18px;
+</div>
 
-    text-align: center;
-}
 
-.menuContent h1 {
-    font-size: clamp(30px, 7vw, 60px);
+<div id="phoneScreen" class="screen hidden">
 
-    margin-bottom: 25px;
+    <div class="phoneBox">
 
-    letter-spacing: 4px;
+        <h2 id="phoneNight">
+            NIGHT 1
+        </h2>
 
-    text-shadow:
-        0 0 10px #000,
-        0 0 25px #000;
-}
+        <p>
+            Входящий звонок...
+        </p>
 
-.menuContent h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
+        <button id="skipPhoneButton">
+            ПРОПУСТИТЬ ЗВОНОК
+        </button>
 
-.menuContent button {
-    width: 100%;
-}
+    </div>
 
+</div>
 
-/* =========================
-   НОЧИ
-========================= */
 
-#nightsList {
-    display: grid;
+<div id="game" class="hidden">
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    <div id="background"></div>
 
-    gap: 10px;
+    <div id="view">
 
-    max-height: 60vh;
+        <img id="lichi"
+        src="images/lichi.png"
+        alt="Личи">
 
-    overflow-y: auto;
-}
+        <img id="pancake"
+        src="images/pancake.png"
+        alt="Панкейк">
 
-.nightButton {
-    min-height: 50px;
-}
+        <img id="delta"
+        src="images/delta.png"
+        alt="Дельта">
 
-.nightButton.locked {
-    opacity: .4;
-}
+        <div id="nemkaEyes"></div>
 
+        <div id="flash"></div>
 
-/* =========================
-   ЗВОНОК
-========================= */
+        <div id="upperVent"></div>
 
-#phoneScreen {
-    background: #000;
-}
+        <!-- СЖИГАТЕЛЬ -->
 
-.phoneBox {
-    text-align: center;
+        <button id="incineratorButton">
+            🔥
+        </button>
 
-    width: min(90%, 500px);
-}
+    </div>
 
-.phoneBox h2 {
-    font-size: 35px;
-}
 
-.phoneBox p {
-    font-size: 20px;
+    <div id="hud">
 
-    margin: 30px;
-}
+        <div id="night">
+            NIGHT 1
+        </div>
 
+        <div id="time">
+            12:00 AM
+        </div>
 
-/* =========================
-   ИГРА
-========================= */
+    </div>
 
-#game {
-    position: fixed;
 
-    inset: 0;
+    <div id="status">
+        ОФИС
+    </div>
 
-    width: 100%;
-    height: 100%;
 
-    overflow: hidden;
+    <!-- ПОВОРОТЫ + ВЕРХНЯЯ ШАХТА -->
 
-    background: #000;
-}
+    <div id="officeControls">
 
-#background {
-    position: absolute;
+        <button id="leftButton">
+            ◀
+        </button>
 
-    inset: 0;
+        <button id="frontButton">
+            ●
+        </button>
 
-    background:
-        url("images/game_bg.png")
-        center / cover no-repeat;
+        <button id="rightButton">
+            ▶
+        </button>
 
-    opacity: .35;
+        <button id="upperVentButton">
+            ▲
+        </button>
 
-    pointer-events: none;
-}
+    </div>
 
-#view {
-    position: absolute;
 
-    inset: 0;
+    <div id="bottomControls">
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+        <button id="cameraButton">
+            КАМЕРЫ
+        </button>
 
-    overflow: hidden;
-}
+        <button id="flashButton">
+            ВСПЫШКА
+        </button>
 
+        <button id="energyButton">
+            ЭНЕРГИЯ
+        </button>
 
-/* =========================
-   ПЕРСОНАЖИ
-========================= */
+    </div>
 
-#lichi,
-#pancake,
-#delta {
-    position: absolute;
 
-    z-index: 20;
+    <!-- КАМЕРЫ -->
 
-    display: none;
+    <div id="cameraPanel" class="panel hidden">
 
-    pointer-events: none;
+        <div class="panelHeader">
 
-    transform:
-        translate(-50%, -50%);
-}
+            <span>
+                СИСТЕМА КАМЕР
+            </span>
 
+            <button id="closeCameraPanel">
+                ✕
+            </button>
 
-/* =========================
-   ДЕЛЬТА
-========================= */
+        </div>
 
-#delta {
-    width: 260px;
+        <div class="cameraBody">
 
-    z-index: 25;
-}
+            <div id="cameraImage">
 
+                <div id="cameraStatic"></div>
 
-/* =========================
-   ГЛАЗА НЕМКИ
-========================= */
+                <div id="cameraNumber">
+                    CAM 01
+                </div>
 
-#nemkaEyes,
-#cameraNemkaEyes {
-    position: absolute;
+                <img id="cameraLichi"
+                src="images/lichi.png"
+                alt="Личи">
 
-    display: none;
+                <img id="cameraPancake"
+                src="images/pancake.png"
+                alt="Панкейк">
 
-    width: 100%;
-    height: 100%;
+                <div id="cameraNemkaEyes"></div>
 
-    left: 0;
-    top: 0;
+            </div>
 
-    pointer-events: none;
 
-    z-index: 80;
+            <div id="cameraMap">
 
-    background:
-        radial-gradient(
-            ellipse at 35% 45%,
-            white 0,
-            white 7px,
-            black 8px,
-            transparent 15px
-        ),
-        radial-gradient(
-            ellipse at 65% 45%,
-            white 0,
-            white 7px,
-            black 8px,
-            transparent 15px
-        );
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
 
-    background-repeat: no-repeat;
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
 
-    background-size: 50% 50%;
-    background-position: center;
-}
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
 
-.nemkaEyesActive {
-    display: block !important;
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
 
-    animation:
-        eyeFlicker .12s infinite alternate;
-}
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
 
-@keyframes eyeFlicker {
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
 
-    from {
-        opacity: .65;
-    }
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
 
-    to {
-        opacity: 1;
-    }
 
-}
+                <div id="catControl">
 
+                    <span class="catTitle">
+                        ОТВЛЕЧЕНИЕ НЕМКИ
+                    </span>
 
-/* =========================
-   ВСПЫШКА
-========================= */
+                    <button id="catMeowButton">
+                        🐈 МЯУКАНЬЕ
+                    </button>
 
-#flash {
-    position: absolute;
+                    <span id="catMessage">
+                        Выберите камеру.
+                    </span>
 
-    inset: 0;
+                </div>
 
-    background: white;
+            </div>
 
-    opacity: 0;
+        </div>
 
-    pointer-events: none;
+    </div>
 
-    z-index: 300;
 
-    transition: opacity .1s;
-}
+    <!-- ЭНЕРГИЯ -->
 
+    <div id="energyPanel" class="panel hidden">
 
-/* =========================
-   ВЕРХНЯЯ ШАХТА
-========================= */
+        <div class="panelHeader">
 
-#upperVent {
-    position: absolute;
+            <span>
+                ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ
+            </span>
 
-    inset: 0;
+            <button id="closeEnergyPanel">
+                ✕
+            </button>
 
-    display: none;
+        </div>
 
-    z-index: 70;
 
-    background:
-        url("images/upper_vent.png")
-        center / cover no-repeat;
+        <div id="energyContent">
 
-    pointer-events: none;
-}
+            <div id="energyTarget">
 
-.upperVentActive {
-    display: block !important;
-}
+                ЭНЕРГИЯ СЕЙЧАС:
 
-#upperVentButton {
-    position: absolute;
+                <strong id="energyTargetText">
+                    КАМЕРЫ
+                </strong>
 
-    right: 20px;
-    top: 70px;
+            </div>
 
-    width: 65px;
-    height: 55px;
 
-    padding: 0;
+            <div id="energyTargets">
 
-    font-size: 30px;
+                <button data-energy="camera">
+                    📹 КАМЕРЫ
+                </button>
 
-    z-index: 90;
+                <button data-energy="window">
+                    🪟 ОКНО
+                </button>
 
-    display: none;
+                <button data-energy="incinerator">
+                    🔥 СЖИГАТЕЛЬ
+                </button>
 
-    background: rgba(0,0,0,.75);
+                <button data-energy="door">
+                    🚪 ПРАВАЯ ДВЕРЬ
+                </button>
 
-    border: 2px solid #777;
+            </div>
 
-    border-radius: 8px;
-}
 
+            <div id="leverArea">
 
-/* =========================
-   СЖИГАТЕЛЬ
-========================= */
+                <div id="leverBase">
 
-#incineratorButton {
-    position: absolute;
+                    <div id="lever">
+                        ↕
+                    </div>
 
-    left: 20px;
-    bottom: 130px;
+                </div>
 
-    width: 60px;
-    height: 55px;
+                <p>
+                    ТЯНИТЕ РЫЧАГ 3 СЕКУНДЫ
+                </p>
 
-    z-index: 90;
+                <div id="leverProgress">
 
-    display: none;
+                    <div id="leverProgressBar"></div>
 
-    font-size: 25px;
+                </div>
 
-    padding: 0;
+            </div>
 
-    background: rgba(0,0,0,.75);
-}
 
+            <div id="energyMessage">
+                Энергия направлена на камеры.
+            </div>
 
-/* =========================
-   HUD
-========================= */
+        </div>
 
-#hud {
-    position: absolute;
+    </div>
 
-    top: 15px;
-    left: 15px;
-    right: 15px;
 
-    display: flex;
+    <!-- РЕЗЕРВ -->
 
-    justify-content: space-between;
+    <div id="backupPanel" class="panel hidden">
 
-    z-index: 50;
+        <div class="panelHeader">
 
-    font-size: 20px;
+            <span>
+                АВАРИЙНОЕ ПИТАНИЕ
+            </span>
 
-    text-shadow:
-        2px 2px 5px #000;
-}
+        </div>
 
-#status {
-    position: absolute;
 
-    top: 55px;
-    left: 50%;
+        <div id="backupContent">
 
-    transform:
-        translateX(-50%);
+            <h2>
+                ОСНОВНОЕ ПИТАНИЕ ОТКЛЮЧЕНО
+            </h2>
 
-    z-index: 50;
+            <p>
+                НЕОБХОДИМО СОЕДИНИТЬ ПРОВОДА
+            </p>
 
-    font-size: 16px;
+            <div id="backupWires">
 
-    text-shadow:
-        2px 2px 5px #000;
+                <button data-wire="1">
+                    ПРОВОД 1
+                </button>
 
-    text-align: center;
+                <button data-wire="2">
+                    ПРОВОД 2
+                </button>
 
-    width: 90%;
-}
+                <button data-wire="3">
+                    ПРОВОД 3
+                </button>
 
+                <button data-wire="4">
+                    ПРОВОД 4
+                </button>
 
-/* =========================
-   ПОВОРОТЫ
-========================= */
+            </div>
 
-#officeControls {
-    position: absolute;
+            <div id="backupMessage">
+                Соедините провода в правильном порядке.
+            </div>
 
-    bottom: 105px;
+        </div>
 
-    left: 50%;
+    </div>
 
-    transform:
-        translateX(-50%);
 
-    display: flex;
+    <!-- GAME OVER -->
 
-    gap: 15px;
+    <div id="gameOver"
+    class="overlay hidden">
 
-    z-index: 60;
-}
+        <h1>
+            ТЫ ПРОИГРАЛ
+        </h1>
 
-#officeControls button {
-    width: 60px;
-    height: 55px;
+        <p id="loseReason"></p>
 
-    border-radius: 8px;
+        <button id="restart">
+            ПОВТОРИТЬ
+        </button>
 
-    font-size: 24px;
-}
+        <button id="menuAfterLose">
+            МЕНЮ
+        </button>
 
+    </div>
 
-/* =========================
-   НИЖНИЕ КНОПКИ
-========================= */
 
-#bottomControls {
-    position: absolute;
+    <!-- ПОБЕДА -->
 
-    bottom: 15px;
+    <div id="winScreen"
+    class="overlay hidden">
 
-    left: 50%;
+        <h1 id="winText">
+            NIGHT 1 COMPLETE
+        </h1>
 
-    transform:
-        translateX(-50%);
+        <button id="nextNight">
+            СЛЕДУЮЩАЯ НОЧЬ
+        </button>
 
-    display: flex;
+        <button id="menuAfterWin">
+            МЕНЮ
+        </button>
 
-    gap: 10px;
+    </div>
 
-    z-index: 60;
+</div>
 
-    width: min(95%, 600px);
-}
 
-#bottomControls button {
-    flex: 1;
+<audio id="phoneAudio"
+src="sounds/phone.mp3"></audio>
 
-    min-width: 0;
-}
+<audio id="humAudio"
+src="sounds/hum.mp3"
+loop></audio>
 
+<audio id="flashAudio"
+src="sounds/flash.mp3"></audio>
 
-/* =========================
-   ПАНЕЛИ
-========================= */
+<audio id="lichiAudio"
+src="sounds/lichi.mp3"></audio>
 
-.panel {
-    position: absolute;
+<audio id="pancakeAudio"
+src="sounds/pancake.mp3"></audio>
 
-    inset: 4%;
+<audio id="screamAudio"
+src="sounds/scream.mp3"></audio>
 
-    z-index: 200;
+<audio id="ventAudio"
+src="sounds/vent.mp3"
+loop></audio>
 
-    background: #050505;
+<audio id="catAudio"
+src="sounds/cat.mp3"></audio>
 
-    border: 2px solid #888;
+<audio id="nemkaAudio"
+src="sounds/nemka.mp3"></audio>
 
-    box-shadow:
-        0 0 30px #000;
+<audio id="powerOffAudio"
+src="sounds/poweroff.mp3"></audio>
 
-    display: flex;
+<audio id="backupAudio"
+src="sounds/backup.mp3"></audio>
 
-    flex-direction: column;
-}
 
-.panelHeader {
-    min-height: 55px;
+<script src="game.js"></script>
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 8px 15px;
-
-    border-bottom: 2px solid #555;
-
-    font-size: 20px;
-
-    flex-shrink: 0;
-}
-
-.panelHeader button {
-    padding: 5px 12px;
-}
-
-
-/* =========================
-   КАМЕРЫ
-========================= */
-
-.cameraBody {
-    flex: 1;
-
-    min-height: 0;
-
-    display: flex;
-
-    gap: 12px;
-
-    padding: 10px;
-}
-
-#cameraImage {
-    position: relative;
-
-    flex: 1;
-
-    min-width: 0;
-    min-height: 0;
-
-    overflow: hidden;
-
-    background: #111;
-
-    border: 2px solid #555;
-
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-#cameraStatic {
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: .12;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 3px,
-            rgba(255,255,255,.15) 4px
-        );
-
-    z-index: 10;
-}
-
-#cameraNumber {
-    position: absolute;
-
-    top: 10px;
-    left: 10px;
-
-    z-index: 30;
-
-    font-size: 20px;
-
-    text-shadow:
-        2px 2px 5px #000;
-}
-
-#cameraLichi,
-#cameraPancake {
-    position: absolute;
-
-    display: none;
-
-    width: 180px;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    z-index: 20;
-}
-
-
-/* =========================
-   КАМЕРЫ — ПРАВАЯ КОЛОНКА
-========================= */
-
-#cameraMap {
-    width: 125px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-    padding: 5px;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    flex-shrink: 0;
-}
-
-#cameraMap > button {
-    width: 100%;
-
-    min-height: 55px;
-
-    flex-shrink: 0;
-
-    padding: 8px 4px;
-
-    white-space: nowrap;
-}
-
-
-/* =========================
-   МЯУКАНЬЕ
-========================= */
-
-#catControl {
-    width: 100%;
-
-    margin-top: 4px;
-    padding-top: 9px;
-
-    border-top: 2px solid #555;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    text-align: center;
-
-    flex-shrink: 0;
-}
-
-#catControl .catTitle {
-    font-size: 11px;
-
-    color: #ddd;
-}
-
-#catMeowButton {
-    width: 100%;
-
-    min-height: 48px;
-
-    padding: 6px 2px;
-
-    font-size: 11px;
-}
-
-#catMessage {
-    color: #aaa;
-
-    font-size: 9px;
-
-    line-height: 1.2;
-}
-
-
-/* =========================
-   ЭНЕРГИЯ
-========================= */
-
-#energyContent {
-    flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 20px;
-
-    padding: 20px;
-
-    overflow-y: auto;
-}
-
-#energyTarget {
-    text-align: center;
-
-    font-size: 20px;
-}
-
-#energyTargetText {
-    display: block;
-
-    margin-top: 8px;
-
-    font-size: 28px;
-}
-
-
-/* =========================
-   ВЫБОР ЭНЕРГИИ
-========================= */
-
-#energyTargets {
-    width: min(95%, 650px);
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
-}
-
-#energyTargets button {
-    min-height: 60px;
-
-    font-size: 14px;
-}
-
-.energyTargetActive {
-    border-color: white !important;
-
-    background: #333 !important;
-
-    box-shadow:
-        0 0 10px rgba(255,255,255,.3);
-}
-
-
-/* =========================
-   РЫЧАГ
-========================= */
-
-#leverArea {
-    width: min(90%, 420px);
-
-    text-align: center;
-}
-
-#leverBase {
-    position: relative;
-
-    width: 90px;
-    height: 190px;
-
-    margin: auto;
-
-    border: 3px solid #777;
-
-    background: #111;
-
-    border-radius: 10px;
-
-    touch-action: none;
-}
-
-#lever {
-    position: absolute;
-
-    left: 50%;
-    top: 20px;
-
-    transform:
-        translateX(-50%);
-
-    width: 50px;
-    height: 80px;
-
-    border: 3px solid #aaa;
-
-    border-radius: 12px;
-
-    background: #333;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    font-size: 30px;
-
-    cursor: grab;
-
-    touch-action: none;
-}
-
-#lever:active {
-    cursor: grabbing;
-}
-
-#leverArea p {
-    margin: 10px 0;
-
-    font-size: 14px;
-}
-
-#leverProgress {
-    width: 100%;
-
-    height: 12px;
-
-    border: 2px solid #555;
-
-    background: #111;
-}
-
-#leverProgressBar {
-    width: 0%;
-
-    height: 100%;
-
-    background: #ddd;
-
-    transition: width .05s linear;
-}
-
-#energyMessage {
-    min-height: 24px;
-
-    text-align: center;
-
-    color: #ccc;
-}
-
-
-/* =========================
-   РЕЗЕРВ
-========================= */
-
-#backupContent {
-    flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    gap: 20px;
-
-    padding: 20px;
-}
-
-#backupWires {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 15px;
-
-    width: min(90%, 400px);
-}
-
-#backupWires button {
-    min-height: 70px;
-
-    font-size: 20px;
-}
-
-.wireSelected {
-    border-color: white !important;
-
-    background: #333 !important;
-}
-
-#backupMessage {
-    min-height: 25px;
-
-    color: #aaa;
-}
-
-
-/* =========================
-   GAME OVER / WIN
-========================= */
-
-.overlay {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 500;
-
-    background: rgba(0,0,0,.9);
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 20px;
-
-    text-align: center;
-}
-
-.overlay h1 {
-    font-size:
-        clamp(30px, 7vw, 60px);
-}
-
-
-/* =========================
-   МОБИЛЬНЫЙ
-========================= */
-
-@media (max-width: 600px) {
-
-    #bottomControls {
-        width: 95%;
-    }
-
-    #bottomControls button {
-        padding: 10px 5px;
-
-        font-size: 12px;
-    }
-
-    #officeControls {
-        bottom: 100px;
-    }
-
-    .panel {
-        inset: 2%;
-    }
-
-    #cameraMap {
-        width: 100px;
-    }
-
-    #cameraMap > button {
-        font-size: 11px;
-
-        min-height: 48px;
-    }
-
-    #catMeowButton {
-        font-size: 10px;
-
-        min-height: 45px;
-    }
-
-    #catMessage {
-        font-size: 8px;
-    }
-
-    #energyTargets {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    #energyTargets button {
-        min-height: 52px;
-
-        padding: 6px;
-
-        font-size: 11px;
-    }
-
-    #energyDirections {
-        flex-direction: column;
-    }
-
-    #delta {
-        width: 210px;
-    }
-
-    #upperVentButton {
-        right: 10px;
-        top: 65px;
-
-        width: 55px;
-        height: 48px;
-    }
-
-    #incineratorButton {
-        left: 10px;
-        bottom: 125px;
-    }
-
-            }
+</body>
+</html>
