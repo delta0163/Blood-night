@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 
-const q = selector => document.querySelector(selector);
+const q = selector =>
+    document.querySelector(selector);
 
 const qa = selector =>
     Array.from(document.querySelectorAll(selector));
@@ -8,18 +9,21 @@ const qa = selector =>
 
 let night = 1;
 let playing = false;
+
 let view = "front";
 let camera = "cam01";
 
 let energy = "camera";
+
 let energyBusy = false;
 let energyBlockedUntil = 0;
 
 let backupDone = false;
+
 let rightDoorClosed = false;
+let leftDoorClosed = false;
 
 let wireStep = 0;
-let leverStart = 0;
 
 let timer = null;
 let mindTimer = null;
@@ -29,47 +33,53 @@ let mindLevel = 70;
 
 
 let state = {
-    nemka: 0,
-    lichi: 0,
-    pancake: 0,
-    kyu: 0,
-    kashatan: 0,
-    charlotte: 0,
-    delta: 0,
-    lizka: 0,
-    mindflayer: 0
+
+    nemka:0,
+    lichi:0,
+    pancake:0,
+    kyu:0,
+    kashatan:0,
+    charlotte:0,
+    delta:0,
+    lizka:0,
+    mindflayer:0
+
 };
 
 
+/* =========================
+   НОЧИ
+========================= */
+
 const nightEnemies = {
 
-    1: ["lichi"],
+    1:["lichi"],
 
-    2: [
+    2:[
         "lichi",
         "pancake"
     ],
 
-    3: [
+    3:[
         "lichi",
         "pancake",
         "nemka"
     ],
 
-    4: [
+    4:[
         "pancake",
         "delta",
         "nemka"
     ],
 
-    5: [
+    5:[
         "lichi",
         "delta",
         "lizka",
         "nemka"
     ],
 
-    6: [
+    6:[
         "kyu",
         "lichi",
         "pancake",
@@ -77,7 +87,7 @@ const nightEnemies = {
         "lizka"
     ],
 
-    7: [
+    7:[
         "nemka",
         "lichi",
         "pancake",
@@ -88,7 +98,7 @@ const nightEnemies = {
         "lizka"
     ],
 
-    8: [
+    8:[
         "nemka",
         "lichi",
         "pancake",
@@ -100,7 +110,7 @@ const nightEnemies = {
         "mindflayer"
     ],
 
-    9: [
+    9:[
         "nemka",
         "lichi",
         "pancake",
@@ -112,7 +122,7 @@ const nightEnemies = {
         "mindflayer"
     ],
 
-    10: [
+    10:[
         "nemka",
         "lichi",
         "pancake",
@@ -124,7 +134,7 @@ const nightEnemies = {
         "mindflayer"
     ],
 
-    11: [
+    11:[
         "nemka",
         "lichi",
         "pancake",
@@ -136,7 +146,7 @@ const nightEnemies = {
         "mindflayer"
     ],
 
-    12: [
+    12:[
         "nemka",
         "lichi",
         "pancake",
@@ -148,7 +158,7 @@ const nightEnemies = {
         "mindflayer"
     ],
 
-    13: [
+    13:[
         "nemka",
         "lichi",
         "pancake",
@@ -159,31 +169,37 @@ const nightEnemies = {
         "lizka",
         "mindflayer"
     ]
+
 };
 
 
-function active(enemy) {
+function active(enemy){
+
     return nightEnemies[night]?.includes(enemy);
 }
 
 
-function snd(id) {
+/* =========================
+   ЗВУКИ
+========================= */
+
+function snd(id){
 
     const audio = $(id);
 
-    if (!audio) return;
+    if(!audio) return;
 
     audio.currentTime = 0;
 
-    audio.play().catch(() => {});
+    audio.play().catch(()=>{});
 }
 
 
-function stop(id) {
+function stop(id){
 
     const audio = $(id);
 
-    if (!audio) return;
+    if(!audio) return;
 
     audio.pause();
 
@@ -192,20 +208,20 @@ function stop(id) {
 
 
 /* =========================
-   ЭКРАНЫ
+   МЕНЮ
 ========================= */
 
-function hideAll() {
+function hideAll(){
 
-    qa(".screen").forEach(x =>
-        x.classList.add("hidden")
+    qa(".screen").forEach(
+        x => x.classList.add("hidden")
     );
 
     $("game").classList.add("hidden");
 }
 
 
-function menu() {
+function menu(){
 
     playing = false;
 
@@ -216,32 +232,43 @@ function menu() {
 
     hideAll();
 
-    $("mainMenu").classList.remove("hidden");
+    $("mainMenu")
+        .classList
+        .remove("hidden");
 }
 
 
-function start(n) {
+function start(n){
 
-    night = Math.max(1, Math.min(13, n));
+    night =
+        Math.max(
+            1,
+            Math.min(13,n)
+        );
 
     hideAll();
 
-    $("phoneScreen").classList.remove("hidden");
+    $("phoneScreen")
+        .classList
+        .remove("hidden");
 
-    $("phoneNight").textContent =
+    $("phoneNight")
+        .textContent =
         "NIGHT " + night;
 
     snd("phoneAudio");
 }
 
 
-function begin() {
+function begin(){
 
     stop("phoneAudio");
 
     hideAll();
 
-    $("game").classList.remove("hidden");
+    $("game")
+        .classList
+        .remove("hidden");
 
     resetGame();
 
@@ -254,10 +281,10 @@ function begin() {
 
 
 /* =========================
-   СБРОС НОЧИ
+   СБРОС
 ========================= */
 
-function resetGame() {
+function resetGame(){
 
     clearInterval(timer);
     clearInterval(mindTimer);
@@ -273,22 +300,26 @@ function resetGame() {
     energyBlockedUntil = 0;
 
     backupDone = false;
+
     rightDoorClosed = false;
+    leftDoorClosed = false;
 
     wireStep = 0;
+
     mindLevel = 70;
 
     state = {
 
-        nemka: 0,
-        lichi: 0,
-        pancake: 0,
-        kyu: 0,
-        kashatan: 0,
-        charlotte: 0,
-        delta: 0,
-        lizka: 0,
-        mindflayer: 0
+        nemka:0,
+        lichi:0,
+        pancake:0,
+        kyu:0,
+        kashatan:0,
+        charlotte:0,
+        delta:0,
+        lizka:0,
+        mindflayer:0
+
     };
 
 
@@ -298,62 +329,94 @@ function resetGame() {
     $("time").textContent =
         "12:00 AM";
 
-    $("status").textContent =
-        "ОФИС";
+
+    $("rightDoor")
+        .classList
+        .remove("closed");
+
+    $("leftDoor")
+        .classList
+        .remove("closed");
 
 
-    /* НОВЫЙ ФОН ОФИСА */
-
-    $("view").style.backgroundImage =
-        'url("images/office.png")';
-
-
-    $("rightDoor").classList.remove("closed");
-
-    $("rightDoorButton").textContent =
-        "ЗАКРЫТЬ";
+    $("doorStatus")
+        .textContent =
+        "ПРАВАЯ ДВЕРЬ: ОТКРЫТА";
 
 
-    $("backupPanel").classList.add("hidden");
+    $("backupPanel")
+        .classList
+        .add("hidden");
 
-    $("cameraPanel").classList.add("hidden");
+    $("cameraPanel")
+        .classList
+        .add("hidden");
 
-    $("energyPanel").classList.add("hidden");
+    $("energyPanel")
+        .classList
+        .add("hidden");
 
-    $("mindflayerPanel").classList.add("hidden");
-
-    $("gameOver").classList.add("hidden");
-
-    $("winScreen").classList.add("hidden");
-
-
-    $("upperVent").classList.remove(
-        "upperVentActive"
-    );
-
-
-    $("upperVentButton").style.display =
-        "none";
-
-    $("incineratorButton").style.display =
-        "none";
+    $("mindflayerPanel")
+        .classList
+        .add("hidden");
 
 
-    $("lowerVentButton").style.display =
-        "none";
+    $("gameOver")
+        .classList
+        .add("hidden");
+
+    $("winScreen")
+        .classList
+        .add("hidden");
 
 
-    $("cameraImage").style.backgroundImage =
-        'url("images/cam01.png")';
+    $("upperVent")
+        .classList
+        .remove("upperVentActive");
+
+
+    $("lowerVent")
+        .style
+        .display = "none";
+
+
+    $("upperVentButton")
+        .style
+        .display = "none";
+
+
+    $("lowerVentButton")
+        .style
+        .display = "none";
+
+
+    $("incineratorButton")
+        .style
+        .display = "none";
+
+
+    $("backWindow")
+        .style
+        .display = "none";
+
+
+    $("windowElectricity")
+        .style
+        .display = "none";
 
 
     qa("#backupWires button")
-        .forEach(x =>
-            x.classList.remove("wireSelected")
+        .forEach(
+            x =>
+            x.classList.remove(
+                "wireSelected"
+            )
         );
 
 
     updateEnergyUI();
+
+    setView("front");
 
     renderAI();
 }
@@ -363,80 +426,97 @@ function resetGame() {
    ВРЕМЯ
 ========================= */
 
-function startClock() {
+function startClock(){
 
-    const startTime = Date.now();
+    const startTime =
+        Date.now();
 
-    timer = setInterval(() => {
 
-        if (!playing) return;
+    timer =
+        setInterval(()=>{
 
-        elapsed =
-            Math.floor(
-                (Date.now() - startTime) / 1000
-            );
+            if(!playing)
+                return;
 
-        updateClock();
 
-        updateAI();
+            elapsed =
+                Math.floor(
+                    (
+                        Date.now() -
+                        startTime
+                    ) / 1000
+                );
 
-        if (elapsed >= 360) {
-            win();
-        }
 
-    }, 250);
+            updateClock();
+
+            updateAI();
+
+
+            if(elapsed >= 360){
+
+                win();
+
+            }
+
+        },250);
 }
 
 
-function updateClock() {
-
-    let totalMinutes = elapsed;
+function updateClock(){
 
     let hour =
-        Math.floor(totalMinutes / 60);
+        Math.floor(
+            elapsed / 60
+        );
 
     let minute =
-        totalMinutes % 60;
+        elapsed % 60;
+
 
     let displayHour =
         hour === 0
             ? 12
             : hour;
 
-    $("time").textContent =
+
+    $("time")
+        .textContent =
         displayHour +
         ":" +
-        String(minute).padStart(2, "0") +
+        String(minute)
+            .padStart(2,"0") +
         " AM";
 }
 
 
 /* =========================
-   АНИМАТРОНИКИ
+   ИИ
 ========================= */
 
-function updateAI() {
+function updateAI(){
 
-    if (!playing) return;
+    if(!playing)
+        return;
 
 
     /* НЕМКА */
 
-    if (
+    if(
         active("nemka") &&
         elapsed >= 60
-    ) {
+    ){
 
         state.nemka +=
             night >= 7
-                ? 0.055
-                : 0.045;
+                ? .055
+                : .045;
 
 
-        if (
+        if(
             state.nemka >= 100 &&
             !backupDone
-        ) {
+        ){
 
             powerOff();
 
@@ -444,23 +524,23 @@ function updateAI() {
         }
 
 
-        if (
+        if(
             backupDone &&
             state.nemka >= 100
-        ) {
+        ){
 
-            if (
-                view === "right" &&
-                rightDoorClosed
-            ) {
+            if(
+                rightDoorClosed &&
+                energy === "door"
+            ){
 
-                state.nemka = 35;
+                state.nemka = 30;
 
                 status(
-                    "Немка отступила от закрытой двери."
+                    "Немка отступила от двери."
                 );
 
-            } else {
+            }else{
 
                 lose(
                     "Немка добралась до правой двери."
@@ -474,13 +554,13 @@ function updateAI() {
 
     /* ЛИЧИ */
 
-    if (active("lichi")) {
+    if(active("lichi")){
 
-        state.lichi += 0.035;
+        state.lichi += .035;
 
-        if (state.lichi >= 100) {
+        if(state.lichi >= 100){
 
-            if (view === "left") {
+            if(view === "left"){
 
                 lose(
                     "Личи добралась до офиса."
@@ -488,7 +568,7 @@ function updateAI() {
 
                 return;
 
-            } else {
+            }else{
 
                 state.lichi = 95;
             }
@@ -498,46 +578,64 @@ function updateAI() {
 
     /* ПАНКЕЙК */
 
-    if (
+    if(
         active("pancake") &&
         elapsed >= 120
-    ) {
+    ){
 
-        state.pancake += 0.04;
+        state.pancake += .04;
 
-        if (state.pancake >= 100) {
 
-            lose(
-                "Панкейк пробрался через вентиляцию."
-            );
+        if(state.pancake >= 100){
 
-            return;
+            if(
+                energy === "vent"
+            ){
+
+                state.pancake = 25;
+
+                status(
+                    "Вентиляция остановила Панкейка."
+                );
+
+            }else{
+
+                lose(
+                    "Панкейк пробрался через вентиляцию."
+                );
+
+                return;
+            }
         }
     }
 
 
     /* КЬЮ */
 
-    if (active("kyu")) {
+    if(active("kyu")){
 
         let speed =
             state.kyu > 70
-                ? 0.075
-                : 0.025;
+                ? .075
+                : .025;
 
         state.kyu += speed;
 
-        if (state.kyu >= 100) {
 
-            if (rightDoorClosed) {
+        if(state.kyu >= 100){
 
-                state.kyu = 25;
+            if(
+                rightDoorClosed &&
+                energy === "door"
+            ){
+
+                state.kyu = 20;
 
                 status(
-                    "Кью ударился о закрытую дверь."
+                    "Кью ударился о электрическую дверь."
                 );
 
-            } else {
+            }else{
 
                 lose(
                     "Кью ворвался через правую дверь."
@@ -551,24 +649,24 @@ function updateAI() {
 
     /* КАШТАН */
 
-    if (active("kashatan")) {
+    if(active("kashatan")){
 
-        state.kashatan += 0.075;
+        state.kashatan += .075;
 
-        if (state.kashatan >= 100) {
 
-            if (
-                windowPowered() &&
-                view === "rear"
-            ) {
+        if(state.kashatan >= 100){
 
-                state.kashatan = 25;
+            if(
+                windowPowered()
+            ){
+
+                state.kashatan = 20;
 
                 status(
                     "Электрическое окно отпугнуло Каштана!"
                 );
 
-            } else {
+            }else{
 
                 lose(
                     "Каштан добрался до заднего окна."
@@ -582,16 +680,15 @@ function updateAI() {
 
     /* ШАРЛОТА */
 
-    if (active("charlotte")) {
+    if(active("charlotte")){
 
-        state.charlotte += 0.09;
+        state.charlotte += .09;
 
-        if (state.charlotte >= 100) {
+
+        if(state.charlotte >= 100){
 
             energyBlockedUntil =
                 Date.now() + 20000;
-
-            updateEnergyUI();
 
             state.charlotte = 30;
 
@@ -599,33 +696,34 @@ function updateAI() {
                 "Шарлота заблокировала питание окна на 20 секунд!"
             );
 
-            snd("alarmAudio");
+            snd("charlotteAudio");
         }
     }
 
 
     /* ДЕЛЬТА */
 
-    if (
+    if(
         active("delta") &&
         elapsed >= 120
-    ) {
+    ){
 
-        state.delta += 0.045;
+        state.delta += .045;
 
-        if (state.delta >= 100) {
 
-            if (incineratorPowered()) {
+        if(state.delta >= 100){
+
+            if(
+                incineratorPowered()
+            ){
 
                 state.delta = 20;
 
-                snd("incineratorAudio");
-
                 status(
-                    "Дельта отпугнута мусоросжиганием."
+                    "Дельта отпугнута сжигателем."
                 );
 
-            } else {
+            }else{
 
                 lose(
                     "Дельта пробралась через вентиляцию."
@@ -641,13 +739,14 @@ function updateAI() {
 
     /* ЛИЗКА */
 
-    if (active("lizka")) {
+    if(active("lizka")){
 
-        state.lizka += 0.035;
+        state.lizka += .035;
 
-        if (state.lizka >= 100) {
 
-            if (fencePowered()) {
+        if(state.lizka >= 100){
+
+            if(fencePowered()){
 
                 state.lizka = 20;
 
@@ -655,7 +754,7 @@ function updateAI() {
                     "Электрозабор остановил Лизку."
                 );
 
-            } else {
+            }else{
 
                 lose(
                     "Лизка добралась до резервного питания."
@@ -669,13 +768,15 @@ function updateAI() {
 
     /* МАЙНДФЛЕИЕР */
 
-    if (active("mindflayer")) {
+    if(active("mindflayer")){
 
-        state.mindflayer += 0.03;
+        state.mindflayer += .03;
 
-        if (state.mindflayer >= 100) {
+
+        if(state.mindflayer >= 100){
 
             openMindPanel();
+
         }
     }
 
@@ -685,104 +786,193 @@ function updateAI() {
 
 
 /* =========================
-   ОТОБРАЖЕНИЕ
+   ВРАГИ
 ========================= */
 
-function renderAI() {
+function renderAI(){
 
-    if (
+    hideEnemy("lichi");
+    hideEnemy("pancake");
+    hideEnemy("nemka");
+    hideEnemy("kyu");
+    hideEnemy("kashatan");
+    hideEnemy("charlotte");
+    hideEnemy("lizka");
+    hideEnemy("mindflayer");
+
+
+    /* ЛИЧИ */
+
+    if(
         view === "left" &&
         active("lichi") &&
         state.lichi > 50
-    ) {
+    ){
 
-        $("lichi").style.display = "block";
-
-        $("lichi").style.left = "45%";
-        $("lichi").style.top = "55%";
-
-    } else {
-
-        $("lichi").style.display = "none";
+        showEnemy(
+            "lichi",
+            "45%",
+            "55%"
+        );
     }
 
 
-    if (
-        view === "front" &&
+    /* ПАНКЕЙК — ТОЛЬКО В ВЕНТИЛЯЦИИ */
+
+    if(
         active("pancake") &&
-        state.pancake > 50
-    ) {
+        elapsed >= 120 &&
+        state.pancake > 20
+    ){
 
-        $("pancake").style.display = "block";
+        $("lowerVent")
+            .style
+            .display = "block";
 
-        $("pancake").style.left = "50%";
-        $("pancake").style.top = "65%";
+        $("lowerVentPancake")
+            .style
+            .display = "block";
 
-    } else {
+    }else{
 
-        $("pancake").style.display = "none";
+        $("lowerVent")
+            .style
+            .display = "none";
     }
 
 
-    if (
+    /* НЕМКА */
+
+    if(
         view === "right" &&
         active("nemka") &&
         backupDone &&
         state.nemka > 60
-    ) {
+    ){
 
-        $("nemka").style.display = "block";
-
-        $("nemka").style.left = "78%";
-        $("nemka").style.top = "50%";
-
-    } else {
-
-        $("nemka").style.display = "none";
+        showEnemy(
+            "nemka",
+            "78%",
+            "50%"
+        );
     }
 
 
-    if (
+    /* КЬЮ */
+
+    if(
+        view === "right" &&
+        active("kyu") &&
+        state.kyu > 45
+    ){
+
+        showEnemy(
+            "kyu",
+            "62%",
+            "55%"
+        );
+    }
+
+
+    /* КАШТАН */
+
+    if(
         view === "rear" &&
         active("kashatan") &&
         state.kashatan > 40
-    ) {
+    ){
 
-        $("kashatan").style.display = "block";
-
-        $("kashatan").style.left = "50%";
-        $("kashatan").style.top = "48%";
-
-    } else {
-
-        $("kashatan").style.display = "none";
+        showEnemy(
+            "kashatan",
+            "50%",
+            "48%"
+        );
     }
 
 
-    if (
+    /* ШАРЛОТА */
+
+    if(
         view === "rear" &&
         active("charlotte") &&
         state.charlotte > 40
-    ) {
+    ){
 
-        $("charlotte").style.display = "block";
-
-        $("charlotte").style.left = "52%";
-        $("charlotte").style.top = "45%";
-
-    } else {
-
-        $("charlotte").style.display = "none";
+        showEnemy(
+            "charlotte",
+            "52%",
+            "45%"
+        );
     }
 
 
-    $("cameraNemkaEyes")
-        .classList
-        .toggle(
-            "nemkaEyesActive",
-            active("nemka") &&
-            state.nemka > 35
+    /* ЛИЗКА */
+
+    if(
+        view === "front" &&
+        active("lizka") &&
+        state.lizka > 60
+    ){
+
+        showEnemy(
+            "lizka",
+            "25%",
+            "45%"
         );
+    }
+
+
+    /* МАЙНДФЛЕИЕР */
+
+    if(
+        view === "rear" &&
+        active("mindflayer") &&
+        state.mindflayer > 60
+    ){
+
+        showEnemy(
+            "mindflayer",
+            "50%",
+            "50%"
+        );
+    }
+
+
+    /* ДЕЛЬТА В ВЕРХНЕЙ ШАХТЕ */
+
+    if(
+        view === "front" &&
+        active("delta") &&
+        elapsed >= 120 &&
+        state.delta > 35
+    ){
+
+        $("upperVentButton")
+            .style
+            .display = "block";
+    }
+}
+
+
+function showEnemy(id,left,top){
+
+    const enemy = $(id);
+
+    enemy.style.display =
+        "block";
+
+    enemy.style.left = left;
+    enemy.style.top = top;
+}
+
+
+function hideEnemy(id){
+
+    const enemy = $(id);
+
+    if(enemy)
+        enemy.style.display =
+            "none";
 }
 
 
@@ -790,9 +980,10 @@ function renderAI() {
    СТАТУС
 ========================= */
 
-function status(text) {
+function status(text){
 
-    $("status").textContent = text;
+    $("status")
+        .textContent = text;
 }
 
 
@@ -800,15 +991,19 @@ function status(text) {
    ПИТАНИЕ
 ========================= */
 
-function powerOff() {
+function powerOff(){
 
-    if (backupDone) return;
+    if(backupDone)
+        return;
+
 
     snd("powerOffAudio");
+
 
     $("backupPanel")
         .classList
         .remove("hidden");
+
 
     status(
         "ОСНОВНОЕ ПИТАНИЕ ОТКЛЮЧЕНО"
@@ -820,9 +1015,9 @@ function powerOff() {
    ЭНЕРГИЯ
 ========================= */
 
-function windowPowered() {
+function windowPowered(){
 
-    return (
+    return(
         energy === "window" &&
         Date.now() >= energyBlockedUntil &&
         !energyBusy
@@ -830,21 +1025,32 @@ function windowPowered() {
 }
 
 
-function fencePowered() {
+function fencePowered(){
 
-    return (
+    return(
         energy === "fence" &&
-        Date.now() >= energyBlockedUntil &&
         !energyBusy
     );
 }
 
 
-function incineratorPowered() {
+function incineratorPowered(){
 
-    return (
+    return(
         energy === "incinerator" &&
-        Date.now() >= energyBlockedUntil &&
+        !energyBusy
+    );
+}
+
+
+/* =========================
+   ЭНЕРГИЯ ДВЕРИ
+========================= */
+
+function doorPowered(){
+
+    return(
+        energy === "door" &&
         !energyBusy
     );
 }
@@ -854,15 +1060,14 @@ function incineratorPowered() {
    МАЙНДФЛЕИЕР
 ========================= */
 
-function openMindPanel() {
+function openMindPanel(){
 
-    if (
+    if(
         !$("mindflayerPanel")
             .classList
             .contains("hidden")
-    ) {
+    )
         return;
-    }
 
 
     $("mindflayerPanel")
@@ -874,19 +1079,23 @@ function openMindPanel() {
 
     updateMind();
 
+
     clearInterval(mindTimer);
 
 
     mindTimer =
-        setInterval(() => {
+        setInterval(()=>{
 
             mindLevel -= 1.1;
 
-            if (mindLevel <= 0) {
+
+            if(mindLevel <= 0){
 
                 mindLevel = 0;
 
-                clearInterval(mindTimer);
+                clearInterval(
+                    mindTimer
+                );
 
                 $("mindflayerPanel")
                     .classList
@@ -899,25 +1108,31 @@ function openMindPanel() {
                 );
             }
 
+
             updateMind();
 
-        }, 500);
+        },500);
 }
 
 
-function updateMind() {
+function updateMind(){
 
-    $("mindflayerBarFill")
+    $("mindBarFill")
         .style
         .width =
         mindLevel + "%";
 
 
-    $("mindflayerMessage")
+    $("mindMessage")
         .textContent =
-        "СКОРОСТЬ: " +
-        Math.round(mindLevel) +
-        "%";
+        "Скорость: " +
+        (
+            mindLevel > 55
+                ? "высокая"
+                : mindLevel > 25
+                    ? "средняя"
+                    : "низкая"
+        );
 }
 
 
@@ -925,20 +1140,23 @@ function updateMind() {
    ВЕНТИЛЯЦИЯ
 ========================= */
 
-function showVentControls() {
+function showVentControls(){
 
-    if (
+    if(
         !active("delta") ||
         elapsed < 120
-    ) {
+    )
         return;
-    }
 
-    $("upperVentButton").style.display =
-        "block";
 
-    $("incineratorButton").style.display =
-        "block";
+    $("upperVentButton")
+        .style
+        .display = "block";
+
+
+    $("incineratorButton")
+        .style
+        .display = "block";
 }
 
 
@@ -946,72 +1164,70 @@ function showVentControls() {
    ПОВОРОТЫ
 ========================= */
 
-function setView(v) {
+function setView(v){
 
     view = v;
 
 
-    /* СПЕРЕДИ */
-
-    if (v === "front") {
-
-        $("view").style.backgroundImage =
-            'url("images/office.png")';
-
-        status("ОФИС");
-    }
+    $("officeImage")
+        .style
+        .display =
+        v === "front"
+            ? "block"
+            : "none";
 
 
-    /* СЛЕВА */
-
-    else if (v === "left") {
-
-        $("view").style.backgroundImage =
-            'url("images/office_left.png")';
-
-        status("ЛЕВЫЙ КОРИДОР");
-    }
+    $("leftOffice")
+        .style
+        .display =
+        v === "left"
+            ? "block"
+            : "none";
 
 
-    /* СПРАВА */
-
-    else if (v === "right") {
-
-        $("view").style.backgroundImage =
-            'url("images/office_right.png")';
-
-        status("ПРАВЫЙ КОРИДОР");
-    }
+    $("rightOffice")
+        .style
+        .display =
+        v === "right"
+            ? "block"
+            : "none";
 
 
-    /* ЗАДНЕЕ ОКНО */
-
-    else if (v === "rear") {
-
-        $("view").style.backgroundImage =
-            'url("images/office.png")';
-
-        status("ЗАДНЕЕ ОКНО");
-    }
-
-
-    $("rearWindowButton").style.display =
+    $("backWindow")
+        .style
+        .display =
         v === "rear"
             ? "block"
             : "none";
 
 
-    $("upperVentButton").style.display =
-        (
-            v === "front" &&
-            active("delta") &&
-            elapsed >= 120
-        )
-            ? "block"
-            : "none";
+    if(v === "left"){
+
+        status(
+            "ЛЕВЫЙ КОРИДОР"
+        );
+
+    }else if(v === "right"){
+
+        status(
+            "ПРАВЫЙ КОРИДОР"
+        );
+
+    }else if(v === "rear"){
+
+        status(
+            "ЗАДНЕЕ ОКНО"
+        );
+
+    }else{
+
+        status("ОФИС");
+    }
 
 
     renderAI();
+
+    updateWindowElectricity();
 }
 
 
@@ -1019,30 +1235,36 @@ function setView(v) {
    ВСПЫШКА
 ========================= */
 
-function flash() {
+function flash(){
 
     snd("flashAudio");
 
-    $("flash").style.opacity = 1;
+
+    $("flash")
+        .style
+        .opacity = 1;
 
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        $("flash").style.opacity = 0;
+        $("flash")
+            .style
+            .opacity = 0;
 
-    }, 100);
+    },100);
 
 
-    if (
+    if(
         active("lichi") &&
         state.lichi > 30
-    ) {
+    ){
 
         state.lichi =
             Math.max(
                 0,
                 state.lichi - 50
             );
+
 
         status(
             "Личи отпугнута вспышкой."
@@ -1055,9 +1277,9 @@ function flash() {
    КАМЕРЫ
 ========================= */
 
-function openCamera() {
+function openCamera(){
 
-    if (energy !== "camera") {
+    if(energy !== "camera"){
 
         status(
             "Камеры не получают питание!"
@@ -1076,9 +1298,9 @@ function openCamera() {
 }
 
 
-function updateCamera() {
+function updateCamera(){
 
-    let button =
+    const button =
         q(
             `[data-camera="${camera}"]`
         );
@@ -1086,14 +1308,15 @@ function updateCamera() {
 
     qa(
         "#cameraMap button[data-camera]"
-    ).forEach(x =>
+    ).forEach(
+        x =>
         x.classList.remove(
             "energyTargetActive"
         )
     );
 
 
-    if (button) {
+    if(button){
 
         button.classList.add(
             "energyTargetActive"
@@ -1112,24 +1335,69 @@ function updateCamera() {
         `url("images/${camera}.png")`;
 
 
-    $("cameraLichi")
-        .style
-        .display =
+    showCameraEnemy(
+        "cameraLichi",
         active("lichi") &&
         camera === "cam02" &&
         state.lichi > 20
-            ? "block"
-            : "none";
+    );
 
 
-    $("cameraPancake")
-        .style
-        .display =
+    showCameraEnemy(
+        "cameraPancake",
         active("pancake") &&
         camera === "cam04" &&
         state.pancake > 15
-            ? "block"
-            : "none";
+    );
+
+
+    showCameraEnemy(
+        "cameraKyu",
+        active("kyu") &&
+        camera === "cam03" &&
+        state.kyu > 20
+    );
+
+
+    showCameraEnemy(
+        "cameraKashatan",
+        active("kashatan") &&
+        camera === "cam05" &&
+        state.kashatan > 20
+    );
+
+
+    showCameraEnemy(
+        "cameraCharlotte",
+        active("charlotte") &&
+        camera === "cam06" &&
+        state.charlotte > 20
+    );
+
+
+    showCameraEnemy(
+        "cameraLizka",
+        active("lizka") &&
+        camera === "cam07" &&
+        state.lizka > 20
+    );
+
+
+    showCameraEnemy(
+        "cameraNemka",
+        active("nemka") &&
+        camera === "cam01" &&
+        state.nemka > 35
+    );
+
+
+    showCameraEnemy(
+        "cameraDelta",
+        active("delta") &&
+        camera === "cam07" &&
+        elapsed >= 120 &&
+        state.delta > 20
+    );
 
 
     let eyeCamera =
@@ -1155,15 +1423,6 @@ function updateCamera() {
         );
 
 
-    $("cameraCharlotte")
-        .style
-        .display =
-        active("charlotte") &&
-        state.charlotte > 30
-            ? "block"
-            : "none";
-
-
     $("catMessage")
         .textContent =
         "Текущая камера: " +
@@ -1171,13 +1430,22 @@ function updateCamera() {
 }
 
 
+function showCameraEnemy(id,show){
+
+    $(id).style.display =
+        show
+            ? "block"
+            : "none";
+}
+
+
 /* =========================
    МЯУКАНЬЕ
 ========================= */
 
-function meow() {
+function meow(){
 
-    if (energy !== "camera") {
+    if(energy !== "camera"){
 
         status(
             "Камеры обесточены."
@@ -1190,11 +1458,11 @@ function meow() {
     snd("catAudio");
 
 
-    if (
+    if(
         active("nemka") &&
         state.nemka > 10 &&
         state.nemka < 90
-    ) {
+    ){
 
         state.nemka =
             Math.max(
@@ -1212,7 +1480,7 @@ function meow() {
             "Немка отвлечена."
         );
 
-    } else {
+    }else{
 
         $("catMessage")
             .textContent =
@@ -1228,9 +1496,9 @@ function meow() {
    СИРЕНА
 ========================= */
 
-function alarm() {
+function alarm(){
 
-    if (energy !== "camera") {
+    if(energy !== "camera"){
 
         status(
             "Сирена не работает без энергии."
@@ -1243,16 +1511,11 @@ function alarm() {
     snd("alarmAudio");
 
 
-    $("alarmMessage")
-        .textContent =
-        "СИРЕНА АКТИВНА";
-
-
-    if (
+    if(
         active("charlotte") &&
         state.charlotte > 10 &&
         state.charlotte < 100
-    ) {
+    ){
 
         state.charlotte =
             Math.max(
@@ -1261,19 +1524,15 @@ function alarm() {
             );
 
 
+        $("alarmMessage")
+            .textContent =
+            "Шарлота отвлечена!";
+
+
         status(
             "СИРЕНА: Шарлота отвлечена!"
         );
     }
-
-
-    setTimeout(() => {
-
-        $("alarmMessage")
-            .textContent =
-            "Сигнализация не активна.";
-
-    }, 2000);
 }
 
 
@@ -1281,9 +1540,9 @@ function alarm() {
    ВЕРХНЯЯ ШАХТА
 ========================= */
 
-function upperVent() {
+function upperVent(){
 
-    if (elapsed < 120) {
+    if(elapsed < 120){
 
         status(
             "Верхняя шахта пока закрыта."
@@ -1300,44 +1559,54 @@ function upperVent() {
         );
 
 
-    if (
+    if(
         $("upperVent")
             .classList
-            .contains("upperVentActive")
-    ) {
+            .contains(
+                "upperVentActive"
+            )
+    ){
 
         status(
             "ВЕРХНЯЯ ШАХТА"
         );
 
-        showDelta(true);
-
-    } else {
+    }else{
 
         status("ОФИС");
-
-        showDelta(false);
     }
 }
 
 
-function showDelta(show) {
+/* =========================
+   НИЖНЯЯ ВЕНТИЛЯЦИЯ
+========================= */
 
-    $("delta")
-        .style
-        .display =
-        show
-            ? "block"
-            : "none";
+function lowerVent(){
 
+    if(
+        active("pancake") &&
+        state.pancake > 20
+    ){
 
-    if (show) {
+        if(energy === "vent"){
 
-        $("delta").style.left =
-            "50%";
+            state.pancake =
+                Math.max(
+                    0,
+                    state.pancake - 60
+                );
 
-        $("delta").style.top =
-            "45%";
+            status(
+                "Вентиляция остановила Панкейка."
+            );
+
+        }else{
+
+            status(
+                "Для блокировки вентиляции нужна энергия."
+            );
+        }
     }
 }
 
@@ -1346,9 +1615,9 @@ function showDelta(show) {
    СЖИГАТЕЛЬ
 ========================= */
 
-function burn() {
+function burn(){
 
-    if (!incineratorPowered()) {
+    if(!incineratorPowered()){
 
         status(
             "Сначала направьте энергию на сжигатель."
@@ -1361,7 +1630,7 @@ function burn() {
     snd("incineratorAudio");
 
 
-    if (active("delta")) {
+    if(active("delta")){
 
         state.delta =
             Math.max(
@@ -1378,30 +1647,28 @@ function burn() {
 
 
 /* =========================
-   ЗАДНЕЕ ОКНО
-========================= */
-
-function rear() {
-
-    view = "rear";
-
-    status("ЗАДНЕЕ ОКНО");
-
-    $("view").style.backgroundImage =
-        'url("images/office_right.png")';
-
-    $("rearWindowButton").style.display =
-        "block";
-
-    renderAI();
-}
-
-
-/* =========================
    ПРАВАЯ ДВЕРЬ
 ========================= */
 
-function closeRight() {
+function closeRight(){
+
+    /*
+       ГЛАВНОЕ ИЗМЕНЕНИЕ:
+
+       дверь вообще не закрывается,
+       если энергия не направлена
+       на дверь.
+    */
+
+    if(!doorPowered()){
+
+        status(
+            "НЕТ ЭНЕРГИИ ДЛЯ ПРАВОЙ ДВЕРИ!"
+        );
+
+        return;
+    }
+
 
     rightDoorClosed =
         !rightDoorClosed;
@@ -1413,13 +1680,6 @@ function closeRight() {
             "closed",
             rightDoorClosed
         );
-
-
-    $("rightDoorButton")
-        .textContent =
-        rightDoorClosed
-            ? "ОТКРЫТЬ"
-            : "ЗАКРЫТЬ";
 
 
     $("doorStatus")
@@ -1438,18 +1698,47 @@ function closeRight() {
 
 
 /* =========================
+   ЛЕВАЯ ДВЕРЬ
+========================= */
+
+function closeLeft(){
+
+    if(energy !== "door"){
+
+        status(
+            "НЕТ ЭНЕРГИИ ДЛЯ ДВЕРИ!"
+        );
+
+        return;
+    }
+
+
+    leftDoorClosed =
+        !leftDoorClosed;
+
+
+    $("leftDoor")
+        .classList
+        .toggle(
+            "closed",
+            leftDoorClosed
+        );
+}
+
+
+/* =========================
    ЭНЕРГИЯ
 ========================= */
 
-function selectEnergy(target) {
+function selectEnergy(target){
 
-    if (
-        Date.now() <
-        energyBlockedUntil
-    ) {
+    if(
+        target === "window" &&
+        Date.now() < energyBlockedUntil
+    ){
 
         status(
-            "Питание окна временно заблокировано."
+            "ПИТАНИЕ ОКНА ЗАБЛОКИРОВАНО!"
         );
 
         return;
@@ -1459,64 +1748,78 @@ function selectEnergy(target) {
     energy = target;
 
     updateEnergyUI();
+
+    updateWindowElectricity();
+
+
+    if(target === "door"){
+
+        status(
+            "ЭНЕРГИЯ НАПРАВЛЕНА НА ДВЕРЬ."
+        );
+    }
 }
 
 
-function updateEnergyUI() {
+function updateEnergyUI(){
 
     const names = {
 
-        camera:
-            "КАМЕРЫ",
+        camera:"КАМЕРЫ",
 
-        window:
-            "ОКНО",
+        window:"ЗАДНЕЕ ОКНО",
 
-        incinerator:
-            "СЖИГАТЕЛЬ",
+        incinerator:"СЖИГАТЕЛЬ",
 
-        fence:
-            "ЭЛЕКТРОЗАБОР",
+        door:"ПРАВАЯ ДВЕРЬ",
 
-        door:
-            "ПРАВАЯ ДВЕРЬ",
+        fence:"ЭЛЕКТРОЗАБОР",
 
-        vent:
-            "ВЕНТИЛЯЦИЯ"
+        vent:"ВЕНТИЛЯЦИЯ"
     };
-
-
-    const name =
-        names[energy] || "КАМЕРЫ";
 
 
     $("energyTargetText")
         .textContent =
-        name;
+        names[energy];
 
 
     $("energyMessage")
         .textContent =
         "Энергия направлена на " +
-        name.toLowerCase() +
+        names[energy].toLowerCase() +
         ".";
 
 
     qa(
         "#energyTargets button"
-    ).forEach(button => {
+    ).forEach(button=>{
 
         button.classList.toggle(
             "energyTargetActive",
             button.dataset.energy === energy
         );
+
     });
 
 
     $("powerStatus")
         .textContent =
-        "⚡ ПИТАНИЕ: " +
-        name;
+        "⚡ ЭНЕРГИЯ: " +
+        names[energy];
+}
+
+
+function updateWindowElectricity(){
+
+    $("windowElectricity")
+        .style
+        .display =
+        energy === "window" &&
+        view === "rear" &&
+        Date.now() >= energyBlockedUntil
+            ? "block"
+            : "none";
 }
 
 
@@ -1524,9 +1827,10 @@ function updateEnergyUI() {
    РЫЧАГ
 ========================= */
 
-function leverDown() {
+function leverDown(){
 
-    if (energyBusy) return;
+    if(energyBusy)
+        return;
 
 
     leverStart =
@@ -1536,7 +1840,7 @@ function leverDown() {
 
 
     const loop =
-        setInterval(() => {
+        setInterval(()=>{
 
             let progress =
                 Math.min(
@@ -1554,24 +1858,30 @@ function leverDown() {
                 progress + "%";
 
 
-            if (progress >= 100) {
+            if(progress >= 100){
 
                 clearInterval(loop);
 
                 energyBusy = false;
 
+
                 $("leverProgressBar")
                     .style
-                    .width = "0%";
+                    .width =
+                    "0%";
+
 
                 updateEnergyUI();
+
+                updateWindowElectricity();
+
 
                 status(
                     "Перенаправление завершено."
                 );
             }
 
-        }, 30);
+        },30);
 }
 
 
@@ -1579,15 +1889,16 @@ function leverDown() {
    РЕЗЕРВ
 ========================= */
 
-function backupWire(number) {
+function backupWire(number){
 
-    number = Number(number);
+    number =
+        Number(number);
 
 
-    if (
+    if(
         number ===
         wireStep + 1
-    ) {
+    ){
 
         wireStep++;
 
@@ -1595,11 +1906,11 @@ function backupWire(number) {
         q(
             `[data-wire="${number}"]`
         )
-            .classList
-            .add("wireSelected");
+        .classList
+        .add("wireSelected");
 
 
-        if (wireStep === 4) {
+        if(wireStep === 4){
 
             backupDone = true;
 
@@ -1621,14 +1932,15 @@ function backupWire(number) {
         }
 
 
-    } else {
+    }else{
 
         wireStep = 0;
 
 
         qa(
             "#backupWires button"
-        ).forEach(x =>
+        ).forEach(
+            x =>
             x.classList.remove(
                 "wireSelected"
             )
@@ -1646,15 +1958,18 @@ function backupWire(number) {
    GAME OVER
 ========================= */
 
-function lose(reason) {
+function lose(reason){
 
-    if (!playing) return;
+    if(!playing)
+        return;
 
 
     playing = false;
 
+
     clearInterval(timer);
     clearInterval(mindTimer);
+
 
     stop("humAudio");
 
@@ -1674,12 +1989,18 @@ function lose(reason) {
    ПОБЕДА
 ========================= */
 
-function win() {
+function win(){
+
+    if(!playing)
+        return;
+
 
     playing = false;
 
+
     clearInterval(timer);
     clearInterval(mindTimer);
+
 
     stop("humAudio");
 
@@ -1719,10 +2040,10 @@ function win() {
 
 
 /* =========================
-   СПИСОК НОЧЕЙ
+   НОЧИ
 ========================= */
 
-function fillNights() {
+function fillNights(){
 
     let unlocked =
         Number(
@@ -1736,11 +2057,11 @@ function fillNights() {
         .innerHTML = "";
 
 
-    for (
-        let i = 1;
-        i <= 13;
+    for(
+        let i=1;
+        i<=13;
         i++
-    ) {
+    ){
 
         let button =
             document.createElement(
@@ -1781,13 +2102,13 @@ function fillNights() {
 
 $("startGameButton").onclick =
     () =>
-        start(
-            Number(
-                localStorage.getItem(
-                    "bgnUnlocked"
-                ) || 1
-            )
-        );
+    start(
+        Number(
+            localStorage.getItem(
+                "bgnUnlocked"
+            ) || 1
+        )
+    );
 
 
 $("nightsButton").onclick =
@@ -1832,6 +2153,7 @@ $("fullscreenButton").onclick =
         document
             .documentElement
             .requestFullscreen?.();
+
     };
 
 
@@ -1850,7 +2172,9 @@ $("resetProgress").onclick =
     };
 
 
-/* КАМЕРЫ */
+/* =========================
+   КАМЕРЫ
+========================= */
 
 $("cameraButton").onclick =
     openCamera;
@@ -1858,12 +2182,38 @@ $("cameraButton").onclick =
 
 $("closeCameraPanel").onclick =
     () =>
-        $("cameraPanel")
-            .classList
-            .add("hidden");
+    $("cameraPanel")
+        .classList
+        .add("hidden");
 
 
-/* ЭНЕРГИЯ */
+$("catMeowButton").onclick =
+    meow;
+
+
+$("cameraAlarmButton").onclick =
+    alarm;
+
+
+qa(
+    "#cameraMap button[data-camera]"
+).forEach(button=>{
+
+    button.onclick =
+        () => {
+
+            camera =
+                button.dataset.camera;
+
+            updateCamera();
+        };
+
+});
+
+
+/* =========================
+   ЭНЕРГИЯ
+========================= */
 
 $("energyButton").onclick =
     () => {
@@ -1878,21 +2228,112 @@ $("energyButton").onclick =
 
 $("closeEnergyPanel").onclick =
     () =>
-        $("energyPanel")
-            .classList
-            .add("hidden");
+    $("energyPanel")
+        .classList
+        .add("hidden");
 
 
-/* МАЙНДФЛЕИЕР */
+qa(
+    "#energyTargets button"
+).forEach(button=>{
 
-$("closeMindPanel").onclick =
+    button.onclick =
+        () =>
+        selectEnergy(
+            button.dataset.energy
+        );
+
+});
+
+
+/* =========================
+   РЫЧАГ
+========================= */
+
+$("lever")
+    .addEventListener(
+        "pointerdown",
+        leverDown
+    );
+
+
+/* =========================
+   ДВЕРИ
+========================= */
+
+$("rightDoorButton").onclick =
+    closeRight;
+
+
+$("leftDoorButton").onclick =
+    closeLeft;
+
+
+/* =========================
+   ПОВОРОТЫ
+========================= */
+
+$("leftButton").onclick =
     () =>
-        $("mindflayerPanel")
-            .classList
-            .add("hidden");
+    setView("left");
 
 
-$("slowMindflayer").onclick =
+$("frontButton").onclick =
+    () =>
+    setView("front");
+
+
+$("rightButton").onclick =
+    () =>
+    setView("right");
+
+
+/* =========================
+   ВСПЫШКА
+========================= */
+
+$("flashButton").onclick =
+    flash;
+
+
+/* =========================
+   ШАХТЫ
+========================= */
+
+$("upperVentButton").onclick =
+    upperVent;
+
+
+$("lowerVentButton").onclick =
+    lowerVent;
+
+
+$("incineratorButton").onclick =
+    burn;
+
+
+/* =========================
+   ПРОВОДА
+========================= */
+
+qa(
+    "#backupWires button"
+).forEach(button=>{
+
+    button.onclick =
+        () =>
+        backupWire(
+            button.dataset.wire
+        );
+
+});
+
+
+/* =========================
+   МАЙНДФЛЕИЕР
+========================= */
+
+$("mindSlow").onclick =
     () => {
 
         mindLevel =
@@ -1905,7 +2346,7 @@ $("slowMindflayer").onclick =
         updateMind();
 
 
-        if (mindLevel === 0) {
+        if(mindLevel === 0){
 
             clearInterval(
                 mindTimer
@@ -1927,7 +2368,7 @@ $("slowMindflayer").onclick =
     };
 
 
-$("fastMindflayer").onclick =
+$("mindFast").onclick =
     () => {
 
         mindLevel =
@@ -1941,133 +2382,39 @@ $("fastMindflayer").onclick =
     };
 
 
-/* ОСНОВНЫЕ КНОПКИ */
-
-$("flashButton").onclick =
-    flash;
-
-
-$("leftButton").onclick =
-    () =>
-        setView("left");
-
-
-$("frontButton").onclick =
-    () =>
-        setView("front");
-
-
-$("rightButton").onclick =
-    () =>
-        setView("right");
-
-
-$("rightDoorButton").onclick =
-    closeRight;
-
-
-$("upperVentButton").onclick =
-    upperVent;
-
-
-$("incineratorButton").onclick =
-    burn;
-
-
-/* МЯУКАНЬЕ */
-
-$("catMeowButton").onclick =
-    meow;
-
-
-/* СИРЕНА */
-
-$("cameraAlarmButton").onclick =
-    alarm;
-
-
-/* КАМЕРЫ */
-
-qa(
-    "#cameraMap button[data-camera]"
-).forEach(button => {
-
-    button.onclick =
-        () => {
-
-            camera =
-                button.dataset.camera;
-
-            updateCamera();
-        };
-});
-
-
-/* ЭНЕРГИЯ */
-
-qa(
-    "#energyTargets button"
-).forEach(button => {
-
-    button.onclick =
-        () =>
-            selectEnergy(
-                button.dataset.energy
-            );
-});
-
-
-/* ПРОВОДА */
-
-qa(
-    "#backupWires button"
-).forEach(button => {
-
-    button.onclick =
-        () =>
-            backupWire(
-                button.dataset.wire
-            );
-});
-
-
-/* РЫЧАГ */
-
-$("lever")
-    .addEventListener(
-        "pointerdown",
-        leverDown
-    );
-
-
-/* GAME OVER */
+/* =========================
+   GAME OVER
+========================= */
 
 $("restart").onclick =
-    () =>
-        begin();
+    begin;
 
 
 $("menuAfterLose").onclick =
     menu;
 
 
-/* ПОБЕДА */
+/* =========================
+   ПОБЕДА
+========================= */
 
 $("nextNight").onclick =
     () =>
-        start(
-            Math.min(
-                13,
-                night + 1
-            )
-        );
+    start(
+        Math.min(
+            13,
+            night + 1
+        )
+    );
 
 
 $("menuAfterWin").onclick =
     menu;
 
 
-/* НАЧАЛО */
+/* =========================
+   INIT
+========================= */
 
 fillNights();
 
