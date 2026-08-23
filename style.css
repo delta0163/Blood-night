@@ -4,30 +4,22 @@
     user-select:none;
 }
 
-html,
-body{
+html,body{
     margin:0;
-    padding:0;
     width:100%;
     height:100%;
     overflow:hidden;
-
     background:#000;
     color:#fff;
-
     font-family:Arial,sans-serif;
 }
 
 button{
     cursor:pointer;
-
     color:#fff;
     background:#111;
-
     border:2px solid #777;
-
     padding:12px 20px;
-
     font-size:16px;
 }
 
@@ -35,79 +27,43 @@ button:active{
     transform:scale(.96);
 }
 
-button:disabled{
-    opacity:.45;
-}
-
 .hidden{
     display:none!important;
 }
 
-
-/* =========================
-   МЕНЮ
-========================= */
-
 .screen{
     position:fixed;
     inset:0;
-
-    width:100%;
-    height:100%;
-
     display:flex;
-
     justify-content:center;
     align-items:center;
-
     z-index:100;
 }
 
 .menuBackground{
     position:absolute;
     inset:0;
-
     background:
-        linear-gradient(
-            rgba(0,0,0,.65),
-            rgba(0,0,0,.9)
-        ),
-        url("images/menu_bg.png");
-
-    background-size:cover;
-    background-position:center;
-
-    filter:brightness(.65);
-
+        linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.85)),
+        url("images/menu_bg.png") center/cover no-repeat;
     z-index:-1;
 }
 
 .menuContent{
     width:min(90%,500px);
-
     display:flex;
     flex-direction:column;
-
     gap:18px;
-
     text-align:center;
 }
 
 .menuContent h1{
     font-size:clamp(30px,7vw,60px);
-
-    margin-bottom:25px;
-
     letter-spacing:4px;
-
-    text-shadow:
-        0 0 10px #000,
-        0 0 25px #000;
 }
 
 .menuContent h2{
     font-size:30px;
-    margin-bottom:20px;
 }
 
 .menuContent button{
@@ -116,189 +72,92 @@ button:disabled{
 
 #nightsList{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:10px;
-
     max-height:60vh;
-
     overflow-y:auto;
 }
 
-.nightButton{
-    min-height:50px;
-}
-
 .nightButton.locked{
-    opacity:.4;
-}
-
-
-/* =========================
-   ТЕЛЕФОН
-========================= */
-
-#phoneScreen{
-    background:#000;
+    opacity:.35;
 }
 
 .phoneBox{
     text-align:center;
-
-    width:min(90%,500px);
 }
-
-.phoneBox h2{
-    font-size:35px;
-}
-
-.phoneBox p{
-    font-size:20px;
-
-    margin:30px;
-}
-
-
-/* =========================
-   ИГРА
-========================= */
 
 #game{
     position:fixed;
     inset:0;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
     background:#000;
+    overflow:hidden;
 }
 
 #background{
     position:absolute;
     inset:0;
-
-    background:
-        url("images/game_bg.png")
-        center/cover no-repeat;
-
-    opacity:.35;
-
-    pointer-events:none;
+    background:url("images/game_bg.png") center/cover no-repeat;
+    opacity:.25;
 }
 
 #view{
     position:absolute;
     inset:0;
-
     overflow:hidden;
-
-    background:
-        url("images/office.png")
-        center/cover no-repeat;
+    background:url("images/office.png") center/cover no-repeat;
 }
-
-
-/* =========================
-   ОФИСНЫЕ СТОРОНЫ
-========================= */
 
 #officeImage{
     position:absolute;
     inset:0;
-
-    background:
-        url("images/office.png")
-        center/cover no-repeat;
-
+    background:url("images/office.png") center/cover no-repeat;
     z-index:1;
 }
 
 #leftOffice{
     position:absolute;
     inset:0;
-
+    background:url("images/office_left.png") center/cover no-repeat;
+    z-index:1;
     display:none;
-
-    background:
-        url("images/office_left.png")
-        center/cover no-repeat;
-
-    z-index:2;
 }
 
 #rightOffice{
     position:absolute;
     inset:0;
-
+    background:url("images/office_right.png") center/cover no-repeat;
+    z-index:1;
     display:none;
-
-    background:
-        url("images/office_right.png")
-        center/cover no-repeat;
-
-    z-index:2;
 }
 
 #backWindow{
     position:absolute;
     inset:0;
-
-    display:none;
-
-    background:
-        url("images/rear_window.png")
-        center/cover no-repeat;
-
+    background:url("images/rear_window.png") center/cover no-repeat;
     z-index:3;
+    display:none;
 }
-
-
-/* =========================
-   ЭЛЕКТРИЧЕСТВО ОКНА
-========================= */
 
 #windowElectricity{
     position:absolute;
     inset:0;
-
-    display:none;
-
+    z-index:10;
     pointer-events:none;
-
-    z-index:60;
-
+    display:none;
     background:
         repeating-linear-gradient(
-            120deg,
-            transparent 0px,
-            transparent 18px,
-            rgba(255,255,255,.5) 20px,
-            transparent 23px
+            90deg,
+            transparent 0 30px,
+            rgba(100,180,255,.18) 32px,
+            transparent 34px
         );
-
-    opacity:.65;
-
-    animation:electricFlash .15s infinite alternate;
+    animation:electric .15s linear infinite;
 }
 
-@keyframes electricFlash{
-    from{
-        opacity:.35;
-    }
-
-    to{
-        opacity:.8;
-    }
+@keyframes electric{
+    from{opacity:.35}
+    to{opacity:.8}
 }
-
-
-/* =========================
-   ВРАГИ
-========================= */
 
 #lichi,
 #pancake,
@@ -310,642 +169,257 @@ button:disabled{
 #lizka,
 #mindflayer{
     position:absolute;
-
     display:none;
-
+    transform:translate(-50%,-50%);
     pointer-events:none;
-
-    transform:
-        translate(-50%,-50%);
-
-    object-fit:contain;
+    z-index:50;
 }
 
-#lichi{
+#lichi,#pancake,#kyu{
     width:230px;
-    z-index:80;
 }
 
-#pancake{
-    width:200px;
-    z-index:80;
-}
-
-#nemka{
-    width:260px;
-    z-index:90;
-}
-
-#delta{
+#nemka,#delta{
     width:250px;
-    z-index:90;
 }
 
-#kyu{
-    width:230px;
-    z-index:85;
+#kashatan,#charlotte,#lizka,#mindflayer{
+    width:220px;
 }
-
-#kashatan,
-#charlotte,
-#lizka,
-#mindflayer{
-    width:240px;
-    z-index:85;
-}
-
-
-/* =========================
-   ГЛАЗА НЕМКИ
-========================= */
 
 #nemkaEyes,
 #cameraNemkaEyes{
     position:absolute;
-
     inset:0;
-
     display:none;
-
     pointer-events:none;
-
-    z-index:100;
-
+    z-index:80;
     background:
-        radial-gradient(
-            ellipse at 35% 45%,
-            white 0,
-            white 7px,
-            black 8px,
-            transparent 15px
-        ),
-        radial-gradient(
-            ellipse at 65% 45%,
-            white 0,
-            white 7px,
-            black 8px,
-            transparent 15px
-        );
-
-    background-repeat:no-repeat;
-
-    background-size:50% 50%;
-
-    background-position:center;
+        radial-gradient(circle at 43% 48%,#fff 0 7px,#000 8px,transparent 14px),
+        radial-gradient(circle at 57% 48%,#fff 0 7px,#000 8px,transparent 14px);
 }
 
 .nemkaEyesActive{
     display:block!important;
-
-    animation:
-        eyeFlicker .12s
-        infinite alternate;
+    animation:eyeFlicker .12s infinite alternate;
 }
 
 @keyframes eyeFlicker{
-
-    from{
-        opacity:.5;
-    }
-
-    to{
-        opacity:1;
-    }
+    from{opacity:.5}
+    to{opacity:1}
 }
-
-
-/* =========================
-   ВСПЫШКА
-========================= */
 
 #flash{
     position:absolute;
-
     inset:0;
-
     background:#fff;
-
     opacity:0;
-
     pointer-events:none;
-
     z-index:300;
-
-    transition:
-        opacity .1s;
+    transition:opacity .1s;
 }
-
-#flash.flashReady{
-    opacity:0;
-}
-
-
-/* =========================
-   ВЕРХНЯЯ ВЕНТИЛЯЦИЯ
-========================= */
 
 #upperVent{
     position:absolute;
     inset:0;
-
     display:none;
-
-    background:
-        url("images/upper_vent.png")
-        center/cover no-repeat;
-
+    background:url("images/upper_vent.png") center/cover no-repeat;
     z-index:70;
-
-    pointer-events:none;
 }
 
-.upperVentActive{
-    display:block!important;
+#upperVent.upperVentActive{
+    display:block;
 }
 
 #upperVentLabel{
-    display:none!important;
-}
-
-#upperVentDelta{
-    position:absolute;
-
-    width:230px;
-
-    left:50%;
-    top:48%;
-
-    transform:
-        translate(-50%,-50%);
-}
-
-
-/* =========================
-   НИЖНЯЯ ВЕНТИЛЯЦИЯ
-========================= */
-
-#lowerVent{
-    position:absolute;
-    inset:0;
-
     display:none;
-
-    background:#050505;
-
-    z-index:70;
 }
-
-#lowerVentLabel{
-    display:none!important;
-}
-
-#lowerVentPancake,
-#lowerVentDelta{
-    position:absolute;
-
-    display:none;
-
-    width:220px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-}
-
-
-/* =========================
-   КНОПКИ ШАХТЫ
-========================= */
 
 #upperVentButton,
-#lowerVentButton,
 #incineratorButton,
-#rearWindowButton{
+#alarmButton{
     position:absolute;
-
-    width:65px;
+    z-index:100;
+    width:60px;
     height:55px;
-
     padding:0;
-
-    z-index:120;
-
-    display:none;
-
-    background:
-        rgba(0,0,0,.8);
-
-    border:2px solid #777;
-
-    border-radius:8px;
 }
 
 #upperVentButton{
-    right:20px;
+    right:15px;
     top:70px;
-
-    font-size:30px;
-}
-
-#lowerVentButton{
-    left:20px;
-    bottom:125px;
-
-    font-size:25px;
 }
 
 #incineratorButton{
-    left:20px;
-    bottom:190px;
-
-    font-size:25px;
-}
-
-#rearWindowButton{
-    right:20px;
+    left:15px;
     bottom:125px;
-
-    font-size:25px;
 }
 
-
-/* =========================
-   СЖИГАТЕЛЬ
-========================= */
-
-#incineratorButton.active{
-    border-color:#fff;
-
-    box-shadow:
-        0 0 15px
-        rgba(255,255,255,.5);
+#alarmButton{
+    right:15px;
+    bottom:125px;
+    display:none;
 }
-
-
-/* =========================
-   ДВЕРИ
-========================= */
 
 #rightDoor{
     position:absolute;
-
     right:0;
     top:20%;
-
-    width:170px;
+    width:160px;
     height:60%;
-
-    z-index:110;
-
-    background:
-        linear-gradient(
-            #222,
-            #080808
-        );
-
+    background:linear-gradient(#222,#050505);
     border-left:4px solid #777;
-
+    z-index:90;
+    transform:translateX(140px);
+    transition:.25s;
     display:flex;
-
     justify-content:center;
     align-items:center;
-
-    transition:
-        transform .25s;
-
-    transform:
-        translateX(140px);
 }
 
 #rightDoor.closed{
-    transform:
-        translateX(0);
+    transform:translateX(0);
 }
 
 #rightDoorText{
-    transform:
-        rotate(-90deg);
+    transform:rotate(-90deg);
+}
 
-    font-size:13px;
+#leftDoor,
+#leftDoorButton{
+    display:none!important;
 }
 
 #rightDoorButton{
     position:absolute;
-
     right:15px;
     top:50%;
-
-    transform:
-        translateY(-50%);
-
-    z-index:130;
-
-    width:65px;
-    height:55px;
-
-    padding:0;
-}
-
-
-/*
-   ЛЕВАЯ ДВЕРЬ
-   НЕ ЗАКРЫВАЕТСЯ
-*/
-
-#leftDoor{
-    position:absolute;
-
-    left:0;
-    top:20%;
-
-    width:150px;
-    height:60%;
-
     z-index:110;
-
-    background:
-        linear-gradient(
-            #222,
-            #080808
-        );
-
-    border-right:4px solid #777;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    transform:
-        translateX(-130px);
 }
-
-#leftDoorText{
-    transform:
-        rotate(90deg);
-
-    font-size:13px;
-}
-
-#leftDoorButton{
-    position:absolute;
-
-    left:15px;
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    z-index:130;
-
-    width:65px;
-    height:55px;
-
-    padding:0;
-}
-
-
-/* =========================
-   HUD
-========================= */
 
 #hud{
     position:absolute;
-
     top:15px;
     left:15px;
     right:15px;
-
     display:flex;
-
     justify-content:space-between;
-
     z-index:150;
-
     font-size:20px;
-
-    text-shadow:
-        2px 2px 5px #000;
+    text-shadow:2px 2px 5px #000;
 }
 
 #status{
     position:absolute;
-
     top:55px;
     left:50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:150;
-
+    transform:translateX(-50%);
     width:90%;
-
     text-align:center;
-
-    font-size:16px;
-
-    text-shadow:
-        2px 2px 5px #000;
+    z-index:150;
+    text-shadow:2px 2px 5px #000;
 }
 
 #powerStatus{
     position:absolute;
-
     left:15px;
-    bottom:155px;
-
+    bottom:15px;
     z-index:150;
-
-    font-size:14px;
 }
 
 #doorStatus{
     position:absolute;
-
     right:15px;
-    bottom:155px;
-
+    bottom:15px;
     z-index:150;
-
-    font-size:14px;
 }
-
-
-/* =========================
-   ПОВОРОТЫ
-========================= */
 
 #officeControls{
     position:absolute;
-
-    bottom:105px;
+    bottom:100px;
     left:50%;
-
-    transform:
-        translateX(-50%);
-
+    transform:translateX(-50%);
     display:flex;
-
     gap:15px;
-
     z-index:150;
 }
 
 #officeControls button{
     width:60px;
     height:55px;
-
-    border-radius:8px;
-
     font-size:24px;
 }
 
-
-/* =========================
-   НИЖНИЕ КНОПКИ
-========================= */
-
 #bottomControls{
     position:absolute;
-
-    bottom:15px;
+    bottom:10px;
     left:50%;
-
-    transform:
-        translateX(-50%);
-
+    transform:translateX(-50%);
     display:flex;
-
     gap:10px;
-
-    z-index:150;
-
     width:min(95%,600px);
+    z-index:150;
 }
 
 #bottomControls button{
     flex:1;
-
-    min-width:0;
 }
-
-
-/* =========================
-   ПАНЕЛИ
-========================= */
 
 .panel{
     position:absolute;
-
-    inset:4%;
-
+    inset:3%;
     z-index:200;
-
     background:#050505;
-
     border:2px solid #888;
-
-    box-shadow:
-        0 0 30px #000;
-
     display:flex;
-
     flex-direction:column;
 }
 
 .panelHeader{
     min-height:55px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     padding:8px 15px;
-
-    border-bottom:
-        2px solid #555;
-
+    border-bottom:2px solid #555;
     font-size:20px;
-
-    flex-shrink:0;
 }
-
-.panelHeader button{
-    padding:5px 12px;
-}
-
-
-/* =========================
-   КАМЕРЫ
-========================= */
 
 .cameraBody{
     flex:1;
-
     min-height:0;
-
     display:flex;
-
     gap:12px;
-
     padding:10px;
 }
 
 #cameraImage{
     position:relative;
-
     flex:1;
-
     min-width:0;
     min-height:0;
-
     overflow:hidden;
-
-    background:#111;
-
+    background:#111 center/cover no-repeat;
     border:2px solid #555;
-
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
 }
 
 #cameraStatic{
     position:absolute;
     inset:0;
-
-    pointer-events:none;
-
-    opacity:.12;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 3px,
-            rgba(255,255,255,.15) 4px
-        );
-
+    background:repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(255,255,255,.15) 4px
+    );
+    opacity:.15;
     z-index:10;
 }
 
 #cameraNumber{
     position:absolute;
-
     top:10px;
     left:10px;
-
     z-index:30;
-
-    font-size:20px;
-
-    text-shadow:
-        2px 2px 5px #000;
 }
 
 #cameraLichi,
@@ -956,636 +430,228 @@ button:disabled{
 #cameraLizka,
 #cameraNemka{
     position:absolute;
-
-    display:none;
-
     width:180px;
-
     left:50%;
     top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
+    display:none;
     z-index:20;
 }
 
-#cameraNemkaEyes{
-    z-index:40;
-}
-
-
-/* =========================
-   КАРТА КАМЕР
-========================= */
-
 #cameraMap{
-    width:135px;
-
+    width:125px;
     display:flex;
-
     flex-direction:column;
-
     gap:8px;
-
-    padding:5px;
-
     overflow-y:auto;
-
-    flex-shrink:0;
 }
 
-#cameraMap > button{
-    width:100%;
-
-    min-height:52px;
-
-    flex-shrink:0;
-
-    padding:8px 4px;
-
-    white-space:nowrap;
+#cameraMap>button{
+    min-height:50px;
+    padding:5px;
 }
 
-
-/* =========================
-   МЯУКАНЬЕ
-========================= */
-
-#catControl{
-    width:100%;
-
-    margin-top:4px;
-
-    padding-top:9px;
-
-    border-top:
-        2px solid #555;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:7px;
-
-    text-align:center;
-
-    flex-shrink:0;
-}
-
-#catControl .catTitle{
-    font-size:11px;
-}
-
-#catMeowButton{
-    width:100%;
-
-    min-height:48px;
-
-    padding:6px 2px;
-
-    font-size:11px;
-}
-
-#catMessage{
-    color:#aaa;
-
-    font-size:9px;
-}
-
-
-/* =========================
-   СИРЕНА
-========================= */
-
+#catControl,
 #alarmControl{
-    width:100%;
-
-    margin-top:5px;
-
-    padding-top:9px;
-
-    border-top:
-        2px solid #555;
-
+    border-top:2px solid #555;
+    padding-top:8px;
     display:flex;
-
     flex-direction:column;
-
-    align-items:center;
-
-    gap:7px;
-
+    gap:6px;
     text-align:center;
-
-    flex-shrink:0;
 }
 
-.alarmTitle{
-    font-size:11px;
+#catControl span,
+#alarmControl span{
+    font-size:10px;
 }
 
+#catMeowButton,
 #cameraAlarmButton{
-    width:100%;
-
-    min-height:48px;
-
-    padding:6px;
-
     font-size:11px;
+    padding:8px 2px;
 }
-
-#alarmMessage{
-    color:#aaa;
-
-    font-size:9px;
-}
-
-
-/* =========================
-   ЭНЕРГИЯ
-========================= */
 
 #energyContent{
     flex:1;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:flex-start;
-
-    gap:28px;
-
-    padding:
-        55px
-        20px
-        25px;
-
+    gap:25px;
+    padding:30px 20px 20px;
     overflow-y:auto;
 }
 
 #energyTarget{
     text-align:center;
-
-    font-size:20px;
-
-    margin-bottom:5px;
+    font-size:18px;
 }
 
 #energyTargetText{
     display:block;
-
-    margin-top:8px;
-
     font-size:28px;
+    margin-top:8px;
 }
 
 #energyTargets{
     width:min(95%,650px);
-
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:12px;
-
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
     margin-top:20px;
 }
 
 #energyTargets button{
     min-height:60px;
-
-    font-size:14px;
-
-    padding:10px;
 }
 
 .energyTargetActive{
     border-color:#fff!important;
-
     background:#333!important;
-
-    box-shadow:
-        0 0 10px
-        rgba(255,255,255,.3);
+    box-shadow:0 0 12px rgba(255,255,255,.4);
 }
-
-
-/* =========================
-   РЫЧАГ
-========================= */
 
 #leverArea{
     width:min(90%,420px);
-
     text-align:center;
-
-    margin-top:15px;
-
-    padding-bottom:20px;
+    margin-top:20px;
 }
 
 #leverBase{
     position:relative;
-
     width:90px;
     height:190px;
-
     margin:auto;
-
     border:3px solid #777;
-
     background:#111;
-
     border-radius:10px;
-
     touch-action:none;
 }
 
 #lever{
     position:absolute;
-
     left:50%;
     top:20px;
-
-    transform:
-        translateX(-50%);
-
+    transform:translateX(-50%);
     width:50px;
     height:80px;
-
     border:3px solid #aaa;
-
     border-radius:12px;
-
     background:#333;
-
     display:flex;
-
     justify-content:center;
     align-items:center;
-
     font-size:30px;
-
-    cursor:grab;
-
     touch-action:none;
-}
-
-#lever:active{
-    cursor:grabbing;
-}
-
-#leverArea p{
-    margin:10px 0;
-
-    font-size:14px;
 }
 
 #leverProgress{
     width:100%;
-
     height:12px;
-
     border:2px solid #555;
-
     background:#111;
 }
 
 #leverProgressBar{
-    width:0%;
-
+    width:0;
     height:100%;
-
     background:#ddd;
 }
 
 #energyMessage{
-    min-height:24px;
-
     text-align:center;
-
-    color:#ccc;
+    min-height:25px;
 }
 
-
-/* =========================
-   РЕЗЕРВ
-========================= */
-
-#backupContent{
+#backupContent,
+.miniGame{
     flex:1;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
+    justify-content:center;
     text-align:center;
-
-    gap:14px;
-
-    padding:30px 20px 20px;
-
-    overflow-y:auto;
-}
-
-#backupContent h2{
-    margin-top:0;
+    gap:15px;
+    padding:20px;
 }
 
 #backupWires{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:12px;
-
     width:min(90%,400px);
 }
 
 #backupWires button{
-    min-height:65px;
-
-    font-size:18px;
+    min-height:60px;
 }
 
 .wireSelected{
-    border-color:#fff!important;
-
     background:#333!important;
+    border-color:#fff!important;
 }
 
-#backupMessage{
-    min-height:25px;
-
-    color:#aaa;
-}
-
-
-/* =========================
-   МАЙНДФЛЕИЕР
-========================= */
-
-#mindflayerContent{
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    gap:20px;
-
-    padding:20px;
-}
-
-#mindflayerBar{
+#mindBar{
     width:min(90%,500px);
-
     height:25px;
-
     border:2px solid #777;
-
-    background:#111;
 }
 
-#mindflayerBarFill{
+#mindBarFill{
     width:70%;
-
     height:100%;
-
     background:#ddd;
 }
 
-#mindflayerButtons{
+.mindButtons{
     display:flex;
-
     gap:15px;
-
     width:min(90%,500px);
 }
 
-#mindflayerButtons button{
+.mindButtons button{
     flex:1;
-
-    min-height:65px;
+    min-height:60px;
 }
-
-#mindflayerMessage{
-    font-size:18px;
-}
-
-
-/* =========================
-   OVERLAY
-========================= */
 
 .overlay{
     position:absolute;
-
     inset:0;
-
     z-index:500;
-
-    background:
-        rgba(0,0,0,.92);
-
+    background:rgba(0,0,0,.92);
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
     justify-content:center;
-
     gap:20px;
-
     text-align:center;
 }
 
-.overlay h1{
-    font-size:
-        clamp(30px,7vw,60px);
-}
-
-
-/* =========================
-   FLASH COOLDOWN
-========================= */
-
-#flashButton.cooldown{
-    opacity:.45;
-
-    pointer-events:none;
-}
-
-#flashButton.ready{
-    opacity:1;
-}
-
-
-/* =========================
-   МОБИЛЬНЫЙ
-========================= */
-
 @media(max-width:600px){
 
-    #bottomControls{
-        width:95%;
-    }
-
-    #bottomControls button{
-        padding:10px 5px;
-
-        font-size:12px;
-    }
-
-    #officeControls{
-        bottom:100px;
-    }
-
-    .panel{
-        inset:2%;
-    }
-
     #cameraMap{
-        width:105px;
+        width:100px;
     }
 
-    #cameraMap > button{
+    #cameraMap>button{
         font-size:11px;
-
-        min-height:46px;
-    }
-
-    #catMeowButton,
-    #cameraAlarmButton{
-        font-size:10px;
-
-        min-height:45px;
-    }
-
-    #catMessage,
-    #alarmMessage{
-        font-size:8px;
-    }
-
-    #energyContent{
-        padding:
-            45px
-            12px
-            20px;
-
-        gap:22px;
-    }
-
-    #energyTarget{
-        font-size:17px;
-    }
-
-    #energyTargetText{
-        font-size:24px;
     }
 
     #energyTargets{
-        width:95%;
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-        gap:10px;
-
-        margin-top:15px;
+        grid-template-columns:repeat(2,1fr);
     }
 
     #energyTargets button{
-        min-height:58px;
-
-        padding:6px;
-
+        min-height:52px;
         font-size:11px;
     }
 
-    #leverArea{
-        width:90%;
-
-        margin-top:10px;
-    }
-
-    #delta{
-        width:210px;
-    }
-
-    #nemka{
-        width:210px;
-    }
-
-    #kashatan,
-    #charlotte,
-    #lizka,
-    #mindflayer{
-        width:190px;
-    }
-
-    #upperVentButton{
-        right:10px;
-        top:65px;
-
-        width:55px;
-        height:48px;
-    }
-
-    #lowerVentButton{
-        left:10px;
-        bottom:125px;
-    }
-
-    #incineratorButton{
-        left:10px;
-        bottom:185px;
-    }
-
-    #rearWindowButton{
-        right:10px;
-        bottom:125px;
+    #energyContent{
+        padding-top:20px;
     }
 
     #rightDoor{
         width:130px;
-    }
-
-    #leftDoor{
-        width:115px;
-    }
-
-    #backupContent{
-        padding-top:20px;
-    }
-
-    #backupContent h2{
-        font-size:20px;
-    }
-
-    #backupWires button{
-        min-height:58px;
-
-        font-size:15px;
-    }
-
-    #mindflayerButtons{
-        flex-direction:column;
     }
     }
