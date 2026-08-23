@@ -11,32 +11,22 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
-
     background:#000;
     color:#fff;
-
     font-family:Arial,sans-serif;
 }
 
 button{
     cursor:pointer;
-
     color:#fff;
     background:#111;
-
     border:2px solid #777;
-
     padding:12px 20px;
-
     font-size:16px;
 }
 
 button:active{
     transform:scale(.96);
-}
-
-button:disabled{
-    cursor:not-allowed;
 }
 
 .hidden{
@@ -50,14 +40,11 @@ button:disabled{
 
 .screen{
     position:fixed;
-
     inset:0;
-
     width:100%;
     height:100%;
 
     display:flex;
-
     justify-content:center;
     align-items:center;
 
@@ -66,20 +53,17 @@ button:disabled{
 
 .menuBackground{
     position:absolute;
-
     inset:0;
 
     background:
         linear-gradient(
-            rgba(0,0,0,.65),
-            rgba(0,0,0,.85)
+            rgba(0,0,0,.7),
+            rgba(0,0,0,.9)
         ),
         url("images/menu_bg.png");
 
     background-size:cover;
     background-position:center;
-
-    filter:brightness(.6);
 
     z-index:-1;
 }
@@ -88,52 +72,32 @@ button:disabled{
     width:min(90%,500px);
 
     display:flex;
-
     flex-direction:column;
-
     gap:18px;
 
     text-align:center;
 }
 
 .menuContent h1{
-    font-size:
-        clamp(30px,7vw,60px);
-
-    margin-bottom:25px;
-
+    font-size:clamp(30px,7vw,60px);
     letter-spacing:4px;
-
-    text-shadow:
-        0 0 10px #000,
-        0 0 25px #000;
+    margin-bottom:25px;
 }
 
 .menuContent h2{
     font-size:30px;
-
-    margin-bottom:20px;
 }
 
 .menuContent button{
     width:100%;
 }
 
-
-/* =========================
-   НОЧИ
-========================= */
-
 #nightsList{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:10px;
 
     max-height:60vh;
-
     overflow-y:auto;
 }
 
@@ -147,7 +111,7 @@ button:disabled{
 
 
 /* =========================
-   ЗВОНОК
+   ТЕЛЕФОН
 ========================= */
 
 #phoneScreen{
@@ -156,7 +120,6 @@ button:disabled{
 
 .phoneBox{
     text-align:center;
-
     width:min(90%,500px);
 }
 
@@ -166,7 +129,6 @@ button:disabled{
 
 .phoneBox p{
     font-size:20px;
-
     margin:30px;
 }
 
@@ -177,79 +139,76 @@ button:disabled{
 
 #game{
     position:fixed;
-
     inset:0;
-
     width:100%;
     height:100%;
-
     overflow:hidden;
-
     background:#000;
 }
 
 #background{
-    position:absolute;
+    display:none;
+}
 
+#view{
+    position:absolute;
     inset:0;
 
-    background:
-        url("images/game_bg.png")
-        center/cover no-repeat;
+    overflow:hidden;
 
-    opacity:.35;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
 
-    pointer-events:none;
+    transition:
+        background-image .15s;
 }
 
 
 /* =========================
-   ОФИС
+   ФОНЫ ОФИСА
 ========================= */
 
-#view{
+#officeImage{
     position:absolute;
-
     inset:0;
 
-    background-image:
-        url("images/office.png");
-
-    background-size:cover;
-
-    background-position:center;
-
-    background-repeat:no-repeat;
-
-    overflow:hidden;
-
-    transition:
-        background-image .15s ease;
-}
-
-
-/*
-    Эти элементы оставлены,
-    но теперь фон офиса
-    находится непосредственно
-    в #view.
-*/
-
-#officeImage,
-#leftOffice,
-#rightOffice{
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
+    background:
+        url("images/office.png")
+        center/cover no-repeat;
 
     z-index:1;
 }
 
+#leftOffice{
+    position:absolute;
+    inset:0;
+
+    background:
+        url("images/office_left.png")
+        center/cover no-repeat;
+
+    display:none;
+
+    z-index:2;
+}
+
+#rightOffice{
+    position:absolute;
+    inset:0;
+
+    background:
+        url("images/office_right.png")
+        center/cover no-repeat;
+
+    display:none;
+
+    z-index:2;
+}
+
 
 /* =========================
-   ПЕРСОНАЖИ
+   ВРАГИ
 ========================= */
 
 #lichi,
@@ -271,28 +230,130 @@ button:disabled{
     transform:
         translate(-50%,-50%);
 
-    z-index:20;
+    z-index:30;
+}
+
+#lichi{
+    width:250px;
+}
+
+#pancake{
+    width:210px;
 }
 
 #nemka{
-    z-index:75;
-
     width:260px;
+    z-index:75;
 }
 
 #delta{
-    z-index:76;
-
     width:260px;
+    z-index:76;
+}
+
+#kyu{
+    width:230px;
 }
 
 #kashatan,
 #charlotte,
 #lizka,
 #mindflayer{
-    z-index:77;
-
     width:240px;
+    z-index:77;
+}
+
+
+/* =========================
+   ДВЕРИ
+========================= */
+
+#rightDoor,
+#leftDoor{
+    position:absolute;
+
+    top:20%;
+    height:60%;
+    width:160px;
+
+    background:
+        linear-gradient(
+            #252525,
+            #080808
+        );
+
+    border:3px solid #666;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:85;
+
+    transition:
+        transform .25s;
+}
+
+#rightDoor{
+    right:0;
+
+    transform:
+        translateX(140px);
+}
+
+#leftDoor{
+    left:0;
+
+    transform:
+        translateX(-140px);
+}
+
+#rightDoor.closed{
+    transform:
+        translateX(0);
+}
+
+#leftDoor.closed{
+    transform:
+        translateX(0);
+}
+
+#rightDoorText,
+#leftDoorText{
+    font-size:13px;
+
+    transform:
+        rotate(-90deg);
+}
+
+
+/* =========================
+   ДВЕРНЫЕ КНОПКИ
+========================= */
+
+#rightDoorButton,
+#leftDoorButton{
+    position:absolute;
+
+    z-index:100;
+
+    bottom:180px;
+
+    width:65px;
+    height:55px;
+
+    padding:0;
+
+    font-size:24px;
+}
+
+#rightDoorButton{
+    right:15px;
+}
+
+#leftDoorButton{
+    left:15px;
 }
 
 
@@ -304,21 +365,15 @@ button:disabled{
 #cameraNemkaEyes{
 
     position:absolute;
+    inset:0;
 
     display:none;
-
-    width:100%;
-    height:100%;
-
-    left:0;
-    top:0;
 
     pointer-events:none;
 
     z-index:80;
 
     background:
-
         radial-gradient(
             ellipse at 35% 45%,
             white 0,
@@ -326,7 +381,6 @@ button:disabled{
             black 8px,
             transparent 15px
         ),
-
         radial-gradient(
             ellipse at 65% 45%,
             white 0,
@@ -336,10 +390,7 @@ button:disabled{
         );
 
     background-repeat:no-repeat;
-
-    background-size:
-        50% 50%;
-
+    background-size:50% 50%;
     background-position:center;
 }
 
@@ -347,14 +398,13 @@ button:disabled{
     display:block!important;
 
     animation:
-        eyeFlicker .12s
-        infinite alternate;
+        eyeFlicker .12s infinite alternate;
 }
 
 @keyframes eyeFlicker{
 
     from{
-        opacity:.65;
+        opacity:.5;
     }
 
     to{
@@ -368,9 +418,7 @@ button:disabled{
 ========================= */
 
 #flash{
-
     position:absolute;
-
     inset:0;
 
     background:#fff;
@@ -387,45 +435,76 @@ button:disabled{
 
 
 /* =========================
-   ШАХТА
+   ВЕРХНЯЯ ШАХТА
 ========================= */
 
-#upperVent,
-#rearWindow{
-
+#upperVent{
     position:absolute;
-
     inset:0;
 
     display:none;
 
+    background:
+        url("images/upper_vent.png")
+        center/cover no-repeat;
+
     z-index:70;
-
-    background-position:center;
-
-    background-size:cover;
-
-    background-repeat:no-repeat;
 
     pointer-events:none;
 }
 
-#upperVent{
-
-    background-image:
-        url("images/upper_vent.png");
-}
-
-#rearWindow{
-
-    background-image:
-        url("images/rear_window.png");
-
-    z-index:71;
-}
-
 .upperVentActive{
     display:block!important;
+}
+
+#upperVentDelta{
+    position:absolute;
+
+    width:230px;
+
+    left:50%;
+    top:48%;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+
+/* =========================
+   НИЖНЯЯ ВЕНТИЛЯЦИЯ
+========================= */
+
+#lowerVent{
+    position:absolute;
+
+    left:50%;
+    bottom:0;
+
+    width:50%;
+    height:30%;
+
+    transform:
+        translateX(-50%);
+
+    display:none;
+
+    background:
+        url("images/lower_vent.png")
+        center/cover no-repeat;
+
+    z-index:70;
+}
+
+#lowerVentPancake{
+    position:absolute;
+
+    width:190px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
 }
 
 
@@ -434,9 +513,8 @@ button:disabled{
 ========================= */
 
 #upperVentButton,
-#rearWindowButton,
-#incineratorButton,
-#lowerVentButton{
+#lowerVentButton,
+#incineratorButton{
 
     position:absolute;
 
@@ -445,12 +523,12 @@ button:disabled{
 
     padding:0;
 
-    z-index:90;
+    z-index:100;
 
     display:none;
 
     background:
-        rgba(0,0,0,.75);
+        rgba(0,0,0,.8);
 
     border:2px solid #777;
 
@@ -458,39 +536,74 @@ button:disabled{
 }
 
 #upperVentButton{
-
     right:20px;
     top:70px;
 
     font-size:30px;
 }
 
-#rearWindowButton{
-
-    right:20px;
-    bottom:125px;
-
-    font-size:25px;
-}
-
-#incineratorButton{
-
-    left:20px;
-    bottom:130px;
-
-    font-size:25px;
-}
-
 #lowerVentButton{
-
     left:50%;
-
-    bottom:190px;
+    bottom:175px;
 
     transform:
         translateX(-50%);
 
     font-size:25px;
+}
+
+#incineratorButton{
+    left:20px;
+    bottom:125px;
+
+    font-size:25px;
+}
+
+
+/* =========================
+   ЗАДНЕЕ ОКНО
+========================= */
+
+#backWindow{
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    background:
+        url("images/rear_window.png")
+        center/cover no-repeat;
+
+    z-index:71;
+}
+
+#windowElectricity{
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    pointer-events:none;
+
+    z-index:78;
+
+    box-shadow:
+        inset 0 0 35px
+        rgba(255,255,255,.8);
+
+    animation:
+        electricity .12s infinite alternate;
+}
+
+@keyframes electricity{
+
+    from{
+        opacity:.35;
+    }
+
+    to{
+        opacity:.9;
+    }
 }
 
 
@@ -499,7 +612,6 @@ button:disabled{
 ========================= */
 
 #hud{
-
     position:absolute;
 
     top:15px;
@@ -519,7 +631,6 @@ button:disabled{
 }
 
 #status{
-
     position:absolute;
 
     top:55px;
@@ -530,18 +641,14 @@ button:disabled{
 
     z-index:100;
 
-    font-size:16px;
-
-    text-shadow:
-        2px 2px 5px #000;
-
     text-align:center;
 
     width:90%;
+
+    font-size:16px;
 }
 
 #powerStatus{
-
     position:absolute;
 
     left:15px;
@@ -549,14 +656,10 @@ button:disabled{
 
     z-index:100;
 
-    font-size:12px;
-
-    text-shadow:
-        2px 2px 5px #000;
+    font-size:14px;
 }
 
 #doorStatus{
-
     position:absolute;
 
     right:15px;
@@ -564,10 +667,7 @@ button:disabled{
 
     z-index:100;
 
-    font-size:12px;
-
-    text-shadow:
-        2px 2px 5px #000;
+    font-size:14px;
 }
 
 
@@ -576,7 +676,6 @@ button:disabled{
 ========================= */
 
 #officeControls{
-
     position:absolute;
 
     bottom:105px;
@@ -586,20 +685,20 @@ button:disabled{
         translateX(-50%);
 
     display:flex;
-
     gap:15px;
 
     z-index:100;
 }
 
 #officeControls button{
-
     width:60px;
     height:55px;
 
-    border-radius:8px;
+    padding:0;
 
     font-size:24px;
+
+    border-radius:8px;
 }
 
 
@@ -608,7 +707,6 @@ button:disabled{
 ========================= */
 
 #bottomControls{
-
     position:absolute;
 
     bottom:15px;
@@ -627,141 +725,7 @@ button:disabled{
 }
 
 #bottomControls button{
-
     flex:1;
-
-    min-width:0;
-}
-
-
-/* =========================
-   ДВЕРЬ
-========================= */
-
-#rightDoor{
-
-    position:absolute;
-
-    right:0;
-    top:25%;
-
-    width:170px;
-    height:50%;
-
-    background:
-        linear-gradient(
-            #222,
-            #080808
-        );
-
-    border-left:4px solid #777;
-
-    z-index:85;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:20px;
-
-    transition:
-        transform .25s;
-}
-
-#rightDoor.closed{
-
-    transform:
-        translateX(0);
-}
-
-#rightDoor:not(.closed){
-
-    transform:
-        translateX(140px);
-}
-
-#rightDoorText{
-
-    font-size:13px;
-
-    transform:
-        rotate(-90deg);
-}
-
-
-/* =========================
-   ЛЕВАЯ ДВЕРЬ
-========================= */
-
-#leftDoor{
-
-    position:absolute;
-
-    left:0;
-    top:25%;
-
-    width:170px;
-    height:50%;
-
-    background:
-        linear-gradient(
-            #222,
-            #080808
-        );
-
-    border-right:4px solid #777;
-
-    z-index:85;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-}
-
-#leftDoorText{
-
-    font-size:13px;
-
-    transform:
-        rotate(90deg);
-}
-
-
-/* =========================
-   КНОПКИ ДВЕРЕЙ
-========================= */
-
-#rightDoorButton,
-#leftDoorButton{
-
-    position:absolute;
-
-    z-index:100;
-
-    width:60px;
-    height:55px;
-
-    padding:0;
-
-    border-radius:8px;
-}
-
-#rightDoorButton{
-
-    right:20px;
-    bottom:190px;
-}
-
-#leftDoorButton{
-
-    left:20px;
-    bottom:190px;
 }
 
 
@@ -770,7 +734,6 @@ button:disabled{
 ========================= */
 
 .panel{
-
     position:absolute;
 
     inset:4%;
@@ -790,7 +753,6 @@ button:disabled{
 }
 
 .panelHeader{
-
     min-height:55px;
 
     display:flex;
@@ -801,17 +763,11 @@ button:disabled{
 
     padding:8px 15px;
 
-    border-bottom:
-        2px solid #555;
+    border-bottom:2px solid #555;
 
     font-size:20px;
 
     flex-shrink:0;
-}
-
-.panelHeader button{
-
-    padding:5px 12px;
 }
 
 
@@ -820,7 +776,6 @@ button:disabled{
 ========================= */
 
 .cameraBody{
-
     flex:1;
 
     min-height:0;
@@ -833,7 +788,6 @@ button:disabled{
 }
 
 #cameraImage{
-
     position:relative;
 
     flex:1;
@@ -848,21 +802,17 @@ button:disabled{
     border:2px solid #555;
 
     background-position:center;
-
     background-size:cover;
-
     background-repeat:no-repeat;
 }
 
 #cameraStatic{
-
     position:absolute;
-
     inset:0;
 
-    pointer-events:none;
-
     opacity:.12;
+
+    pointer-events:none;
 
     background:
         repeating-linear-gradient(
@@ -876,7 +826,6 @@ button:disabled{
 }
 
 #cameraNumber{
-
     position:absolute;
 
     top:10px;
@@ -885,13 +834,16 @@ button:disabled{
     z-index:30;
 
     font-size:20px;
-
-    text-shadow:
-        2px 2px 5px #000;
 }
 
 #cameraLichi,
-#cameraPancake{
+#cameraPancake,
+#cameraKyu,
+#cameraKashatan,
+#cameraCharlotte,
+#cameraLizka,
+#cameraNemka,
+#cameraDelta{
 
     position:absolute;
 
@@ -908,39 +860,7 @@ button:disabled{
     z-index:20;
 }
 
-#cameraKyu,
-#cameraKashatan,
-#cameraLizka,
-#cameraNemka{
-
-    display:none;
-}
-
-#cameraCharlotte{
-
-    position:absolute;
-
-    inset:0;
-
-    display:none;
-
-    z-index:22;
-
-    background:
-        radial-gradient(
-            ellipse,
-            transparent 35%,
-            rgba(0,0,0,.6)
-        );
-}
-
-
-/* =========================
-   КАРТА
-========================= */
-
 #cameraMap{
-
     width:125px;
 
     display:flex;
@@ -953,87 +873,23 @@ button:disabled{
 
     overflow-y:auto;
 
-    overflow-x:hidden;
-
     flex-shrink:0;
 }
 
 #cameraMap > button{
-
     width:100%;
 
     min-height:55px;
 
-    flex-shrink:0;
-
     padding:8px 4px;
-
-    white-space:nowrap;
 }
 
 
 /* =========================
-   МЯУКАНЬЕ
+   МЯУКАНЬЕ / СИРЕНА
 ========================= */
 
-#catControl{
-
-    width:100%;
-
-    margin-top:4px;
-
-    padding-top:9px;
-
-    border-top:
-        2px solid #555;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    text-align:center;
-
-    flex-shrink:0;
-}
-
-#catControl .catTitle{
-
-    font-size:11px;
-
-    color:#ddd;
-}
-
-#catMeowButton{
-
-    width:100%;
-
-    min-height:48px;
-
-    padding:6px 2px;
-
-    font-size:11px;
-}
-
-#catMessage{
-
-    color:#aaa;
-
-    font-size:9px;
-
-    line-height:1.2;
-}
-
-
-/* =========================
-   СИРЕНА
-========================= */
-
+#catControl,
 #alarmControl{
 
     width:100%;
@@ -1042,8 +898,7 @@ button:disabled{
 
     padding-top:9px;
 
-    border-top:
-        2px solid #555;
+    border-top:2px solid #555;
 
     display:flex;
 
@@ -1058,31 +913,18 @@ button:disabled{
     flex-shrink:0;
 }
 
-.alarmTitle{
-
-    font-size:11px;
-
-    color:#ddd;
-}
-
-#cameraAlarmButton{
-
-    width:100%;
-
-    min-height:48px;
-
-    padding:6px 2px;
-
-    font-size:11px;
-}
-
-#alarmMessage{
-
+#catControl span,
+#alarmControl span{
+    font-size:10px;
     color:#aaa;
+}
 
-    font-size:9px;
-
-    line-height:1.2;
+#catMeowButton,
+#cameraAlarmButton{
+    width:100%;
+    min-height:45px;
+    padding:5px;
+    font-size:10px;
 }
 
 
@@ -1091,7 +933,6 @@ button:disabled{
 ========================= */
 
 #energyContent{
-
     flex:1;
 
     display:flex;
@@ -1110,14 +951,11 @@ button:disabled{
 }
 
 #energyTarget{
-
     text-align:center;
-
     font-size:20px;
 }
 
 #energyTargetText{
-
     display:block;
 
     margin-top:8px;
@@ -1126,7 +964,6 @@ button:disabled{
 }
 
 #energyTargets{
-
     width:min(95%,650px);
 
     display:grid;
@@ -1138,16 +975,11 @@ button:disabled{
 }
 
 #energyTargets button{
-
     min-height:60px;
-
-    font-size:14px;
 }
 
 .energyTargetActive{
-
-    border-color:white!important;
-
+    border-color:#fff!important;
     background:#333!important;
 
     box-shadow:
@@ -1161,14 +993,12 @@ button:disabled{
 ========================= */
 
 #leverArea{
-
     width:min(90%,420px);
 
     text-align:center;
 }
 
 #leverBase{
-
     position:relative;
 
     width:90px;
@@ -1186,7 +1016,6 @@ button:disabled{
 }
 
 #lever{
-
     position:absolute;
 
     left:50%;
@@ -1207,30 +1036,14 @@ button:disabled{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     font-size:30px;
 
-    cursor:grab;
-
     touch-action:none;
 }
 
-#lever:active{
-
-    cursor:grabbing;
-}
-
-#leverArea p{
-
-    margin:10px 0;
-
-    font-size:14px;
-}
-
 #leverProgress{
-
     width:100%;
 
     height:12px;
@@ -1241,24 +1054,9 @@ button:disabled{
 }
 
 #leverProgressBar{
-
     width:0%;
-
     height:100%;
-
     background:#ddd;
-
-    transition:
-        width .05s linear;
-}
-
-#energyMessage{
-
-    min-height:24px;
-
-    text-align:center;
-
-    color:#ccc;
 }
 
 
@@ -1267,7 +1065,6 @@ button:disabled{
 ========================= */
 
 #backupContent{
-
     flex:1;
 
     display:flex;
@@ -1276,30 +1073,14 @@ button:disabled{
 
     align-items:center;
 
-    justify-content:flex-start;
-
     text-align:center;
 
     gap:14px;
 
-    padding:30px 20px 20px;
-
-    overflow-y:auto;
-}
-
-#backupContent h2{
-
-    margin-top:0;
-    margin-bottom:4px;
-}
-
-#backupContent p{
-
-    margin:3px;
+    padding:30px 20px;
 }
 
 #backupWires{
-
     display:grid;
 
     grid-template-columns:
@@ -1308,29 +1089,15 @@ button:disabled{
     gap:12px;
 
     width:min(90%,400px);
-
-    margin-top:5px;
 }
 
 #backupWires button{
-
     min-height:65px;
-
-    font-size:18px;
 }
 
 .wireSelected{
-
-    border-color:white!important;
-
+    border-color:#fff!important;
     background:#333!important;
-}
-
-#backupMessage{
-
-    min-height:25px;
-
-    color:#aaa;
 }
 
 
@@ -1338,8 +1105,7 @@ button:disabled{
    МАЙНДФЛЕИЕР
 ========================= */
 
-#mindflayerContent{
-
+.miniGame{
     flex:1;
 
     display:flex;
@@ -1357,10 +1123,8 @@ button:disabled{
     padding:20px;
 }
 
-#mindflayerBar{
-
+#mindBar{
     width:min(90%,500px);
-
     height:25px;
 
     border:2px solid #777;
@@ -1368,50 +1132,31 @@ button:disabled{
     background:#111;
 }
 
-#mindflayerBarFill{
-
+#mindBarFill{
     width:70%;
-
     height:100%;
-
     background:#ddd;
-
-    transition:
-        width .15s;
 }
 
-#mindflayerButtons{
-
+.mindButtons{
     display:flex;
-
     gap:15px;
 
     width:min(90%,500px);
 }
 
-#mindflayerButtons button{
-
+.mindButtons button{
     flex:1;
-
     min-height:65px;
-}
-
-#mindflayerMessage{
-
-    color:#ccc;
-
-    font-size:18px;
 }
 
 
 /* =========================
-   GAME OVER / WIN
+   OVERLAY
 ========================= */
 
 .overlay{
-
     position:absolute;
-
     inset:0;
 
     z-index:500;
@@ -1424,18 +1169,11 @@ button:disabled{
     flex-direction:column;
 
     align-items:center;
-
     justify-content:center;
 
     gap:20px;
 
     text-align:center;
-}
-
-.overlay h1{
-
-    font-size:
-        clamp(30px,7vw,60px);
 }
 
 
@@ -1446,178 +1184,56 @@ button:disabled{
 @media(max-width:600px){
 
     #bottomControls{
-
         width:95%;
     }
 
     #bottomControls button{
-
         padding:10px 5px;
-
         font-size:12px;
     }
 
-    #officeControls{
-
-        bottom:100px;
-    }
-
-    .panel{
-
-        inset:2%;
-    }
-
     #cameraMap{
-
         width:100px;
     }
 
     #cameraMap > button{
-
         font-size:11px;
-
         min-height:48px;
     }
 
-    #catMeowButton{
-
-        font-size:10px;
-
-        min-height:45px;
-    }
-
-    #cameraAlarmButton{
-
-        font-size:10px;
-
-        min-height:45px;
-    }
-
-    #catMessage,
-    #alarmMessage{
-
-        font-size:8px;
-    }
-
-    #energyTargets{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
     #energyTargets button{
-
         min-height:52px;
-
         padding:6px;
-
         font-size:11px;
     }
 
-    #delta{
-
-        width:210px;
-    }
-
     #nemka{
-
         width:210px;
     }
 
-    #kashatan,
-    #charlotte,
-    #lizka,
-    #mindflayer{
-
-        width:190px;
+    #delta{
+        width:210px;
     }
 
-    #upperVentButton{
-
-        right:10px;
-        top:65px;
-
-        width:55px;
-        height:48px;
+    #pancake{
+        width:170px;
     }
 
-    #incineratorButton{
-
-        left:10px;
-        bottom:125px;
-    }
-
-    #rearWindowButton{
-
-        right:10px;
-        bottom:125px;
-    }
-
-    #lowerVentButton{
-
-        width:55px;
-        height:48px;
-
-        bottom:180px;
-    }
-
-    #rightDoor{
-
-        width:130px;
-    }
-
+    #rightDoor,
     #leftDoor{
-
         width:130px;
     }
 
     #rightDoorButton{
-
         right:10px;
-        bottom:180px;
     }
 
     #leftDoorButton{
-
         left:10px;
-        bottom:180px;
     }
 
-    #powerStatus{
-
-        left:8px;
-        bottom:8px;
-
-        font-size:9px;
-    }
-
+    #powerStatus,
     #doorStatus{
-
-        right:8px;
-        bottom:8px;
-
-        font-size:9px;
+        font-size:11px;
     }
-
-    #backupContent{
-
-        padding-top:20px;
-    }
-
-    #backupContent h2{
-
-        font-size:20px;
-    }
-
-    #backupWires button{
-
-        min-height:58px;
-
-        font-size:15px;
-    }
-
-    #mindflayerButtons{
-
-        flex-direction:column;
-    }
-        }
+}
