@@ -1,1254 +1,1047 @@
-"use strict";
+const $=id=>document.getElementById(id);
+const qa=s=>Array.from(document.querySelectorAll(s));
 
-/* =========================================================
-   PIXEL RPG
-   Первая версия:
-   - комната
-   - игрок
-   - 4 напарника
-   - движение
-   - столкновения
-   - NPC
-   - переход между комнатами
-   - диалог
-   - полноэкранный режим
-========================================================= */
+let night=1;
+let playing=false;
+let view="front";
+let camera="cam01";
+let energy="camera";
+let energyBusy=false;
+let energyBlockedUntil=0;
+let backupDone=false;
+let rightDoorClosed=false;
+let wireStep=0;
+let elapsed=0;
+let timer=null;
+let mindTimer=null;
+let leverTimer=null;
+let leverHolding=false;
+let mindLevel=70;
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-
-ctx.imageSmoothingEnabled = false;
-
-const W = canvas.width;
-const H = canvas.height;
-
-
-/* =========================================================
-   ИГРА
-========================================================= */
-
-const game = {
-
-    room: "room1",
-
-    mode: "explore",
-
-    dialogue: null,
-
-    dialogueIndex: 0,
-
-    dialogueTimer: 0,
-
-    transition: 0,
-
-    time: 0
-
+let state={
+    nemka:0,
+    lichi:0,
+    pancake:0,
+    kyu:0,
+    kashatan:0,
+    charlotte:0,
+    delta:0,
+    lizka:0,
+    mindflayer:0
 };
 
-
-/* =========================================================
-   УПРАВЛЕНИЕ
-========================================================= */
-
-const keys = {
-
-    up: false,
-    down: false,
-    left: false,
-    right: false,
-
-    interact: false
-
+const nightEnemies={
+1:["lichi"],
+2:["lichi","pancake"],
+3:["lichi","pancake","nemka"],
+4:["pancake","delta","nemka"],
+5:["lichi","delta","lizka","nemka"],
+6:["kyu","lichi","pancake","nemka","lizka"],
+7:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka"],
+8:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"],
+9:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"],
+10:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"],
+11:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"],
+12:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"],
+13:["nemka","lichi","pancake","kyu","kashatan","charlotte","delta","lizka","mindflayer"]
 };
 
-
-/* =========================================================
-   КЛАВИАТУРА
-========================================================= */
-
-window.addEventListener("keydown", e => {
-
-    if (
-        e.key === "ArrowUp" ||
-        e.key.toLowerCase() === "w"
-    ) {
-        keys.up = true;
-    }
-
-    if (
-        e.key === "ArrowDown" ||
-        e.key.toLowerCase() === "s"
-    ) {
-        keys.down = true;
-    }
-
-    if (
-        e.key === "ArrowLeft" ||
-        e.key.toLowerCase() === "a"
-    ) {
-        keys.left = true;
-    }
-
-    if (
-        e.key === "ArrowRight" ||
-        e.key.toLowerCase() === "d"
-    ) {
-        keys.right = true;
-    }
-
-    if (
-        e.key === "z" ||
-        e.key === "Enter" ||
-        e.key === " "
-    ) {
-        keys.interact = true;
-    }
-
-    e.preventDefault();
-
-}, { passive: false });
-
-
-window.addEventListener("keyup", e => {
-
-    if (
-        e.key === "ArrowUp" ||
-        e.key.toLowerCase() === "w"
-    ) {
-        keys.up = false;
-    }
-
-    if (
-        e.key === "ArrowDown" ||
-        e.key.toLowerCase() === "s"
-    ) {
-        keys.down = false;
-    }
-
-    if (
-        e.key === "ArrowLeft" ||
-        e.key.toLowerCase() === "a"
-    ) {
-        keys.left = false;
-    }
-
-    if (
-        e.key === "ArrowRight" ||
-        e.key.toLowerCase() === "d"
-    ) {
-        keys.right = false;
-    }
-
-    if (
-        e.key === "z" ||
-        e.key === "Enter" ||
-        e.key === " "
-    ) {
-        keys.interact = false;
-    }
-
-});
-
-
-/* =========================================================
-   ТАЧ-КНОПКИ
-========================================================= */
-
-document.querySelectorAll(".control, .action").forEach(button => {
-
-    const key = button.dataset.key;
-
-    function start(e) {
-
-        e.preventDefault();
-
-        keys[key] = true;
-
-    }
-
-    function stop(e) {
-
-        e.preventDefault();
-
-        keys[key] = false;
-
-    }
-
-    button.addEventListener("pointerdown", start);
-    button.addEventListener("pointerup", stop);
-    button.addEventListener("pointercancel", stop);
-    button.addEventListener("pointerleave", stop);
-
-});
-
-
-/* =========================================================
-   ПОЛНОЭКРАННЫЙ РЕЖИМ
-========================================================= */
-
-async function enterFullscreen() {
-
-    try {
-
-        if (!document.fullscreenElement) {
-
-            await document.documentElement.requestFullscreen();
-
-        }
-
-    } catch (error) {
-
-        console.log("Fullscreen недоступен:", error);
-
-    }
-
+function active(x){
+    return nightEnemies[night]?.includes(x);
 }
 
-
-document.getElementById("fullscreen-hint")
-    .addEventListener("click", enterFullscreen);
-
-canvas.addEventListener("pointerdown", enterFullscreen);
-
-
-/* =========================================================
-   ИГРОК
-========================================================= */
-
-const player = {
-
-    x: 145,
-
-    y: 120,
-
-    width: 10,
-
-    height: 14,
-
-    speed: 1.4,
-
-    direction: "down",
-
-    moving: false
-
-};
-
-
-/* =========================================================
-   НАПАРНИКИ
-========================================================= */
-
-const party = [
-
-    {
-        name: "Напарник 1",
-        x: 130,
-        y: 120,
-        width: 10,
-        height: 14,
-        color: "#ff4d4d"
-    },
-
-    {
-        name: "Напарник 2",
-        x: 115,
-        y: 120,
-        width: 10,
-        height: 14,
-        color: "#4da6ff"
-    },
-
-    {
-        name: "Напарник 3",
-        x: 100,
-        y: 120,
-        width: 10,
-        height: 14,
-        color: "#66ff66"
-    },
-
-    {
-        name: "Напарник 4",
-        x: 85,
-        y: 120,
-        width: 10,
-        height: 14,
-        color: "#cc66ff"
-    }
-
-];
-
-
-/* =========================================================
-   КОМНАТЫ
-========================================================= */
-
-const rooms = {
-
-    room1: {
-
-        name: "Начальная комната",
-
-        floor: "#181818",
-
-        walls: [
-
-            {
-                x: 0,
-                y: 0,
-                w: 320,
-                h: 8
-            },
-
-            {
-                x: 0,
-                y: 172,
-                w: 320,
-                h: 8
-            },
-
-            {
-                x: 0,
-                y: 0,
-                w: 8,
-                h: 180
-            },
-
-            {
-                x: 312,
-                y: 0,
-                w: 8,
-                h: 180
-            },
-
-            {
-                x: 55,
-                y: 45,
-                w: 80,
-                h: 10
-            },
-
-            {
-                x: 200,
-                y: 45,
-                w: 60,
-                h: 10
-            },
-
-            {
-                x: 55,
-                y: 45,
-                w: 10,
-                h: 60
-            },
-
-            {
-                x: 255,
-                y: 45,
-                w: 10,
-                h: 60
-            }
-
-        ],
-
-        npc: {
-
-            x: 225,
-
-            y: 110,
-
-            width: 10,
-
-            height: 14,
-
-            color: "#ffff66",
-
-            name: "Странный человек"
-
-        },
-
-        exit: {
-
-            x: 295,
-
-            y: 75,
-
-            w: 17,
-
-            h: 30,
-
-            target: "room2"
-
-        }
-
-    },
-
-
-    room2: {
-
-        name: "Тёмная комната",
-
-        floor: "#0d1018",
-
-        walls: [
-
-            {
-                x: 0,
-                y: 0,
-                w: 320,
-                h: 8
-            },
-
-            {
-                x: 0,
-                y: 172,
-                w: 320,
-                h: 8
-            },
-
-            {
-                x: 0,
-                y: 0,
-                w: 8,
-                h: 180
-            },
-
-            {
-                x: 312,
-                y: 0,
-                w: 8,
-                h: 180
-            }
-
-        ],
-
-        npc: {
-
-            x: 160,
-
-            y: 65,
-
-            width: 10,
-
-            height: 14,
-
-            color: "#ff66cc",
-
-            name: "Таинственная девушка"
-
-        },
-
-        exit: {
-
-            x: 8,
-
-            y: 75,
-
-            w: 17,
-
-            h: 30,
-
-            target: "room1"
-
-        }
-
-    }
-
-};
-
-
-/* =========================================================
-   ДИАЛОГИ
-========================================================= */
-
-const dialogues = {
-
-    "Странный человек": [
-
-        "Эй...",
-
-        "Вы четверо тоже его сопровождаете?",
-
-        "Странно.",
-
-        "Вам лучше идти дальше.",
-
-        "Впереди вас ждёт кое-что интересное..."
-
-    ],
-
-    "Таинственная девушка": [
-
-        "Вы наконец пришли.",
-
-        "Я ждала именно вас.",
-
-        "Но сначала...", 
-
-        "вам нужно кое-что узнать."
-
-    ]
-
-};
-
-
-/* =========================================================
-   COLLISION
-========================================================= */
-
-function rectsOverlap(a, b) {
-
-    return (
-
-        a.x < b.x + b.w &&
-
-        a.x + a.width > b.x &&
-
-        a.y < b.y + b.h &&
-
-        a.y + a.height > b.y
-
-    );
-
+function snd(id){
+    const a=$(id);
+    if(!a)return;
+    a.currentTime=0;
+    a.play().catch(()=>{});
 }
 
+function stop(id){
+    const a=$(id);
+    if(!a)return;
+    a.pause();
+    a.currentTime=0;
+}
 
-function canMove(x, y) {
+function hideAll(){
+    qa(".screen").forEach(x=>x.classList.add("hidden"));
+    $("game").classList.add("hidden");
+}
 
-    const test = {
+function menu(){
+    playing=false;
+    clearInterval(timer);
+    clearInterval(mindTimer);
+    clearInterval(leverTimer);
+    stop("humAudio");
+    hideAll();
+    $("mainMenu").classList.remove("hidden");
+}
 
-        x: x,
+function start(n){
+    night=Math.max(1,Math.min(13,n));
+    hideAll();
+    $("phoneScreen").classList.remove("hidden");
+    $("phoneNight").textContent="NIGHT "+night;
+    snd("phoneAudio");
+}
 
-        y: y,
+function begin(){
+    stop("phoneAudio");
+    hideAll();
+    $("game").classList.remove("hidden");
+    resetGame();
+    playing=true;
+    snd("humAudio");
+    startClock();
+}
 
-        width: player.width,
+function resetGame(){
 
-        height: player.height
+    clearInterval(timer);
+    clearInterval(mindTimer);
+    clearInterval(leverTimer);
 
+    elapsed=0;
+    view="front";
+    camera="cam01";
+    energy="camera";
+    energyBusy=false;
+    energyBlockedUntil=0;
+    backupDone=false;
+    rightDoorClosed=false;
+    wireStep=0;
+    mindLevel=70;
+
+    state={
+        nemka:0,
+        lichi:0,
+        pancake:0,
+        kyu:0,
+        kashatan:0,
+        charlotte:0,
+        delta:0,
+        lizka:0,
+        mindflayer:0
     };
 
-    const room = rooms[game.room];
+    $("night").textContent="NIGHT "+night;
+    $("time").textContent="12:00 AM";
+    $("status").textContent="ОФИС";
 
-    for (const wall of room.walls) {
+    $("officeImage").style.display="block";
+    $("leftOffice").style.display="none";
+    $("rightOffice").style.display="none";
+    $("backWindow").style.display="none";
+    $("windowElectricity").style.display="none";
+    $("upperVent").classList.remove("upperVentActive");
 
-        if (rectsOverlap(test, wall)) {
+    $("rightDoor").classList.remove("closed");
+    $("rightDoorButton").textContent="🚪";
+    $("doorStatus").textContent="ПРАВАЯ ДВЕРЬ: ОТКРЫТА";
 
-            return false;
+    $("backupPanel").classList.add("hidden");
+    $("cameraPanel").classList.add("hidden");
+    $("energyPanel").classList.add("hidden");
+    $("mindflayerPanel").classList.add("hidden");
+    $("gameOver").classList.add("hidden");
+    $("winScreen").classList.add("hidden");
 
-        }
+    $("upperVentButton").style.display="none";
+    $("incineratorButton").style.display="none";
+    $("alarmButton").style.display="none";
 
-    }
+    qa("#backupWires button").forEach(x=>x.classList.remove("wireSelected"));
 
-    return true;
-
+    updateEnergyUI();
+    renderAI();
 }
 
+function startClock(){
 
-/* =========================================================
-   ДВИЖЕНИЕ ИГРОКА
-========================================================= */
+    const startTime=Date.now();
 
-function updatePlayer() {
+    timer=setInterval(()=>{
 
-    if (game.mode !== "explore") {
+        if(!playing)return;
+
+        elapsed=Math.floor((Date.now()-startTime)/1000);
+
+        updateClock();
+        updateAI();
+
+        if(elapsed>=360){
+            win();
+        }
+
+    },250);
+}
+
+function updateClock(){
+
+    const hour=Math.floor(elapsed/60);
+    const minute=elapsed%60;
+
+    const displayHour=hour===0?12:hour;
+
+    $("time").textContent=
+        displayHour+":"+
+        String(minute).padStart(2,"0")+
+        " AM";
+}
+
+function updateAI(){
+
+    if(!playing)return;
+
+    if(active("nemka")&&elapsed>=60){
+
+        state.nemka+=(night>=7?.055:.045);
+
+        if(state.nemka>=100&&!backupDone){
+            powerOff();
+            state.nemka=65;
+        }
+
+        if(backupDone&&state.nemka>=100){
+
+            if(rightDoorClosed&&energy==="door"){
+                state.nemka=30;
+                status("Немка остановлена электрической дверью.");
+            }else{
+                lose("Немка добралась до правой двери.");
+                return;
+            }
+        }
+    }
+
+    if(active("lichi")){
+
+        state.lichi+=.035;
+
+        if(state.lichi>=100){
+
+            if(view==="left"){
+                lose("Личи добралась до офиса.");
+                return;
+            }
+
+            state.lichi=95;
+        }
+    }
+
+    if(active("pancake")&&elapsed>=120){
+
+        state.pancake+=.04;
+
+        if(state.pancake>=100){
+
+            if(energy==="vent"){
+                state.pancake=25;
+                status("Вентиляция остановила Панкейка.");
+            }else{
+                lose("Панкейк пробрался через вентиляцию.");
+                return;
+            }
+        }
+    }
+
+    if(active("kyu")){
+
+        state.kyu+=state.kyu>70?.075:.025;
+
+        if(state.kyu>=100){
+
+            if(rightDoorClosed&&energy==="door"){
+                state.kyu=20;
+                status("Кью остановлен электрической дверью.");
+            }else{
+                lose("Кью ворвался через правую дверь.");
+                return;
+            }
+        }
+    }
+
+    if(active("kashatan")){
+
+        state.kashatan+=.075;
+
+        if(state.kashatan>=100){
+
+            if(
+                energy==="window"&&
+                Date.now()>=energyBlockedUntil
+            ){
+                state.kashatan=20;
+                status("Электричество отбросило Каштана.");
+            }else{
+                lose("Каштан добрался до заднего окна.");
+                return;
+            }
+        }
+    }
+
+    if(active("charlotte")){
+
+        state.charlotte+=.09;
+
+        if(state.charlotte>=100){
+
+            energyBlockedUntil=Date.now()+20000;
+            state.charlotte=20;
+
+            status("Шарлота заблокировала питание окна на 20 секунд!");
+            snd("charlotteAudio");
+        }
+    }
+
+    if(active("delta")&&elapsed>=120){
+
+        state.delta+=.045;
+
+        if(state.delta>=100){
+
+            if(
+                energy==="incinerator"&&
+                Date.now()>=energyBlockedUntil
+            ){
+                state.delta=15;
+                status("Дельта отпугнута сжигателем.");
+                snd("incineratorAudio");
+            }else{
+                lose("Дельта пробралась через верхнюю вентиляцию.");
+                return;
+            }
+        }
+
+        $("upperVentButton").style.display=
+            view==="front"?"block":"none";
+
+        $("incineratorButton").style.display="block";
+    }
+
+    if(active("lizka")){
+
+        state.lizka+=.035;
+
+        if(state.lizka>=100){
+
+            if(energy==="fence"){
+                state.lizka=20;
+                status("Электрозабор остановил Лизку.");
+            }else{
+                lose("Лизка добралась до резервного питания.");
+                return;
+            }
+        }
+    }
+
+    if(active("mindflayer")){
+
+        state.mindflayer+=.03;
+
+        if(state.mindflayer>=100){
+            openMindPanel();
+        }
+    }
+
+    renderAI();
+    updateCamera();
+    updateEnergyUI();
+}
+
+function renderAI(){
+
+    $("lichi").style.display=
+        view==="left"&&active("lichi")&&state.lichi>45
+        ?"block":"none";
+
+    $("pancake").style.display="none";
+
+    $("kyu").style.display=
+        view==="right"&&active("kyu")&&state.kyu>45
+        ?"block":"none";
+
+    $("nemka").style.display=
+        view==="right"&&active("nemka")&&backupDone&&state.nemka>55
+        ?"block":"none";
+
+    $("kashatan").style.display=
+        view==="rear"&&active("kashatan")&&state.kashatan>35
+        ?"block":"none";
+
+    $("charlotte").style.display=
+        view==="rear"&&active("charlotte")&&state.charlotte>30
+        ?"block":"none";
+
+    $("lizka").style.display="none";
+    $("mindflayer").style.display="none";
+
+    $("lichi").style.left="45%";
+    $("lichi").style.top="55%";
+
+    $("kyu").style.left="75%";
+    $("kyu").style.top="52%";
+
+    $("nemka").style.left="78%";
+    $("nemka").style.top="50%";
+
+    $("kashatan").style.left="50%";
+    $("kashatan").style.top="48%";
+
+    $("charlotte").style.left="52%";
+    $("charlotte").style.top="45%";
+
+    $("pancake").style.display="none";
+}
+
+function setView(v){
+
+    view=v;
+
+    $("officeImage").style.display=v==="front"?"block":"none";
+    $("leftOffice").style.display=v==="left"?"block":"none";
+    $("rightOffice").style.display=v==="right"?"block":"none";
+    $("backWindow").style.display=v==="rear"?"block":"none";
+
+    $("status").textContent=
+        v==="left"?"ЛЕВЫЙ КОРИДОР":
+        v==="right"?"ПРАВЫЙ КОРИДОР":
+        v==="rear"?"ЗАДНЕЕ ОКНО":
+        "ОФИС";
+
+    $("upperVentButton").style.display=
+        v==="front"&&active("delta")&&elapsed>=120
+        ?"block":"none";
+
+    renderAI();
+}
+
+function flash(){
+
+    snd("flashAudio");
+
+    $("flash").style.opacity="1";
+
+    setTimeout(()=>{
+        $("flash").style.opacity="0";
+    },100);
+
+    if(active("lichi")&&state.lichi>20){
+        state.lichi=Math.max(0,state.lichi-55);
+        status("Вспышка отпугнула Личи!");
+    }
+
+    if(active("kashatan")&&state.kashatan>20){
+        state.kashatan=Math.max(0,state.kashatan-20);
+    }
+
+    if(active("mindflayer")&&state.mindflayer>30){
+        state.mindflayer=Math.max(0,state.mindflayer-10);
+    }
+}
+
+function openCamera(){
+
+    if(energy!=="camera"){
+        status("Камеры не получают питание!");
         return;
     }
 
-    let dx = 0;
-    let dy = 0;
-
-    if (keys.up) {
-        dy -= player.speed;
-        player.direction = "up";
-    }
-
-    if (keys.down) {
-        dy += player.speed;
-        player.direction = "down";
-    }
-
-    if (keys.left) {
-        dx -= player.speed;
-        player.direction = "left";
-    }
-
-    if (keys.right) {
-        dx += player.speed;
-        player.direction = "right";
-    }
-
-    player.moving = dx !== 0 || dy !== 0;
-
-    if (dx !== 0 && dy !== 0) {
-
-        dx *= 0.707;
-        dy *= 0.707;
-
-    }
-
-    if (canMove(player.x + dx, player.y)) {
-
-        player.x += dx;
-
-    }
-
-    if (canMove(player.x, player.y + dy)) {
-
-        player.y += dy;
-
-    }
-
+    $("cameraPanel").classList.remove("hidden");
+    updateCamera();
 }
 
+function updateCamera(){
 
-/* =========================================================
-   ДВИЖЕНИЕ НАПАРНИКОВ
-========================================================= */
+    if(!$("cameraPanel"))return;
 
-function updateParty() {
+    $("cameraNumber").textContent=camera.toUpperCase();
 
-    if (game.mode !== "explore") {
-        return;
-    }
+    $("cameraImage").style.backgroundImage=
+        `url("images/${camera}.png")`;
 
-    const positions = [
-
-        {
-            x: player.x - 15,
-            y: player.y
-        },
-
-        {
-            x: player.x - 30,
-            y: player.y
-        },
-
-        {
-            x: player.x - 45,
-            y: player.y
-        },
-
-        {
-            x: player.x - 60,
-            y: player.y
-        }
-
-    ];
-
-    party.forEach((member, index) => {
-
-        const target = positions[index];
-
-        const dx = target.x - member.x;
-        const dy = target.y - member.y;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance > 2) {
-
-            member.x += dx * 0.08;
-            member.y += dy * 0.08;
-
-        }
-
+    qa("#cameraMap button[data-camera]").forEach(b=>{
+        b.classList.toggle(
+            "energyTargetActive",
+            b.dataset.camera===camera
+        );
     });
 
+    $("cameraLichi").style.display=
+        active("lichi")&&camera==="cam02"&&state.lichi>15
+        ?"block":"none";
+
+    $("cameraPancake").style.display=
+        active("pancake")&&camera==="cam04"&&state.pancake>10
+        ?"block":"none";
+
+    $("cameraKyu").style.display=
+        active("kyu")&&camera==="cam05"&&state.kyu>15
+        ?"block":"none";
+
+    $("cameraKashatan").style.display=
+        active("kashatan")&&camera==="cam06"&&state.kashatan>15
+        ?"block":"none";
+
+    $("cameraCharlotte").style.display=
+        active("charlotte")&&state.charlotte>15
+        ?"block":"none";
+
+    $("cameraLizka").style.display=
+        active("lizka")&&camera==="cam07"&&state.lizka>15
+        ?"block":"none";
+
+    $("cameraNemka").style.display="none";
+
+    const eyeCamera=
+        "cam0"+Math.max(
+            1,
+            Math.min(7,Math.ceil(state.nemka/12))
+        );
+
+    $("cameraNemkaEyes").classList.toggle(
+        "nemkaEyesActive",
+        active("nemka")&&
+        state.nemka>30&&
+        camera===eyeCamera
+    );
+
+    $("catMessage").textContent=
+        "Текущая камера: "+camera.toUpperCase();
 }
 
+function meow(){
 
-/* =========================================================
-   NPC
-========================================================= */
-
-function updateNPC() {
-
-    if (game.mode !== "explore") {
+    if(energy!=="camera"){
+        status("Камеры обесточены.");
         return;
     }
 
-    const npc = rooms[game.room].npc;
+    snd("catAudio");
 
-    const dx = player.x - npc.x;
-    const dy = player.y - npc.y;
+    if(active("nemka")&&state.nemka>5){
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+        state.nemka=Math.max(0,state.nemka-35);
 
-    if (distance < 25 && keys.interact) {
+        status("Немка отвлечена мяуканьем!");
 
-        startDialogue(npc.name);
-
-        keys.interact = false;
-
+        $("catMessage").textContent=
+            "НЕМКА ОТВЛЕЧЕНА!";
+    }else{
+        $("catMessage").textContent=
+            "Мяуканье воспроизведено.";
     }
 
+    updateCamera();
 }
 
+function alarm(){
 
-/* =========================================================
-   ДИАЛОГ
-========================================================= */
-
-function startDialogue(name) {
-
-    if (!dialogues[name]) {
+    if(energy!=="camera"){
+        status("Сирена не работает без энергии.");
         return;
     }
 
-    game.mode = "dialogue";
+    snd("alarmAudio");
 
-    game.dialogue = dialogues[name];
+    if(active("charlotte")&&state.charlotte>5){
 
-    game.dialogueIndex = 0;
+        state.charlotte=Math.max(0,state.charlotte-55);
 
+        status("СИРЕНА ОТВЛЕКЛА ШАРЛОТУ!");
+
+        $("alarmMessage").textContent=
+            "Шарлота отвлечена!";
+    }else{
+        $("alarmMessage").textContent=
+            "Сигнализация активирована.";
+    }
 }
 
+function upperVent(){
 
-function updateDialogue() {
-
-    if (game.mode !== "dialogue") {
+    if(elapsed<120){
+        status("Верхняя шахта откроется в 2:00.");
         return;
     }
 
-    if (keys.interact) {
+    $("upperVent").classList.toggle("upperVentActive");
 
-        game.dialogueIndex++;
+    if($("upperVent").classList.contains("upperVentActive")){
+        status("ВЕРХНЯЯ ШАХТА");
+        $("delta").style.display=
+            active("delta")&&state.delta>15
+            ?"block":"none";
+    }else{
+        status("ОФИС");
+        $("delta").style.display="none";
+    }
+}
 
-        keys.interact = false;
+function burn(){
 
-        if (
-            game.dialogueIndex >=
-            game.dialogue.length
-        ) {
+    if(energy!=="incinerator"){
+        status("Сначала направьте энергию на сжигатель.");
+        return;
+    }
 
-            game.dialogue = null;
+    snd("incineratorAudio");
 
-            game.dialogueIndex = 0;
+    if(active("delta")){
+        state.delta=Math.max(0,state.delta-65);
+        status("Мусор сожжён. Дельта отступает.");
+    }
+}
 
-            game.mode = "explore";
+function closeRight(){
 
+    /*
+        Правая дверь может закрываться
+        ТОЛЬКО если энергия направлена
+        на дверь.
+    */
+
+    if(energy!=="door"){
+        status("Дверь не получает электричество!");
+        return;
+    }
+
+    rightDoorClosed=!rightDoorClosed;
+
+    $("rightDoor").classList.toggle(
+        "closed",
+        rightDoorClosed
+    );
+
+    $("rightDoorButton").textContent=
+        rightDoorClosed
+        ?"🔓 ОТКРЫТЬ"
+        :"🚪 ЗАКРЫТЬ";
+
+    $("doorStatus").textContent=
+        rightDoorClosed
+        ?"ПРАВАЯ ДВЕРЬ: ЗАКРЫТА"
+        :"ПРАВАЯ ДВЕРЬ: ОТКРЫТА";
+}
+
+function selectEnergy(target){
+
+    if(energyBusy){
+        status("Подождите окончания перенаправления.");
+        return;
+    }
+
+    if(Date.now()<energyBlockedUntil&&target==="window"){
+        status("Питание окна временно заблокировано!");
+        return;
+    }
+
+    /*
+        Выбор цели сам по себе
+        НЕ меняет энергию.
+        Энергия переносится только рычагом.
+    */
+
+    pendingEnergy=target;
+
+    status(
+        "Цель выбрана. Потяните рычаг 2 секунды."
+    );
+}
+
+let pendingEnergy="camera";
+
+function updateEnergyUI(){
+
+    const names={
+        camera:"КАМЕРЫ",
+        window:"ЗАДНЕЕ ОКНО",
+        incinerator:"СЖИГАТЕЛЬ",
+        door:"ПРАВАЯ ДВЕРЬ",
+        fence:"ЭЛЕКТРОЗАБОР",
+        vent:"ВЕНТИЛЯЦИЯ"
+    };
+
+    $("energyTargetText").textContent=
+        names[energy];
+
+    $("energyMessage").textContent=
+        "Энергия направлена на "+
+        names[energy].toLowerCase()+".";
+
+    qa("#energyTargets button").forEach(b=>{
+        b.classList.toggle(
+            "energyTargetActive",
+            b.dataset.energy===pendingEnergy
+        );
+    });
+
+    $("powerStatus").textContent=
+        "⚡ ПИТАНИЕ: "+
+        (energyBusy?"ПЕРЕНОС...":names[energy]);
+}
+
+function startLever(){
+
+    if(energyBusy)return;
+
+    leverHolding=true;
+
+    const start=Date.now();
+
+    clearInterval(leverTimer);
+
+    leverTimer=setInterval(()=>{
+
+        if(!leverHolding){
+            clearInterval(leverTimer);
+            $("leverProgressBar").style.width="0%";
+            return;
         }
 
-    }
+        const progress=
+            Math.min(100,(Date.now()-start)/20);
 
-}
+        $("leverProgressBar").style.width=
+            progress+"%";
 
+        if(progress>=100){
 
-/* =========================================================
-   ПЕРЕХОДЫ
-========================================================= */
+            clearInterval(leverTimer);
 
-function checkExit() {
+            leverHolding=false;
 
-    if (game.mode !== "explore") {
-        return;
-    }
+            energyBusy=true;
 
-    const room = rooms[game.room];
+            const target=pendingEnergy;
 
-    const exit = room.exit;
+            setTimeout(()=>{
 
-    if (rectsOverlap(player, exit)) {
+                energy=target;
+                energyBusy=false;
 
-        game.room = exit.target;
+                $("leverProgressBar").style.width="0%";
 
-        game.transition = 20;
+                updateEnergyUI();
 
-        if (game.room === "room1") {
+                status(
+                    "Энергия перенаправлена: "+
+                    target.toUpperCase()
+                );
 
-            player.x = 275;
-            player.y = 90;
-
-        } else {
-
-            player.x = 30;
-            player.y = 90;
-
+            },2000);
         }
 
-        party.forEach((member, index) => {
+    },30);
+}
 
-            member.x = player.x - 15 * (index + 1);
+function stopLever(){
+    if(!energyBusy){
+        leverHolding=false;
+    }
+}
 
-            member.y = player.y;
+function powerOff(){
 
+    if(backupDone)return;
+
+    snd("powerOffAudio");
+
+    $("backupPanel").classList.remove("hidden");
+
+    status("ОСНОВНОЕ ПИТАНИЕ ОТКЛЮЧЕНО");
+}
+
+function backupWire(number){
+
+    number=Number(number);
+
+    if(number===wireStep+1){
+
+        wireStep++;
+
+        qa("#backupWires button").forEach(b=>{
+            if(Number(b.dataset.wire)<=wireStep){
+                b.classList.add("wireSelected");
+            }
         });
 
-    }
+        if(wireStep===4){
 
+            backupDone=true;
+
+            $("backupPanel").classList.add("hidden");
+
+            state.nemka=65;
+
+            snd("backupAudio");
+
+            status("Резервная система запущена!");
+        }
+
+    }else{
+
+        wireStep=0;
+
+        qa("#backupWires button")
+            .forEach(b=>b.classList.remove("wireSelected"));
+
+        $("backupMessage").textContent=
+            "ОШИБКА! НАЧНИТЕ ЗАНОВО.";
+    }
 }
 
+function openMindPanel(){
 
-/* =========================================================
-   РИСОВАНИЕ КОМНАТЫ
-========================================================= */
+    if(!$("mindflayerPanel").classList.contains("hidden")){
+        return;
+    }
 
-function drawRoom() {
+    $("mindflayerPanel").classList.remove("hidden");
 
-    const room = rooms[game.room];
+    mindLevel=70;
 
-    ctx.fillStyle = room.floor;
+    updateMind();
 
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
+    clearInterval(mindTimer);
 
-    /* Пол */
+    mindTimer=setInterval(()=>{
 
-    ctx.fillStyle = "#202020";
+        mindLevel-=.8;
 
-    for (let y = 10; y < 172; y += 16) {
+        if(mindLevel<=0){
 
-        for (let x = 10; x < 312; x += 16) {
+            mindLevel=0;
 
-            ctx.fillRect(
-                x,
-                y,
-                1,
-                1
-            );
+            clearInterval(mindTimer);
+
+            $("mindflayerPanel").classList.add("hidden");
+
+            state.mindflayer=10;
+
+            status("Майндфлеиер полностью замедлен.");
 
         }
 
+        updateMind();
+
+    },500);
+}
+
+function updateMind(){
+
+    $("mindBarFill").style.width=
+        mindLevel+"%";
+
+    $("mindMessage").textContent=
+        "СКОРОСТЬ: "+
+        Math.round(mindLevel)+"%";
+}
+
+function lose(reason){
+
+    if(!playing)return;
+
+    playing=false;
+
+    clearInterval(timer);
+    clearInterval(mindTimer);
+    clearInterval(leverTimer);
+
+    stop("humAudio");
+
+    $("loseReason").textContent=reason;
+    $("gameOver").classList.remove("hidden");
+}
+
+function win(){
+
+    if(!playing)return;
+
+    playing=false;
+
+    clearInterval(timer);
+    clearInterval(mindTimer);
+    clearInterval(leverTimer);
+
+    stop("humAudio");
+
+    const unlocked=Math.min(13,night+1);
+
+    localStorage.setItem(
+        "bgnUnlocked",
+        unlocked
+    );
+
+    $("winText").textContent=
+        "NIGHT "+night+" COMPLETE";
+
+    $("nextNight").style.display=
+        night<13?"block":"none";
+
+    $("winScreen").classList.remove("hidden");
+}
+
+function fillNights(){
+
+    const unlocked=Number(
+        localStorage.getItem("bgnUnlocked")||1
+    );
+
+    $("nightsList").innerHTML="";
+
+    for(let i=1;i<=13;i++){
+
+        const b=document.createElement("button");
+
+        b.className=
+            "nightButton"+
+            (i>unlocked?" locked":"");
+
+        b.textContent=
+            "NIGHT "+i;
+
+        b.disabled=i>unlocked;
+
+        b.onclick=()=>start(i);
+
+        $("nightsList").appendChild(b);
     }
-
-    /* Стены */
-
-    ctx.fillStyle = "#555";
-
-    room.walls.forEach(wall => {
-
-        ctx.fillRect(
-            wall.x,
-            wall.y,
-            wall.w,
-            wall.h
-        );
-
-    });
-
-    /* Выход */
-
-    ctx.fillStyle = "#663333";
-
-    ctx.fillRect(
-        room.exit.x,
-        room.exit.y,
-        room.exit.w,
-        room.exit.h
-    );
-
 }
 
+$("startGameButton").onclick=()=>{
+    start(Number(localStorage.getItem("bgnUnlocked")||1));
+};
 
-/* =========================================================
-   РИСОВАНИЕ NPC
-========================================================= */
+$("nightsButton").onclick=()=>{
+    fillNights();
+    hideAll();
+    $("nightsMenu").classList.remove("hidden");
+};
 
-function drawNPC() {
+$("closeNights").onclick=menu;
 
-    const npc = rooms[game.room].npc;
+$("settingsButton").onclick=()=>{
+    hideAll();
+    $("settingsMenu").classList.remove("hidden");
+};
 
-    drawCharacter(
-        npc.x,
-        npc.y,
-        npc.color
-    );
+$("closeSettings").onclick=menu;
 
-}
+$("skipPhoneButton").onclick=begin;
 
+$("fullscreenButton").onclick=()=>{
+    document.documentElement.requestFullscreen?.();
+};
 
-/* =========================================================
-   РИСОВАНИЕ ПЕРСОНАЖА
-========================================================= */
+$("resetProgress").onclick=()=>{
+    localStorage.removeItem("bgnUnlocked");
+    fillNights();
+    alert("Прогресс сброшен.");
+};
 
-function drawCharacter(x, y, color) {
+$("cameraButton").onclick=openCamera;
 
-    ctx.fillStyle = "#000";
+$("closeCameraPanel").onclick=()=>{
+    $("cameraPanel").classList.add("hidden");
+};
 
-    ctx.fillRect(
-        x - 1,
-        y - 1,
-        12,
-        16
-    );
+$("energyButton").onclick=()=>{
+    updateEnergyUI();
+    $("energyPanel").classList.remove("hidden");
+};
 
-    ctx.fillStyle = color;
+$("closeEnergyPanel").onclick=()=>{
+    $("energyPanel").classList.add("hidden");
+};
 
-    /* Голова */
+$("closeMindPanel").onclick=()=>{
+    $("mindflayerPanel").classList.add("hidden");
+};
 
-    ctx.fillRect(
-        x + 2,
-        y,
-        6,
-        6
-    );
+$("mindSlow").onclick=()=>{
+    mindLevel=Math.max(0,mindLevel-15);
+    updateMind();
 
-    /* Тело */
-
-    ctx.fillRect(
-        x + 1,
-        y + 6,
-        8,
-        7
-    );
-
-    /* Ноги */
-
-    ctx.fillRect(
-        x + 1,
-        y + 13,
-        3,
-        2
-    );
-
-    ctx.fillRect(
-        x + 6,
-        y + 13,
-        3,
-        2
-    );
-
-}
-
-
-/* =========================================================
-   ИГРОК
-========================================================= */
-
-function drawPlayer() {
-
-    drawCharacter(
-        player.x,
-        player.y,
-        "#ffffff"
-    );
-
-}
-
-
-/* =========================================================
-   НАПАРНИКИ
-========================================================= */
-
-function drawParty() {
-
-    party.forEach(member => {
-
-        drawCharacter(
-            Math.round(member.x),
-            Math.round(member.y),
-            member.color
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   ИМЯ КОМНАТЫ
-========================================================= */
-
-function drawRoomName() {
-
-    ctx.font = "6px monospace";
-
-    ctx.fillStyle = "#fff";
-
-    ctx.fillText(
-        rooms[game.room].name,
-        12,
-        18
-    );
-
-}
-
-
-/* =========================================================
-   ПОДСКАЗКА NPC
-========================================================= */
-
-function drawNPCPrompt() {
-
-    if (game.mode !== "explore") {
-        return;
+    if(mindLevel===0){
+        clearInterval(mindTimer);
+        $("mindflayerPanel").classList.add("hidden");
+        state.mindflayer=10;
+        status("Майндфлеиер полностью замедлен.");
     }
+};
 
-    const npc = rooms[game.room].npc;
+$("mindFast").onclick=()=>{
+    mindLevel=Math.min(100,mindLevel+20);
+    updateMind();
+};
 
-    const dx = player.x - npc.x;
-    const dy = player.y - npc.y;
+$("flashButton").onclick=flash;
 
-    const distance =
-        Math.sqrt(dx * dx + dy * dy);
+$("leftButton").onclick=()=>{
+    setView("left");
+};
 
-    if (distance < 25) {
+$("frontButton").onclick=()=>{
+    setView("front");
+};
 
-        ctx.fillStyle = "#000";
+$("rightButton").onclick=()=>{
+    setView("right");
+};
 
-        ctx.fillRect(
-            105,
-            145,
-            110,
-            18
-        );
+$("rightDoorButton").onclick=closeRight;
 
-        ctx.strokeStyle = "#fff";
+$("upperVentButton").onclick=upperVent;
 
-        ctx.strokeRect(
-            105,
-            145,
-            110,
-            18
-        );
+$("incineratorButton").onclick=burn;
 
-        ctx.fillStyle = "#fff";
+$("catMeowButton").onclick=meow;
 
-        ctx.font = "6px monospace";
+$("cameraAlarmButton").onclick=alarm;
 
-        ctx.fillText(
-            "A — поговорить",
-            118,
-            156
-        );
+qa("#cameraMap button[data-camera]").forEach(b=>{
+    b.onclick=()=>{
+        camera=b.dataset.camera;
+        updateCamera();
+    };
+});
 
-    }
+qa("#energyTargets button").forEach(b=>{
+    b.onclick=()=>{
+        selectEnergy(b.dataset.energy);
+    };
+});
 
-}
+qa("#backupWires button").forEach(b=>{
+    b.onclick=()=>{
+        backupWire(b.dataset.wire);
+    };
+});
 
+$("lever").addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    $("lever").setPointerCapture?.(e.pointerId);
+    startLever();
+});
 
-/* =========================================================
-   ДИАЛОГОВОЕ ОКНО
-========================================================= */
+$("lever").addEventListener("pointerup",stopLever);
+$("lever").addEventListener("pointercancel",stopLever);
+$("lever").addEventListener("pointerleave",e=>{
+    if(e.buttons===0)stopLever();
+});
 
-function drawDialogue() {
+$("restart").onclick=begin;
 
-    if (game.mode !== "dialogue") {
-        return;
-    }
+$("menuAfterLose").onclick=menu;
 
-    const text =
-        game.dialogue[
-            game.dialogueIndex
-        ];
+$("nextNight").onclick=()=>{
+    start(Math.min(13,night+1));
+};
 
-    /* Затемнение */
+$("menuAfterWin").onclick=menu;
 
-    ctx.fillStyle = "rgba(0,0,0,0.35)";
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    /* Окно */
-
-    ctx.fillStyle = "#000";
-
-    ctx.fillRect(
-        15,
-        115,
-        290,
-        52
-    );
-
-    ctx.strokeStyle = "#fff";
-
-    ctx.lineWidth = 2;
-
-    ctx.strokeRect(
-        15,
-        115,
-        290,
-        52
-    );
-
-    /* Текст */
-
-    ctx.fillStyle = "#fff";
-
-    ctx.font = "7px monospace";
-
-    drawWrappedText(
-        text,
-        25,
-        135,
-        270,
-        10
-    );
-
-    ctx.font = "6px monospace";
-
-    ctx.fillText(
-        "A / ENTER",
-        250,
-        158
-    );
-
-}
-
-
-function drawWrappedText(
-    text,
-    x,
-    y,
-    maxWidth,
-    lineHeight
-) {
-
-    const words = text.split(" ");
-
-    let line = "";
-
-    for (let i = 0; i < words.length; i++) {
-
-        const testLine =
-            line + words[i] + " ";
-
-        const width =
-            ctx.measureText(testLine).width;
-
-        if (
-            width > maxWidth &&
-            i > 0
-        ) {
-
-            ctx.fillText(
-                line,
-                x,
-                y
-            );
-
-            line =
-                words[i] + " ";
-
-            y += lineHeight;
-
-        } else {
-
-            line = testLine;
-
-        }
-
-    }
-
-    ctx.fillText(
-        line,
-        x,
-        y
-    );
-
-}
-
-
-/* =========================================================
-   ПЕРЕХОД ЭКРАНА
-========================================================= */
-
-function drawTransition() {
-
-    if (game.transition <= 0) {
-        return;
-    }
-
-    ctx.fillStyle = "#000";
-
-    ctx.globalAlpha =
-        game.transition / 20;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    ctx.globalAlpha = 1;
-
-    game.transition--;
-
-}
-
-
-/* =========================================================
-   ОБНОВЛЕНИЕ
-========================================================= */
-
-function update() {
-
-    game.time++;
-
-    if (game.mode === "explore") {
-
-        updatePlayer();
-
-        updateParty();
-
-        updateNPC();
-
-        checkExit();
-
-    }
-
-    if (game.mode === "dialogue") {
-
-        updateDialogue();
-
-    }
-
-}
-
-
-/* =========================================================
-   РИСОВАНИЕ
-========================================================= */
-
-function draw() {
-
-    ctx.clearRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    drawRoom();
-
-    drawNPC();
-
-    drawParty();
-
-    drawPlayer();
-
-    drawRoomName();
-
-    drawNPCPrompt();
-
-    drawDialogue();
-
-    drawTransition();
-
-}
-
-
-/* =========================================================
-   ИГРОВОЙ ЦИКЛ
-========================================================= */
-
-function gameLoop() {
-
-    update();
-
-    draw();
-
-    requestAnimationFrame(gameLoop);
-
-}
-
-
-gameLoop();
+fillNights();
+updateEnergyUI();
