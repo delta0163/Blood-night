@@ -2,8 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -12,51 +16,159 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <body>
 
+<!-- =========================
+     ГЛАВНОЕ МЕНЮ
+========================= -->
+
 <div id="mainMenu" class="screen">
+
     <div class="menuBackground"></div>
+
     <div class="menuContent">
+
         <h1>BLOOD GLOW NIGHT</h1>
-        <button id="startGameButton">НОВАЯ НОЧЬ</button>
-        <button id="nightsButton">НОЧИ</button>
-        <button id="settingsButton">НАСТРОЙКИ</button>
+
+        <button id="startGameButton">
+            НОВАЯ НОЧЬ
+        </button>
+
+        <button id="nightsButton">
+            НОЧИ
+        </button>
+
+        <button id="settingsButton">
+            НАСТРОЙКИ
+        </button>
+
     </div>
+
 </div>
+
+
+<!-- =========================
+     ВЫБОР НОЧИ
+========================= -->
 
 <div id="nightsMenu" class="screen hidden">
+
     <div class="menuContent">
+
         <h2>ВЫБОР НОЧИ</h2>
+
         <div id="nightsList"></div>
-        <button id="closeNights">НАЗАД</button>
+
+        <button id="closeNights">
+            НАЗАД
+        </button>
+
     </div>
+
 </div>
+
+
+<!-- =========================
+     НАСТРОЙКИ
+========================= -->
 
 <div id="settingsMenu" class="screen hidden">
+
     <div class="menuContent">
+
         <h2>НАСТРОЙКИ</h2>
-        <button id="fullscreenButton">ПОЛНЫЙ ЭКРАН</button>
-        <button id="resetProgress">СБРОСИТЬ ПРОГРЕСС</button>
-        <button id="closeSettings">НАЗАД</button>
+
+        <button id="fullscreenButton">
+            ПОЛНЫЙ ЭКРАН
+        </button>
+
+        <button id="resetProgress">
+            СБРОСИТЬ ПРОГРЕСС
+        </button>
+
+        <button id="closeSettings">
+            НАЗАД
+        </button>
+
     </div>
+
 </div>
+
+
+<!-- =========================
+     ТЕЛЕФОННЫЙ ЗВОНОК
+========================= -->
 
 <div id="phoneScreen" class="screen hidden">
+
     <div class="phoneBox">
-        <h2 id="phoneNight">NIGHT 1</h2>
-        <p>Входящий звонок...</p>
-        <button id="skipPhoneButton">ПРОПУСТИТЬ ЗВОНОК</button>
+
+        <h2 id="phoneNight">
+            NIGHT 1
+        </h2>
+
+        <p>
+            ВХОДЯЩИЙ ЗВОНОК...
+        </p>
+
+        <button id="skipPhoneButton">
+            ПРОПУСТИТЬ ЗВОНОК
+        </button>
+
     </div>
+
 </div>
 
+
+<!-- =========================
+     ИГРА
+========================= -->
+
 <div id="game" class="hidden">
+
+    <!-- ФОН ИГРЫ -->
 
     <div id="background"></div>
 
     <div id="view">
 
-        <img id="lichi" src="images/lichi.png" alt="Личи">
-        <img id="pancake" src="images/pancake.png" alt="Панкейк">
-        <img id="nemka" src="images/nemka.png" alt="Немка">
-        <img id="delta" src="images/delta.png" alt="Дельта">
+        <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ ОФИСА -->
+        <div id="officeImage"></div>
+
+        <!-- ЛЕВАЯ СТОРОНА ОФИСА -->
+        <div id="leftOffice"></div>
+
+        <!-- ПРАВАЯ СТОРОНА ОФИСА -->
+        <div id="rightOffice"></div>
+
+        <!-- ЗАДНЕЕ ОКНО -->
+        <div id="backWindow"></div>
+
+        <!-- ЭЛЕКТРИЧЕСКОЕ ПОЛЕ НА ОКНЕ -->
+        <div id="windowElectricity"></div>
+
+
+        <!-- =====================
+             ПЕРСОНАЖИ
+        ====================== -->
+
+        <img id="lichi"
+             src="images/lichi.png"
+             alt="Личи">
+
+        <img id="pancake"
+             src="images/pancake.png"
+             alt="Панкейк">
+
+        <img id="nemka"
+             src="images/nemka.png"
+             alt="Немка">
+
+        <img id="delta"
+             src="images/delta.png"
+             alt="Дельта">
+
+        <img id="kyu"
+             src="images/kyu.png"
+             alt="Кью">
 
         <img id="kashatan"
              src="images/kashatan.png"
@@ -74,52 +186,212 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
              src="images/mindflayer.png"
              alt="Майндфлеиер">
 
+
+        <!-- ГЛАЗА НЕМКИ -->
+
         <div id="nemkaEyes"></div>
+
+        <!-- ВСПЫШКА -->
+
         <div id="flash"></div>
 
-        <div id="upperVent"></div>
-        <div id="rearWindow"></div>
 
-        <button id="upperVentButton">▲</button>
-        <button id="incineratorButton">🔥</button>
-        <button id="rearWindowButton">🪟</button>
+        <!-- =====================
+             ВЕРХНЯЯ ШАХТА
+        ====================== -->
+
+        <div id="upperVent">
+
+            <div id="upperVentLabel">
+                ВЕРХНЯЯ ВЕНТИЛЯЦИЯ
+            </div>
+
+            <img id="upperVentDelta"
+                 src="images/delta.png"
+                 alt="Дельта">
+
+        </div>
+
+        <button id="upperVentButton">
+            ▲
+        </button>
+
+
+        <!-- =====================
+             НИЖНЯЯ ВЕНТИЛЯЦИЯ
+        ====================== -->
+
+        <div id="lowerVent">
+
+            <div id="lowerVentLabel">
+                НИЖНЯЯ ВЕНТИЛЯЦИЯ
+            </div>
+
+            <img id="lowerVentPancake"
+                 src="images/pancake.png"
+                 alt="Панкейк">
+
+            <img id="lowerVentDelta"
+                 src="images/delta.png"
+                 alt="Дельта">
+
+        </div>
+
+
+        <button id="lowerVentButton">
+            ▼
+        </button>
+
+
+        <!-- =====================
+             СЖИГАТЕЛЬ
+        ====================== -->
+
+        <button id="incineratorButton">
+            🔥
+        </button>
+
+
+        <!-- =====================
+             СИРЕНА
+        ====================== -->
+
+        <button id="alarmButton">
+            🚨
+        </button>
+
+
+        <!-- =====================
+             ПРАВАЯ ДВЕРЬ
+        ====================== -->
+
+        <div id="rightDoor">
+
+            <div id="rightDoorText">
+                ПРАВАЯ ДВЕРЬ
+            </div>
+
+        </div>
+
+        <button id="rightDoorButton">
+            🚪
+        </button>
+
+
+        <!-- =====================
+             ЛЕВАЯ ДВЕРЬ
+        ====================== -->
+
+        <div id="leftDoor">
+
+            <div id="leftDoorText">
+                ЛЕВАЯ ДВЕРЬ
+            </div>
+
+        </div>
+
+        <button id="leftDoorButton">
+            🚪
+        </button>
 
     </div>
+
+
+    <!-- =========================
+         HUD
+    ========================= -->
 
     <div id="hud">
-        <div id="night">NIGHT 1</div>
-        <div id="time">12:00 AM</div>
+
+        <div id="night">
+            NIGHT 1
+        </div>
+
+        <div id="time">
+            12:00 AM
+        </div>
+
     </div>
 
-    <div id="status">ОФИС</div>
+
+    <div id="status">
+        ОФИС
+    </div>
+
+
+    <!-- =========================
+         ИНДИКАТОРЫ
+    ========================= -->
+
+    <div id="powerStatus">
+        ⚡ ПИТАНИЕ: 100%
+    </div>
+
+    <div id="doorStatus">
+        ПРАВАЯ ДВЕРЬ: ОТКРЫТА
+    </div>
+
+
+    <!-- =========================
+         ПОВОРОТЫ
+    ========================= -->
 
     <div id="officeControls">
-        <button id="leftButton">◀</button>
-        <button id="frontButton">●</button>
-        <button id="rightButton">▶</button>
+
+        <button id="leftButton">
+            ◀
+        </button>
+
+        <button id="frontButton">
+            ●
+        </button>
+
+        <button id="rightButton">
+            ▶
+        </button>
+
     </div>
+
+
+    <!-- =========================
+         НИЖНИЕ КНОПКИ
+    ========================= -->
 
     <div id="bottomControls">
-        <button id="cameraButton">КАМЕРЫ</button>
-        <button id="flashButton">ВСПЫШКА</button>
-        <button id="energyButton">ЭНЕРГИЯ</button>
+
+        <button id="cameraButton">
+            КАМЕРЫ
+        </button>
+
+        <button id="flashButton">
+            ВСПЫШКА
+        </button>
+
+        <button id="energyButton">
+            ЭНЕРГИЯ
+        </button>
+
     </div>
 
-    <!-- ПРАВАЯ ДВЕРЬ -->
 
-    <div id="rightDoor" class="door">
-        <span>ПРАВАЯ ДВЕРЬ</span>
-        <button id="rightDoorButton">ЗАКРЫТЬ</button>
-    </div>
-
-    <!-- КАМЕРЫ -->
+    <!-- =========================
+         КАМЕРЫ
+    ========================= -->
 
     <div id="cameraPanel" class="panel hidden">
 
         <div class="panelHeader">
-            <span>СИСТЕМА КАМЕР</span>
-            <button id="closeCameraPanel">✕</button>
+
+            <span>
+                СИСТЕМА КАМЕР
+            </span>
+
+            <button id="closeCameraPanel">
+                ✕
+            </button>
+
         </div>
+
 
         <div class="cameraBody">
 
@@ -132,31 +404,72 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
                 </div>
 
                 <img id="cameraLichi"
-                     src="images/lichi.png">
+                     src="images/lichi.png"
+                     alt="Личи">
 
                 <img id="cameraPancake"
-                     src="images/pancake.png">
+                     src="images/pancake.png"
+                     alt="Панкейк">
+
+                <img id="cameraKyu"
+                     src="images/kyu.png"
+                     alt="Кью">
+
+                <img id="cameraKashatan"
+                     src="images/kashatan.png"
+                     alt="Каштан">
+
+                <img id="cameraCharlotte"
+                     src="images/charlotte.png"
+                     alt="Шарлота">
+
+                <img id="cameraLizka"
+                     src="images/lizka.png"
+                     alt="Лизка">
+
+                <img id="cameraNemka"
+                     src="images/nemka.png"
+                     alt="Немка">
 
                 <div id="cameraNemkaEyes"></div>
 
-                <div id="cameraCharlotte"></div>
-
-                <button id="cameraAlarm">
-                    🚨 СИРЕНА
-                </button>
-
             </div>
+
+
+            <!-- КАРТА КАМЕР -->
 
             <div id="cameraMap">
 
-                <button data-camera="cam01">CAM 01</button>
-                <button data-camera="cam02">CAM 02</button>
-                <button data-camera="cam03">CAM 03</button>
-                <button data-camera="cam04">CAM 04</button>
-                <button data-camera="cam05">CAM 05</button>
-                <button data-camera="cam06">CAM 06</button>
-                <button data-camera="cam07">CAM 07</button>
-                <button data-camera="cam08">CAM 08</button>
+                <button data-camera="cam01">
+                    CAM 01
+                </button>
+
+                <button data-camera="cam02">
+                    CAM 02
+                </button>
+
+                <button data-camera="cam03">
+                    CAM 03
+                </button>
+
+                <button data-camera="cam04">
+                    CAM 04
+                </button>
+
+                <button data-camera="cam05">
+                    CAM 05
+                </button>
+
+                <button data-camera="cam06">
+                    CAM 06
+                </button>
+
+                <button data-camera="cam07">
+                    CAM 07
+                </button>
+
+
+                <!-- МЯУКАНЬЕ В РЯДУ С КАМЕРАМИ -->
 
                 <div id="catControl">
 
@@ -174,30 +487,63 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
                 </div>
 
+
+                <!-- СИРЕНА ШАРЛОТЫ -->
+
+                <div id="alarmControl">
+
+                    <span class="alarmTitle">
+                        ОТВЛЕЧЕНИЕ ШАРЛОТЫ
+                    </span>
+
+                    <button id="cameraAlarmButton">
+                        🚨 СИРЕНА
+                    </button>
+
+                    <span id="alarmMessage">
+                        Сигнализация не активна.
+                    </span>
+
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-    <!-- ЭНЕРГИЯ -->
+
+    <!-- =========================
+         ЭНЕРГИЯ
+    ========================= -->
 
     <div id="energyPanel" class="panel hidden">
 
         <div class="panelHeader">
-            <span>ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ</span>
-            <button id="closeEnergyPanel">✕</button>
+
+            <span>
+                ПЕРЕНАПРАВЛЕНИЕ ЭНЕРГИИ
+            </span>
+
+            <button id="closeEnergyPanel">
+                ✕
+            </button>
+
         </div>
+
 
         <div id="energyContent">
 
             <div id="energyTarget">
+
                 ЭНЕРГИЯ СЕЙЧАС:
 
                 <strong id="energyTargetText">
                     КАМЕРЫ
                 </strong>
+
             </div>
+
 
             <div id="energyTargets">
 
@@ -206,27 +552,38 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
                 </button>
 
                 <button data-energy="window">
-                    🪟 ОКНО
+                    🪟 ЗАДНЕЕ ОКНО
                 </button>
 
                 <button data-energy="incinerator">
                     🔥 СЖИГАТЕЛЬ
                 </button>
 
-                <button data-energy="fence">
-                    ⚡ ЗАБОР
-                </button>
-
                 <button data-energy="door">
                     🚪 ПРАВАЯ ДВЕРЬ
                 </button>
 
+                <button data-energy="fence">
+                    ⚡ ЭЛЕКТРОЗАБОР
+                </button>
+
+                <button data-energy="vent">
+                    🌀 ВЕНТИЛЯЦИЯ
+                </button>
+
             </div>
+
+
+            <!-- РЫЧАГ -->
 
             <div id="leverArea">
 
                 <div id="leverBase">
-                    <div id="lever">↕</div>
+
+                    <div id="lever">
+                        ↕
+                    </div>
+
                 </div>
 
                 <p>
@@ -234,10 +591,13 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
                 </p>
 
                 <div id="leverProgress">
+
                     <div id="leverProgressBar"></div>
+
                 </div>
 
             </div>
+
 
             <div id="energyMessage">
                 Энергия направлена на камеры.
@@ -247,13 +607,21 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
     </div>
 
-    <!-- РЕЗЕРВ -->
+
+    <!-- =========================
+         РЕЗЕРВНОЕ ПИТАНИЕ
+    ========================= -->
 
     <div id="backupPanel" class="panel hidden">
 
         <div class="panelHeader">
-            <span>АВАРИЙНОЕ ПИТАНИЕ</span>
+
+            <span>
+                АВАРИЙНОЕ ПИТАНИЕ
+            </span>
+
         </div>
+
 
         <div id="backupContent">
 
@@ -269,14 +637,27 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
                 СОЕДИНИТЕ ПРОВОДА
             </p>
 
+
             <div id="backupWires">
 
-                <button data-wire="1">ПРОВОД 1</button>
-                <button data-wire="2">ПРОВОД 2</button>
-                <button data-wire="3">ПРОВОД 3</button>
-                <button data-wire="4">ПРОВОД 4</button>
+                <button data-wire="1">
+                    ПРОВОД 1
+                </button>
+
+                <button data-wire="2">
+                    ПРОВОД 2
+                </button>
+
+                <button data-wire="3">
+                    ПРОВОД 3
+                </button>
+
+                <button data-wire="4">
+                    ПРОВОД 4
+                </button>
 
             </div>
+
 
             <div id="backupMessage">
                 Соедините провода в правильном порядке.
@@ -286,54 +667,73 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
     </div>
 
-    <!-- МАЙНДФЛЕИЕР -->
 
-    <div id="mindPanel" class="panel hidden">
+    <!-- =========================
+         МИНИ-ИГРА МАЙНДФЛЕИЕРА
+    ========================= -->
+
+    <div id="mindflayerPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
-            <span>ЗАЩИТА ОКНА</span>
-            <button id="closeMindPanel">✕</button>
+
+            <span>
+                ЗАЩИТА ОКНА
+            </span>
+
         </div>
 
-        <div class="miniGame">
 
-            <h2>МАЙНДФЛЕИЕР</h2>
+        <div id="mindflayerContent">
+
+            <h2>
+                МАЙНДФЛЕИЕР АТАКУЕТ ОКНО
+            </h2>
 
             <p>
-                ЗАМЕДЛЯЙТЕ ЕГО.
-                КРЕСТ УСКОРЯЕТ.
+                ПОЛНОСТЬЮ ЗАМЕДЛИТЕ ЕГО
             </p>
 
-            <div id="mindBar">
-                <div id="mindBarFill"></div>
-            </div>
 
-            <div class="mindButtons">
+            <div id="mindflayerBar">
 
-                <button id="mindSlow">
-                    ЗАМЕДЛИТЬ
-                </button>
-
-                <button id="mindFast">
-                    ✕
-                </button>
+                <div id="mindflayerBarFill"></div>
 
             </div>
 
-            <p id="mindMessage">
-                Скорость: высокая
-            </p>
+
+            <div id="mindflayerButtons">
+
+                <button id="slowMindflayer">
+                    ⬇ ЗАМЕДЛЕНИЕ
+                </button>
+
+                <button id="fastMindflayer">
+                    ✕ УСКОРЕНИЕ
+                </button>
+
+            </div>
+
+
+            <div id="mindflayerMessage">
+                СКОРОСТЬ: 100%
+            </div>
 
         </div>
 
     </div>
 
-    <!-- GAME OVER -->
+
+    <!-- =========================
+         GAME OVER
+    ========================= -->
 
     <div id="gameOver"
          class="overlay hidden">
 
-        <h1>ТЫ ПРОИГРАЛ</h1>
+        <h1>
+            ТЫ ПРОИГРАЛ
+        </h1>
 
         <p id="loseReason"></p>
 
@@ -347,7 +747,10 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
     </div>
 
-    <!-- ПОБЕДА -->
+
+    <!-- =========================
+         ПОБЕДА
+    ========================= -->
 
     <div id="winScreen"
          class="overlay hidden">
@@ -368,7 +771,10 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 </div>
 
-<!-- ЗВУКИ -->
+
+<!-- =========================
+     ЗВУКИ
+========================= -->
 
 <audio id="phoneAudio"
        src="sounds/phone.mp3"></audio>
@@ -385,6 +791,15 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <audio id="pancakeAudio"
        src="sounds/pancake.mp3"></audio>
+
+<audio id="kyuAudio"
+       src="sounds/kyu.mp3"></audio>
+
+<audio id="kashatanAudio"
+       src="sounds/kashatan.mp3"></audio>
+
+<audio id="charlotteAudio"
+       src="sounds/charlotte.mp3"></audio>
 
 <audio id="screamAudio"
        src="sounds/scream.mp3"></audio>
@@ -405,13 +820,27 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <audio id="backupAudio"
        src="sounds/backup.mp3"></audio>
 
-<audio id="sirenAudio"
-       src="sounds/siren.mp3"></audio>
+<audio id="alarmAudio"
+       src="sounds/alarm.mp3"></audio>
 
-<audio id="burnAudio"
-       src="sounds/burn.mp3"></audio>
+<audio id="deltaAudio"
+       src="sounds/delta.mp3"></audio>
+
+<audio id="lizkaAudio"
+       src="sounds/lizka.mp3"></audio>
+
+<audio id="mindflayerAudio"
+       src="sounds/mindflayer.mp3"></audio>
+
+<audio id="incineratorAudio"
+       src="sounds/incinerator.mp3"></audio>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script src="game.js"></script>
 
 </body>
-                  </html>
+    </html>
