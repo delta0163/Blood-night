@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Blood Glow Night</title>
 
@@ -41,7 +41,6 @@
         </button>
 
     </div>
-
 </div>
 
 
@@ -62,7 +61,6 @@
         </button>
 
     </div>
-
 </div>
 
 
@@ -89,32 +87,26 @@
         </button>
 
     </div>
-
 </div>
 
 
 <!-- =========================
-     ТЕЛЕФОННЫЙ ЗВОНОК
+     ТЕЛЕФОН
 ========================= -->
 
 <div id="phoneScreen" class="screen hidden">
 
     <div class="phoneBox">
 
-        <h2 id="phoneNight">
-            NIGHT 1
-        </h2>
+        <h2 id="phoneNight">NIGHT 1</h2>
 
-        <p>
-            ВХОДЯЩИЙ ЗВОНОК...
-        </p>
+        <p>ВХОДЯЩИЙ ЗВОНОК...</p>
 
         <button id="skipPhoneButton">
             ПРОПУСТИТЬ ЗВОНОК
         </button>
 
     </div>
-
 </div>
 
 
@@ -128,20 +120,25 @@
 
     <div id="view">
 
-        <!-- ОФИС -->
+        <!-- ФОН ОФИСА -->
+
         <div id="officeImage"></div>
 
         <div id="leftOffice"></div>
 
         <div id="rightOffice"></div>
 
+
         <!-- ЗАДНЕЕ ОКНО -->
+
         <div id="backWindow"></div>
 
         <div id="windowElectricity"></div>
 
 
-        <!-- ПЕРСОНАЖИ -->
+        <!-- =====================
+             ВРАГИ
+        ====================== -->
 
         <img id="lichi"
              src="images/lichi.png"
@@ -184,19 +181,16 @@
 
         <div id="nemkaEyes"></div>
 
-
         <!-- ВСПЫШКА -->
 
         <div id="flash"></div>
 
 
-        <!-- ВЕРХНЯЯ ШАХТА -->
+        <!-- =====================
+             ВЕРХНЯЯ ШАХТА
+        ====================== -->
 
         <div id="upperVent">
-
-            <div id="upperVentLabel">
-                ВЕРХНЯЯ ВЕНТИЛЯЦИЯ
-            </div>
 
             <img id="upperVentDelta"
                  src="images/delta.png"
@@ -209,21 +203,15 @@
         </button>
 
 
-        <!-- НИЖНЯЯ ВЕНТИЛЯЦИЯ -->
+        <!-- =====================
+             НИЖНЯЯ ВЕНТИЛЯЦИЯ
+        ====================== -->
 
         <div id="lowerVent">
-
-            <div id="lowerVentLabel">
-                НИЖНЯЯ ВЕНТИЛЯЦИЯ
-            </div>
 
             <img id="lowerVentPancake"
                  src="images/pancake.png"
                  alt="Панкейк">
-
-            <img id="lowerVentDelta"
-                 src="images/delta.png"
-                 alt="Дельта">
 
         </div>
 
@@ -232,21 +220,18 @@
         </button>
 
 
-        <!-- СЖИГАТЕЛЬ -->
+        <!-- =====================
+             СЖИГАТЕЛЬ
+        ====================== -->
 
         <button id="incineratorButton">
             🔥
         </button>
 
 
-        <!-- СИРЕНА -->
-
-        <button id="alarmButton">
-            🚨
-        </button>
-
-
-        <!-- ПРАВАЯ ДВЕРЬ -->
+        <!-- =====================
+             ПРАВАЯ ДВЕРЬ
+        ====================== -->
 
         <div id="rightDoor">
 
@@ -261,7 +246,9 @@
         </button>
 
 
-        <!-- ЛЕВАЯ ДВЕРЬ -->
+        <!-- =====================
+             ЛЕВАЯ ДВЕРЬ
+        ====================== -->
 
         <div id="leftDoor">
 
@@ -278,7 +265,9 @@
     </div>
 
 
-    <!-- HUD -->
+    <!-- =========================
+         HUD
+    ========================= -->
 
     <div id="hud">
 
@@ -298,18 +287,19 @@
     </div>
 
 
-    <!-- ИНДИКАТОРЫ -->
-
     <div id="powerStatus">
         ⚡ ПИТАНИЕ: 100%
     </div>
+
 
     <div id="doorStatus">
         ПРАВАЯ ДВЕРЬ: ОТКРЫТА
     </div>
 
 
-    <!-- ПОВОРОТЫ -->
+    <!-- =========================
+         ПОВОРОТЫ
+    ========================= -->
 
     <div id="officeControls">
 
@@ -328,7 +318,9 @@
     </div>
 
 
-    <!-- НИЖНИЕ КНОПКИ -->
+    <!-- =========================
+         НИЖНИЕ КНОПКИ
+    ========================= -->
 
     <div id="bottomControls">
 
@@ -351,7 +343,8 @@
          КАМЕРЫ
     ========================= -->
 
-    <div id="cameraPanel" class="panel hidden">
+    <div id="cameraPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
@@ -376,40 +369,37 @@
                     CAM 01
                 </div>
 
+
                 <img id="cameraLichi"
-                     src="images/lichi.png"
-                     alt="Личи">
+                     src="images/lichi.png">
 
                 <img id="cameraPancake"
-                     src="images/pancake.png"
-                     alt="Панкейк">
+                     src="images/pancake.png">
 
                 <img id="cameraKyu"
-                     src="images/kyu.png"
-                     alt="Кью">
+                     src="images/kyu.png">
 
                 <img id="cameraKashatan"
-                     src="images/kashatan.png"
-                     alt="Каштан">
+                     src="images/kashatan.png">
 
                 <img id="cameraCharlotte"
-                     src="images/charlotte.png"
-                     alt="Шарлота">
+                     src="images/charlotte.png">
 
                 <img id="cameraLizka"
-                     src="images/lizka.png"
-                     alt="Лизка">
+                     src="images/lizka.png">
 
                 <img id="cameraNemka"
-                     src="images/nemka.png"
-                     alt="Немка">
+                     src="images/nemka.png">
+
+                <img id="cameraDelta"
+                     src="images/delta.png">
 
                 <div id="cameraNemkaEyes"></div>
 
             </div>
 
 
-            <!-- КАРТА КАМЕР -->
+            <!-- КАРТЫ КАМЕР -->
 
             <div id="cameraMap">
 
@@ -446,7 +436,7 @@
 
                 <div id="catControl">
 
-                    <span class="catTitle">
+                    <span>
                         ОТВЛЕЧЕНИЕ НЕМКИ
                     </span>
 
@@ -465,7 +455,7 @@
 
                 <div id="alarmControl">
 
-                    <span class="alarmTitle">
+                    <span>
                         ОТВЛЕЧЕНИЕ ШАРЛОТЫ
                     </span>
 
@@ -482,7 +472,6 @@
             </div>
 
         </div>
-
     </div>
 
 
@@ -490,7 +479,8 @@
          ЭНЕРГИЯ
     ========================= -->
 
-    <div id="energyPanel" class="panel hidden">
+    <div id="energyPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
 
@@ -577,24 +567,19 @@
             </div>
 
         </div>
-
     </div>
 
 
     <!-- =========================
-         РЕЗЕРВНОЕ ПИТАНИЕ
+         РЕЗЕРВ
     ========================= -->
 
-    <div id="backupPanel" class="panel hidden">
+    <div id="backupPanel"
+         class="panel hidden">
 
         <div class="panelHeader">
-
-            <span>
-                АВАРИЙНОЕ ПИТАНИЕ
-            </span>
-
+            АВАРИЙНОЕ ПИТАНИЕ
         </div>
-
 
         <div id="backupContent">
 
@@ -609,7 +594,6 @@
             <p>
                 СОЕДИНИТЕ ПРОВОДА
             </p>
-
 
             <div id="backupWires">
 
@@ -631,13 +615,11 @@
 
             </div>
 
-
             <div id="backupMessage">
                 Соедините провода в правильном порядке.
             </div>
 
         </div>
-
     </div>
 
 
@@ -649,19 +631,10 @@
          class="panel hidden">
 
         <div class="panelHeader">
-
-            <span>
-                ЗАЩИТА ОКНА
-            </span>
-
-            <button id="closeMindPanel">
-                ✕
-            </button>
-
+            ЗАЩИТА ОКНА
         </div>
 
-
-        <div id="mindflayerContent">
+        <div class="miniGame">
 
             <h2>
                 МАЙНДФЛЕИЕР АТАКУЕТ ОКНО
@@ -671,37 +644,35 @@
                 ПОЛНОСТЬЮ ЗАМЕДЛИТЕ ЕГО
             </p>
 
+            <div id="mindBar">
 
-            <div id="mindflayerBar">
-
-                <div id="mindflayerBarFill"></div>
+                <div id="mindBarFill"></div>
 
             </div>
 
+            <div class="mindButtons">
 
-            <div id="mindflayerButtons">
-
-                <button id="slowMindflayer">
+                <button id="mindSlow">
                     ⬇ ЗАМЕДЛЕНИЕ
                 </button>
 
-                <button id="fastMindflayer">
+                <button id="mindFast">
                     ✕ УСКОРЕНИЕ
                 </button>
 
             </div>
 
-
-            <div id="mindflayerMessage">
-                СКОРОСТЬ: 70%
+            <div id="mindMessage">
+                Скорость: высокая
             </div>
 
         </div>
-
     </div>
 
 
-    <!-- GAME OVER -->
+    <!-- =========================
+         GAME OVER
+    ========================= -->
 
     <div id="gameOver"
          class="overlay hidden">
@@ -723,7 +694,9 @@
     </div>
 
 
-    <!-- ПОБЕДА -->
+    <!-- =========================
+         ПОБЕДА
+    ========================= -->
 
     <div id="winScreen"
          class="overlay hidden">
@@ -749,67 +722,52 @@
      ЗВУКИ
 ========================= -->
 
-<audio id="phoneAudio"
-       src="sounds/phone.mp3"></audio>
+<audio id="phoneAudio" src="sounds/phone.mp3"></audio>
 
 <audio id="humAudio"
        src="sounds/hum.mp3"
        loop></audio>
 
-<audio id="flashAudio"
-       src="sounds/flash.mp3"></audio>
+<audio id="flashAudio" src="sounds/flash.mp3"></audio>
 
-<audio id="lichiAudio"
-       src="sounds/lichi.mp3"></audio>
+<audio id="catAudio" src="sounds/cat.mp3"></audio>
 
-<audio id="pancakeAudio"
-       src="sounds/pancake.mp3"></audio>
+<audio id="nemkaAudio" src="sounds/nemka.mp3"></audio>
 
-<audio id="kyuAudio"
-       src="sounds/kyu.mp3"></audio>
+<audio id="lichiAudio" src="sounds/lichi.mp3"></audio>
 
-<audio id="kashatanAudio"
-       src="sounds/kashatan.mp3"></audio>
+<audio id="pancakeAudio" src="sounds/pancake.mp3"></audio>
 
-<audio id="charlotteAudio"
-       src="sounds/charlotte.mp3"></audio>
+<audio id="kyuAudio" src="sounds/kyu.mp3"></audio>
 
-<audio id="screamAudio"
-       src="sounds/scream.mp3"></audio>
+<audio id="kashatanAudio" src="sounds/kashatan.mp3"></audio>
+
+<audio id="charlotteAudio" src="sounds/charlotte.mp3"></audio>
+
+<audio id="lizkaAudio" src="sounds/lizka.mp3"></audio>
+
+<audio id="deltaAudio" src="sounds/delta.mp3"></audio>
+
+<audio id="mindflayerAudio" src="sounds/mindflayer.mp3"></audio>
+
+<audio id="powerOffAudio" src="sounds/poweroff.mp3"></audio>
+
+<audio id="backupAudio" src="sounds/backup.mp3"></audio>
+
+<audio id="alarmAudio" src="sounds/alarm.mp3"></audio>
+
+<audio id="incineratorAudio"
+       src="sounds/incinerator.mp3"></audio>
 
 <audio id="ventAudio"
        src="sounds/vent.mp3"
        loop></audio>
 
-<audio id="catAudio"
-       src="sounds/cat.mp3"></audio>
-
-<audio id="nemkaAudio"
-       src="sounds/nemka.mp3"></audio>
-
-<audio id="powerOffAudio"
-       src="sounds/poweroff.mp3"></audio>
-
-<audio id="backupAudio"
-       src="sounds/backup.mp3"></audio>
-
-<audio id="alarmAudio"
-       src="sounds/alarm.mp3"></audio>
-
-<audio id="deltaAudio"
-       src="sounds/delta.mp3"></audio>
-
-<audio id="lizkaAudio"
-       src="sounds/lizka.mp3"></audio>
-
-<audio id="mindflayerAudio"
-       src="sounds/mindflayer.mp3"></audio>
-
-<audio id="incineratorAudio"
-       src="sounds/incinerator.mp3"></audio>
+<audio id="screamAudio"
+       src="sounds/scream.mp3"></audio>
 
 
 <script src="game.js"></script>
 
 </body>
-      </html>
+                      </html>
