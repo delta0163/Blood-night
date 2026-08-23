@@ -1,203 +1,657 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
 
-body {
-    touch-action: none;
-    user-select: none;
-    font-family: monospace;
+button{
+    cursor:pointer;
+    color:#fff;
+    background:#111;
+    border:2px solid #777;
+    padding:12px 20px;
+    font-size:16px;
 }
 
-#game-wrapper {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #000;
+button:active{
+    transform:scale(.96);
 }
 
-#game {
-    display: block;
-
-    width: 100vw;
-    height: 100vh;
-
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-
-    background: #111;
-
-    touch-action: none;
+.hidden{
+    display:none!important;
 }
 
-/* =========================
-   МОБИЛЬНОЕ УПРАВЛЕНИЕ
-========================= */
-
-#mobile-controls {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 38vh;
-
-    pointer-events: none;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    padding:
-        15px
-        20px
-        calc(15px + env(safe-area-inset-bottom))
-        20px;
+.screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:100;
 }
 
-.dpad {
-    position: relative;
-
-    width: 135px;
-    height: 135px;
-
-    pointer-events: auto;
+.menuBackground{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.85)),
+        url("images/menu_bg.png") center/cover no-repeat;
+    z-index:-1;
 }
 
-.control {
-    position: absolute;
-
-    width: 45px;
-    height: 45px;
-
-    border: 3px solid white;
-
-    background: rgba(0, 0, 0, 0.65);
-
-    color: white;
-
-    font-size: 22px;
-    font-family: monospace;
-
-    border-radius: 5px;
-
-    touch-action: none;
+.menuContent{
+    width:min(90%,500px);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    text-align:center;
 }
 
-.control:active {
-    background: white;
-    color: black;
+.menuContent h1{
+    font-size:clamp(30px,7vw,60px);
+    letter-spacing:4px;
 }
 
-.up {
-    left: 45px;
-    top: 0;
+.menuContent h2{
+    font-size:30px;
 }
 
-.left {
-    left: 0;
-    top: 45px;
+.menuContent button{
+    width:100%;
 }
 
-.down {
-    left: 45px;
-    top: 90px;
+#nightsList{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    max-height:60vh;
+    overflow-y:auto;
 }
 
-.right {
-    left: 90px;
-    top: 45px;
+.nightButton.locked{
+    opacity:.35;
 }
 
-.action-buttons {
-    pointer-events: auto;
+.phoneBox{
+    text-align:center;
 }
 
-.action {
-    width: 70px;
-    height: 70px;
-
-    border-radius: 50%;
-
-    border: 4px solid white;
-
-    background: rgba(100, 0, 0, 0.75);
-
-    color: white;
-
-    font-size: 28px;
-    font-weight: bold;
-
-    font-family: monospace;
-
-    touch-action: none;
+#game{
+    position:fixed;
+    inset:0;
+    background:#000;
+    overflow:hidden;
 }
 
-.action:active {
-    background: white;
-    color: black;
+#background{
+    position:absolute;
+    inset:0;
+    background:url("images/game_bg.png") center/cover no-repeat;
+    opacity:.25;
 }
 
-/* =========================
-   ПОДСКАЗКА
-========================= */
-
-#fullscreen-hint {
-    position: fixed;
-
-    top: 20px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    padding: 10px 16px;
-
-    color: white;
-
-    background: rgba(0, 0, 0, 0.85);
-
-    border: 2px solid white;
-
-    font-size: 13px;
-
-    pointer-events: none;
-
-    opacity: 1;
-
-    transition: opacity 0.5s;
+#view{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:url("images/office.png") center/cover no-repeat;
 }
 
-/* =========================
-   ПК
-========================= */
+#officeImage{
+    position:absolute;
+    inset:0;
+    background:url("images/office.png") center/cover no-repeat;
+    z-index:1;
+}
 
-@media (min-width: 800px) {
+#leftOffice{
+    position:absolute;
+    inset:0;
+    background:url("images/office_left.png") center/cover no-repeat;
+    z-index:1;
+    display:none;
+}
 
-    #game {
-        width: 960px;
-        height: 540px;
+#rightOffice{
+    position:absolute;
+    inset:0;
+    background:url("images/office_right.png") center/cover no-repeat;
+    z-index:1;
+    display:none;
+}
+
+#backWindow{
+    position:absolute;
+    inset:0;
+    background:url("images/rear_window.png") center/cover no-repeat;
+    z-index:3;
+    display:none;
+}
+
+#windowElectricity{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+    display:none;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 30px,
+            rgba(100,180,255,.18) 32px,
+            transparent 34px
+        );
+    animation:electric .15s linear infinite;
+}
+
+@keyframes electric{
+    from{opacity:.35}
+    to{opacity:.8}
+}
+
+#lichi,
+#pancake,
+#nemka,
+#delta,
+#kyu,
+#kashatan,
+#charlotte,
+#lizka,
+#mindflayer{
+    position:absolute;
+    display:none;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    z-index:50;
+}
+
+#lichi,#pancake,#kyu{
+    width:230px;
+}
+
+#nemka,#delta{
+    width:250px;
+}
+
+#kashatan,#charlotte,#lizka,#mindflayer{
+    width:220px;
+}
+
+#nemkaEyes,
+#cameraNemkaEyes{
+    position:absolute;
+    inset:0;
+    display:none;
+    pointer-events:none;
+    z-index:80;
+    background:
+        radial-gradient(circle at 43% 48%,#fff 0 7px,#000 8px,transparent 14px),
+        radial-gradient(circle at 57% 48%,#fff 0 7px,#000 8px,transparent 14px);
+}
+
+.nemkaEyesActive{
+    display:block!important;
+    animation:eyeFlicker .12s infinite alternate;
+}
+
+@keyframes eyeFlicker{
+    from{opacity:.5}
+    to{opacity:1}
+}
+
+#flash{
+    position:absolute;
+    inset:0;
+    background:#fff;
+    opacity:0;
+    pointer-events:none;
+    z-index:300;
+    transition:opacity .1s;
+}
+
+#upperVent{
+    position:absolute;
+    inset:0;
+    display:none;
+    background:url("images/upper_vent.png") center/cover no-repeat;
+    z-index:70;
+}
+
+#upperVent.upperVentActive{
+    display:block;
+}
+
+#upperVentLabel{
+    display:none;
+}
+
+#upperVentButton,
+#incineratorButton,
+#alarmButton{
+    position:absolute;
+    z-index:100;
+    width:60px;
+    height:55px;
+    padding:0;
+}
+
+#upperVentButton{
+    right:15px;
+    top:70px;
+}
+
+#incineratorButton{
+    left:15px;
+    bottom:125px;
+}
+
+#alarmButton{
+    right:15px;
+    bottom:125px;
+    display:none;
+}
+
+#rightDoor{
+    position:absolute;
+    right:0;
+    top:20%;
+    width:160px;
+    height:60%;
+    background:linear-gradient(#222,#050505);
+    border-left:4px solid #777;
+    z-index:90;
+    transform:translateX(140px);
+    transition:.25s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#rightDoor.closed{
+    transform:translateX(0);
+}
+
+#rightDoorText{
+    transform:rotate(-90deg);
+}
+
+#leftDoor,
+#leftDoorButton{
+    display:none!important;
+}
+
+#rightDoorButton{
+    position:absolute;
+    right:15px;
+    top:50%;
+    z-index:110;
+}
+
+#hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    display:flex;
+    justify-content:space-between;
+    z-index:150;
+    font-size:20px;
+    text-shadow:2px 2px 5px #000;
+}
+
+#status{
+    position:absolute;
+    top:55px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    text-align:center;
+    z-index:150;
+    text-shadow:2px 2px 5px #000;
+}
+
+#powerStatus{
+    position:absolute;
+    left:15px;
+    bottom:15px;
+    z-index:150;
+}
+
+#doorStatus{
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    z-index:150;
+}
+
+#officeControls{
+    position:absolute;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:15px;
+    z-index:150;
+}
+
+#officeControls button{
+    width:60px;
+    height:55px;
+    font-size:24px;
+}
+
+#bottomControls{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+    width:min(95%,600px);
+    z-index:150;
+}
+
+#bottomControls button{
+    flex:1;
+}
+
+.panel{
+    position:absolute;
+    inset:3%;
+    z-index:200;
+    background:#050505;
+    border:2px solid #888;
+    display:flex;
+    flex-direction:column;
+}
+
+.panelHeader{
+    min-height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:8px 15px;
+    border-bottom:2px solid #555;
+    font-size:20px;
+}
+
+.cameraBody{
+    flex:1;
+    min-height:0;
+    display:flex;
+    gap:12px;
+    padding:10px;
+}
+
+#cameraImage{
+    position:relative;
+    flex:1;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+    background:#111 center/cover no-repeat;
+    border:2px solid #555;
+}
+
+#cameraStatic{
+    position:absolute;
+    inset:0;
+    background:repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(255,255,255,.15) 4px
+    );
+    opacity:.15;
+    z-index:10;
+}
+
+#cameraNumber{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:30;
+}
+
+#cameraLichi,
+#cameraPancake,
+#cameraKyu,
+#cameraKashatan,
+#cameraCharlotte,
+#cameraLizka,
+#cameraNemka{
+    position:absolute;
+    width:180px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    display:none;
+    z-index:20;
+}
+
+#cameraMap{
+    width:125px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    overflow-y:auto;
+}
+
+#cameraMap>button{
+    min-height:50px;
+    padding:5px;
+}
+
+#catControl,
+#alarmControl{
+    border-top:2px solid #555;
+    padding-top:8px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    text-align:center;
+}
+
+#catControl span,
+#alarmControl span{
+    font-size:10px;
+}
+
+#catMeowButton,
+#cameraAlarmButton{
+    font-size:11px;
+    padding:8px 2px;
+}
+
+#energyContent{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:25px;
+    padding:30px 20px 20px;
+    overflow-y:auto;
+}
+
+#energyTarget{
+    text-align:center;
+    font-size:18px;
+}
+
+#energyTargetText{
+    display:block;
+    font-size:28px;
+    margin-top:8px;
+}
+
+#energyTargets{
+    width:min(95%,650px);
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+#energyTargets button{
+    min-height:60px;
+}
+
+.energyTargetActive{
+    border-color:#fff!important;
+    background:#333!important;
+    box-shadow:0 0 12px rgba(255,255,255,.4);
+}
+
+#leverArea{
+    width:min(90%,420px);
+    text-align:center;
+    margin-top:20px;
+}
+
+#leverBase{
+    position:relative;
+    width:90px;
+    height:190px;
+    margin:auto;
+    border:3px solid #777;
+    background:#111;
+    border-radius:10px;
+    touch-action:none;
+}
+
+#lever{
+    position:absolute;
+    left:50%;
+    top:20px;
+    transform:translateX(-50%);
+    width:50px;
+    height:80px;
+    border:3px solid #aaa;
+    border-radius:12px;
+    background:#333;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    touch-action:none;
+}
+
+#leverProgress{
+    width:100%;
+    height:12px;
+    border:2px solid #555;
+    background:#111;
+}
+
+#leverProgressBar{
+    width:0;
+    height:100%;
+    background:#ddd;
+}
+
+#energyMessage{
+    text-align:center;
+    min-height:25px;
+}
+
+#backupContent,
+.miniGame{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:15px;
+    padding:20px;
+}
+
+#backupWires{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    width:min(90%,400px);
+}
+
+#backupWires button{
+    min-height:60px;
+}
+
+.wireSelected{
+    background:#333!important;
+    border-color:#fff!important;
+}
+
+#mindBar{
+    width:min(90%,500px);
+    height:25px;
+    border:2px solid #777;
+}
+
+#mindBarFill{
+    width:70%;
+    height:100%;
+    background:#ddd;
+}
+
+.mindButtons{
+    display:flex;
+    gap:15px;
+    width:min(90%,500px);
+}
+
+.mindButtons button{
+    flex:1;
+    min-height:60px;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.92);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    text-align:center;
+}
+
+@media(max-width:600px){
+
+    #cameraMap{
+        width:100px;
     }
 
-    #mobile-controls {
-        display: none;
+    #cameraMap>button{
+        font-size:11px;
     }
 
+    #energyTargets{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    #energyTargets button{
+        min-height:52px;
+        font-size:11px;
+    }
+
+    #energyContent{
+        padding-top:20px;
+    }
+
+    #rightDoor{
+        width:130px;
+    }
 }
